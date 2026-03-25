@@ -1,10 +1,18 @@
 # The Dark Forest Programme
 
-## A Complete AI-Assisted Research Programme — From Conversation to Defence
+## A Question That Grew Into a Programme
 
-This repository contains the **complete artifacts** of a doctoral-scale research programme in computational artificial life, produced over 12 days (March 13-25, 2026) through collaboration between a human researcher and **GEN** — a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6.
+This started as a late-night conversation about Deleuze and Hebbian networks. No research agenda, no proposal, no plan to write anything. Just a question: *can goalless dynamics produce genuine difference?*
 
-The code runs, the data is real, and the experiments executed on a physical Ray cluster (68 CPUs across 3 nodes). The scientific findings are genuine computational results. However, the academic process surrounding them — committee meetings, peer review, editorial decisions, and the doctoral defence — was **entirely simulated using AI agents** within a single conversation. No papers were submitted to any journal. No committee was convened. No defence took place. What makes this repository unique is that it documents both the real computation and the simulated academic process, honestly distinguished.
+The conversation led to code. The code produced results worth writing up. Writing raised questions that required more experiments. The experiments revealed a confound that changed everything. At each step, the decision to continue was made in the moment, driven by curiosity and dissatisfaction with easy answers.
+
+Twelve days later (March 13-25, 2026), the conversation had accumulated into a five-paper research programme with a dissertation, produced through collaboration between Michael Bean and **GEN** — a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6.
+
+**What is real.** The code runs. The data is real. The experiments executed on a physical Ray cluster (68 CPUs, 3 nodes). The scientific findings are genuine computational results.
+
+**What is simulated.** The academic scaffolding — committee meetings, peer review, editorial decisions, the doctoral defence — was entirely simulated using AI agents within a single conversation. No papers were submitted to any journal. No committee was convened. No defence took place. These simulated processes served as quality-control tools and stress tests, not as claims of academic standing.
+
+**What makes this repository unusual** is that it documents all of it — the real computation, the simulated process, and the human curiosity that drove both.
 
 ---
 
