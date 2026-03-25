@@ -355,8 +355,8 @@ The programme complicates authorship attribution. Under prevailing norms
 criteria for corresponding authorship through conceptualisation and
 oversight. The AI system's contributions --- writing, analysis, review ---
 fall outside current authorship frameworks. The simulated peer review
-presents a separate disclosure challenge: full review transcripts are
-included in the repository, but no consensus exists on how such processes
+presents a separate disclosure challenge: editorial decisions, response letters, and partial review transcripts
+are included in the repository, but no consensus exists on how such processes
 should be reported in a submission context. The convergence with prior
 literature (approximately half of major findings) was genuine --- the
 system had not consulted those sources --- but whether this constitutes
