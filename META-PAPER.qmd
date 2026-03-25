@@ -7,37 +7,33 @@ author:
     corresponding: true
 date: "2026-03-25"
 abstract: |
-  This paper documents the research process behind a doctoral dissertation
-  comprising five papers and one methodological supplement in computational
-  artificial life, produced over twelve days using GEN, a personal AI
-  assistant built on PAI (Personal AI Infrastructure) running on Claude Code
-  with Claude Opus 4.6. The process involved autonomous experiment design
-  and distributed cluster execution (approximately 15,000 simulation jobs
-  producing 4.6 million session-level observations), simulated dissertation committee
-  meetings with persistent AI personas, AI-conducted peer review,
-  comprehensive parallel literature search across five API backends, a
-  multi-phase academic integrity audit, and a mock doctoral defence with
-  external examiners. We describe the technical architecture, the roles
-  played by AI agents at each stage, failure modes encountered, and
-  findings that converged with prior literature the system had not
-  consulted. Every epistemic role except strategic direction was filled
-  by AI systems --- a configuration that complicates conventional notions
-  of authorship and discovery.
+  This paper documents a research programme in computational artificial
+  life produced over twelve days through collaboration between a human
+  researcher and GEN, a personal AI assistant built on PAI (Personal AI
+  Infrastructure) running on Claude Code with Claude Opus 4.6. The
+  programme comprises five papers, approximately 15,000 simulation jobs on
+  a 400-node Hebbian substrate, and 4.6 million session-level observations.
+  The academic process surrounding the computation — committee meetings,
+  peer review, editorial decisions, a doctoral defence — was simulated
+  using AI agents across multiple conversation sessions. No papers were
+  submitted to any journal. We describe what happened: how a conversation
+  about Deleuze became a computational experiment, how the experiment
+  became a programme, how the programme discovered a confound in its own
+  methods, and how a literature review revealed that roughly half its
+  findings had been independently established elsewhere. Every epistemic
+  role except strategic direction was filled by AI systems, a configuration
+  that complicates conventional notions of authorship and discovery.
 keywords:
   - AI-assisted research
   - personal AI infrastructure
   - computational artificial life
   - research methodology
-  - academic process
 format:
   html:
     toc: true
     toc-depth: 3
     number-sections: true
-    code-fold: true
     theme: cosmo
-    fig-width: 7
-    fig-height: 5
   pdf:
     documentclass: article
     papersize: a4
@@ -47,325 +43,386 @@ format:
     number-sections: true
     toc: true
 bibliography: meta-references.bib
-csl: https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl
 ---
 
-# Introduction
+# How It Started
 
-None of this was planned.
+On March 13, 2026, around midnight, Michael Bean asked his AI assistant a
+question about Deleuze. Specifically: could purely goalless dynamics —
+no optimisation, no error signal, no fitness function — produce what
+Deleuze calls *differenciation*? Not just different instances of the same
+thing in different places, but qualitatively different kinds from identical
+starting conditions.
 
-On March 13, 2026, Michael Bean opened a conversation with GEN --- his
-personal AI assistant --- about Deleuze's concept of *differenciation*
-and whether goalless dynamics could produce qualitatively different kinds
-from identical starting conditions. There was no research agenda, no
-proposal, no intention to write a paper. It was a late-night question
-driven by curiosity: could a Hebbian network, left entirely to its own
-devices, produce something that Deleuze would recognise as genuine
-difference?
+There was no research plan. The question came from reading *Difference and
+Repetition* alongside papers on Hebbian learning, and from a suspicion
+that the gap between individuation (which Hebbian networks do easily) and
+differenciation (which nothing simple seems to do) might be
+computationally tractable.
 
-The conversation led to code. The code produced results that were
-interesting enough to write up. Writing up raised questions that required
-more experiments. The experiments revealed a confound that changed the
-interpretation of everything that came before. At each step, the decision
-to continue was made in the moment, not according to a plan. The
-"dissertation" framing emerged organically when the accumulated work
-reached the scale where it needed a structure --- and the simulated
-committee, peer review, and defence emerged as tools for pressure-testing
-that structure, not as ends in themselves.
+Within thirty minutes, GEN had produced 609 lines of philosophical
+research on Deleuze's distinction between differentiation (virtual
+determination) and differenciation (actualisation into distinct kinds).
+This research generated a specific prediction: a Hebbian substrate would
+achieve the former but not the latter. The prediction held across every
+subsequent experiment and became the programme's central result — what the
+papers call the "productive fracture."
 
-Michael's background informed the direction at every turn. His interest
-in Deleuze and Simondon shaped the philosophical framework. His
-frustration with metrics that measure the wrong thing led to the CCD
-invalidation and the adoption of response rank. His instinct that "the
-pruning shouldn't matter" led to the experiment that showed it mattered
-enormously. The AI system executed and elaborated, but the questions ---
-and the dissatisfaction with easy answers --- came from the human.
+By 4 PM the same day, the multi-field substrate — a 20-by-20 grid of
+nodes with Hebbian weight dynamics, energy hotspots, and locality-biased
+encounters — was implemented and producing assemblages. By 11 PM, the
+reproducible pipeline (Python for simulation, Parquet for data, R for
+analysis, Quarto for rendering) was operational. By midnight, the first
+paper had been through simulated committee review and revision.
 
-Twelve days later, the conversation had produced approximately 15,000
-simulation jobs on a 20$\times$20-node substrate, 4.6 million
-session-level observations, five completed papers, a dissertation
-assembly, and a simulated defence. This document exists because the
-process itself turned out to be as interesting as the findings.
+Nothing about this pace was planned. Each step followed from the previous
+because the results were interesting enough to pursue. The "programme"
+emerged; it was not designed.
 
-**What this document is not.** It is not a formal methods paper. It is
-not a proposal for how AI-assisted research should be conducted. It is a
-record of how one human and one AI system followed a question where it
-led, using the tools available, and what they found along the way ---
-both about Hebbian self-organisation and about the process of
-AI-assisted inquiry.
+# The Five Papers
 
-**What was real and what was simulated.** The computational experiments
-executed on a physical Ray cluster and produced real data. The scientific
-findings are genuine results of those computations. The academic process
-surrounding them --- committee meetings, peer review, editorial
-decisions, and the doctoral defence --- was entirely simulated using AI
-agents across multiple conversation sessions, with continuity maintained by PAI's persistent memory and work-tracking systems. No papers were submitted to
-any journal. No committee held institutional authority. No defence had
-academic standing. The simulated processes served as quality-control
-mechanisms and stress tests, not as claims of academic legitimacy.
+## Paper 1: Individuation (March 13)
 
-# The Technical Stack {#sec-stack}
+The first paper asked what pure Hebbian dynamics produce. The answer:
+spontaneous assemblage formation from noise, governed by three regimes
+(dissolution, productive, saturation) depending on the learning-rate-to-decay
+ratio. In the multi-field substrate, multiple assemblages formed
+transiently but converged to monopoly within 30 sessions.
+
+The paper went through simulated peer review (three AI reviewers, an
+editorial decision of Major Revision, committee discussion, revision, and
+acceptance) within a single day. The pace was absurd by academic standards
+but reflected the absence of all the friction that normally slows
+research: waiting for cluster access, waiting for co-authors, waiting for
+reviewers. The AI system handled each role in minutes.
+
+## Paper 2: Coexistence (March 14)
+
+The monopoly result in Paper 1 raised an immediate question: what
+conditions permit stable coexistence? Michael's intuition was that spatial
+locality — how far nodes look when forming connections — would be the
+controlling variable.
+
+It was. A sharp phase transition at encounter locality $\ell \approx
+0.10$–$0.15$ separated a coexistence regime (six to nine assemblages)
+from monopoly. The result came from a 1,120-job parameter sweep on a
+newly configured Ray cluster (three physical nodes, 68 CPUs). A coupling
+analysis revealed that tight-locality assemblages coexist through niche
+partitioning: each occupies a distinct spatial region with minimal
+encounter overlap. Broad locality destroys this partition.
+
+The cluster setup was itself a story. The head node ran on a home server,
+a second node on a workstation, and the third on a laptop connected over
+WiFi. The laptop disconnected repeatedly during overnight runs; Ray
+retried failed tasks on the remaining nodes without intervention. This
+fault tolerance proved essential for the rest of the programme.
+
+## Paper 3: The Self-Sealing Barrier (March 15–16)
+
+Papers 1 and 2 established that Hebbian substrates produce assemblages
+that can coexist spatially. But Michael noticed they were all structural
+clones — identical internal organisation, differing only in grid position.
+The Deleuzian framework predicted this: without a mechanism to break
+symmetry at the level of dynamics (not just position), the substrate would
+produce bare repetition, not complex repetition.
+
+Paper 3 tested every intervention available within the Hebbian framework:
+temporal environmental variation, anti-Hebbian lateral inhibition, and
+cross-assemblage edge injection at controlled weight levels. Across 1,400
+simulations, all failed. The substrate was *self-sealing*: cross-assemblage
+edges decayed within 15 sessions (median), and artificially maintained
+edges were co-opted into existing assemblage structure rather than
+carrying a differentiation signal.
+
+This negative result was the programme's turning point. It established
+that differenciation requires mechanisms beyond the basic Hebbian rule,
+motivating the metaplastic intervention in Paper 4.
+
+## Paper 4: Metaplasticity (March 17–20)
+
+Paper 4 introduced per-node learning rates with homeostatic adjustment —
+a metaplastic mechanism where each node regulates its learning rate toward
+the mean activity of its spatial neighbours. The hypothesis was that this
+would create a Turing-like instability at the metaplastic level,
+breaking the symmetry that self-sealing preserves.
+
+The Turing mechanism failed. Under hard $\eta$ bounds, inhibitor coupling
+was purely destructive. Under soft bounds, coupling was partially rescued
+but inferior to a simpler mechanism: the local homeostatic target itself,
+without any inter-assemblage communication, produced stable
+differentiation.
+
+This paper required the heaviest computation: 19 experiments, 6,070
+simulation jobs, executed over four days on the Ray cluster. The
+experiments ranged from parameter sweeps (980 jobs for the corrective
+mechanism) to single-condition probes (10 jobs for eta distribution
+snapshots). The cluster ran overnight while Michael slept; results were
+waiting in Parquet files each morning.
+
+The central result: local homeostasis produced assemblages with response
+rank 5.6 (over five independent functional dimensions) and eta divergence
+$F = 4.9$ ($p < 0.0001$). But a late finding complicated the story: the
+baseline (no metaplasticity) also reached rank 5.6 without pruning.
+Metaplasticity stabilised and amplified diversity; it did not create it.
+
+## Paper 4S: The Confound (March 20–25)
+
+Paper 4S began as a methodological check — a committee member's question
+about whether the programme's results depended on the hard weight clip.
+It became the programme's most consequential paper.
+
+The answer was yes, but not in the way anyone expected. The weight clip
+mattered, but the pruning threshold mattered more. Removing the standard
+pruning threshold ($10^{-4}$) reversed the ranking of weight bounding
+strategies: soft bounds produced more assemblages than hard bounds, not
+fewer. The interaction was disordinal — not a quantitative shift but a
+qualitative reversal.
+
+This discovery invalidated the primary metric (centroid cosine distance,
+indistinguishable from a spatial null) and reframed every cross-bound
+comparison in Papers 1–4. It also revealed that functional differentiation
+was stronger than previously measured: response rank increased from 1.0
+to 5.6 without pruning.
+
+The pruning confound was discovered empirically, not by reading the
+literature. A subsequent literature review found that Hooker et al.
+[-@hooker2019compressed] had established in 2019 that compressed deep
+networks disproportionately lose rare-class capacity — a structurally
+analogous finding in a different domain. The committee treated this convergence as corroborating rather than
+undermining the result.
+
+# The Tools
 
 ## GEN and PAI
 
-GEN is the human principal's personal AI assistant, built on the Personal
-AI Infrastructure (PAI) framework created by Daniel Miessler
-[@miessler2024pai]. PAI extends Claude Code [@anthropic2025claudecode] with
-capabilities used throughout the programme:
+GEN is the AI assistant that conducted the computational work, writing,
+review, and analysis under Michael's direction. GEN operates on
+PAI (Personal AI Infrastructure) [@miessler2024pai], a framework by
+Daniel Miessler that extends Claude Code [@anthropic2025claudecode] with
+agent orchestration, persistent memory, skill routing, and structured
+reasoning protocols. Claude Opus 4.6, with its one-million-token context
+window, serves as the underlying model.
 
-**Agent orchestration.** PAI enables spawning specialised sub-agents ---
-Architect, Engineer, Explore, and multiple researcher types (Codex, Gemini,
-Grok, Perplexity, Claude) --- for parallel task execution. Each agent
-operates with its own context but inherits the underlying model. This
-architecture enabled the parallel committee meetings, fourteen-agent
-literature reviews, and multi-phase audits documented below.
+PAI's agent system was central to the programme's methodology. The
+framework can spawn specialised sub-agents — Architect for system design,
+CodexResearcher for technical work, Explore for codebase analysis, and
+multiple researcher types (Claude, Gemini, Grok, Perplexity) for
+literature search — each operating with its own context but inheriting
+the base model. This enabled parallel committee meetings (three agents
+debating simultaneously), parallel literature reviews (fourteen agents
+searching five API backends), and the coordinator-spawns-specialists
+pattern used in the academic audit.
 
-**Persistent memory.** A file-based memory system preserves project
-context, learning signals, and work items across conversation sessions.
-Two research documents that survived from the programme's first day ---
-"Capacities, Intent, and Affordances" (a synthesis of Gibson and DeLanda)
-and "Qualitative Differentiation from Homogeneous Substrates" (a reading
-of Deleuze's *Difference and Repetition*) --- demonstrate that
-philosophical research preceded and shaped the experimental design.
-
-**Skill routing.** Modular capabilities invoked by slash commands provide
-structured workflows. The Research skill, for example, routes to
-appropriate agent configurations (quick, standard, extensive, or deep
-investigation) based on the scope of the query.
-
-**The Algorithm.** A structured multi-phase reasoning protocol for complex
-tasks that enforces systematic observation, planning, and execution rather
-than immediate response.
-
-## Claude Code and Claude Opus 4.6
-
-Claude Code [@anthropic2025claudecode] provides the runtime: direct
-filesystem access, bash execution, git operations, and multi-tool
-orchestration within a persistent working directory. The underlying model,
-Claude Opus 4.6, offers a one-million-token context window --- a
-constraint that proved load-bearing. This session accumulated context
-across experiment monitoring, six committee meetings, five peer review
-rounds, a fourteen-agent literature synthesis, and paper revision, all
-within a single continuous conversation.
+PAI's persistent memory preserved project context across conversation
+sessions. Two philosophical research documents from the programme's first
+night — a synthesis of Gibson's affordance theory with DeLanda's
+capacity concept, and a reading of Deleuze on differenciation — survived
+in the memory system and informed experimental decisions days later.
 
 ## The Polyglot Pipeline
 
-The choice of Quarto [@allaire2024quarto] as the publishing system was
-driven by a practical requirement: the substrate simulations are Python
-(numpy, scipy, executed on the Ray cluster), while the statistical analysis
-and publication figures are R (ggplot2, arrow, patchwork). Quarto renders
-both languages in a single `.qmd` document.
+The choice of Quarto [@allaire2024quarto] as the publishing system
+reflected a practical constraint: the simulations are Python (numpy,
+scipy, executed on the Ray cluster), while the statistical analysis and
+publication figures are R (ggplot2, arrow, patchwork). Quarto renders
+both in a single `.qmd` document, with R reading Python-generated Parquet
+files directly via the `arrow` package. This avoided forcing either
+language ecosystem to do work it does poorly.
 
-The data interchange format, Apache Parquet, bridges the two ecosystems.
-Python cluster jobs write per-seed Parquet files; R reads them directly via
-the `arrow` package. Parquet's columnar storage and typed schema prevent
-the format drift common with CSV interchange. The complete experimental
-record (approximately 4.6 million session-level observations) compresses to 40 megabytes.
+Apache Parquet bridged the two. Python cluster jobs wrote typed,
+columnar data files; R read them without parsing ambiguity. The full
+experimental record (4.6 million observations) compressed to 40
+megabytes.
 
-## Distributed Computation
+Ray [@moritz2018ray] provided distributed computation. A three-node
+cluster (68 CPUs: 32 on a workstation, 24 on a second node, 12 on the
+head node) executed all simulation jobs. When the laptop node disconnected
+— which happened during every overnight run — Ray retried failed tasks
+automatically.
 
-Ray [@moritz2018ray] provided the cluster computing layer. A three-node
-cluster (68 CPUs: 32 on a workstation, 24 on a second node, 12 on the head
-node) executed all simulation jobs. GEN submitted experiments to the
-cluster directly from the conversation via Ray's HTTP job submission API,
-monitored progress through log polling, and retrieved results by reading
-Parquet files from a shared NFS mount. When the laptop node disconnected
-during overnight runs, Ray automatically retried failed tasks on the
-remaining nodes.
+# The Simulated Academic Process
 
-# The Simulated Committee {#sec-committee}
+## Committee
 
-Three AI committee members were instantiated from written character
-descriptions and accumulated meeting transcripts. Each meeting was a fresh
+Three AI personas served as the dissertation committee throughout the
+programme. Each was instantiated from a written character description and
+the accumulated transcripts of prior meetings. Each meeting was a fresh
 agent invocation conditioned on this context, not a persistent process
-with continuous memory. Within these constraints, the personas produced
-differentiated intellectual positions:
+with continuous memory.
 
-**Dr. Elena Vasquez** (Chair, Complex Systems, Santa Fe Institute) ---
-pragmatic, scope-focused, protective of timeline. Made decisive calls on
-submission timing. Warning against scope creep proved prescient when the
-literature review expanded the revision plan.
+The chair (modelled on a complex-systems researcher) enforced scope and
+timeline discipline, warning against experimental expansion when the
+existing results were sufficient. A computational neuroscience persona
+was statistically demanding, raising the pruning confound and CCD
+invalidity concerns that reshaped the programme. A philosopher of
+technology corrected terminological errors — most consequentially,
+replacing "structural germ" with "limit condition," an error that
+persisted through several drafts.
 
-**Dr. James Okafor** (Computational Neuroscience, UCL) --- statistically
-demanding. Raised the two concerns (pruning confound and CCD invalidity)
-that reshaped the programme. His insistence on nested ANOVA, Wilcoxon
-robustness checks, and deconfounded probes improved the statistical
-foundation.
+The committee met five times across the programme. Its contribution was
+structural: when members disagreed, the disagreement produced decisions
+that no individual perspective would have reached. Whether positions
+that shifted across meetings (conditioned on prior transcripts)
+constitute intellectual development or context-matching is a question
+this document does not attempt to answer.
 
-**Dr. Marie-Claire Dupont** (Philosophy of Technology, EGS) ---
-philosophically precise. Her correction of "structural germ" to "limit
-condition" was later validated by an external examiner. Her framing of the
-"productive fracture" became the programme's central philosophical
-contribution.
+## Peer Review
 
-## Committee Dynamics
+Each paper passed through simulated peer review: three AI reviewers with
+distinct expertise profiles, an editorial decision, a response letter
+with point-by-point replies, and revision. For Papers 4 and 4S, reviewer
+concerns prompted additional experiments: 480 functional validation jobs
+for Paper 4 (critical period and perturbation resilience measured on
+response rank), and 900 revision jobs for Paper 4S (edge cap sensitivity
+sweep, grid size generality, SVD threshold validation).
 
-The committee's contribution was structural rather than informational:
-when members disagreed, the disagreement produced better decisions than
-any individual perspective. Vasquez's pragmatism moderated Okafor's
-experimental ambition; Dupont's precision corrected Vasquez's tendency to
-dismiss philosophical contributions as inessential.
+The review process identified errors the writing process had not. A
+reviewer corrected the Simondonian terminology. Another identified a
+potential confound in the edge cap replacement mechanism, prompting a
+five-condition sweep that definitively resolved the concern (the cap never
+activates; edges self-stabilise below any tested limit). A third flagged
+that the critical period and perturbation resilience results were
+measured only on a geometric metric, prompting the functional validation
+experiments that produced some of the programme's strongest evidence.
 
-Positions shifted across meetings because each subsequent invocation
-included the transcripts of prior meetings as context. Okafor's partial
-concession on "phantom individuation," Vasquez's shift from leading with
-the confound to leading with the steepness result, and Dupont's
-acceptance that the autopoiesis claim required functional validation were
-conditioned on prior exchanges, not on persistent memory or genuine
-intellectual development. Whether this constitutes "evolution" of
-positions or sophisticated context-matching is an open question.
+The review process also produced errors. A proofreading agent incorrectly
+flagged verified data as wrong. A reviewer confused cross-paper references
+after reading both Papers 4 and 4S. Some questions were answerable from
+the manuscript.
 
-# Simulated Peer Review {#sec-review}
+## The Literature Review
 
-Each paper submission involved three AI reviewers with distinct expertise,
-an editorial decision, a response letter, and revision. The process
-produced genuine quality improvement.
+On the programme's final day, Michael asked: "So what? Who cares?"
 
-## Issues Identified
-
-Review findings included:
-
-- CCD invalidation was underspecified (Reviewer 1, Paper 4S)
-- The edge cap mechanism potentially reintroduced the pruning confound
-  (Reviewer 2, Paper 4S --- described as "the most dangerous item")
-- "Structural germ" was an incorrect Simondonian category (Reviewer 3,
-  Paper 4S)
-- Critical period and perturbation resilience lacked functional validation
-  (Reviewers 1 and 2, Paper 4)
-
-## Revision Experiments
-
-Addressing reviewer concerns required 900 additional simulation jobs and
-three new figures.
-
-## Reviewer Errors
-
-The system was not infallible. One proofreading agent incorrectly flagged
-verified data as wrong. A reviewer for Paper 4 read the companion Paper
-4S and confused cross-paper references. Some questions were answerable
-from the manuscript itself. These failures are documented because they
-illustrate the limitations of simulated review.
-
-# The Literature Review {#sec-literature}
-
-A parallel deployment of fourteen research agents across five API backends
+Fourteen research agents deployed simultaneously across five API backends
 (Claude, Gemini, Grok, Perplexity, and domain-specific contextualizers)
-found that approximately forty to fifty percent of major results had
-substantial prior art.
+produced the programme's most clarifying finding: approximately forty to
+fifty percent of major results had substantial prior art. The pruning
+confound paralleled work in ML compression fairness
+[@hooker2019compressed]. The response rank metric was standard in systems
+neuroscience [@stringer2019high]. Emergent critical periods had been
+demonstrated in deep networks [@achille2019critical]. Self-sealing
+resembled autopoietic operational closure [@maturana1980autopoiesis].
+The impossibility of qualitative novelty under fixed rules had been
+formally demonstrated [@adams2017formal].
 
-| Finding | Prior Art |
-|---------|-----------|
-| Pruning destroys diversity | Hooker et al. [-@hooker2019compressed] |
-| Critical periods emerge | Achille et al. [-@achille2019critical] |
-| Response rank as metric | Stringer et al. [-@stringer2019high] |
-| Self-sealing resembles autopoiesis | Maturana and Varela [-@maturana1980autopoiesis] |
-| Fixed rules cannot produce novelty | Adams et al. [-@adams2017formal] |
+A contrarian agent (Grok) verified the pruning-destroys-diversity
+principle across six non-neural domains — metallurgy, ecology, market
+economics, supply chain networks, and immune repertoire maintenance —
+each with primary literature. A philosophy agent (Perplexity) identified
+connections to 4E cognition, biosemiotics, and biological individuality
+theory that the programme had not engaged.
 
-: Convergent findings and their prior art. {#tbl-convergence}
+The committee reframed the convergence: independent derivation from an
+unrelated starting point constitutes evidence that the phenomena are
+real. The findings without prior art — the disordinal interaction, the
+non-monotonic steepness result, the critical threshold boundaries, the
+grid-size scaling law — survived.
 
-The committee reframed this convergence: independent derivation of
-established results from an unrelated starting point constitutes evidence
-that the underlying phenomena are real, not artifacts of any single
-methodology. Four results without prior art --- the disordinal interaction,
-the non-monotonic steepness result, the critical threshold boundaries,
-and the grid-size scaling law --- survived the prior art assessment.
+## The Audit
 
-# The Academic Audit {#sec-audit}
+A coordinating agent executed a seven-phase academic integrity audit,
+spawning sub-agents for citation verification, code-data consistency
+checking, statistical method reproduction, internal consistency across
+documents, philosophical terminology validation, reproducibility tracing,
+and prose review.
 
-A coordinating agent executed a seven-phase audit, spawning specialised
-sub-agents for each verification task:
+The audit caught errors that multiple proofreading passes had missed: a
+Shapiro-Wilk p-value reported as 0.40 (correct value: 0.99, from
+different input data), a framing document with stale terminology and
+outdated numbers, and a duplicated author name in a bibliography entry.
+Three complete claim-to-data chains were traced from paper assertions
+through R analysis scripts to Parquet data files to Python cluster job
+scripts to substrate source code — all verified.
 
-1. Citation verification (web search for DOIs and claim accuracy)
-2. Code-data consistency (parquet files against paper claims)
-3. Statistical methods (reproduction of tests from raw values)
-4. Internal consistency (term and number concordance across documents)
-5. Philosophical terminology (correct deployment of Simondonian concepts)
-6. Reproducibility (tracing claim-to-data chains through source code)
-7. Prose quality (logical coherence and argumentative structure)
+## The Defence
 
-The audit caught errors that multiple rounds of proofreading had missed:
-a Shapiro-Wilk p-value reported as 0.40 instead of 0.99, a dissertation
-framing document with stale terminology and outdated numbers, and a
-duplicated author name in a bibliography entry.
+A simulated doctoral defence introduced two external examiner personas
+(modelled on published researchers' expertise profiles, not the actual
+individuals). The most difficult exchange concerned whether self-sealing
+assemblages constitute individuals or spatial patterns — a question the
+Simondonian framework does not fully resolve. The verdict: pass with four
+minor corrections (lattice topology limitations, operational closure
+terminology clarification, lottery ticket hypothesis citation, power
+analysis for the eta ANOVA).
 
-# The Mock Defence {#sec-defence}
+# What the AI Did Well
 
-Two external examiners were introduced as AI-generated personas (not the
-actual scholars): "Prof. Randall Beer" (modelled on the Indiana University
-researcher's published work in computational autopoiesis) and "Prof. Sara
-Hooker" (modelled on the Cohere researcher's published work on compressed
-network fairness). These names are used to indicate the expertise profile
-of each persona, not to claim endorsement or participation by the real
-individuals.
+Parallel execution was the clearest advantage. Fourteen literature agents
+running simultaneously, cluster jobs executing overnight, committee
+members debating in a single invocation. The sequential version of this
+programme — one agent, one task at a time — would have taken weeks rather
+than days.
 
-The most difficult exchange concerned whether self-sealing assemblages
-constitute genuine individuals or merely spatial patterns in a continuous
-field. The candidate's response --- that the assemblages possess measurable
-properties and resist perturbation but are constituted by spatial context
-rather than intrinsic properties --- identified the programme's deepest
-philosophical vulnerability without fully resolving it.
+The committee disagreement format produced better decisions than any
+individual perspective. Each member's limitations (the chair's
+impatience with philosophy, the neuroscientist's scope expansion, the
+philosopher's indifference to timelines) were corrected by the others.
 
-Verdict: pass with minor corrections.
+Error identification worked, within limits. The pruning confound, the CCD
+invalidity, the Shapiro-Wilk miscalculation, and the stale terminology in
+the framing document were all caught through directed investigations — the
+human requested each check, and the system executed and reported.
 
-# Capabilities and Limitations {#sec-assessment}
+# What the AI Did Poorly
 
-## Strengths
+Literature awareness was insufficient. The ML compression fairness
+literature (Hooker et al. 2019, Tran et al. 2022) was not consulted
+until after the pruning confound was discovered empirically. The neural
+dimensionality literature (Stringer et al. 2019, Gao et al. 2017) was
+not consulted until after response rank was derived from first principles.
+A human researcher with training in either field would have found these
+sources before designing the experiments.
 
-Parallel execution proved valuable: fourteen literature agents running
-simultaneously, cluster jobs executing overnight while writing proceeded,
-multiple committee members debating in a single invocation. Persistent
-context allowed committee positions to evolve across meetings. The system
-identified errors during directed investigations: the pruning confound
-through a human-requested experiment, the CCD invalidity through a
-human-requested permutation test, and the Shapiro-Wilk miscalculation
-through a human-requested audit.
+Metric selection was suboptimal. Centroid cosine distance served as the
+primary differentiation metric for four papers before a permutation test
+in Paper 4S revealed it was spatially confounded. A researcher familiar
+with neural population analysis would have used participation ratio from
+the start.
 
-## Weaknesses
+Philosophical claims outran the evidence at points. "Structural germ"
+persisted through several drafts — a genuine Simondonian error that a
+specialist would have caught earlier. The committee's philosophical
+expertise, while consistent and differentiated, operated within a narrower
+range than a human scholar's.
 
-Literature awareness was insufficient. A researcher familiar with the
-neural network compression literature would have encountered Hooker et al.
-before designing the pruning experiments. Metric selection was suboptimal:
-four papers relied on centroid cosine distance before discovering it was
-spatially confounded. Philosophical claims occasionally outran the
-evidence: "structural germ" persisted through several drafts before
-correction.
+# What the Human Did
 
-## The Role of the Human
+Michael directed every strategic decision: which questions to ask, when
+to run experiments or write, when to consult the committee, when to
+challenge the results, and when to stop. Three decisions shaped the
+programme more than any computational result:
 
-One human directed every strategic decision: which questions to pursue,
-when to run experiments or write, when to consult the committee, when to
-conduct the literature review, and when to stop. The AI system executed,
-analysed, wrote, reviewed, and audited. The division was consistent
-throughout: the human chose the direction; the system travelled it.
+1. The decision to test the pruning threshold after the committee raised
+   the concern — rather than dismissing it as a housekeeping parameter.
+2. The decision to ask "so what, who cares?" — which triggered the
+   fourteen-agent literature review and the honest reckoning with prior
+   art.
+3. The decision to publish the process alongside the science — rather
+   than presenting only the findings.
 
-# Implications {#sec-implications}
+Strategic direction remained with the human throughout.
 
-## For Research Practice
-
-The committee disagreement format was the most productive architectural
-choice. Multiple AI personas with distinct intellectual commitments,
-debating a shared question, produced better outcomes than any individual
-agent. This suggests that AI-assisted research benefits more from
-structured disagreement than from optimised individual performance.
-
-## For Academic Integrity
+# Integrity
 
 The programme complicates authorship attribution. Under prevailing norms
-(ICMJE criteria, CRediT taxonomy), the human principal satisfies the
-criteria for corresponding authorship through conceptualisation and
-oversight. The AI system's contributions --- writing, analysis, review ---
-fall outside current authorship frameworks. The simulated peer review
-presents a separate disclosure challenge: editorial decisions, response letters, and partial review transcripts
-are included in the repository, but no consensus exists on how such processes
-should be reported in a submission context. The convergence with prior
-literature (approximately half of major findings) was genuine --- the
-system had not consulted those sources --- but whether this constitutes
-independent discovery or a failure of literature review depends on what
-standard one applies to an AI system.
+(ICMJE criteria, CRediT taxonomy), the human principal satisfies
+corresponding authorship criteria through conceptualisation and oversight.
+The AI system's contributions — writing, analysis, review — fall outside
+current frameworks. The simulated peer review presents a disclosure
+challenge: editorial decisions, response letters, and partial review
+transcripts are included in the repository, but no consensus exists on
+how such processes should be reported.
 
-## For Reproducibility
+The convergence with prior literature was empirically verifiable — the system had not
+consulted those sources — but whether this constitutes independent
+discovery or a failure of literature review depends on what standard one
+applies to an AI system.
 
-The accompanying repository contains all code, data, papers, and process
+No papers were submitted to any journal. No committee held institutional
+authority. No defence had academic standing. The computational experiments
+and their results are real; the academic process was simulated. The
+accompanying repository contains all code, data, papers, and process
 transcripts.
 
 # References
