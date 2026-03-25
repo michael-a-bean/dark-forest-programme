@@ -1,12 +1,12 @@
 # AI as Research Infrastructure: A Case Study in Dissertation-Scale Computational Science
 
-## How a Personal AI System Conducted, Validated, and Defended a Five-Paper Doctoral Programme
+## How GEN/PAI/Claude Code Conducted, Validated, and Defended a Five-Paper Doctoral Programme
 
 ---
 
 ## Abstract
 
-We document the research process behind a doctoral dissertation comprising five papers and one methodological supplement in computational artificial life, produced over 12 days (March 13-25, 2026) using a personal AI infrastructure (PAI) system built on Claude Code. The process involved autonomous experiment design and cluster execution (~15,000 simulation jobs, ~3M observations), simulated dissertation committee meetings with persistent AI personas, AI-conducted peer review at a simulated journal, comprehensive literature search using 14 parallel research agents across 5 API backends, a full academic integrity audit, and a mock doctoral defence with external examiners. We describe the architecture, the specific roles played by AI agents at each stage, the failure modes encountered, and the surprising discoveries that emerged from the process — including several findings that were independently validated against prior literature the system had not been designed to search. The case raises questions about the nature of academic discovery when the researcher, the committee, the reviewers, and the auditors are all AI systems operating under the direction of a single human principal.
+We document the research process behind a doctoral dissertation comprising five papers and one methodological supplement in computational artificial life, produced over 12 days (March 13-25, 2026) using **GEN** — a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) by Daniel Miessler, running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6 (1M context). The process involved autonomous experiment design and cluster execution (~15,000 simulation jobs, ~3M observations), simulated dissertation committee meetings with persistent AI personas, AI-conducted peer review at a simulated journal, comprehensive literature search using 14 parallel research agents across 5 API backends, a full academic integrity audit, and a mock doctoral defence with external examiners. We describe the architecture, the specific roles played by AI agents at each stage, the failure modes encountered, and the surprising discoveries that emerged from the process — including several findings that were independently validated against prior literature the system had not been designed to search. The case raises questions about the nature of academic discovery when the researcher, the committee, the reviewers, and the auditors are all AI systems operating under the direction of a single human principal.
 
 ---
 
@@ -48,7 +48,7 @@ This prediction — the "productive fracture" — proved correct across all subs
 
 ### 2.1 System Overview
 
-The Personal AI Infrastructure (PAI) is a Claude Code-based system with several extensions:
+**GEN** is the human principal's personal AI assistant, built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) by Daniel Miessler. PAI is a Claude Code-based system that extends Anthropic's CLI with:
 
 - **Agent spawning**: the ability to launch specialised sub-agents (Explore, Architect, Engineer, CodexResearcher, GeminiResearcher, GrokResearcher, PerplexityResearcher, ClaudeResearcher) for parallel task execution
 - **Persistent memory**: a file-based memory system at `~/.claude/MEMORY/` with work items, learning signals, and relationship context

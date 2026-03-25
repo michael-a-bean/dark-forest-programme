@@ -2,7 +2,7 @@
 
 ## A Complete AI-Assisted Research Programme — From Conversation to Defence
 
-This repository contains the **complete artifacts** of a doctoral-scale research programme in computational artificial life, produced over 12 days (March 13-25, 2026) through collaboration between a human researcher and an AI system (Claude, via the PAI personal AI infrastructure).
+This repository contains the **complete artifacts** of a doctoral-scale research programme in computational artificial life, produced over 12 days (March 13-25, 2026) through collaboration between a human researcher and **GEN** — a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6.
 
 **This is not a simulated exercise.** The code runs, the data is real, the experiments executed on a physical Ray cluster (68 CPUs across 3 nodes), and the findings are genuine. What makes this repository unique is that it documents not just the science but the **entire research process** — including the AI-simulated committee meetings, peer reviews, literature searches, audits, and mock defence that shaped the work.
 
@@ -135,9 +135,17 @@ The convergence is interpreted as **evidence the underlying phenomena are real**
 
 **Michael Bean (human):** Directed every significant decision. Which questions to ask, when to run experiments vs write, when to submit vs revise, the decision to conduct the meta-literature review, the decision to conduct the audit. Asked the questions that mattered.
 
-**PAI / Claude (AI system):** Executed, analysed, wrote, reviewed, and audited. Spawned specialised agents for parallel research. Maintained persistent committee personas. Identified and corrected its own methodological errors.
+**GEN (AI assistant):** Built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) by Daniel Miessler, running on Claude Code with Claude Opus 4.6 (1M context). GEN executed, analysed, wrote, reviewed, and audited. Spawned specialised agents for parallel research (CodexResearcher, GeminiResearcher, GrokResearcher, PerplexityResearcher, ClaudeResearcher, Architect, Explore, Engineer). Maintained persistent committee personas across sessions. Identified and corrected its own methodological errors.
 
 The most productive pattern was the **committee disagreement format**: multiple AI personas with distinct intellectual commitments debating a question produced better decisions than any single agent.
+
+### The Stack
+
+- **[PAI](https://github.com/danielmiessler/Personal_AI_Infrastructure)** — the personal AI infrastructure framework providing agent orchestration, persistent memory, skill routing, and the Algorithm reasoning protocol
+- **Claude Code** — Anthropic's CLI for Claude, providing tool use, file editing, and bash execution
+- **Claude Opus 4.6 (1M context)** — the underlying model powering GEN and all spawned agents
+- **Ray** — distributed computing framework for cluster execution (68 CPUs across 3 nodes)
+- **Quarto** — scientific publishing system for rendering papers and the dissertation
 
 ---
 
