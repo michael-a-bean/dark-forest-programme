@@ -1,0 +1,12 @@
+# Python dependencies
+numpy>=1.24
+scipy>=1.10
+scikit-learn>=1.2
+pyarrow>=12.0
+ray>=2.9
+
+# R dependencies (install via R console):
+# install.packages(c("tidyverse", "arrow", "ggthemes", "viridis",
+#                     "patchwork", "scales", "here"))
+
+# Quarto (install from https://quarto.org/docs/get-started/)

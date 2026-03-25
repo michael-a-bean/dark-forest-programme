@@ -16,7 +16,7 @@ bibliography: references.bib
 ```{r setup, include=FALSE}
 source("_setup.R")
 fig_dir <- file.path(getwd(), "figures")
-meta_data <- file.path(dirname(dirname(getwd())), "..", "dark-forest-metaplastic", "data")
+meta_data <- file.path(dirname(dirname(getwd())), "data")  # Points to repo data/ directory
 
 bound_colours <- c("hard"="#E63946", "tanh"="#457B9D", "oja"="#E9C46A")
 bound_labels <- c("hard"="Hard clip", "tanh"="Tanh", "oja"="Oja")

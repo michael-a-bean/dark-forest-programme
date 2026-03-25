@@ -111,7 +111,7 @@ mechanisms and stress tests, not as claims of academic legitimacy.
 GEN is the human principal's personal AI assistant, built on the Personal
 AI Infrastructure (PAI) framework created by Daniel Miessler
 [@miessler2024pai]. PAI extends Claude Code [@anthropic2025claudecode] with
-capabilities that used throughout the programme:
+capabilities used throughout the programme:
 
 **Agent orchestration.** PAI enables spawning specialised sub-agents ---
 Architect, Engineer, Explore, and multiple researcher types (Codex, Gemini,

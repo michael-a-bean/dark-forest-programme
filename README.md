@@ -36,7 +36,7 @@ The programme's central finding: **maintenance operations in self-organising sys
 
 What makes this repository unusual:
 
-- **6 committee meetings** with three persistent AI personas (Vasquez/complex systems, Okafor/neuroscience, Dupont/philosophy) who maintained intellectual positions, disagreed productively, and changed their minds when persuaded
+- **5 committee meetings** with three persistent AI personas (Vasquez/complex systems, Okafor/neuroscience, Dupont/philosophy) who maintained intellectual positions, disagreed productively, and changed their minds when persuaded
 - **5 rounds of peer review** with domain-expert AI reviewers who found genuine errors (CCD invalidity, Simondonian terminology, statistical methods) and prompted 900 additional simulation jobs
 - **14-agent parallel literature review** that discovered ~40-50% of findings had prior art — leading to an honest reckoning rather than a cover-up
 - **A comprehensive academic audit** (7 phases, ~75 tool invocations) that caught stale documents, a Shapiro-Wilk error, and a bib entry duplication
@@ -63,7 +63,6 @@ dissertation/              # Dissertation frame
   chapters/                # Introduction, methods, synthesis, conclusion
   research-reports/        # 15 literature analysis reports from 14 agents
   so-what-analysis.md      # "Who cares?" — the honest assessment
-  academic-audit-report.md # 7-phase integrity audit
   defence-prep.md          # 5 hardest questions with answers
 
 src/                       # All source code
@@ -114,7 +113,9 @@ META-PAPER.md              # The process documentation
 
 **If you're interested in what AI-assisted research looks like:** Read `dissertation/so-what-analysis.md` for the honest reckoning with prior art, then `process/audit/academic-audit-report.md` for the integrity check.
 
-**If you want to run the code:** The substrate code in `src/substrate/` is self-contained Python (numpy, scipy). The cluster job scripts in `src/experiments/` show the experimental designs. Data is in `data/` as Apache Parquet files readable by pandas, R arrow, or any Parquet reader.
+**If you want to run the code:** Start with `examples/quickstart.py` — a 40-line script that instantiates the substrate and runs it. The substrate code in `src/substrate/` is self-contained Python (numpy, scipy). The cluster job scripts in `src/experiments/` show the experimental designs. Data is in `data/` as Apache Parquet files readable by pandas, R arrow, or any Parquet reader. See `requirements.txt` for dependencies.
+
+**Note on data paths:** The `data/` directory contains key experimental datasets from Papers 4 and 4S. Papers 1-3 reference data from the original single-paper repositories not fully consolidated here. Paper 4S is the most self-contained entry point.
 
 ---
 
@@ -180,7 +181,7 @@ If you use or reference this work:
 ```
 Bean, M. (2026). The Dark Forest Programme: A Complete AI-Assisted Research
 Programme in Computational Artificial Life. GitHub repository.
-https://github.com/[username]/dark-forest-programme
+https://github.com/michaelbean/dark-forest-programme
 ```
 
 ---
