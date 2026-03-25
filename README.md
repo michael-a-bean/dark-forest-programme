@@ -2,7 +2,7 @@
 
 ## A Question That Grew Into a Programme
 
-This started as a late-night conversation about Deleuze and Hebbian networks. No research agenda, no proposal, no plan to write anything. Just a question: *can goalless dynamics produce genuine difference?*
+This started as a conversation about Liu Cixin's Dark Forest hypothesis — whether something like a dark forest could already exist in silica. That led to a question about what an AI not governed by human objectives might look like, which led to Deleuze, which led to code. No research agenda, no proposal, no plan to write anything.
 
 The conversation led to code. The code produced results worth writing up. Writing raised questions that required more experiments. The experiments revealed a confound that changed everything. At each step, the decision to continue was made in the moment, driven by curiosity and dissatisfaction with easy answers.
 
