@@ -4,7 +4,7 @@
 
 This repository contains the **complete artifacts** of a doctoral-scale research programme in computational artificial life, produced over 12 days (March 13-25, 2026) through collaboration between a human researcher and **GEN** — a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6.
 
-**This is not a simulated exercise.** The code runs, the data is real, the experiments executed on a physical Ray cluster (68 CPUs across 3 nodes), and the findings are genuine. What makes this repository unique is that it documents not just the science but the **entire research process** — including the AI-simulated committee meetings, peer reviews, literature searches, audits, and mock defence that shaped the work.
+The code runs, the data is real, and the experiments executed on a physical Ray cluster (68 CPUs across 3 nodes). The scientific findings are genuine computational results. However, the academic process surrounding them — committee meetings, peer review, editorial decisions, and the doctoral defence — was **entirely simulated using AI agents** within a single conversation. No papers were submitted to any journal. No committee was convened. No defence took place. What makes this repository unique is that it documents both the real computation and the simulated academic process, honestly distinguished.
 
 ---
 
@@ -29,11 +29,11 @@ The programme's central finding: **maintenance operations in self-organising sys
 What makes this repository unusual:
 
 - **6 committee meetings** with three persistent AI personas (Vasquez/complex systems, Okafor/neuroscience, Dupont/philosophy) who maintained intellectual positions, disagreed productively, and changed their minds when persuaded
-- **5 rounds of peer review** with domain-expert AI reviewers who found genuine errors (CCD invalidity, Simondonian terminology, statistical methods) and prompted 780 additional simulation jobs
+- **5 rounds of peer review** with domain-expert AI reviewers who found genuine errors (CCD invalidity, Simondonian terminology, statistical methods) and prompted 900 additional simulation jobs
 - **14-agent parallel literature review** that discovered ~40-50% of findings had prior art — leading to an honest reckoning rather than a cover-up
 - **A comprehensive academic audit** (7 phases, ~75 tool invocations) that caught stale documents, a Shapiro-Wilk error, and a bib entry duplication
 - **A mock doctoral defence** with external examiners (Beer on autopoiesis, Hooker on pruning fairness) that identified the programme's deepest vulnerability
-- **~15,000 simulation jobs** producing ~3 million observations across 28 experiments
+- **~15,000 simulation jobs** producing approximately 4.6 million session-level observations across 28 experiments
 
 ### The Meta-Paper
 
@@ -84,16 +84,17 @@ META-PAPER.md              # The process documentation
 
 | Metric | Value |
 |---|---|
-| Simulation jobs | ~15,000 |
-| Observations | ~3,000,000 |
+| Simulation jobs | ~15,000 (estimated; not fully countable from consolidated data) |
+| Session-level observations | ~4.6M across all repos; ~293K in programme repo |
 | Experiments | 28 |
-| Papers | 5 + 1 supplement |
-| Agent invocations | ~70 |
-| Committee meetings | 6 |
-| Peer review rounds | 5 |
-| Literature citations verified | ~100 |
-| Days from first commit to defence | 12 |
-| CPU hours | ~200 |
+| Papers completed | 5 + 1 supplement |
+| Simulated acceptance decisions | 4 of 5 documented |
+| Agent invocations | ~60-70 (estimate; no invocation logs saved) |
+| Committee meeting documents | 5 dedicated + additional in peer review |
+| Simulated peer review rounds | 5 |
+| Literature citations examined | ~100 |
+| Days from first commit to assembly | 12 |
+| CPU hours | ~200 (estimated) |
 
 ---
 
@@ -141,11 +142,19 @@ The most productive pattern was the **committee disagreement format**: multiple 
 
 ### The Stack
 
-- **[PAI](https://github.com/danielmiessler/Personal_AI_Infrastructure)** — the personal AI infrastructure framework providing agent orchestration, persistent memory, skill routing, and the Algorithm reasoning protocol
-- **Claude Code** — Anthropic's CLI for Claude, providing tool use, file editing, and bash execution
-- **Claude Opus 4.6 (1M context)** — the underlying model powering GEN and all spawned agents
-- **Ray** — distributed computing framework for cluster execution (68 CPUs across 3 nodes)
-- **Quarto** — scientific publishing system for rendering papers and the dissertation
+**GEN** operates through a layered infrastructure:
+
+**[PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure)** by Daniel Miessler provides the orchestration layer. PAI extends Claude Code with: agent spawning and management (launching specialised sub-agents for parallel tasks), persistent file-based memory (work items, learning signals, project context that survive across sessions), skill routing (modular capabilities like Research, Thinking, and domain-specific workflows invoked by slash commands), the Algorithm reasoning protocol (a structured multi-phase approach for complex problems), and hooks (automated pre/post-tool-use behaviours for quality control). PAI's agent taxonomy — Architect, Engineer, Explore, and multiple researcher types (Codex, Gemini, Grok, Perplexity, Claude) — enabled the parallel committee meetings, literature reviews, and audit processes documented here.
+
+**[Claude Code](https://docs.anthropic.com/en/docs/claude-code)** is Anthropic's CLI for Claude, providing the runtime environment: direct filesystem read/write, bash execution, git operations, and multi-tool orchestration within a persistent working directory context. Claude Code's permission system and sandboxing enabled GEN to execute cluster jobs, render documents, and manage code across four repositories without manual file-by-file approval.
+
+**Claude Opus 4.6 (1M context)** is the underlying model. The 1M token context window was load-bearing: this session accumulated substantial context across experiment monitoring, committee meetings, peer review, literature synthesis, and paper revision — all within a single continuous conversation. Every spawned agent inherits the model but operates with its own context, enabling parallel execution without context interference.
+
+**[Ray](https://www.ray.io/)** provided distributed computing. A 3-node cluster (68 CPUs total: 32 on a workstation with GPU, 24 on a second node, 12 on the head node) executed all simulation jobs. Ray's job submission API allowed GEN to submit experiments from the conversation, monitor progress, and retrieve results without manual SSH. Jobs were fault-tolerant — when the laptop node disconnected mid-experiment, Ray automatically retried failed tasks on remaining nodes.
+
+**[Quarto](https://quarto.org/)** was chosen as the scientific publishing system because it natively supports both R and Python in the same document. The substrate simulations are Python (numpy, scipy on the Ray cluster), while the statistical analysis and publication figures are R (ggplot2, arrow, patchwork). Quarto renders both through a single `.qmd` document, with R reading the Python-generated Parquet data files directly via the `arrow` package. This polyglot workflow — Python for computation, Parquet for data interchange, R for analysis and visualisation, Quarto for rendering — avoided the friction of choosing one language ecosystem and allowed each tool to do what it does best. The dissertation renders as both HTML (for review) and PDF (for submission) from the same source.
+
+**Apache Parquet** serves as the data interchange format across the entire pipeline. Python cluster jobs write per-seed Parquet files, which are merged into per-experiment tables. R reads these directly via `arrow::read_parquet()`. Parquet's columnar storage and type system prevent the schema drift and floating-point formatting issues common with CSV interchange. The entire experimental record (~3M observations) compresses to ~40MB.
 
 ---
 
@@ -168,4 +177,4 @@ https://github.com/[username]/dark-forest-programme
 
 ---
 
-*"The human asked the questions that mattered."*
+*All academic processes documented here (committee meetings, peer review, editorial decisions, defence) were simulated using AI agents. The computational experiments and their results are real.*

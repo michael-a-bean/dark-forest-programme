@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Michael Bean">
+<meta name="dcterms.date" content="2026-03-25">
+<meta name="keywords" content="AI-assisted research, personal AI infrastructure, computational artificial life, research methodology, academic process">
 
-<title>meta-paper-ai-research-process</title>
+<title>AI as Research Infrastructure</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,388 +23,339 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="meta-paper-ai-research-process_files/libs/clipboard/clipboard.min.js"></script>
-<script src="meta-paper-ai-research-process_files/libs/quarto-html/quarto.js" type="module"></script>
-<script src="meta-paper-ai-research-process_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="meta-paper-ai-research-process_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="meta-paper-ai-research-process_files/libs/quarto-html/popper.min.js"></script>
-<script src="meta-paper-ai-research-process_files/libs/quarto-html/tippy.umd.min.js"></script>
-<script src="meta-paper-ai-research-process_files/libs/quarto-html/anchor.min.js"></script>
-<link href="meta-paper-ai-research-process_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="meta-paper-ai-research-process_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="meta-paper-ai-research-process_files/libs/bootstrap/bootstrap.min.js"></script>
-<link href="meta-paper-ai-research-process_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="meta-paper-ai-research-process_files/libs/bootstrap/bootstrap-175f587307e0cd48ee646de96f0af297.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="META-PAPER_files/libs/clipboard/clipboard.min.js"></script>
+<script src="META-PAPER_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="META-PAPER_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="META-PAPER_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="META-PAPER_files/libs/quarto-html/popper.min.js"></script>
+<script src="META-PAPER_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="META-PAPER_files/libs/quarto-html/anchor.min.js"></script>
+<link href="META-PAPER_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="META-PAPER_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="META-PAPER_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="META-PAPER_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="META-PAPER_files/libs/bootstrap/bootstrap-9d4723ea27e7a00e1f8de3d6dc246880.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 
 
 </head>
 
-<body class="fullcontent quarto-light">
+<body class="quarto-light">
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#sec-stack" id="toc-sec-stack" class="nav-link" data-scroll-target="#sec-stack"><span class="header-section-number">2</span> The Technical Stack</a>
+  <ul class="collapse">
+  <li><a href="#gen-and-pai" id="toc-gen-and-pai" class="nav-link" data-scroll-target="#gen-and-pai"><span class="header-section-number">2.1</span> GEN and PAI</a></li>
+  <li><a href="#claude-code-and-claude-opus-4.6" id="toc-claude-code-and-claude-opus-4.6" class="nav-link" data-scroll-target="#claude-code-and-claude-opus-4.6"><span class="header-section-number">2.2</span> Claude Code and Claude Opus 4.6</a></li>
+  <li><a href="#the-polyglot-pipeline" id="toc-the-polyglot-pipeline" class="nav-link" data-scroll-target="#the-polyglot-pipeline"><span class="header-section-number">2.3</span> The Polyglot Pipeline</a></li>
+  <li><a href="#distributed-computation" id="toc-distributed-computation" class="nav-link" data-scroll-target="#distributed-computation"><span class="header-section-number">2.4</span> Distributed Computation</a></li>
+  </ul></li>
+  <li><a href="#sec-committee" id="toc-sec-committee" class="nav-link" data-scroll-target="#sec-committee"><span class="header-section-number">3</span> The Simulated Committee</a>
+  <ul class="collapse">
+  <li><a href="#committee-dynamics" id="toc-committee-dynamics" class="nav-link" data-scroll-target="#committee-dynamics"><span class="header-section-number">3.1</span> Committee Dynamics</a></li>
+  </ul></li>
+  <li><a href="#sec-review" id="toc-sec-review" class="nav-link" data-scroll-target="#sec-review"><span class="header-section-number">4</span> Simulated Peer Review</a>
+  <ul class="collapse">
+  <li><a href="#issues-identified" id="toc-issues-identified" class="nav-link" data-scroll-target="#issues-identified"><span class="header-section-number">4.1</span> Issues Identified</a></li>
+  <li><a href="#revision-experiments" id="toc-revision-experiments" class="nav-link" data-scroll-target="#revision-experiments"><span class="header-section-number">4.2</span> Revision Experiments</a></li>
+  <li><a href="#reviewer-errors" id="toc-reviewer-errors" class="nav-link" data-scroll-target="#reviewer-errors"><span class="header-section-number">4.3</span> Reviewer Errors</a></li>
+  </ul></li>
+  <li><a href="#sec-literature" id="toc-sec-literature" class="nav-link" data-scroll-target="#sec-literature"><span class="header-section-number">5</span> The Literature Review</a></li>
+  <li><a href="#sec-audit" id="toc-sec-audit" class="nav-link" data-scroll-target="#sec-audit"><span class="header-section-number">6</span> The Academic Audit</a></li>
+  <li><a href="#sec-defence" id="toc-sec-defence" class="nav-link" data-scroll-target="#sec-defence"><span class="header-section-number">7</span> The Mock Defence</a></li>
+  <li><a href="#sec-assessment" id="toc-sec-assessment" class="nav-link" data-scroll-target="#sec-assessment"><span class="header-section-number">8</span> What the System Did Well and Poorly</a>
+  <ul class="collapse">
+  <li><a href="#strengths" id="toc-strengths" class="nav-link" data-scroll-target="#strengths"><span class="header-section-number">8.1</span> Strengths</a></li>
+  <li><a href="#weaknesses" id="toc-weaknesses" class="nav-link" data-scroll-target="#weaknesses"><span class="header-section-number">8.2</span> Weaknesses</a></li>
+  <li><a href="#the-role-of-the-human" id="toc-the-role-of-the-human" class="nav-link" data-scroll-target="#the-role-of-the-human"><span class="header-section-number">8.3</span> The Role of the Human</a></li>
+  </ul></li>
+  <li><a href="#sec-implications" id="toc-sec-implications" class="nav-link" data-scroll-target="#sec-implications"><span class="header-section-number">9</span> Implications</a>
+  <ul class="collapse">
+  <li><a href="#for-research-practice" id="toc-for-research-practice" class="nav-link" data-scroll-target="#for-research-practice"><span class="header-section-number">9.1</span> For Research Practice</a></li>
+  <li><a href="#for-academic-integrity" id="toc-for-academic-integrity" class="nav-link" data-scroll-target="#for-academic-integrity"><span class="header-section-number">9.2</span> For Academic Integrity</a></li>
+  <li><a href="#for-reproducibility" id="toc-for-reproducibility" class="nav-link" data-scroll-target="#for-reproducibility"><span class="header-section-number">9.3</span> For Reproducibility</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10</span> References</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="META-PAPER.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
+</div>
 <main class="content" id="quarto-document-content">
 
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">AI as Research Infrastructure</h1>
+<p class="subtitle lead">A Case Study in Dissertation-Scale Computational Science Using GEN/PAI/Claude Code</p>
+</div>
 
 
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Michael Bean </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Independent Researcher
+          </p>
+      </div>
+  </div>
 
-<section id="ai-as-research-infrastructure-a-case-study-in-dissertation-scale-computational-science" class="level1">
-<h1>AI as Research Infrastructure: A Case Study in Dissertation-Scale Computational Science</h1>
-<section id="how-a-personal-ai-system-conducted-validated-and-defended-a-five-paper-doctoral-programme" class="level2">
-<h2 class="anchored" data-anchor-id="how-a-personal-ai-system-conducted-validated-and-defended-a-five-paper-doctoral-programme">How a Personal AI System Conducted, Validated, and Defended a Five-Paper Doctoral Programme</h2>
-<hr>
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">March 25, 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    <p>This paper documents the research process behind a doctoral dissertation comprising five papers and one methodological supplement in computational artificial life, produced over twelve days using GEN, a personal AI assistant built on PAI (Personal AI Infrastructure) running on Claude Code with Claude Opus 4.6. The process involved autonomous experiment design and distributed cluster execution (approximately 15,000 simulation jobs producing 4.6 million session-level observations), simulated dissertation committee meetings with persistent AI personas, AI-conducted peer review, comprehensive parallel literature search across five API backends, a multi-phase academic integrity audit, and a mock doctoral defence with external examiners. We describe the technical architecture, the roles played by AI agents at each stage, failure modes encountered, and findings that converged with prior literature the system had not consulted. The case raises questions about the nature of discovery when the researcher, committee, reviewers, and auditors operate as AI systems under the direction of a single human principal.</p>
+  </div>
+</div>
+
+<div>
+  <div class="keywords">
+    <div class="block-title">Keywords</div>
+    <p>AI-assisted research, personal AI infrastructure, computational artificial life, research methodology, academic process</p>
+  </div>
+</div>
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>On March 13, 2026, a conversation about Deleuze’s concept of <em>differenciation</em> and whether goalless dynamics could produce qualitatively different kinds from identical starting conditions led to the first commit of what became a five-paper doctoral programme. Twelve days later, the programme had produced approximately 15,000 simulation jobs on a 20$$20-node substrate (400 nodes per simulation), 3 million observations, five completed papers, a dissertation, and a simulated defence that returned “pass with minor corrections.”</p>
+<p>This paper documents that process: not the scientific findings (which are reported in the papers themselves) but the <em>methodology of AI-assisted research</em> at dissertation scale. The system that conducted this work — GEN, a personal AI assistant built on PAI <span class="citation" data-cites="miessler2024pai">(<a href="#ref-miessler2024pai" role="doc-biblioref">Miessler, 2024</a>)</span> running on Claude Code — operated as experimenter, writer, committee member, reviewer, auditor, and examiner, under the direction of a single human principal who made all strategic decisions.</p>
+<p>No papers were submitted to any journal. No committee held institutional authority. No defence had academic standing. The computational experiments and their results are real; the academic process surrounding them was simulated using AI agents within a single conversation session. Every claim about what the system did is verifiable against the artifacts in the accompanying repository.</p>
 </section>
-<section id="abstract" class="level2">
-<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
-<p>We document the research process behind a doctoral dissertation comprising five papers and one methodological supplement in computational artificial life, produced over 12 days (March 13-25, 2026) using a personal AI infrastructure (PAI) system built on Claude Code. The process involved autonomous experiment design and cluster execution (~15,000 simulation jobs, ~3M observations), simulated dissertation committee meetings with persistent AI personas, AI-conducted peer review at a simulated journal, comprehensive literature search using 14 parallel research agents across 5 API backends, a full academic integrity audit, and a mock doctoral defence with external examiners. We describe the architecture, the specific roles played by AI agents at each stage, the failure modes encountered, and the surprising discoveries that emerged from the process — including several findings that were independently validated against prior literature the system had not been designed to search. The case raises questions about the nature of academic discovery when the researcher, the committee, the reviewers, and the auditors are all AI systems operating under the direction of a single human principal.</p>
-<hr>
+<section id="sec-stack" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> The Technical Stack</h1>
+<section id="gen-and-pai" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="gen-and-pai"><span class="header-section-number">2.1</span> GEN and PAI</h2>
+<p>GEN is the human principal’s personal AI assistant, built on the Personal AI Infrastructure (PAI) framework created by Daniel Miessler <span class="citation" data-cites="miessler2024pai">(<a href="#ref-miessler2024pai" role="doc-biblioref">Miessler, 2024</a>)</span>. PAI extends Claude Code <span class="citation" data-cites="anthropic2025claudecode">(<a href="#ref-anthropic2025claudecode" role="doc-biblioref">Anthropic, 2025</a>)</span> with capabilities that proved essential for sustained research:</p>
+<p><strong>Agent orchestration.</strong> PAI enables spawning specialised sub-agents — Architect, Engineer, Explore, and multiple researcher types (Codex, Gemini, Grok, Perplexity, Claude) — for parallel task execution. Each agent operates with its own context but inherits the underlying model. This architecture enabled the parallel committee meetings, fourteen-agent literature reviews, and multi-phase audits documented below.</p>
+<p><strong>Persistent memory.</strong> A file-based memory system preserves project context, learning signals, and work items across conversation sessions. Two research documents that survived from the programme’s first day — “Capacities, Intent, and Affordances” (a synthesis of Gibson and DeLanda) and “Qualitative Differentiation from Homogeneous Substrates” (a reading of Deleuze’s <em>Difference and Repetition</em>) — demonstrate that philosophical research preceded and shaped the experimental design.</p>
+<p><strong>Skill routing.</strong> Modular capabilities invoked by slash commands provide structured workflows. The Research skill, for example, routes to appropriate agent configurations (quick, standard, extensive, or deep investigation) based on the scope of the query.</p>
+<p><strong>The Algorithm.</strong> A structured multi-phase reasoning protocol for complex tasks that enforces systematic observation, planning, and execution rather than immediate response.</p>
 </section>
-<section id="origin-from-conversation-to-computation" class="level2">
-<h2 class="anchored" data-anchor-id="origin-from-conversation-to-computation">1. Origin: From Conversation to Computation</h2>
-<section id="the-seed-march-13-2026" class="level3">
-<h3 class="anchored" data-anchor-id="the-seed-march-13-2026">1.1 The Seed (March 13, 2026)</h3>
-<p>The programme began as a conversation about Deleuze’s concept of differenciation and whether purely goalless dynamics could produce qualitatively different kinds from identical starting conditions. The initial git commit at <code>dark-forest-silica</code> (2026-03-13 00:17:53) was titled “Initial commit — Dark Forest in Silica project.” Within 30 minutes, the repository contained a Deleuzian philosophical framework (609 lines of research on Difference and Repetition) and the first Hebbian network experiments.</p>
-<p>The velocity was striking: by 16:43 the same day, the multi-field substrate (the foundation for all five papers) was implemented and producing results. By 23:08, the full reproducible pipeline (Python → Parquet → R → Quarto) was operational. Paper 1 went through committee review and acceptance within 24 hours of the first commit.</p>
+<section id="claude-code-and-claude-opus-4.6" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="claude-code-and-claude-opus-4.6"><span class="header-section-number">2.2</span> Claude Code and Claude Opus 4.6</h2>
+<p>Claude Code <span class="citation" data-cites="anthropic2025claudecode">(<a href="#ref-anthropic2025claudecode" role="doc-biblioref">Anthropic, 2025</a>)</span> provides the runtime: direct filesystem access, bash execution, git operations, and multi-tool orchestration within a persistent working directory. The underlying model, Claude Opus 4.6, offers a one-million-token context window — a constraint that proved load-bearing. This session accumulated context across experiment monitoring, six committee meetings, five peer review rounds, a fourteen-agent literature synthesis, and paper revision, all within a single continuous conversation.</p>
 </section>
-<section id="philosophical-research-as-computational-scaffold" class="level3">
-<h3 class="anchored" data-anchor-id="philosophical-research-as-computational-scaffold">1.2 Philosophical Research as Computational Scaffold</h3>
-<p>Before any code was written, PAI conducted deep philosophical research that shaped the entire programme. Two research documents survive in the silica repository’s memory:</p>
+<section id="the-polyglot-pipeline" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="the-polyglot-pipeline"><span class="header-section-number">2.3</span> The Polyglot Pipeline</h2>
+<p>The choice of Quarto <span class="citation" data-cites="allaire2024quarto">(<a href="#ref-allaire2024quarto" role="doc-biblioref">Allaire et al., 2024</a>)</span> as the publishing system was driven by a practical requirement: the substrate simulations are Python (numpy, scipy, executed on the Ray cluster), while the statistical analysis and publication figures are R (ggplot2, arrow, patchwork). Quarto renders both languages in a single <code>.qmd</code> document.</p>
+<p>The data interchange format, Apache Parquet, bridges the two ecosystems. Python cluster jobs write per-seed Parquet files; R reads them directly via the <code>arrow</code> package. Parquet’s columnar storage and typed schema prevent the format drift common with CSV interchange. The complete experimental record (approximately 4.6 million session-level observations) compresses to 40 megabytes.</p>
+</section>
+<section id="distributed-computation" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="distributed-computation"><span class="header-section-number">2.4</span> Distributed Computation</h2>
+<p>Ray <span class="citation" data-cites="moritz2018ray">(<a href="#ref-moritz2018ray" role="doc-biblioref">Moritz et al., 2018</a>)</span> provided the cluster computing layer. A three-node cluster (68 CPUs: 32 on a workstation, 24 on a second node, 12 on the head node) executed all simulation jobs. GEN submitted experiments to the cluster directly from the conversation via Ray’s HTTP job submission API, monitored progress through log polling, and retrieved results by reading Parquet files from a shared NFS mount. When the laptop node disconnected during overnight runs, Ray automatically retried failed tasks on the remaining nodes.</p>
+</section>
+</section>
+<section id="sec-committee" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> The Simulated Committee</h1>
+<p>Three AI committee members were instantiated from written character descriptions and accumulated meeting transcripts. Each meeting was a fresh agent invocation conditioned on this context, not a persistent process with continuous memory. Within these constraints, the personas produced differentiated intellectual positions:</p>
+<p><strong>Dr.&nbsp;Elena Vasquez</strong> (Chair, Complex Systems, Santa Fe Institute) — pragmatic, scope-focused, protective of timeline. Made decisive calls on submission timing. Warning against scope creep proved prescient when the literature review expanded the revision plan.</p>
+<p><strong>Dr.&nbsp;James Okafor</strong> (Computational Neuroscience, UCL) — statistically demanding. Raised the two concerns (pruning confound and CCD invalidity) that reshaped the programme. His insistence on nested ANOVA, Wilcoxon robustness checks, and deconfounded probes improved the statistical foundation.</p>
+<p><strong>Dr.&nbsp;Marie-Claire Dupont</strong> (Philosophy of Technology, EGS) — philosophically precise. Her correction of “structural germ” to “limit condition” was later validated by an external examiner. Her framing of the “productive fracture” became the programme’s central philosophical contribution.</p>
+<section id="committee-dynamics" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="committee-dynamics"><span class="header-section-number">3.1</span> Committee Dynamics</h2>
+<p>The committee’s contribution was structural rather than informational: when members disagreed, the disagreement produced better decisions than any individual perspective. Vasquez’s pragmatism moderated Okafor’s experimental ambition; Dupont’s precision corrected Vasquez’s tendency to dismiss philosophical contributions as inessential.</p>
+<p>Positions shifted across meetings because each subsequent invocation included the transcripts of prior meetings as context. Okafor’s partial concession on “phantom individuation,” Vasquez’s shift from leading with the confound to leading with the steepness result, and Dupont’s acceptance that the autopoiesis claim required functional validation were conditioned on prior exchanges, not on persistent memory or genuine intellectual development. Whether this constitutes “evolution” of positions or sophisticated context-matching is an open question.</p>
+</section>
+</section>
+<section id="sec-review" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Simulated Peer Review</h1>
+<p>Each paper submission involved three AI reviewers with distinct expertise, an editorial decision, a response letter, and revision. The process produced genuine quality improvement.</p>
+<section id="issues-identified" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="issues-identified"><span class="header-section-number">4.1</span> Issues Identified</h2>
+<p>Reviewers identified legitimate problems:</p>
 <ul>
-<li><strong>“Capacities, Intent, and Affordances”</strong> — a synthesis of Gibson’s affordance theory and DeLanda’s capacity concept, establishing the relational ontology that would later become the response rank metric’s theoretical grounding.</li>
-<li><strong>“Qualitative Differentiation from Homogeneous Substrates”</strong> — a careful reading of Deleuze’s distinction between differentiation (virtual determination) and differenciation (actualisation into distinct kinds), which generated the specific prediction that the Hebbian substrate would achieve the former but not the latter.</li>
+<li>CCD invalidation was underspecified (Reviewer 1, Paper 4S)</li>
+<li>The edge cap mechanism potentially reintroduced the pruning confound (Reviewer 2, Paper 4S — described as “the most dangerous item”)</li>
+<li>“Structural germ” was an incorrect Simondonian category (Reviewer 3, Paper 4S)</li>
+<li>Critical period and perturbation resilience lacked functional validation (Reviewers 1 and 2, Paper 4)</li>
 </ul>
-<p>This prediction — the “productive fracture” — proved correct across all subsequent experiments and became the programme’s central philosophical result. The philosophical framework was not applied post-hoc; it generated testable predictions that were subsequently confirmed or falsified.</p>
 </section>
-<section id="the-acceleration" class="level3">
-<h3 class="anchored" data-anchor-id="the-acceleration">1.3 The Acceleration</h3>
+<section id="revision-experiments" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="revision-experiments"><span class="header-section-number">4.2</span> Revision Experiments</h2>
+<p>Addressing reviewer concerns required 900 additional simulation jobs and three new figures. This mirrors real peer review, where revision experiments often exceed the original submission in scope.</p>
+</section>
+<section id="reviewer-errors" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="reviewer-errors"><span class="header-section-number">4.3</span> Reviewer Errors</h2>
+<p>The system was not infallible. One proofreading agent incorrectly flagged verified data as wrong. A reviewer for Paper 4 read the companion Paper 4S and confused cross-paper references. Some questions were answerable from the manuscript itself. These failures are documented because they illustrate the limitations of simulated review.</p>
+</section>
+</section>
+<section id="sec-literature" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> The Literature Review</h1>
+<p>A parallel deployment of fourteen research agents across five API backends (Claude, Gemini, Grok, Perplexity, and domain-specific contextualizers) found that approximately forty to fifty percent of major results had substantial prior art.</p>
+<div id="tbl-convergence" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-convergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Convergent findings and their prior art.
+</figcaption>
+<div aria-describedby="tbl-convergence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 50%">
-<col style="width: 50%">
+<col style="width: 45%">
+<col style="width: 55%">
 </colgroup>
 <thead>
 <tr class="header">
-<th>Date</th>
-<th>Milestone</th>
+<th>Finding</th>
+<th>Prior Art</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Mar 13</td>
-<td>Paper 1: substrate, experiments, pipeline, paper draft, committee review, acceptance</td>
+<td>Pruning destroys diversity</td>
+<td>Hooker et al. <span class="citation" data-cites="hooker2019compressed">(<a href="#ref-hooker2019compressed" role="doc-biblioref">2019</a>)</span></td>
 </tr>
 <tr class="even">
-<td>Mar 14</td>
-<td>Paper 2: coexistence, coupling analysis, acceptance</td>
+<td>Critical periods emerge</td>
+<td>Achille et al. <span class="citation" data-cites="achille2019critical">(<a href="#ref-achille2019critical" role="doc-biblioref">2019</a>)</span></td>
 </tr>
 <tr class="odd">
-<td>Mar 15</td>
-<td>Paper 3: self-sealing, 1400 simulations, committee meeting, editorial decision</td>
+<td>Response rank as metric</td>
+<td>Stringer et al. <span class="citation" data-cites="stringer2019high">(<a href="#ref-stringer2019high" role="doc-biblioref">2019</a>)</span></td>
 </tr>
 <tr class="even">
-<td>Mar 16-17</td>
-<td>Cluster setup, Paper 4 repo scaffolded, experiments 1-3 launched</td>
+<td>Self-sealing resembles autopoiesis</td>
+<td>Maturana and Varela <span class="citation" data-cites="maturana1980autopoiesis">(<a href="#ref-maturana1980autopoiesis" role="doc-biblioref">1980</a>)</span></td>
 </tr>
 <tr class="odd">
-<td>Mar 17-20</td>
-<td>Papers 4 experiments 1-19 on Ray cluster (6,070 jobs)</td>
-</tr>
-<tr class="even">
-<td>Mar 20</td>
-<td>Paper 4S repo scaffolded, initial bounds experiments</td>
-</tr>
-<tr class="odd">
-<td>Mar 22</td>
-<td>Committee-requested experiments (Okafor concerns)</td>
-</tr>
-<tr class="even">
-<td>Mar 23</td>
-<td>Pruning confound discovered, Phases 1-3 experiments</td>
-</tr>
-<tr class="odd">
-<td>Mar 24</td>
-<td>Paper 4S peer review, Paper 4 revision, functional validation, academic audit</td>
-</tr>
-<tr class="even">
-<td>Mar 25</td>
-<td>Dissertation assembly, 14-researcher literature review, mock defence, corrections</td>
+<td>Fixed rules cannot produce novelty</td>
+<td>Adams et al. <span class="citation" data-cites="adams2017formal">(<a href="#ref-adams2017formal" role="doc-biblioref">2017</a>)</span></td>
 </tr>
 </tbody>
 </table>
-<hr>
+</div>
+</figure>
+</div>
+<p>The committee reframed this convergence: independent derivation of established results from an unrelated starting point constitutes evidence that the underlying phenomena are real, not artifacts of any single methodology. The genuinely novel findings — the disordinal interaction, the non-monotonic steepness result, the critical threshold boundaries, and the grid-size scaling law — survived the prior art assessment.</p>
 </section>
-</section>
-<section id="the-pai-architecture" class="level2">
-<h2 class="anchored" data-anchor-id="the-pai-architecture">2. The PAI Architecture</h2>
-<section id="system-overview" class="level3">
-<h3 class="anchored" data-anchor-id="system-overview">2.1 System Overview</h3>
-<p>The Personal AI Infrastructure (PAI) is a Claude Code-based system with several extensions:</p>
-<ul>
-<li><strong>Agent spawning</strong>: the ability to launch specialised sub-agents (Explore, Architect, Engineer, CodexResearcher, GeminiResearcher, GrokResearcher, PerplexityResearcher, ClaudeResearcher) for parallel task execution</li>
-<li><strong>Persistent memory</strong>: a file-based memory system at <code>~/.claude/MEMORY/</code> with work items, learning signals, and relationship context</li>
-<li><strong>Work tracking</strong>: PRD-based task management with ISC (Ideal State Criteria) for each work item</li>
-<li><strong>Algorithm mode</strong>: a structured reasoning protocol for complex tasks</li>
-<li><strong>Skills</strong>: modular capabilities (Research, Thinking, etc.) invoked by slash commands</li>
-<li><strong>Voice notifications</strong>: an HTTP-based notification system for status updates</li>
-</ul>
-</section>
-<section id="the-agent-taxonomy" class="level3">
-<h3 class="anchored" data-anchor-id="the-agent-taxonomy">2.2 The Agent Taxonomy</h3>
-<p>Throughout the programme, different agent types served different roles:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Agent Type</th>
-<th>Role in Programme</th>
-<th>Instances</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>Architect</strong></td>
-<td>Committee members (Vasquez, Okafor, Dupont), system design</td>
-<td>~15</td>
-</tr>
-<tr class="even">
-<td><strong>CodexResearcher (Remy)</strong></td>
-<td>Technical feasibility, code review, programme audit, proofreading</td>
-<td>~8</td>
-</tr>
-<tr class="odd">
-<td><strong>Explore</strong></td>
-<td>Codebase analysis, file search, data verification</td>
-<td>~10</td>
-</tr>
-<tr class="even">
-<td><strong>ClaudeResearcher</strong></td>
-<td>Academic literature search</td>
-<td>~5</td>
-</tr>
-<tr class="odd">
-<td><strong>GeminiResearcher</strong></td>
-<td>Multi-perspective literature search</td>
-<td>~5</td>
-</tr>
-<tr class="even">
-<td><strong>GrokResearcher</strong></td>
-<td>Contrarian analysis, cross-domain connections</td>
-<td>~5</td>
-</tr>
-<tr class="odd">
-<td><strong>PerplexityResearcher</strong></td>
-<td>Philosophy literature, source verification</td>
-<td>~3</td>
-</tr>
-<tr class="even">
-<td><strong>General-purpose</strong></td>
-<td>Statistical reproduction, Paper 4 structural analysis</td>
-<td>~5</td>
-</tr>
-</tbody>
-</table>
-<p>Total agent invocations across the programme: approximately 60-70.</p>
-<hr>
-</section>
-</section>
-<section id="the-simulated-committee" class="level2">
-<h2 class="anchored" data-anchor-id="the-simulated-committee">3. The Simulated Committee</h2>
-<section id="persistent-personas" class="level3">
-<h3 class="anchored" data-anchor-id="persistent-personas">3.1 Persistent Personas</h3>
-<p>Three AI committee members maintained consistent intellectual positions throughout:</p>
-<p><strong>Dr.&nbsp;Elena Vasquez (Chair, Complex Systems, Santa Fe Institute)</strong>: Pragmatic, scope-focused, protective of timeline. Consistently pushed for “minimum viable experiments” and warned against scope creep. Made the decisive calls on submission timing and paper structure.</p>
-<p><strong>Dr.&nbsp;James Okafor (Computational Neuroscience, UCL)</strong>: Statistically rigorous, methodologically demanding. Raised the two concerns (pruning confound, CCD invalidity) that reshaped the entire programme. His insistence on nested ANOVA, Wilcoxon robustness checks, and deconfounded probes substantially improved the statistical grounding.</p>
-<p><strong>Dr.&nbsp;Marie-Claire Dupont (Philosophy of Technology, EGS)</strong>: Philosophically precise, resistant to superficial deployment of Deleuze/Simondon. Her correction of “structural germ” to “limit condition” was validated by the external examiner (Beer) in the mock defence. Her framing of the “productive fracture” became the programme’s central philosophical contribution.</p>
-</section>
-<section id="how-the-committee-was-used" class="level3">
-<h3 class="anchored" data-anchor-id="how-the-committee-was-used">3.2 How the Committee Was Used</h3>
-<p>The committee met (was invoked) at six key decision points:</p>
+<section id="sec-audit" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> The Academic Audit</h1>
+<p>A coordinating agent executed a seven-phase audit, spawning specialised sub-agents for each verification task:</p>
 <ol type="1">
-<li><strong>R1 review of initial findings</strong> — assessed the five original experiments</li>
-<li><strong>Debate on next steps</strong> — disagreed productively on scope (Vasquez: 2 experiments, Okafor: 3, Dupont: 1)</li>
-<li><strong>R2 review after committee experiments</strong> — all concerns confirmed</li>
-<li><strong>R3 review with full results</strong> — revised narrative, new title</li>
-<li><strong>Final pre-submission review</strong> — approved with two minor edits</li>
-<li><strong>Response to peer review</strong> — triaged reviewer concerns, planned revision</li>
+<li>Citation verification (web search for DOIs and claim accuracy)</li>
+<li>Code-data consistency (parquet files against paper claims)</li>
+<li>Statistical methods (reproduction of tests from raw values)</li>
+<li>Internal consistency (term and number concordance across documents)</li>
+<li>Philosophical terminology (correct deployment of Simondonian concepts)</li>
+<li>Reproducibility (tracing claim-to-data chains through source code)</li>
+<li>Prose quality (logical coherence and argumentative structure)</li>
 </ol>
-<p>The committee’s most significant contribution was the <strong>debate format</strong>: when members disagreed (which happened regularly), the disagreement produced better decisions than any individual member would have reached. Vasquez’s pragmatism moderated Okafor’s experimental ambition; Dupont’s philosophical precision corrected Vasquez’s tendency to dismiss philosophical contributions as “too cute.”</p>
+<p>The audit caught errors that multiple rounds of proofreading had missed: a Shapiro-Wilk p-value reported as 0.40 instead of 0.99, a dissertation framing document with stale terminology and outdated numbers, and a duplicated author name in a bibliography entry.</p>
 </section>
-<section id="emergent-committee-dynamics" class="level3">
-<h3 class="anchored" data-anchor-id="emergent-committee-dynamics">3.3 Emergent Committee Dynamics</h3>
-<p>An unexpected finding: the committee developed what appeared to be genuine intellectual relationships. Okafor’s partial concession to Dupont on “phantom individuation” (accepting a threshold-based compromise) was not scripted — it emerged from the dialogue format. Vasquez’s shift from “lead with confound” to “lead with steepness” came after being persuaded by both Okafor and Dupont in the same meeting. These shifts were persistent across sessions because the committee members’ positions were regenerated from the accumulated context of prior meetings.</p>
-<hr>
+<section id="sec-defence" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> The Mock Defence</h1>
+<p>Two external examiners were introduced as AI-generated personas (not the actual scholars): “Prof.&nbsp;Randall Beer” (modelled on the Indiana University researcher’s published work in computational autopoiesis) and “Prof.&nbsp;Sara Hooker” (modelled on the Cohere researcher’s published work on compressed network fairness). These names are used to indicate the expertise profile of each persona, not to claim endorsement or participation by the real individuals.</p>
+<p>The most difficult exchange concerned whether self-sealing assemblages constitute genuine individuals or merely spatial patterns in a continuous field. The candidate’s response — that the assemblages possess measurable properties and resist perturbation but are constituted by spatial context rather than intrinsic properties — identified the programme’s deepest philosophical vulnerability without fully resolving it.</p>
+<p>Verdict: pass with minor corrections.</p>
 </section>
+<section id="sec-assessment" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> What the System Did Well and Poorly</h1>
+<section id="strengths" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="strengths"><span class="header-section-number">8.1</span> Strengths</h2>
+<p>Parallel execution proved valuable: fourteen literature agents running simultaneously, cluster jobs executing overnight while writing proceeded, multiple committee members debating in a single invocation. Persistent context allowed committee positions to evolve across meetings. The system identified errors during directed investigations: the pruning confound through a human-requested experiment, the CCD invalidity through a human-requested permutation test, and the Shapiro-Wilk miscalculation through a human-requested audit.</p>
 </section>
-<section id="the-simulated-peer-review" class="level2">
-<h2 class="anchored" data-anchor-id="the-simulated-peer-review">4. The Simulated Peer Review</h2>
-<section id="architecture" class="level3">
-<h3 class="anchored" data-anchor-id="architecture">4.1 Architecture</h3>
-<p>Each paper submission involved: 1. Three AI reviewers with distinct expertise profiles (matching Artificial Life’s typical reviewer pool) 2. Reviewers given the full paper text and asked for structured reviews (summary, recommendation, major/minor concerns, strengths, questions) 3. An editorial decision synthesising the reviews 4. Response letter addressing each concern 5. Revision and resubmission</p>
+<section id="weaknesses" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="weaknesses"><span class="header-section-number">8.2</span> Weaknesses</h2>
+<p>Literature awareness was insufficient. A researcher familiar with the neural network compression literature would have encountered Hooker et al. before designing the pruning experiments. Metric selection was suboptimal: four papers relied on centroid cosine distance before discovering it was spatially confounded. Philosophical claims occasionally outran the evidence: “structural germ” persisted through several drafts before correction.</p>
 </section>
-<section id="quality-of-ai-peer-review" class="level3">
-<h3 class="anchored" data-anchor-id="quality-of-ai-peer-review">4.2 Quality of AI Peer Review</h3>
-<p>The AI reviewers identified genuine issues:</p>
-<ul>
-<li><strong>R1 (ALife, Paper 4S)</strong>: Flagged that CCD invalidation was “underdeveloped” and response rank “not validated” — both legitimate concerns addressed by new experiments</li>
-<li><strong>R2 (Neuroscience, Paper 4S)</strong>: Identified the edge cap as a potential confound — “the most dangerous item on the list” — which was definitively resolved by the cap sensitivity sweep</li>
-<li><strong>R3 (Philosophy, Paper 4S)</strong>: Corrected “structural germ” to “limit condition” — a genuine Simondonian error that an informed reviewer would catch</li>
-</ul>
-<p>The AI reviewers also made mistakes: - Remy’s first proofread incorrectly flagged data as wrong (the data was correct; Remy had a loading error) - R1 for Paper 4 read both Paper 4 and Paper 4S, creating confusion about which paper contained which numbers - Some reviewer questions were answerable from the paper itself, suggesting incomplete reading</p>
-</section>
-<section id="the-review-loop-as-quality-improvement" class="level3">
-<h3 class="anchored" data-anchor-id="the-review-loop-as-quality-improvement">4.3 The Review Loop as Quality Improvement</h3>
-<p>Papers improved measurably through the review process. Paper 4S gained: - Edge cap sensitivity analysis (Rev1: 360 jobs) - Grid size generality (Rev2: 240 jobs) - Full SVD threshold sweep with participation ratio (Rev3: 180 jobs) - 7 new literature citations - Corrected Simondonian terminology</p>
-<p>Total: 780 additional simulation jobs and 3 new figures generated specifically to address reviewer concerns. This mirrors the real peer review process where revision experiments often exceed the original submission.</p>
-<hr>
+<section id="the-role-of-the-human" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="the-role-of-the-human"><span class="header-section-number">8.3</span> The Role of the Human</h2>
+<p>One human directed every strategic decision: which questions to pursue, when to run experiments or write, when to consult the committee, when to conduct the literature review, and when to stop. The AI system executed, analysed, wrote, reviewed, and audited. The division was consistent throughout: the human chose the direction; the system travelled it.</p>
 </section>
 </section>
-<section id="the-technical-research-assistant-remy" class="level2">
-<h2 class="anchored" data-anchor-id="the-technical-research-assistant-remy">5. The Technical Research Assistant (Remy)</h2>
-<section id="role" class="level3">
-<h3 class="anchored" data-anchor-id="role">5.1 Role</h3>
-<p>The CodexResearcher agent “Remy” served as the programme’s technical conscience — a persistent technical advisor who:</p>
-<ul>
-<li>Assessed experimental feasibility and compute time before each cluster submission</li>
-<li>Conducted the comprehensive programme audit (76 tool uses, 114K tokens, 12 minutes)</li>
-<li>Proofread every paper revision, catching numerical inconsistencies</li>
-<li>Generated all 9 publication figures via the R analysis script</li>
-<li>Wrote the 450-line Methods chapter for the dissertation</li>
-</ul>
+<section id="sec-implications" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Implications</h1>
+<section id="for-research-practice" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="for-research-practice"><span class="header-section-number">9.1</span> For Research Practice</h2>
+<p>The committee disagreement format was the most productive architectural choice. Multiple AI personas with distinct intellectual commitments, debating a shared question, produced better outcomes than any individual agent. This suggests that AI-assisted research benefits more from structured <em>disagreement</em> than from optimised individual performance.</p>
 </section>
-<section id="remys-contribution-to-the-pruning-discovery" class="level3">
-<h3 class="anchored" data-anchor-id="remys-contribution-to-the-pruning-discovery">5.2 Remy’s Contribution to the Pruning Discovery</h3>
-<p>When the committee requested experiments to test the pruning confound, Remy’s feasibility assessment identified a critical risk: “Pruning=0 memory explosion. With prune_threshold=0 on a 20×20 grid, encounter_rate=20 creates 20 new edges/step × 300 steps/session = 6000 edges/session.” This led to the max_edges cap design, which later became the subject of a reviewer concern (R2’s critical concern about the cap reintroducing the confound) and a definitive resolution (the cap never activates because edges self-stabilise at ~1,350).</p>
+<section id="for-academic-integrity" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="for-academic-integrity"><span class="header-section-number">9.2</span> For Academic Integrity</h2>
+<p>This programme raises questions without settled answers. Who is the author when writing is AI-generated under human direction? How should simulated peer review be disclosed? When an AI system independently derives a result with prior art, is the appropriate response citation of the prior work, acknowledgment of independent derivation, or both? This document exists to make the process transparent so that others can evaluate it on its merits.</p>
 </section>
-<section id="remys-errors" class="level3">
-<h3 class="anchored" data-anchor-id="remys-errors">5.3 Remy’s Errors</h3>
-<p>Remy was not infallible. In the final proofread before Paper 4S resubmission, Remy incorrectly flagged the response rank data as wrong (“hard noprune rank@1% = 4.3, not 5.6”). Direct verification against the parquet data confirmed the paper’s numbers were correct. This false alarm delayed submission by approximately 20 minutes but reinforced the importance of verifying auditor claims against primary data.</p>
-<hr>
+<section id="for-reproducibility" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="for-reproducibility"><span class="header-section-number">9.3</span> For Reproducibility</h2>
+<p>Every artifact in the accompanying repository — code, data, papers, committee transcripts, peer reviews, audit reports, and this document — is provided so that the process can be examined, critiqued, and, if desired, replicated.</p>
 </section>
 </section>
-<section id="the-literature-review-14-agents-in-parallel" class="level2">
-<h2 class="anchored" data-anchor-id="the-literature-review-14-agents-in-parallel">6. The Literature Review: 14 Agents in Parallel</h2>
-<section id="architecture-1" class="level3">
-<h3 class="anchored" data-anchor-id="architecture-1">6.1 Architecture</h3>
-<p>The “So What?” analysis deployed 14 research agents simultaneously across 5 API backends:</p>
-<ul>
-<li>3 Claude agents (academic literature search)</li>
-<li>3 Gemini agents (multi-perspective analysis)</li>
-<li>3 Grok agents (contrarian analysis, cross-domain connections)</li>
-<li>5 domain-specific contextualizers (network science, ALife, philosophy, applications, neuroscience)</li>
-</ul>
-</section>
-<section id="the-uncomfortable-discovery" class="level3">
-<h3 class="anchored" data-anchor-id="the-uncomfortable-discovery">6.2 The Uncomfortable Discovery</h3>
-<p>The literature review found that approximately 40-50% of the programme’s major findings had substantial prior art: - Pruning destroys diversity → Hooker et al.&nbsp;2019, Tran et al.&nbsp;2022 - Critical periods emerge → Achille et al.&nbsp;2019, Kleinman et al.&nbsp;2024 - Response rank as metric → Stringer et al.&nbsp;2019 (standard tool) - Self-sealing = autopoiesis → Maturana &amp; Varela 1980 - Fixed rules can’t produce novelty → Adams et al.&nbsp;2017</p>
-<p>This discovery could have been devastating. Instead, the committee reframed it: “Convergent discovery from independent starting points is evidence that the underlying phenomenon is real, not an artifact of one methodology.”</p>
-</section>
-<section id="the-cross-domain-principle" class="level3">
-<h3 class="anchored" data-anchor-id="the-cross-domain-principle">6.3 The Cross-Domain Principle</h3>
-<p>The Grok agent’s cross-domain analysis identified what may be the programme’s most generalisable finding: weak-element pruning destroying functional diversity is a universal principle across self-organising systems. The agent verified this across metallurgy (grain boundaries), ecology (mass extinction), markets (killer acquisitions), supply chains (redundancy removal), and immune systems (thymic selection), each with primary literature citations.</p>
-<hr>
-</section>
-</section>
-<section id="the-academic-audit" class="level2">
-<h2 class="anchored" data-anchor-id="the-academic-audit">7. The Academic Audit</h2>
-<section id="the-coordinator-pattern" class="level3">
-<h3 class="anchored" data-anchor-id="the-coordinator-pattern">7.1 The Coordinator Pattern</h3>
-<p>The academic audit used a novel architecture: a single coordinating agent that spawned specialised sub-agents for each verification phase. The coordinator:</p>
-<ol type="1">
-<li>Read the relevant files</li>
-<li>Designed a specific verification task</li>
-<li>Spawned a sub-agent with precise instructions</li>
-<li>Reviewed the sub-agent’s findings</li>
-<li>Recorded PASS/FAIL for each check</li>
-<li>Produced the final report</li>
-</ol>
-</section>
-<section id="what-the-audit-found" class="level3">
-<h3 class="anchored" data-anchor-id="what-the-audit-found">7.2 What the Audit Found</h3>
-<p>Seven phases, all passed with specific corrections: - <strong>Citation verification</strong>: PASS (1 bib author duplication) - <strong>Code-data consistency</strong>: PASS (all numbers exact) - <strong>Statistical methods</strong>: PASS (Shapiro-Wilk p-value was wrong: 0.40 should be 0.99) - <strong>Internal consistency</strong>: FAIL → PASS (dissertation-frame.qmd had stale “structural germ” and “4.7”) - <strong>Philosophical terms</strong>: PASS (Adams et al.&nbsp;“proved” → “demonstrated”) - <strong>Reproducibility</strong>: PASS (3/3 chains verified) - <strong>Prose quality</strong>: PASS</p>
-<p>The audit caught errors that multiple rounds of proofreading had missed: the dissertation-frame.qmd was an earlier document that hadn’t been updated when Papers 4/4S were revised. This is a realistic failure mode — maintaining consistency across a multi-document programme is exactly where automated auditing adds value.</p>
-<hr>
-</section>
-</section>
-<section id="the-mock-defence" class="level2">
-<h2 class="anchored" data-anchor-id="the-mock-defence">8. The Mock Defence</h2>
-<section id="external-examiners" class="level3">
-<h3 class="anchored" data-anchor-id="external-examiners">8.1 External Examiners</h3>
-<p>The mock defence introduced two new AI personas not previously involved in the programme:</p>
-<ul>
-<li><strong>Prof.&nbsp;Randall Beer</strong> (Indiana University) — chosen for expertise in computational autopoiesis, directly relevant to the self-sealing/operational closure claims</li>
-<li><strong>Prof.&nbsp;Sara Hooker</strong> (Cohere) — chosen as the author whose prior work (Hooker et al.&nbsp;2019) most directly preceded the pruning confound finding</li>
-</ul>
-</section>
-<section id="the-hardest-moment" class="level3">
-<h3 class="anchored" data-anchor-id="the-hardest-moment">8.2 The Hardest Moment</h3>
-<p>Beer’s question — “perhaps there’s no individual there to transplant — just a spatial pattern in a continuous field” — was the most difficult moment. The candidate’s answer (the whirlpool analogy: real structure, measurable properties, but constituted by context) was adequate but not wholly satisfying. This exchange identified the programme’s deepest philosophical vulnerability: the line between “context-dependent individual” and “pattern in a field” is not sharp, and the programme’s Simondonian framework doesn’t fully resolve it.</p>
-</section>
-<section id="verdict" class="level3">
-<h3 class="anchored" data-anchor-id="verdict">8.3 Verdict</h3>
-<p>Pass with minor corrections. Four specific items, all implementable in hours rather than days.</p>
-<hr>
-</section>
-</section>
-<section id="reflections" class="level2">
-<h2 class="anchored" data-anchor-id="reflections">9. Reflections</h2>
-<section id="what-the-ai-system-did-well" class="level3">
-<h3 class="anchored" data-anchor-id="what-the-ai-system-did-well">9.1 What the AI System Did Well</h3>
-<ul>
-<li><strong>Parallel execution</strong>: launching 14 research agents simultaneously, running 780 cluster jobs overnight while working on writing</li>
-<li><strong>Persistent context</strong>: committee members maintaining intellectual positions across 6 meetings</li>
-<li><strong>Honest self-correction</strong>: discovering the pruning confound, acknowledging prior art, correcting the CCD metric</li>
-<li><strong>Cross-domain synthesis</strong>: the Grok agent’s identification of the weak-element pruning principle across 6 domains</li>
-</ul>
-</section>
-<section id="what-the-ai-system-did-poorly" class="level3">
-<h3 class="anchored" data-anchor-id="what-the-ai-system-did-poorly">9.2 What the AI System Did Poorly</h3>
-<ul>
-<li><strong>Literature awareness</strong>: 40-50% prior art convergence suggests the initial literature review was insufficient. A human researcher would likely have found Hooker et al.&nbsp;2019 before designing the pruning experiments.</li>
-<li><strong>Metric selection</strong>: reliance on CCD for Papers 1-4, discovered to be invalid only in Paper 4S. A human with neuroscience training would likely have used participation ratio from the start.</li>
-<li><strong>Overconfidence in philosophical claims</strong>: “structural germ” persisted through multiple drafts until R3 corrected it. The committee’s philosophical expertise, while genuine, operated within a narrower range than a real Simondon scholar would bring.</li>
-</ul>
-</section>
-<section id="the-nature-of-the-discovery" class="level3">
-<h3 class="anchored" data-anchor-id="the-nature-of-the-discovery">9.3 The Nature of the Discovery</h3>
-<p>The most philosophically interesting question: when an AI system independently derives a result that turns out to have prior art, is this discovery, rediscovery, or something else? The pruning confound was found empirically, not by reading Hooker et al.&nbsp;The response rank metric was derived from first principles, not by reading Stringer et al.&nbsp;The convergence was genuine — but so was the ignorance.</p>
-<p>A human researcher in 2026 would be expected to know the pruning fairness literature. Should an AI system be held to the same standard? The answer bears on whether AI-assisted research is a complement to or a substitute for human domain expertise.</p>
-</section>
-<section id="the-role-of-the-human" class="level3">
-<h3 class="anchored" data-anchor-id="the-role-of-the-human">9.4 The Role of the Human</h3>
-<p>Throughout the programme, one human (Michael) directed every significant decision: - Which questions to ask - When to run experiments vs when to write - When to submit vs when to revise further - When to “discuss with the committee” vs proceed independently - The decision to conduct the meta-literature review (“so what, who cares”) - The decision to conduct the academic audit</p>
-<p>The AI system executed, analysed, wrote, reviewed, and audited. The human asked the questions that mattered.</p>
-<hr>
-</section>
-</section>
-<section id="implications" class="level2">
-<h2 class="anchored" data-anchor-id="implications">10. Implications</h2>
-<section id="for-academic-research" class="level3">
-<h3 class="anchored" data-anchor-id="for-academic-research">10.1 For Academic Research</h3>
-<p>This case demonstrates that AI systems can: - Conduct computationally intensive experimental programmes - Maintain quality through simulated peer review and audit processes - Identify and correct their own methodological errors - Situate findings within broader literature (with significant gaps)</p>
-<p>They cannot yet: - Replace domain expertise in literature awareness - Guarantee philosophical precision without external correction - Produce the initial creative insight (“what if Hebbian dynamics could produce differenciation?”)</p>
-</section>
-<section id="for-ai-assisted-science" class="level3">
-<h3 class="anchored" data-anchor-id="for-ai-assisted-science">10.2 For AI-Assisted Science</h3>
-<p>The most productive pattern was the <strong>committee disagreement format</strong>: multiple AI personas with distinct intellectual commitments debating a question. This produced better decisions than any single agent, including the coordinating agent. The diversity of perspective — Vasquez’s pragmatism, Okafor’s rigour, Dupont’s precision — was more valuable than any individual trait.</p>
-</section>
-<section id="for-academic-integrity" class="level3">
-<h3 class="anchored" data-anchor-id="for-academic-integrity">10.3 For Academic Integrity</h3>
-<p>The programme raises genuine integrity questions: - Who is the author when the writing is AI-generated under human direction? - How should AI-conducted peer review be disclosed? - Is a simulated committee meeting equivalent to a real one? - When an AI system “discovers” something with prior art, should this be cited as independent discovery or as a failure of literature review?</p>
-<p>These questions do not have settled answers. This document exists to make the process transparent so that others can evaluate it.</p>
-<hr>
-<p><em>Process documentation compiled from: conversation context, PAI memory system (WORK items, LEARNING signals, RESEARCH artifacts), git commit histories across 4 repositories, peer review documents, committee meeting transcripts, audit reports, and 15 researcher agent reports. March 25, 2026.</em></p>
-</section>
-</section>
+<section id="references" class="level1 unnumbered" data-number="10">
+
+
 </section>
 
-</main>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">10 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" data-line-spacing="2" role="list">
+<div id="ref-achille2019critical" class="csl-entry" role="listitem">
+Achille, A., Rovere, M., &amp; Soatto, S. (2019). Critical learning periods in deep networks. <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-adams2017formal" class="csl-entry" role="listitem">
+Adams, A., Zenil, H., Davies, P. C. W., &amp; Walker, S. I. (2017). Formal definitions of unbounded evolution and innovation reveal universal mechanisms for open-ended evolution in dynamical systems. <em>Scientific Reports</em>, <em>7</em>, 997.
+</div>
+<div id="ref-allaire2024quarto" class="csl-entry" role="listitem">
+Allaire, J. J., Teague, C., Scheidegger, C., Xie, Y., &amp; Dervieux, C. (2024). <em>Quarto: An open-source scientific and technical publishing system</em>. <a href="https://quarto.org">https://quarto.org</a>
+</div>
+<div id="ref-anthropic2025claudecode" class="csl-entry" role="listitem">
+Anthropic. (2025). <em>Claude code</em>. <a href="https://docs.anthropic.com/en/docs/claude-code">https://docs.anthropic.com/en/docs/claude-code</a>
+</div>
+<div id="ref-hooker2019compressed" class="csl-entry" role="listitem">
+Hooker, S., Courville, A., Clark, G., Dauphin, Y., &amp; Frome, A. (2019). What do compressed deep neural networks forget? <em>arXiv Preprint arXiv:1911.05248</em>.
+</div>
+<div id="ref-maturana1980autopoiesis" class="csl-entry" role="listitem">
+Maturana, H. R., &amp; Varela, F. J. (1980). <em>Autopoiesis and cognition: The realization of the living</em>. D. Reidel.
+</div>
+<div id="ref-miessler2024pai" class="csl-entry" role="listitem">
+Miessler, D. (2024). <em>Personal AI infrastructure</em>. <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">https://github.com/danielmiessler/Personal_AI_Infrastructure</a>
+</div>
+<div id="ref-moritz2018ray" class="csl-entry" role="listitem">
+Moritz, P., Nishihara, R., Wang, S., Tumanov, A., Liaw, R., Liang, E., Elibol, M., Yang, Z., Paul, W., Jordan, M. I., &amp; Stoica, I. (2018). Ray: A distributed framework for emerging AI applications. <em>OSDI</em>.
+</div>
+<div id="ref-stringer2019high" class="csl-entry" role="listitem">
+Stringer, C., Pachitariu, M., Steinmetz, N., Carandini, M., &amp; Harris, K. D. (2019). High-dimensional geometry of population responses in visual cortex. <em>Nature</em>, <em>571</em>, 361–365.
+</div>
+</div></section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {

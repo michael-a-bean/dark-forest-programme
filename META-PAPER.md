@@ -140,7 +140,7 @@ Papers improved measurably through the review process. Paper 4S gained:
 - 7 new literature citations
 - Corrected Simondonian terminology
 
-Total: 780 additional simulation jobs and 3 new figures generated specifically to address reviewer concerns. This mirrors the real peer review process where revision experiments often exceed the original submission.
+Total: 900 additional simulation jobs and 3 new figures generated specifically to address reviewer concerns. This mirrors the real peer review process where revision experiments often exceed the original submission.
 
 ---
 
@@ -245,7 +245,7 @@ Pass with minor corrections. Four specific items, all implementable in hours rat
 
 ### 9.1 What the AI System Did Well
 
-- **Parallel execution**: launching 14 research agents simultaneously, running 780 cluster jobs overnight while working on writing
+- **Parallel execution**: launching 14 research agents simultaneously, running 900 cluster jobs overnight while working on writing
 - **Persistent context**: committee members maintaining intellectual positions across 6 meetings
 - **Honest self-correction**: discovering the pruning confound, acknowledging prior art, correcting the CCD metric
 - **Cross-domain synthesis**: the Grok agent's identification of the weak-element pruning principle across 6 domains
