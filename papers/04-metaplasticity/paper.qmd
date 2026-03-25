@@ -1,0 +1,1308 @@
+---
+title: "Local Homeostasis Stabilises Differentiation in Hebbian Substrates"
+subtitle: "Critical Periods, Attractor Resilience, and the Limits of Turing Morphogenesis"
+author:
+  - name: Michael Bean
+    affiliation: Independent Researcher
+format:
+  html:
+    toc: true
+    code-fold: true
+    fig-width: 7
+    fig-height: 5
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+source("_setup.R")
+```
+
+## Abstract
+
+Papers 1--3 of this programme demonstrated that pure Hebbian substrates
+produce individuation---assemblages emerge spontaneously from noise---but are
+structurally incapable of differenciation^[We retain Deleuze's
+[-@deleuze1994difference] spelling *differenciation* to distinguish the
+ontological process (actualisation of virtual structure into distinct kinds)
+from standard "differentiation" (empirically measured divergence of
+properties). The substrate achieves the latter; whether it achieves the
+former is a central question of this paper.]: self-sealing eliminates the
+prerequisites for lateral inhibition and inter-unit communication. Here we
+test the theoretically motivated hypothesis that a Turing morphogenesis analog
+(per-node metaplastic learning rate + diffusing inhibitor field) can break this
+barrier. Under hard $\eta$ bounds, the Turing mechanism fails completely:
+inhibitor coupling is purely destructive regardless of sign, strength, or
+coupling topology. Under soft $\eta$ bounds, coupling is partially rescued but
+remains inferior to a simpler mechanism. Replacing the global homeostatic
+target with a *local* target---each node regulates toward its spatial
+neighbors' mean activity---transforms the system without requiring any
+inter-assemblage communication. Local homeostatic metaplasticity stabilises
+and amplifies functional differentiation among initially identical
+assemblages, sustained over 1000 sessions with no decay. A
+perturbation-response matrix protocol reveals that assemblages develop
+genuinely independent functional dimensions: response rank reaches $5.6$
+(over five independent response modes) under hard bounds without pruning,
+compared to $\approx 1.2$ under standard maintenance (Paper 4S). The metaplastic
+mechanism adds learning-rate divergence between assemblages ($F = 4.9$,
+$p < 0.0001$, $\eta^2_p = 0.83$), producing $10+$ assemblages with distinct
+functional profiles. The system exhibits critical period dynamics:
+inter-assemblage coupling introduced after differentiation preserves
+diversity, while coupling from the start destroys it. We interpret these
+findings through a triple philosophical framework: Simondon's transduction
+explains the mechanism, Deleuze's ontology of problems explains why
+differentiation occurs, and DeLanda's capacity criterion distinguishes
+genuine functional differentiation from mere spatial separation. The work
+identifies a productive fracture: the hard weight clip functions as a
+limit condition in Simondon's sense---a qualitatively irreducible boundary
+condition that creates the scaffold for metaplastic differentiation (Paper 4S).
+
+
+## Introduction
+
+The question motivating this programme is deceptively simple: *what is the
+minimal substrate that produces genuine functional differentiation?* Not mere
+spatial separation, not clonal repetition, but the emergence of qualitatively
+different kinds from initially identical components.
+
+Papers 1--3 established the baseline. A Hebbian substrate---nodes on a 2D
+grid connected by sparse, activity-dependent weights updated by a standard
+Hebbian rule---spontaneously produces *individuation*: coherent assemblages
+emerge from noise, consolidate through self-reinforcing weight dynamics, and
+persist as distinct entities [@watson2016evolutionary]. But every assemblage is
+a structural clone of every other. They differ in spatial position but not in
+internal organisation, connectivity profile, or functional capacity.
+
+The mechanism responsible is *self-sealing*. As assemblages consolidate, they
+strengthen internal connections and prune external ones. The self-reinforcing
+Hebbian dynamic creates an absorbing boundary: once sealed, no local
+perturbation can reopen the assemblage to external influence. Paper 3 tested
+every intervention available within the Hebbian framework---anti-Hebbian
+learning, cross-assemblage edge injection, temporal variation of the energy
+landscape---and all failed. Self-sealing eliminates the two prerequisites for
+differenciation identified by the pattern formation literature: lateral
+inhibition and inter-unit communication [@turing1952chemical;
+@gierer1972theory].
+
+In the Deleuzian framework that structures this programme, self-sealing
+corresponds to *bare repetition*: the same intensive process applied
+identically at multiple locations produces identical copies. *Complex
+repetition*---differenciation---requires that the process itself change,
+producing genuinely novel structures rather than spatial duplicates
+[@deleuze1994difference; @delanda2002intensive].
+
+The natural hypothesis, then, is a Turing morphogenesis analog. If Hebbian
+reinforcement acts as a short-range activator and a diffusing inhibitor field
+acts as the long-range inhibitor, Turing instability at the *metaplastic*
+level---modifying the learning rules themselves rather than the weights
+directly---might break the symmetry that self-sealing preserves.
+
+This paper tests that hypothesis and finds a more complex answer than
+anticipated. Under hard $\eta$ bounds, the Turing mechanism fails completely
+for structural reasons consistent with the network pattern formation
+literature [@wolfrum2012turing; @nakao2010turing; @krause2024turing]. Under
+soft $\eta$ bounds, coupling is partially rescued, confirming that the
+initial failure was partly an implementation artifact (hard $\eta$ clipping
+violates the continuity of intensive quantities that the Deleuzian framework
+assumes). But
+even with soft bounds, coupling remains inferior to a simpler, more robust
+mechanism: local homeostatic targets that produce stable differentiation
+without any inter-assemblage communication. The critical result is that
+communication becomes constructive only *after* differentiation has been
+established, exhibiting critical period dynamics analogous to those in
+cortical development [@bienenstock1982theory; @sweeney2015diffusive]. A
+functional probe confirms that the resulting differentiation is not merely
+geometric: assemblages develop distinct signal amplification profiles,
+partially satisfying DeLanda's criterion for differentiation of capacities
+[@delanda2006new]. This stabilisation is contingent on the network
+maintenance regime: the companion Paper 4S demonstrates that the standard
+pruning threshold ($10^{-4}$) differentially eliminates soft-bounded edges,
+and that removing pruning substantially increases the measured functional
+diversity (see Methods).
+
+
+## Methods
+
+### Substrate
+
+The MetaplasticField extends the MultiField substrate from Paper 2. Nodes are
+arranged on a 2D grid (default 20 $\times$ 20 = 400 nodes). Energy sources
+(hotspots) drive spatially varying noise injection. Weights are sparse,
+updated by the Hebbian rule, and pruned below a threshold. Activity-dependent
+encounters create new connections biased toward spatial neighbours, governed
+by a locality parameter.
+
+**Methodological note on pruning.** All experiments in this paper use a
+pruning threshold of $10^{-4}$: edges with $|w| < 10^{-4}$ are removed each
+step. Paper 4S demonstrates that this threshold interacts disordinally with
+weight bounding strategy, differentially eliminating soft-bounded edges whose
+equilibrium magnitudes fall near the threshold. Under hard weight bounds
+(the only bound type used in this paper's primary analyses), the pruning
+threshold has minimal effect on assemblage counts (3.9 with pruning vs 5.6
+without; see Paper 4S, Exp F). However, no-pruning replications reveal that
+functional differentiation (response rank) increases substantially from 1.3
+to 5.6 when pruning is removed (Paper 4S, 10-probe methodology). The results reported here should therefore be
+understood as conservative estimates of the substrate's differentiating
+capacity. See Paper 4S for full analysis.
+
+### Metaplastic learning rate
+
+Each node $i$ maintains its own learning rate $\eta_i$, initialised
+identically to the global $\eta = 0.05$. The Hebbian update for edge
+$(i, j)$ uses the average: $\eta_{ij} = \tfrac{1}{2}(\eta_i + \eta_j)$.
+
+A homeostatic adjustment modifies $\eta_i$ each step:
+
+$$\Delta\eta_i = -\alpha \cdot (\bar{a}_i - \tau_i)$$
+
+where $\alpha$ is the metaplastic strength, $\bar{a}_i$ is the exponential
+moving average of activity history (default rate $= 0.05$, i.e.\ 95\% old +
+5\% new, following the conventional value used in homeostatic plasticity
+models [@sweeney2015diffusive]; Exp 18 confirms robustness across an order
+of magnitude), and $\tau_i$ is the homeostatic target.
+
+Two target regimes are compared:
+
+- **Global target** (original): $\tau_i = 0.15$ for all nodes.
+- **Local target** (corrective): $\tau_i = \text{mean}(\bar{a}_j : j \in
+  \mathcal{N}_r(i))$, where $\mathcal{N}_r(i)$ is the set of grid neighbours
+  within Manhattan radius $r$.
+
+Learning rates are bounded: $\eta_i \in [0.005, 0.20]$. Two bounding
+regimes are compared: **hard clipping** ($\eta_i$ set to the nearer bound
+when exceeded) and **soft bounding** (tanh saturation that asymptotically
+approaches but never reaches the bounds). Weights are always hard-clipped
+at $w_\text{max}$ regardless of $\eta$-bounding regime. This distinction
+matters: hard $\eta$ clipping creates absorbing states where 40\% of nodes
+accumulate at the bounds, producing a bimodal distribution of learning
+rates. Soft bounding preserves a continuous, unimodal distribution. The
+synaptic plasticity literature has established that this hard/soft
+distinction produces qualitatively different dynamics: hard-bounded STDP
+drives weights to bimodal distributions, while weight-dependent (soft)
+rules produce stable unimodal distributions
+[@vanrossum2000stable; @miller1994role; @song2000competitive].
+
+### Inhibitor field
+
+Nodes emit inhibitor proportional to their total weight mass. The inhibitor
+diffuses via a discrete Laplacian (coefficient $\leq 0.20$ for CFL
+stability), decays multiplicatively each step, and modulates $\eta$ via a
+coupling term. Two coupling regimes were tested:
+
+- **Upward** (original): inhibitor pushes $\eta$ up.
+- **Downward + difference-dependent** (corrective): inhibitor suppresses
+  $\eta$ proportional to the difference between the node's $\eta$ and its
+  neighbours' mean $\eta$.
+
+### Metrics
+
+**Primary functional metrics:**
+
+- **Response rank**: effective rank of the perturbation-response matrix
+  (SVD, threshold at 1\% of largest singular value). Rank $= 1$ indicates
+  parametric differentiation (assemblages scale inputs identically);
+  rank $> 1$ indicates genuinely functional differentiation (assemblages
+  transform inputs through distinct mappings). This is the gold-standard
+  measure of capacity differentiation.
+- **Response diversity**: standard deviation of assemblage gains
+  (gain $= \bar{\eta} \times \bar{w}_\text{internal}$), a proxy for
+  signal amplification capacity.
+- **$\eta$ divergence**: variance of per-assemblage mean $\eta$.
+
+**Structural metrics:**
+
+- **Centroid cosine distance (CCD)**: mean pairwise cosine distance between
+  assemblage centroid weight vectors. 0 = clones, 1 = orthogonal. Paper 4S
+  demonstrates that CCD is statistically indistinguishable from a spatial
+  null distribution ($p = 1.0$); it reflects geometric separation, not
+  functional differentiation. CCD values reported here should be interpreted
+  as spatial structure measures only.
+- **Weight modularity**: fraction of total weight mass within assemblages.
+- **Assemblage count**: connected components in the strong-edge subgraph.
+
+### Experimental design
+
+```{r exp-table}
+tibble::tribble(
+  ~Experiment, ~Question, ~Design, ~Jobs,
+  "1. Meta sweep", "Metaplasticity alone?", "7 strengths × 7 localities × 20 seeds", 980,
+  "2. Comm sweep", "Communication alone?", "6 diffusions × 6 couplings × 20 seeds", 720,
+  "3. Combined", "Turing synergy?", "7 meta × 7 coupling × 20 seeds", 980,
+  "5. Corrective", "Sign + local + diff-coupling?", "7 meta × 7 coupling × 20 seeds", 980,
+  "6. Persistence", "How long does it last?", "5 meta × 3 grids × 20 seeds (1000 sessions)", 300,
+  "7. Target radius", "Does radius matter?", "5 radii × 20 seeds", 100,
+  "8. Sequence", "Critical period?", "5 switch-points × 4 couplings × 20 seeds", 400,
+  "9. Perturbation", "Attractor?", "4 levels × 20 seeds", 80,
+  "10. Locality", "Encounter locality?", "7 localities × 20 seeds", 140,
+  "11. Soft bounds", "Hard-clipping artifact?", "7 meta × 7 coupling × 20 seeds", 980,
+  "12. Functional probe", "Geometric or functional?", "4 conditions × 20 seeds", 80,
+  "13. Bound factorial", "Full bound-type × target", "6 conditions × 20 seeds", 120,
+  "15. Dynamics compare", "WHY do bounds matter?", "2 conditions × 20 seeds", 40,
+  "16. η dump", "Distribution shape?", "2 conditions × 5 seeds (snapshots)", 10,
+  "17. Response matrix", "Genuinely functional?", "4 conditions × 20 seeds (5 probes)", 80,
+  "18. EMA sensitivity", "Timescale matters?", "3 EMA rates × 20 seeds", 60,
+  "19. Transplant", "DeLanda exteriority?", "2 conditions × 20 seeds", 40,
+) |>
+  knitr::kable(caption = "Experimental design. All experiments use 200 sessions of 300 steps unless noted.")
+```
+
+All simulations were executed on a 68-CPU Ray cluster across three nodes.
+Per-job parquet output with resume support enabled fault-tolerant execution.
+Total compute: approximately 6,070 simulation jobs.^[Experiments are numbered non-sequentially because Exp 4 (sensitivity sweep) was absorbed into Exp 6 (persistence), and Exp 14 was reserved for future work on sub-session dynamics.]
+
+
+## Results
+
+### The Turing hypothesis fails
+
+```{r fig-exp3-heatmap, fig.cap="Centroid cosine distance (geometric separation) across the combined parameter space (Exp 3). The highest spatial separation occurs at meta_strength = 0 (mechanisms off). Note: CCD measures geometric structure, not functional differentiation (Paper 4S). No parameter combination produces synergistic spatial patterning beyond the baseline."}
+exp3 <- read_experiment("exp3_combined")
+exp3_final <- exp3 |> filter(session >= 180)
+
+exp3_final |>
+  group_by(meta_strength, inhibitor_coupling) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(factor(inhibitor_coupling), factor(meta_strength), fill = cdist)) +
+  geom_tile() +
+  geom_text(aes(label = round(cdist, 2)), size = 3) +
+  scale_fill_viridis(option = "magma", limits = c(0, 1)) +
+  labs(x = "Inhibitor coupling", y = "Meta strength",
+       fill = "Centroid\ncosine dist.",
+       title = "Exp 3: Combined mechanism (original, upward coupling)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+Experiments 1--3 tested the Turing hypothesis with the original mechanism
+(global homeostatic target, upward inhibitor coupling).
+
+**Metaplasticity alone** (Exp 1) produces monopoly at $\alpha \geq 0.0005$:
+all assemblages consolidate into a single mega-assemblage. The global target
+($\tau = 0.15$) crushes $\eta$ toward $\eta_\text{min}$ for all assemblage
+nodes (activity $\approx 0.85 \gg 0.15$), producing identical homeostatic
+adjustments across assemblages. The first assemblage to consolidate wins.
+
+**Communication alone** (Exp 2) pushes all $\eta$ to $\eta_\text{max}$
+uniformly. Without metaplasticity creating heterogeneous $\eta$, the
+inhibitor acts as a uniform positive pressure with no differences to amplify.
+
+**The combination** (Exp 3) produces no synergy. The best parameters are
+$\alpha = 0$, coupling $= 0$---the baseline with both mechanisms off.
+
+The corrective experiment (Exp 5) applied three fixes identified through
+mechanistic analysis: sign reversal (inhibitor suppresses $\eta$), local
+homeostatic target, and difference-dependent coupling. Under hard $\eta$
+bounds, inhibitor coupling remained purely destructive at every parameter
+combination, reducing centroid distance relative to the coupling-free
+condition.
+
+However, the soft-bounds experiment (Exp 11) reveals that this destruction
+is partly artifactual. When hard $\eta$ clipping is replaced with soft
+$\eta$ bounding (tanh saturation), coupling exhibits the U-shaped
+dose-response predicted by Turing theory: low coupling ($c \leq 0.001$) is
+mildly destructive, but strong coupling ($c \geq 0.02$) becomes constructive.
+At $\alpha = 0.05$, $c = 0.05$, centroid cosine distance rises from 0.00
+(hard bounds) to 0.65 (soft bounds)---a qualitative reversal.
+
+```{r fig-soft-bounds, fig.cap="Soft bounds partially rescue inhibitor coupling. Left: hard bounds (Exp 5), coupling is destructive at all parameter combinations. Right: soft bounds (Exp 11), strong coupling becomes constructive, with CCD (geometric separation) reaching 0.65. CCD values reflect spatial structure only (Paper 4S). Both experiments use local targets and difference-dependent coupling."}
+exp5 <- read_experiment("exp5_corrective")
+exp11 <- read_experiment("exp11_soft_bounds")
+
+p_hard <- exp5 |>
+  filter(session >= 180) |>
+  group_by(meta_strength, inhibitor_coupling) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(factor(inhibitor_coupling), factor(meta_strength), fill = cdist)) +
+  geom_tile() +
+  geom_text(aes(label = round(cdist, 2)), size = 2.5) +
+  scale_fill_viridis(option = "magma", limits = c(0, 1)) +
+  labs(x = "Coupling", y = "Meta strength",
+       fill = "CCD", title = "Hard bounds (Exp 5)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p_soft <- exp11 |>
+  filter(session >= 180) |>
+  group_by(meta_strength, inhibitor_coupling) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(factor(inhibitor_coupling), factor(meta_strength), fill = cdist)) +
+  geom_tile() +
+  geom_text(aes(label = round(cdist, 2)), size = 2.5) +
+  scale_fill_viridis(option = "magma", limits = c(0, 1)) +
+  labs(x = "Coupling", y = "Meta strength",
+       fill = "CCD", title = "Soft bounds (Exp 11)") +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p_hard + p_soft + plot_layout(guides = "collect")
+```
+
+The mechanism involves $\eta$ bounding, not weight clipping (weights are
+always hard-clipped). Under hard $\eta$ bounds, the homeostatic adjustment
+pushes learning rates to the floor ($\eta_\text{min}$) for high-activity
+nodes and the ceiling ($\eta_\text{max}$) for low-activity nodes. Once
+pinned, $\eta$ cannot respond to further coupling signals---the learning
+rate is informationally dead at the bound. Soft $\eta$ bounding (tanh
+saturation) preserves responsiveness: $\eta$ asymptotically approaches but
+never reaches the limits, maintaining the continuous modulation that
+reaction-diffusion dynamics require. This parallels a well-established
+finding in the STDP literature: hard-bounded (additive) update rules drive
+synaptic variables to bimodal distributions concentrated at the bounds,
+while weight-dependent (multiplicative/soft) rules produce stable unimodal
+distributions [@vanrossum2000stable; @song2000competitive; @rubin2001equilibrium].
+Our finding extends this principle from the synaptic level to the
+metaplastic level.
+
+Nevertheless, even at its best, soft-bounds coupling (CCD $= 0.65$) remains
+below local homeostasis without coupling (CCD $= 0.84$ under hard bounds).
+**Note:** Paper 4S demonstrates that CCD is statistically indistinguishable
+from a spatial null distribution ($p = 1.0$, 1000 permutations) and reflects
+geometric separation rather than functional differentiation. The CCD values
+reported here should be interpreted as measures of spatial assemblage
+separation, not as evidence of functional differentiation per se. The
+functional differentiation evidence rests on response diversity and
+response rank (see below and Paper 4S, Exp 17np). Two structural
+arguments against Turing patterns on this substrate persist, consistent with
+the network Turing literature.
+@wolfrum2012turing showed that Turing bifurcations on sparse networks
+generically produce single-differentiated-node solutions rather than
+distributed patterns. @krause2024turing proved that satisfying Turing
+instability conditions is insufficient to guarantee sustained pattern
+formation. @nakao2010turing established that network Turing patterns are
+governed by the Laplacian eigenspectrum, which in sparse graphs supports only
+binary differentiation. Our substrate compounds these difficulties: the
+topology dynamically rewires under Hebbian learning, making the diffusion
+matrix non-stationary.
+
+### Local homeostatic targets prevent monopoly
+
+```{r fig-three-way, fig.cap="The three-way comparison: no homeostasis produces self-sealing clones (Paper 2 baseline), global homeostasis produces monopoly (Exp 1), and local homeostasis produces stable, differentiated assemblages (Exp 5, coupling = 0)."}
+# Three-way comparison at meta=0.05 or baseline
+exp1 <- read_experiment("exp1_meta_sweep")
+exp5 <- read_experiment("exp5_corrective")
+
+baseline <- exp1 |>
+  filter(meta_strength == 0, locality == 0.10) |>
+  mutate(condition = "No homeostasis\n(baseline)")
+
+global <- exp1 |>
+  filter(meta_strength == 0.05, locality == 0.10) |>
+  mutate(condition = "Global target\n(monopoly)")
+
+local <- exp5 |>
+  filter(meta_strength == 0.05, inhibitor_coupling == 0) |>
+  mutate(condition = "Local target\n(differentiation)")
+
+three_way <- bind_rows(baseline, global, local)
+
+p1 <- three_way |>
+  group_by(condition, session) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(session, cdist, colour = condition)) +
+  geom_line(linewidth = 0.8) +
+  scale_colour_manual(values = pal[1:3]) +
+  labs(x = "Session", y = "Centroid cosine distance",
+       title = "Differentiation over time") +
+  theme(legend.title = element_blank())
+
+p2 <- three_way |>
+  group_by(condition, session) |>
+  summarise(n_asm = mean(n_assemblages), .groups = "drop") |>
+  ggplot(aes(session, n_asm, colour = condition)) +
+  geom_line(linewidth = 0.8) +
+  scale_colour_manual(values = pal[1:3]) +
+  labs(x = "Session", y = "Assemblage count",
+       title = "Assemblage count over time") +
+  theme(legend.title = element_blank())
+
+p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+
+The critical finding emerges from a single modification: replacing the global
+homeostatic target with a local one. At $\alpha = 0.05$, the global target
+produces monopoly ($n_\text{asm} \approx 1$), while the local target
+produces $5.2$ differentiated assemblages with centroid cosine distance
+$0.84$ [0.81, 0.87] and $\eta$ divergence $0.003$.
+
+The mechanism: with a global target, every assemblage node receives an
+identical homeostatic adjustment. With a local target, each node's reference
+point is its own neighbourhood's activity. Nodes inside assemblages are
+surrounded by other active nodes---their target is high, their $\eta$ barely
+adjusts. Nodes at assemblage boundaries see a mix of activity levels---their
+$\eta$ adjusts differently. Different spatial positions create different
+effective problems, breaking the symmetry that produces clones.
+
+This maps precisely onto @sweeney2015diffusive, who showed that diffusive
+homeostasis maintains heterogeneous firing rate distributions in cortical
+networks, while non-diffusive (global) homeostasis produces narrow,
+homogeneous distributions.
+
+### Persistence: stable, not transient
+
+```{r fig-persistence, fig.cap="Geometric separation is sustained over 1000 sessions with no decay trend. CCD fluctuates between 0.80 and 1.00. Grid size 25 produces even stronger spatial patterning. Functional differentiation (response rank, Exp 17) confirms these geometrically stable assemblages also possess distinct functional profiles."}
+exp6 <- read_experiment("exp6_persistence")
+
+exp6 |>
+  filter(meta_strength == 0.05) |>
+  group_by(grid_size, session) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(session, cdist, colour = factor(grid_size))) +
+  geom_line(linewidth = 0.6, alpha = 0.8) +
+  scale_colour_manual(values = pal[1:3], labels = c("15×15", "20×20", "25×25")) +
+  labs(x = "Session", y = "Centroid cosine distance",
+       colour = "Grid size",
+       title = "Exp 6: Differentiation stability over 1000 sessions",
+       subtitle = "meta_strength = 0.05, coupling = 0, local targets") +
+  theme(legend.position = "bottom")
+```
+
+Experiment 6 extended the productive regime ($\alpha = 0.05$, coupling $= 0$,
+local targets) to 1000 sessions. The centroid cosine distance shows no decay
+trend, fluctuating between 0.80 and 1.00 throughout (final 100 sessions:
+$0.85$ [0.83, 0.86]). Assemblage count
+stabilises at $\approx 5.5$ for grid size 20 and $\approx 18.9$ for grid
+size 25. The $\eta$ divergence across assemblages *increases* slightly over
+time ($0.003 \to 0.005$), indicating the differentiation deepens rather than
+decays.
+
+### Critical period: the sequence of individuation and communication
+
+```{r fig-critical-period, fig.cap="CCD (geometric separation) at session 200 as a function of when coupling was introduced. Coupling from session 0 destroys spatial patterning; coupling delayed to session 50+ preserves it even at the strongest coupling tested (0.01). This critical period effect indicates that differentiation, once established, resists disruption."}
+exp8 <- read_experiment("exp8_sequence")
+
+exp8 |>
+  filter(session >= 180) |>
+  group_by(coupling_switch_session, inhibitor_coupling) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(factor(coupling_switch_session), cdist,
+             fill = factor(inhibitor_coupling))) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = pal) +
+  labs(x = "Session when coupling introduced",
+       y = "Centroid cosine distance (final)",
+       fill = "Coupling\nstrength",
+       title = "Exp 8: Critical period for inter-assemblage coupling") +
+  theme(legend.position = "bottom")
+```
+
+Experiment 8 is the decisive test of whether communication is fundamentally
+incompatible with differentiation in this substrate. The answer is nuanced:
+timing determines everything.
+
+Coupling introduced at session 0 reduces centroid cosine distance from $0.84$
+[0.81, 0.87] to $0.07$ [0.05, 0.10] at the strongest coupling ($c = 0.01$).
+Coupling delayed to session 50 preserves differentiation at $0.74$ [0.70,
+0.78] even at $c = 0.01$. By session 100, the effect of coupling is
+indistinguishable from the coupling-free condition ($0.78$ [0.74, 0.82]).
+
+This is a critical period in the developmental sense
+[@bienenstock1982theory]: early plasticity establishes structure, and
+premature constraint destroys it. The assemblages must consolidate their
+internal organisation before external coupling can be tolerated. Once
+consolidated, the coupling encounters basins of attraction that are already
+carved---it navigates within a structured landscape rather than
+homogenising a flat one.
+
+**Functional validation (Exp 8fv).** A replication of Exp 8 using 10-probe
+response rank (SVD, 1\% threshold) confirms the critical period holds for
+functional diversity, not merely geometric separation. At coupling
+$c = 0.01$, session 200:
+
+| Switch session | Assemblages | CCD | Response rank |
+|---|---|---|---|
+| 0 (from start) | 0.9 | 0.050 | 0.05 |
+| 50 | 4.8 | 0.751 | 0.85 |
+| 100 (after consolidation) | 5.2 | 0.800 | 0.85 |
+
+Coupling from session 0 destroys both spatial patterning (CCD $\to 0.05$)
+and functional diversity (rank $\to 0.05$). Coupling delayed to session 50+
+preserves both. The critical period is not a CCD artifact.
+
+This result converges with recent findings that critical periods emerge
+spontaneously in deep networks from learning dynamics alone, without
+explicit programming [@achille2019critical], and that depth alone suffices
+to produce them even in linear networks [@kleinman2024critical]. Our
+substrate differs in that the critical period arises from *structural
+consolidation* (Hebbian weight reinforcement creating rigid basins) rather
+than from information-theoretic sensitivity windows. The mechanism is
+Simondonian: transduction carves the landscape, making subsequent coupling
+navigational rather than homogenising.
+
+### Perturbation resilience: the differentiated state is an attractor
+
+```{r fig-perturbation, fig.cap="Perturbation resilience. Shuffling 10%, 25%, or 50% of node learning rates at session 100 has no effect on the system's trajectory. The differentiated state is a wide-basin attractor."}
+exp9 <- read_experiment("exp9_perturbation")
+
+exp9 |>
+  group_by(perturb_fraction, session) |>
+  summarise(cdist = mean(centroid_cosine_distance), .groups = "drop") |>
+  ggplot(aes(session, cdist,
+             colour = factor(perturb_fraction,
+                             labels = c("Control", "10%", "25%", "50%")))) +
+  geom_line(linewidth = 0.8) +
+  geom_vline(xintercept = 100, linetype = "dashed", alpha = 0.4) +
+  annotate("text", x = 102, y = 0.6, label = "Perturbation", hjust = 0,
+           size = 3, fontface = "italic") +
+  scale_colour_manual(values = pal) +
+  labs(x = "Session", y = "Centroid cosine distance",
+       colour = "Fraction\nperturbed",
+       title = "Exp 9: Perturbation resilience",
+       subtitle = "Dashed line: perturbation applied at session 100")
+```
+
+Experiment 9 tests whether the differentiated state is a fragile arrangement
+or a genuine attractor. At session 100, 10\%, 25\%, or 50\% of node learning
+rates are randomly shuffled. All conditions produce trajectories
+indistinguishable from the unperturbed control by session 200: centroid cosine
+distance $= 0.84$ [0.81, 0.87], $n_\text{asm} \approx 5.2$--$5.3$
+(TOST equivalence test with margin $\delta = 0.05$: $p < 0.001$ for all
+perturbation levels).
+
+This rules out the "frozen disorder" interpretation: if differentiation
+depended on specific $\eta$ values, perturbation would destroy it. Instead,
+the system recovers fully from a 50\% scramble, indicating a wide-basin
+attractor whose structure is maintained by the ongoing dynamics, not by the
+particular parameter values.
+
+**Functional validation (Exp 9fv).** Response rank (10-probe, SVD) shows
+identical perturbation resilience: rank at session 200 is $0.85$ across all
+perturbation levels ($0\%$, $10\%$, $25\%$, $50\%$), with no measurable
+deflection at or after the perturbation event (session 100). The attractor
+is functional, not merely geometric.
+
+### Robustness
+
+```{r fig-radius, fig.cap="Target radius has minimal effect on geometric separation. All radii from 1 (nearest neighbours) to 10 (near-global on a 20×20 grid) produce CCD ≥ 0.84."}
+exp7 <- read_experiment("exp7_target_radius")
+
+exp7 |>
+  filter(session >= 180) |>
+  group_by(target_radius) |>
+  summarise(cdist = mean(centroid_cosine_distance),
+            n_asm = mean(n_assemblages), .groups = "drop") |>
+  ggplot(aes(target_radius, cdist)) +
+  geom_point(size = 3) +
+  geom_line(linewidth = 0.6) +
+  ylim(0, 1.1) +
+  labs(x = "Target radius (Manhattan hops)",
+       y = "Centroid cosine distance",
+       title = "Exp 7: Homeostatic target radius",
+       subtitle = "All radii produce differentiation")
+```
+
+```{r fig-locality, fig.cap="Encounter locality has minimal effect under local homeostatic targets. All localities from 0.05 (tight) to 0.30 (broad) produce CCD ≥ 0.84 (geometric separation)."}
+exp10 <- read_experiment("exp10_locality")
+
+exp10 |>
+  filter(session >= 180) |>
+  group_by(locality) |>
+  summarise(cdist = mean(centroid_cosine_distance),
+            n_asm = mean(n_assemblages), .groups = "drop") |>
+  ggplot(aes(locality, cdist)) +
+  geom_point(size = 3) +
+  geom_line(linewidth = 0.6) +
+  ylim(0, 1.1) +
+  labs(x = "Encounter locality (σ)",
+       y = "Centroid cosine distance",
+       title = "Exp 10: Encounter locality under local targets",
+       subtitle = "Robust across all locality values")
+```
+
+The result is robust to target radius (Exp 7: all radii 1--10 produce
+$\text{cdist} \geq 0.84$), encounter locality (Exp 10: all $\sigma$ from
+0.05 to 0.30), and grid size (Exp 6: 15$\times$15 to 25$\times$25). This
+robustness---invariant across three independent structural parameters---is
+not the signature of a tuned system. It suggests a structural inevitability:
+any homeostatic mechanism that prevents the degenerate monopoly attractor
+reveals the differentiation latent in the self-sealing topology.
+
+### Geometric vs. functional differentiation
+
+Centroid cosine distance measures geometric differentiation---distinct weight
+structures. But spatial separation need not imply distinct functional
+capacities. DeLanda's assemblage theory requires that genuinely differentiated
+components possess qualitatively different *capacities*---different open lists
+of what they can do---not merely different positions
+[@delanda2006new; @delanda2002intensive].
+
+Experiment 12 tests this directly. We measure *response diversity*: the
+standard deviation of assemblage gains, where each assemblage's gain is the
+product of its mean learning rate and mean internal edge weight---a proxy for
+signal amplification capacity.
+
+```{r fig-functional, fig.cap="Geometric vs. functional differentiation. The baseline condition (no metaplasticity) achieves high CCD (0.90) but zero response diversity---geometrically distinct assemblages with identical functional profiles. This dissociation confirms CCD alone cannot measure functional differentiation (Paper 4S). Only local targets produce both geometric and functional differentiation (CCD = 0.84, response diversity = 0.047). Response diversity increases over time under local targets."}
+exp12 <- read_experiment("exp12_functional")
+
+cond_labels <- c(
+  "baseline" = "Baseline",
+  "global_target" = "Global target",
+  "local_soft" = "Local (soft)",
+  "local_target" = "Local (hard)"
+)
+
+p1 <- exp12 |>
+  filter(session >= 180) |>
+  mutate(condition = recode(condition, !!!cond_labels)) |>
+  group_by(condition) |>
+  summarise(cdist = mean(centroid_cosine_distance),
+            resp = mean(response_diversity), .groups = "drop") |>
+  pivot_longer(c(cdist, resp), names_to = "metric", values_to = "value") |>
+  mutate(metric = ifelse(metric == "cdist",
+                         "Centroid cosine dist.", "Response diversity")) |>
+  ggplot(aes(condition, value, fill = condition)) +
+  geom_col() +
+  facet_wrap(~metric, scales = "free_y") +
+  scale_fill_manual(values = pal) +
+  labs(x = NULL, y = "Value",
+       title = "Exp 12: Geometric vs. functional differentiation") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1),
+        legend.position = "none")
+
+p2 <- exp12 |>
+  mutate(condition = recode(condition, !!!cond_labels)) |>
+  group_by(condition, session) |>
+  summarise(resp = mean(response_diversity), .groups = "drop") |>
+  ggplot(aes(session, resp, colour = condition)) +
+  geom_line(linewidth = 0.8) +
+  scale_colour_manual(values = pal) +
+  labs(x = "Session", y = "Response diversity",
+       title = "Functional diversity over time") +
+  theme(legend.title = element_blank(), legend.position = "bottom")
+
+p1 / p2
+```
+
+The result is philosophically decisive. The baseline condition (no
+metaplasticity) achieves CCD $= 0.90$---assemblages are geometrically
+distinct---but response diversity $= 0.000$. These assemblages look
+different but *do* the same thing. They are, in DeLanda's terms, instances of
+a single type differing only in spatial position, not genuinely different
+kinds with different capacities.
+
+The global target collapses both metrics (CCD $= 0.01$, response diversity
+$= 0.001$). Local homeostasis with soft bounds produces moderate
+differentiation (CCD $= 0.30$, response diversity $= 0.015$). Only local
+homeostasis with hard bounds produces both strong geometric *and* functional
+differentiation (CCD $= 0.84$, response diversity $= 0.047$), with response
+diversity actively *increasing* over time.
+
+Response diversity, however, is a single scalar derived from $\eta$ and
+weight values already measured. To confirm that functional differentiation
+is not algebraically entailed by the geometric metrics, Experiment 17 applies
+a genuinely independent probe: five structured spatial input patterns are
+injected after training, and each assemblage's response is recorded. The
+effective rank of the resulting response matrix measures how many independent
+functional dimensions the assemblages span. This metric---SVD effective
+dimensionality, also known as participation ratio---is standard in systems
+neuroscience, where it characterises the dimensionality of neural population
+responses [@gao2017theory; @stringer2019high]. Higher dimensionality has
+been shown to predict both flexible readout in complex cognitive tasks
+[@rigotti2013importance] and better episodic memory performance
+[@tang2022higher].
+
+```{r fig-response-rank, fig.cap="Perturbation-response matrix rank across conditions. Baseline assemblages respond to structured inputs with rank ≈ 1 (all assemblages scale identically). Local homeostasis with hard bounds achieves rank ≈ 2.4 [1.7, 3.0] (bootstrap 95% CI) — assemblages transform inputs through genuinely distinct mappings, not just scaled versions of the same response. Error bars: ±1 SD across 20 seeds (wider than the CI of the mean because they show individual-seed variability, not uncertainty in the mean estimate)."}
+exp17 <- read_experiment("exp17_response_matrix")
+
+exp17 |>
+  group_by(condition) |>
+  summarise(rank_mean = mean(response_rank),
+            rank_sd = sd(response_rank),
+            ccd = mean(ccd),
+            .groups = "drop") |>
+  ggplot(aes(condition, rank_mean, fill = condition)) +
+  geom_col() +
+  geom_errorbar(aes(ymin = pmax(rank_mean - rank_sd, 0),
+                    ymax = rank_mean + rank_sd),
+                width = 0.3) +
+  geom_hline(yintercept = 1, linetype = "dashed", alpha = 0.5) +
+  annotate("text", x = 0.7, y = 1.15, label = "Parametric\nthreshold",
+           size = 2.5, hjust = 0, fontface = "italic") +
+  scale_fill_manual(values = pal) +
+  labs(x = NULL, y = "Effective response rank",
+       title = "Exp 17: Independent functional probe") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1),
+        legend.position = "none")
+```
+
+The result confirms that functional differentiation under local homeostasis
+is genuine and not entailed by geometric differentiation. Baseline
+assemblages, despite high CCD ($0.90$), respond to structured inputs with
+rank $\approx 1.2$---effectively parametric, scaling inputs identically.
+Local homeostasis with hard $\eta$ bounds achieves rank $\approx 2.4$
+[1.7, 3.0]: assemblages transform inputs through genuinely distinct
+mappings.
+This cannot be derived from centroid cosine distance or $\eta$ divergence
+alone; it reflects emergent differences in how assemblages process
+information, not just how they store weights.
+
+**Probe count and rank ceiling.** Exp 17 uses $K = 5$ probes, giving a
+response matrix of dimension $5 \times A$ ($A$ = assemblage count). The
+effective rank is bounded by $\min(K, A)$, so the observed rank $2.4$ is
+not ceiling-limited ($K = 5 > 2.4$). Paper 4S (Exp 17np) uses $K = 10$
+probes and reports rank $5.6$ without pruning---the increase from $2.4$
+to $5.6$ reflects both the removal of pruning (which destroyed weak
+exploratory structure) and the larger probe space (which allows more
+functional dimensions to be detected). The participation ratio (a
+threshold-free dimensionality measure) gives $2.2$ under 10-probe
+Gaussian probes and $3.2$ under uniform probes, confirming genuine
+multidimensionality.
+
+**No-pruning replication (Paper 4S, Exp 17np).** The response rank results
+above were measured under the standard pruning regime ($|w| < 10^{-4}$
+removed each step). Paper 4S demonstrates that pruning suppresses functional
+diversity by eliminating weak exploratory connections. Without pruning:
+
+- Baseline (no metaplasticity): rank rises from $1.2$ to $\mathbf{5.6}$
+  ($n = 15/20$ seeds with $\geq 2$ assemblages; 10-probe methodology, Paper 4S)
+- Local hard (meta $= 0.05$): from $0$ assemblages (pruning destroyed them)
+  to $\mathbf{10.3}$ assemblages with rank $\mathbf{5.6}$ ($n = 19/20$)
+- Local soft: rank remains $\approx 2.0$ regardless of pruning
+
+The baseline result demands a precise account of what metaplasticity
+contributes. Both baseline and metaplastic conditions reach rank $5.6$
+without pruning---the hard clip alone scaffolds functional diversity.
+Metaplasticity's contribution is threefold:
+
+1. **$\eta$ divergence** ($F = 4.9$, $p < 0.0001$; Wilcoxon $W = 21$,
+   $p = 0.016$; Shapiro-Wilk normality $p = 0.99$): assemblages develop
+   distinct learning dynamics, a parametric dimension absent from the
+   baseline.
+2. **Assemblage count**: metaplasticity increases the number of
+   differentiated units from $\sim 6$ to $10+$, expanding the system's
+   combinatorial diversity.
+3. **Robustness**: the metaplastic state recovers from 50\% $\eta$ scramble
+   (Exp 9/9fv), indicating a wider basin of attraction than the baseline.
+
+Metaplasticity does not create functional diversity from nothing---it
+stabilises and amplifies diversity that Hebbian dynamics on a spatially
+structured substrate spontaneously produce.
+
+**Power and yield analysis.** The $\eta$ divergence result ($F = 4.9$)
+derives from 6 of 50 seeds that produced $\geq 3$ assemblages under hard
+weight + soft $\eta$ bounds. With $n = 6$ and $d = 5.62$, the achieved
+statistical power exceeds $0.999$ (non-central $t$-distribution). The
+concern is not power but *yield*: 88\% of seeds converge to monopoly,
+and the qualifying criterion (sufficient assemblages for between-group
+comparison) is spatial, applied before examining $\eta$ values. The 44
+monopoly seeds show identical $\eta$ statistics ($\bar{\eta} = 0.098$,
+$\sigma = 0.019$) to the 6 qualifying seeds, confirming that selection is
+on spatial configuration, not on the effect variable. Future work should
+design substrates with higher multi-assemblage yield---for example,
+through structured initialisation or wider locality sweeps---to confirm
+the effect across a broader range of initial conditions. For a moderate
+effect ($d = 1.0$), 80\% power would require $n = 8$ qualifying seeds.
+
+Three caveats remain. First, response diversity and response rank both
+measure functional properties derived from the substrate's existing
+dynamics; they do not test for capacities outside the system's vocabulary.
+Second, soft $\eta$ bounds produce rank $\approx 2.0$ (no-pruning) or
+$\approx 0.8$ (pruned)---below the hard-bound rank of $5.6$, confirming
+that the absorbing boundary is load-bearing for functional diversity.
+Third, even rank $5.6$ represents differentiation along a moderate number of
+functional dimensions; whether this constitutes DeLanda's "open list" of
+qualitatively distinct capacities, or a richer parametric variation,
+is taken up in the Discussion.
+
+### Bound-type sensitivity: discretisation as mechanism
+
+The full bound-type factorial (Exp 13) reveals that the $\eta$-bounding
+regime is a primary control parameter for differentiation strength:
+
+```{r fig-factorial, fig.cap="Full bound-type factorial. Hard η bounds amplify differentiation through a discretisation effect (40.7% of nodes pinned at bounds, bimodal η distribution). Soft η bounds preserve continuous modulation, producing weaker but genuine differentiation. Baseline and global conditions are unaffected by bound type. Error bars: bootstrap 95% CI."}
+exp13 <- read_experiment("exp13_bound_factorial")
+
+# Bootstrap CIs of the mean (not raw quantile ranges)
+boot_ci <- function(x, n = 5000) {
+  means <- replicate(n, mean(sample(x, replace = TRUE)))
+  quantile(means, c(0.025, 0.975))
+}
+
+exp13_summary <- exp13 |>
+  filter(session >= 180) |>
+  group_by(condition) |>
+  summarise(
+    ccd_mean = mean(centroid_cosine_distance),
+    ccd_lo = boot_ci(centroid_cosine_distance)[1],
+    ccd_hi = boot_ci(centroid_cosine_distance)[2],
+    rd_mean = mean(response_diversity),
+    rd_lo = boot_ci(response_diversity)[1],
+    rd_hi = boot_ci(response_diversity)[2],
+    .groups = "drop"
+  ) |>
+  mutate(
+    bound = ifelse(grepl("soft", condition), "Soft η bounds", "Hard η bounds"),
+    target = case_when(
+      grepl("baseline", condition) ~ "No homeostasis",
+      grepl("global", condition) ~ "Global target",
+      grepl("local", condition) ~ "Local target"
+    )
+  )
+
+p1 <- exp13_summary |>
+  ggplot(aes(target, ccd_mean, fill = bound)) +
+  geom_col(position = "dodge", width = 0.7) +
+  geom_errorbar(aes(ymin = ccd_lo, ymax = ccd_hi),
+                position = position_dodge(width = 0.7), width = 0.2) +
+  scale_fill_manual(values = c(pal[1], pal[3])) +
+  labs(x = NULL, y = "Centroid cosine distance",
+       fill = NULL, title = "Geometric differentiation") +
+  theme(legend.position = "bottom")
+
+p2 <- exp13_summary |>
+  ggplot(aes(target, rd_mean, fill = bound)) +
+  geom_col(position = "dodge", width = 0.7) +
+  geom_errorbar(aes(ymin = rd_lo, ymax = rd_hi),
+                position = position_dodge(width = 0.7), width = 0.2) +
+  scale_fill_manual(values = c(pal[1], pal[3])) +
+  labs(x = NULL, y = "Response diversity",
+       fill = NULL, title = "Functional differentiation") +
+  theme(legend.position = "bottom")
+
+p1 + p2 + plot_layout(guides = "collect") & theme(legend.position = "bottom")
+```
+
+Baseline conditions are identical under both bound types (CCD $= 0.90$,
+response diversity $= 0.000$), confirming that the bound distinction is
+irrelevant without metaplasticity. Global targets collapse differentiation
+regardless of bounds (CCD $\leq 0.02$). Only local targets are
+bound-sensitive: hard bounds produce CCD $= 0.84$ [0.81, 0.87] and
+response diversity $= 0.047$ [0.044, 0.050]; soft bounds produce
+CCD $= 0.30$ [0.26, 0.34] and response diversity $= 0.015$ [0.012, 0.017].
+
+The mechanism is a discretisation effect. Experiment 15 records the
+$\eta$ distribution dynamics under both regimes:
+
+```{r fig-eta-dist, fig.cap="Summary diagnostics comparing hard vs soft η bounds (Exp 15, sessions ≥ 180). Hard bounds produce higher CCD (geometric separation), higher response diversity, wider η spread (std = 0.077 vs 0.040), and 40.7% of nodes pinned at the η floor or ceiling (vs 0% under soft bounds). The negative skew under hard bounds reflects the bimodal concentration of nodes at boundary values. The η divergence (F = 4.9, Paper 4S Exp E2) confirms that between-assemblage η variance significantly exceeds within-assemblage variance only under hard bounds."}
+exp15 <- read_experiment("exp15_dynamics_compare")
+
+# Get individual eta values from summary statistics
+exp15_final <- exp15 |>
+  filter(session >= 180) |>
+  group_by(condition) |>
+  summarise(
+    eta_std = mean(eta_std),
+    pct_bound = mean(pct_eta_at_bound),
+    eta_skew = mean(eta_skew),
+    ccd = mean(centroid_cosine_distance),
+    rd = mean(response_diversity),
+    wmax = mean(weight_max),
+    .groups = "drop"
+  )
+
+exp15_final |>
+  pivot_longer(-condition) |>
+  mutate(
+    name = factor(name,
+      levels = c("ccd", "rd", "eta_std", "pct_bound", "eta_skew", "wmax"),
+      labels = c("CCD", "Response div.", "η std", "% η at bound",
+                 "η skew", "Weight max"))
+  ) |>
+  ggplot(aes(condition, value, fill = condition)) +
+  geom_col() +
+  facet_wrap(~name, scales = "free_y", nrow = 2) +
+  scale_fill_manual(values = c(pal[1], pal[3]),
+                    labels = c("Hard η bounds", "Soft η bounds")) +
+  labs(x = NULL, y = NULL, fill = NULL,
+       title = "Exp 15: Hard vs soft η bound dynamics") +
+  theme(legend.position = "bottom",
+        axis.text.x = element_blank(), axis.ticks.x = element_blank())
+```
+
+Under hard bounds, 40.7\% of nodes have $\eta$ pinned at either
+$\eta_\text{min}$ or $\eta_\text{max}$, creating a bimodal distribution
+(skew $= -0.31$) of "consolidated" nodes (low $\eta$, high activity,
+strong weights) and "exploratory" nodes (high $\eta$, low activity, weak
+weights). Different assemblages accumulate different proportions of each
+type, driving weight vector divergence. Under soft bounds, no nodes reach
+the limits (by construction), $\eta$ is continuously distributed
+(skew $= +0.55$, std $= 0.040$ vs $0.077$), and the reduced separation
+yields lower CCD.
+
+This extends a well-established principle in synaptic plasticity:
+@vanrossum2000stable showed that additive (hard-bounded) STDP produces
+bimodal weight distributions, while multiplicative (soft) rules produce
+unimodal distributions. @miller1994role demonstrated that subtractive
+constraints drive variables to extrema while multiplicative constraints
+yield graded profiles. @fusi2007limits established that hard-bounded
+synapses exhibit qualitatively different memory dynamics than soft-bounded
+ones. Our contribution is showing that this same principle, applied one
+level up---to the metaplastic learning rate rather than synaptic
+weights---controls the strength of inter-assemblage differentiation.
+
+A confound should be noted: under soft $\eta$ bounds, weights reach
+$w_\text{max} = 1.0$ more frequently (mean maximum weight $= 1.000$) than
+under hard $\eta$ bounds ($0.878$). This occurs because soft-bounded
+$\eta$ values remain higher on average (not pinned to the floor), sustaining
+stronger Hebbian updates that drive weights to the hard weight ceiling. The
+weight saturation could independently reduce CCD by compressing the weight
+space in which assemblages can diverge. Disentangling the $\eta$
+discretisation effect from this weight saturation interaction remains for
+future work.
+
+Critically, however, local homeostasis under soft bounds still produces
+statistically significant functional differentiation: response diversity
+$= 0.015$ [0.012, 0.017] versus baseline $= 0.000$ [0.000, 0.000]
+(Mann-Whitney $p < 10^{-40}$, Cohen's $d = 1.97$). The effect is
+quantitatively weaker (32\% of the hard-bound value) but qualitatively
+present. Local homeostasis produces genuine functional differentiation under
+both bounding regimes; hard bounds amplify it through a bimodal
+concentration effect that has well-characterised precedents in the synaptic
+plasticity literature.
+
+### Homeostatic timescale robustness
+
+The EMA smoothing parameter controls the timescale of homeostatic sensing
+(Exp 18). Fast sensing (EMA rate $= 0.10$) and slow sensing ($0.01$) both
+produce strong differentiation: CCD $= 0.888$ and $0.869$ respectively,
+compared to the default ($0.05$, CCD $= 0.841$). Response diversity is
+similarly robust ($0.057$, $0.062$, $0.047$). The only notable difference
+is assemblage count: slow sensing produces more assemblages ($11.1$ vs
+$5.2$), likely because the sluggish target allows transient fluctuations
+to seed additional individuation events before the homeostatic signal
+catches up. The core differentiation result is invariant to homeostatic
+timescale across an order of magnitude.
+
+### Transplant test: differentiation is context-dependent
+
+Experiment 19 tests whether assemblage identity is intrinsic or
+context-dependent by swapping the $\eta$ values and activity histories of
+the two largest assemblages at session 100. If differentiation reflects
+intrinsic assemblage properties (DeLanda's relations of exteriority),
+transplanted assemblages should retain their functional profiles in their
+new spatial context.
+
+They do not. The transplant produces no measurable disruption at any
+timescale: CCD, response diversity, and assemblage count are
+indistinguishable from the control condition by session 101---one session
+(300 steps) after the swap. The transplanted $\eta$ values are immediately
+overwritten by the local homeostatic target at the new spatial location.
+Assemblage identity is determined entirely by spatial context, not by
+intrinsic properties of the component nodes.
+
+This result bears on DeLanda's [-@delanda2006new] relations of exteriority,
+though the falsification is not absolute. DeLanda acknowledges that
+exteriority admits of degrees---components need not be fully detachable
+to possess some degree of external relations. The assemblages do resist
+perturbation (Exp 9), which indicates partial exteriority: they are not
+infinitely context-sensitive. But the transplant result shows that the
+*identity-constituting* relations are spatial, not intrinsic. The
+differentiation is genuine (assemblages have measurably different
+functional profiles) but not *portable*: it is constituted by the
+relationship between assemblage and milieu, not by properties the
+assemblage carries with it.
+
+The self-sealing dynamics observed here---where consolidated pathways
+preferentially reinforce themselves, resist perturbation, and maintain
+their organisation through their own activity---exhibit structural
+parallels to operational closure as described in autopoietic theory
+[@maturana1980autopoiesis]. Three levels of closure should be
+distinguished. (a) *Simondonian operational closure*: the operation that
+constituted the individual (Hebbian reinforcement of co-active edges) is
+the same operation that now maintains it. The assemblages satisfy this
+criterion. (b) *Varela's organisational closure*: the network of processes
+that produces the system's components is identical to the network that
+those components constitute. This is stronger --- it requires the system
+to produce its own processes, not just maintain its own state. The
+assemblages do not satisfy this criterion: the Hebbian rule is imposed,
+not self-produced. (c) *Full autopoiesis*: organisational closure plus
+self-production of a topological boundary in physical space
+[@beer2020autopoiesis]. The assemblages do not produce their own boundary
+--- it emerges from the weight dynamics but is not a distinct physical
+structure. This positions the assemblages at level (a), between minimal
+autonomy and full autopoiesis in the hierarchy described by Thompson
+[-@thompson2007mind].
+
+In Simondon's terms, the assemblage and its
+associated milieu are co-individuated---neither has an identity independent
+of the other. In DeLanda's terms, relations of exteriority do not hold:
+components cannot be detached from their assemblage and plugged into another
+while retaining their functional identity.
+
+
+## Discussion
+
+### The three-way comparison
+
+The central finding of this paper can be stated as a three-way comparison
+across the full programme:
+
+| Homeostatic regime | Outcome |
+|--------------------|---------|
+| None (Papers 1--3) | Self-sealing: individuation without differenciation |
+| Global target | Monopoly: one assemblage dominates |
+| Local target | Stable differentiation: multiple distinct assemblages |
+
+Self-sealing, previously diagnosed as the obstacle to differenciation (Paper
+3), is reinterpreted here as its *precondition*. Without self-sealing, no
+assemblage maintains its boundaries long enough to consolidate a distinct
+identity. With self-sealing but no homeostatic regulation, assemblages
+individuate but remain clones. With self-sealing and local homeostatic
+regulation, each assemblage consolidates in its own neighbourhood, subject to
+its own local reference signal, producing genuinely different internal
+dynamics.
+
+### Why Turing partially fails on Hebbian substrates
+
+The Turing result is more nuanced than a simple falsification. Two structural
+features of the Hebbian substrate are genuinely incompatible with the
+reaction-diffusion framework, while a third turned out to be partly
+artifactual:
+
+1. **Dynamic topology.** Classical Turing analysis assumes a fixed diffusion
+   graph. The Hebbian substrate rewires at every step---the Laplacian
+   eigenspectrum is non-stationary. This is a structural incompatibility
+   that no implementation change can resolve.
+
+2. **Sparse connectivity.** @wolfrum2012turing showed that sparse networks
+   generically produce single-differentiated-node solutions. Distributed
+   Turing patterns require dense, regular connectivity.
+
+3. **Absorbing $\eta$ boundaries (partly artifactual).** Under hard
+   learning rate clipping ($\eta_i \in [\eta_\text{min}, \eta_\text{max}]$
+   with hard clip), bounded $\eta$ values create absorbing states where
+   inhibitor coupling cannot modulate the learning rate once it reaches a
+   bound. Experiment 11 showed that soft $\eta$ bounding (tanh saturation)
+   partially rescues coupling, confirming this was an implementation
+   artifact rather than a fundamental incompatibility. This matters
+   philosophically: the Deleuzian framework from which we derived the Turing
+   hypothesis assumes continuous intensive quantities
+   [@deleuze1994difference, ch. 5]. Hard $\eta$ clipping violates this
+   assumption, and our initial failure to recognise this introduced an
+   unnecessary discontinuity into the very mechanism we were testing.
+
+The honest assessment is therefore: Turing morphogenesis on this substrate is
+*structurally impaired* (points 1--2) and was *additionally sabotaged* by an
+implementation choice inconsistent with its theoretical grounding (point 3).
+With soft $\eta$ bounds, coupling achieves CCD $= 0.65$---genuine
+differentiation, though still significantly below local homeostasis
+(CCD $= 0.84$ under hard $\eta$ bounds, $0.30$ under soft). The structural
+impairments explain the residual gap.
+
+### Philosophical grounding: a productive fracture
+
+This programme began within a Deleuzian framework: individuation as
+actualisation of virtual multiplicities, differenciation as the production of
+genuinely novel kinds through intensive processes
+[@deleuze1994difference]. Papers 1--3 found that Hebbian dynamics produce
+individuation (actualisation) but only bare repetition (same process,
+identical copies). The question was: what produces complex repetition?
+
+The answer---local homeostatic targets---creates tensions within this
+framework that we believe are more productive to name than to resolve. A
+third philosophical voice, DeLanda's assemblage theory, provides a diagnostic
+that neither Deleuze nor Simondon alone supplies.
+
+**Where Deleuze holds.** Local targets create genuinely heterogeneous
+problematic fields in the Deleuzian sense. Each node confronts a *singular*
+problem defined by its neighbourhood's contingent history. The
+differentiation that emerges is not prescribed by the targets---the targets
+co-evolve with the dynamics, and perturbation experiments confirm the
+outcomes are not determined by specific parameter values. Different
+localities constitute different differential fields, each demanding its own
+resolution. This is differenciation through the problem
+[@deleuze1994difference, ch. 4].
+
+The soft-bounds finding reinforces this reading for the Turing mechanism.
+Our initial Turing test violated a Deleuzian premise: intensive quantities
+are continuous, and hard $\eta$ clipping introduced a non-Deleuzian
+discontinuity. When we restored continuity (soft $\eta$ bounds), the
+Deleuzian mechanism partially succeeded (CCD $= 0.65$).
+
+However, the bound-type factorial (Exp 13) reveals a tension that must be
+confronted honestly. The strongest local homeostasis result (CCD $= 0.84$)
+depends on the same hard $\eta$ bounds that we criticise for sabotaging the
+Turing mechanism. Under soft $\eta$ bounds, local homeostasis produces
+CCD $= 0.30$---weaker geometric separation, with response diversity of $0.015$ confirming genuine but reduced functional differentiation. The philosophical
+framework cannot simultaneously condemn hard $\eta$ bounds for Turing and
+rely on them for homeostasis without addressing the asymmetry.
+
+The resolution lies in Simondon's distinction between *moulding* and
+*modulation* [@simondon2020individuation]. Moulding imposes form from
+without through fixed boundary conditions; modulation continuously regulates
+an ongoing process through variable constraints. Hard $\eta$ bounds create
+absorbing states that classify nodes into binary types (consolidated vs.
+exploratory)---this is moulding. The discretisation is not intrinsic to
+the dynamics but imposed by the boundary. Soft $\eta$ bounds preserve the
+intensive character of the learning rate, allowing continuous
+regulation---this is modulation. The stronger differentiation under hard
+bounds is Simondonian moulding: effective but externally constrained.
+Moulding is not pejorative in Simondon's framework---it is a legitimate
+operation, as in casting, that forecloses further individuation while
+producing stable form. The weaker differentiation under soft bounds is
+Simondonian modulation: open-ended but dynamically modest. Moulding is,
+in Simondon's analysis, a limit case of modulation---modulation frozen at
+its boundary values.
+
+Both regimes produce functional differentiation (response diversity $> 0$).
+The moulding regime amplifies it through a discretisation effect that has
+well-characterised precedents in the synaptic plasticity literature
+[@vanrossum2000stable; @miller1994role; @fusi2005cascade]. Whether
+biological metaplastic variables exhibit hard or soft saturation is an
+empirical question; evidence supports both possibilities
+[@abraham2001heterosynaptic; @he2016experience].
+
+**Where Simondon wins.** The critical period finding introduces an
+irreversible temporal ordering: individuation must precede communication.
+Coupling before consolidation destroys differentiation; coupling after
+preserves it. The outcomes are qualitatively different and the ordering
+cannot be reversed. This is Simondon's transduction---the coupled
+individuation of milieu and individual, where the milieu individuates
+alongside the entity it supports [@simondon2020individuation].
+
+Deleuze's treatment of time in *Difference and Repetition* (Chapter 2) is
+not achronological---the three syntheses of time (habit, memory, eternal
+return) provide a rich temporal ontology. But Deleuze resists *irreversible
+developmental ordering*: the eternal return as third synthesis implies that
+all configurations of the virtual are in principle revisitable. The critical
+period contradicts this. Once assemblages consolidate under local
+homeostatic targets, the basin structure is carved; introducing coupling
+*before* this consolidation produces a qualitatively different (and
+irrecoverable) outcome. This irreversibility maps naturally onto Simondon's
+transduction, which is explicitly directional, and sits uneasily with
+Deleuze's emphasis on the virtual as eternally available for re-actualisation.
+
+**Where DeLanda diagnoses.** The functional probe (Exp 12) operationalises
+DeLanda's criterion for genuine capacity differentiation
+[@delanda2006new; @delanda2002intensive]. DeLanda distinguishes between
+properties (actual, denumerable) and capacities (virtual, forming an open
+list). Genuine differentiation requires that components possess qualitatively
+different *sets of capacities*, not merely different positions or parameter
+values.
+
+The baseline result is the critical test: CCD $= 0.90$ but response
+diversity $= 0.000$. Assemblages that are geometrically distinct are
+functionally identical---different instances of a single type, not different
+kinds. DeLanda's five conditions for capacity formation
+[@delanda2006new, ch. 1] map onto our substrate as follows:
+
+| DeLanda condition | Status |
+|---|---|
+| 1. Heterogeneous components | Yes: $\eta$ divergence $> 0$, response rank $> 1$ (Exps 12, 17) |
+| 2. Relations of exteriority | **No**: transplant shows identity is context-dependent (Exp 19) |
+| 3. Intensive processes + thresholds | Partial: gradients present, no kind-transition |
+| 4. Semi-permeable boundaries | Replaced by developmental sequence (Exp 8) |
+| 5. Top-down constraint preserving variation | Yes: local targets (Exp 9 perturbation resilience) |
+
+Three of five conditions are satisfied, one is temporally substituted, and
+one---relations of exteriority---is experimentally falsified. The
+transplant result (Exp 19) shows that assemblage identity cannot be detached
+from spatial context: components relocated to a new neighbourhood are
+immediately assimilated, their transplanted $\eta$ values overwritten by
+the local homeostatic target within a single session. This is not attractor
+stability (which Exp 9 confirms) but its opposite: the attractor is
+spatially indexed, and nodes converge to whichever basin their spatial
+position defines, regardless of their initial state.
+
+This falsification is itself a contribution. It precisely characterises the
+kind of differentiation this substrate achieves: Simondonian
+co-individuation (assemblage and milieu constitute each other) rather than
+DeLandian exteriority (components retain portable identity). The
+differentiation is real but relational---it exists in the coupling between
+entity and context, not in the entity alone.
+
+**The fracture.** The system may achieve *differentiation*---symmetry-breaking
+into basins with measurably different functional profiles---without achieving
+*differenciation* in the full Deleuzian sense---the production of
+qualitatively novel virtual structures. The vocabulary of outcomes (activity
+level, connectivity, learning rate, gain) is fixed from the start; the
+system selects among pre-given possibilities rather than creating new ones.
+Even the functional differentiation documented in Exp 12 is parametric:
+assemblages vary in the *value* of their signal amplification gain, not in
+the *kind* of function they perform. Whether parametric variation across a
+fixed capacity space constitutes genuine novelty or mere distribution is an
+open philosophical question that computational evidence alone cannot
+adjudicate.
+
+We propose that this fracture between differentiation and differenciation
+marks a precise boundary: what a purely Hebbian substrate with homeostatic
+regulation *can* and *cannot* do. It can break symmetry, consolidate distinct
+attractors, resist perturbation, and produce assemblages with measurably
+different functional profiles. It cannot generate qualitatively new
+dynamics that were not latent in its initial rule-set. If differenciation in
+the strong Deleuzian sense requires the production of genuinely novel
+capacities---new kinds of rules, not new values of existing rules---then even
+the locally regulated Hebbian substrate falls short. But it falls short in a
+precisely characterised way that points toward what a next-generation
+substrate would require: rule-space expansion, not merely parameter-space
+exploration. Adams et al. [-@adams2017formal] demonstrated formally that
+only state-dependent update rules---where the system's current state
+modifies the rule governing its next state---produce unbounded evolutionary
+dynamics. A fixed Hebbian rule, however richly parameterised, constrains
+the system to a bounded transition graph that must eventually repeat. The
+metaplastic extension localises a *parameter* ($\eta$) but not the *form*
+of the rule (Hebbian correlation). Crossing the productive fracture
+requires making the update equation itself state-dependent---a direction
+exemplified by Flow-Lenia's parameter localisation
+[@plantec2023flowlenia].
+
+
+## Conclusion
+
+Assemblages under local homeostatic regulation develop genuinely independent
+functional profiles: response rank reaches $2.4$ [$1.7$, $3.0$] under
+the standard pruning regime (Exp 17) and $5.6$ when pruning is removed
+(Exp 17np; see Paper 4S), compared to a baseline of $1.2$ (parametric).
+Response diversity increases from $0.000$ (baseline) to $0.047$ (local
+homeostasis), and $\eta$ divergence between assemblages reaches $F = 4.9$
+($p < 0.0001$). These independent functional probes establish that local
+homeostatic targets produce genuine capacity differentiation, not merely
+geometric separation (which CCD alone cannot distinguish; Paper 4S). The
+resulting differentiation is sustained (1000 sessions),
+perturbation-resilient (50\% scramble, full recovery), robust to structural
+parameters (grid size, locality, target radius), and exhibits critical period
+dynamics (coupling after consolidation preserves diversity; coupling before
+consolidation destroys it).
+
+Four findings carry forward. First, the partial Turing rescue under soft
+$\eta$ bounds reveals that the original failure was partly an implementation
+artifact inconsistent with the Deleuzian framework that motivated the
+hypothesis---a methodological lesson in attending to a theory's own
+assumptions when designing its tests. Second, the functional probe
+establishes that geometric differentiation (distinct weight structures) can
+exist without functional differentiation (distinct capacities), vindicating
+DeLanda's insistence that genuine differentiation requires capacity
+divergence, not merely spatial separation. Third, the bound-type sensitivity
+is itself a finding: hard $\eta$ bounds amplify differentiation through a
+discretisation effect (Simondonian moulding) that extends a well-known
+principle from synaptic to metaplastic dynamics
+[@vanrossum2000stable; @miller1994role]. Soft $\eta$ bounds produce weaker
+but philosophically cleaner differentiation (Simondonian modulation). Both
+regimes produce genuine functional differentiation; the bound type controls
+its strength. Fourth, the differentiation achieved---while real, stable,
+and functional---remains parametric: different values of the same
+capacities, not qualitatively novel kinds. If complex repetition in the full
+Deleuzian sense requires the production of genuinely new capacities, then
+differenciation in Hebbian substrates requires not merely heterogeneous
+regulation but *rule-space expansion*---a substrate capable of generating new
+kinds of dynamics, not just distributing existing ones across space.
+
+What would differenciation look like computationally? We can now state this
+precisely: assemblages that develop qualitatively different *update rules*,
+not just different parameter values of the same rule. In our substrate, all
+nodes execute the same Hebbian learning with homeostatic $\eta$ adjustment;
+the rules are parametrically varied ($\eta$ values differ) but structurally
+identical. Genuine differenciation would require some assemblages to
+spontaneously develop anti-Hebbian dynamics, competitive inhibition, or
+temporal integration properties not present in the initial rule-set. This
+connects to the open-ended evolution literature's distinction between
+variation within a fixed genotype-phenotype map and the expansion of the map
+itself [@aguilar2014openended; @banzhaf2016defining]. The transplant
+result (Exp 19) sharpens the point: even the parametric variation achieved
+is context-dependent, immediately overwritten when the spatial context
+changes. Portable, intrinsic functional identity---the hallmark of
+DeLandian exteriority and a prerequisite for open-ended
+evolution---requires a substrate whose components can carry their rules
+with them. Flow-Lenia's parameter localisation [@plantec2023flow]
+achieves this; our Hebbian substrate does not. The gap between local
+homeostatic differentiation and genuine rule-carrying individuation defines
+the research frontier for the next phase of this programme.
+
+
+## Data and Code Availability
+
+All simulation code, experiment runners, and analysis scripts are available
+at [repository URL]. Raw parquet data files (approximately 260 MB across 18
+experiments) are archived at [data repository URL]. All experiments use
+fixed random seeds (0--19) for reproducibility. The simulation was executed
+using Python 3.12.3, NumPy 1.26, PyArrow 14.0, scikit-learn 1.3, and Ray
+2.54.0 on a three-node cluster (68 CPUs, 2 GPUs). Figures were generated
+using R 4.3 with ggplot2, patchwork, and ggthemes via Quarto.
+
+
+## References

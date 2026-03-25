@@ -1,0 +1,147 @@
+# Synthesis
+
+## Convergent Frameworks Across Scales
+
+Several of the programme's findings converge with results established
+independently in other fields. This convergence is not a weakness --- it is
+evidence that the phenomena identified are real and domain-general.
+
+**Pruning and functional diversity.** The finding that pruning destroys
+functional diversity (Paper 4S) converges with the ML compression
+literature: Hooker et al. (2019) showed compressed networks
+disproportionately forget rare classes; Tran et al. (NeurIPS 2022)
+identified gradient-norm asymmetry as the mechanism; Holste et al. (MICCAI
+2023) demonstrated clinical consequences. Across six non-neural domains
+--- metallurgy (grain boundaries), ecology (mass extinction), markets
+(killer acquisitions), supply chains (redundancy removal), immune systems
+(thymic selection), and social networks (Granovetter's weak ties) --- the
+same pattern holds: removing "weak" elements collapses the system's
+functional response dimensionality.
+
+**Neural dimensionality.** The response rank metric (SVD participation
+ratio) is the standard dimensionality measure in systems neuroscience
+(Stringer et al. 2019; Gao et al. 2017; Rigotti et al. 2013). Our
+independent derivation of the same metric confirms its appropriateness.
+The finding that pruning reduces rank from 5.6 to 1.0 is a testable
+prediction for experimental neuroscience: does developmental synaptic
+pruning reduce the participation ratio of cortical population responses?
+
+**Critical periods.** Emergent critical periods have been demonstrated in
+deep networks (Achille et al. 2019; Kleinman et al. 2024). Our substrate
+produces them through a different mechanism --- structural consolidation
+rather than information-theoretic sensitivity --- but the convergence
+confirms that critical periods are a fundamental property of hierarchical
+learning systems, not specific to biological neurons.
+
+**Operational closure.** The self-sealing property (Paper 3) is
+structurally equivalent to operational closure in autopoietic theory
+(Maturana & Varela 1980). We note this connection without claiming full
+autopoietic organisation: the assemblages are operationally closed but not
+self-producing (Beer 2020).
+
+**Open-endedness.** The "productive fracture" (parametric differentiation
+without qualitative novelty) maps onto the open-ended evolution literature.
+Adams et al. (2017) demonstrated formally that only state-dependent update rules
+produce unbounded evolution. Our fixed Hebbian rule produces bounded
+dynamics by the Poincaré recurrence argument. The path forward ---
+rule-space expansion --- is the same conclusion reached independently by
+the Flow-Lenia programme (Plantec et al. 2023).
+
+**The general principle.** Across all domains, one finding generalises:
+maintenance operations in self-organising systems interact with the
+phenomena they are supposed to maintain, and this interaction can be
+disordinal --- reversing the apparent ranking of approaches. This specific
+result (the ranking reversal) has no prior art in any domain we surveyed.
+
+## Cross-Cutting Themes
+
+### The role of boundary conditions
+
+A recurring finding: boundary conditions are not implementation details.
+
+- The hard weight clip creates qualitatively different dynamics from smooth
+  saturation (Paper 4S). No finite steepness of soft saturation recovers
+  hard clip behaviour.
+- The pruning threshold functions as an unintended mould, selectively
+  eliminating soft-bounded assemblages (Paper 4S).
+- The $\eta$ bounds (hard vs soft) determine whether metaplastic
+  differentiation occurs (Paper 4).
+
+In each case, what appears to be a neutral parameter choice shapes the
+system's individuating capacity. Simondon's framework predicts this:
+individuation proceeds from singularities in the pre-individual field,
+and boundary conditions are precisely such singularities.
+
+### Self-organisation requires constraint
+
+The programme demonstrates, against a naive reading of Deleuze, that
+individuation requires boundary conditions. The fully continuous substrate
+(soft weights, soft $\eta$, no pruning) produces topological structure
+(6--8 assemblages) but not functional differentiation (response rank
+$1$--$2$). Functional differentiation requires the absorbing boundary of
+hard clipping (rank $5.6$). The constraint is not an imposition of form ---
+it is the condition under which the system can resolve its own metastability.
+
+This is consistent with Simondon's analysis: modulation is the more general
+operation, but moulding (a limit case of modulation) produces the strongest
+individuation. The hard clip is productive precisely because it forecloses
+certain dynamics, channelling the system's energy into fewer, more distinct
+configurations.
+
+### Negative results as contributions
+
+Three negative results proved essential:
+
+1. Paper 3's finding that self-sealing prevents differentiation established
+   the barrier that motivated Paper 4's metaplastic mechanism.
+2. Paper 4S's finding that CCD is spatially confounded forced the adoption
+   of response rank as the primary metric, yielding a more rigorous measure
+   of functional differentiation.
+3. Paper 4S's null response-profile results under Gaussian probes led to
+   the discovery that spatially structured probes *deflate* response rank
+   by creating correlated activation across assemblages.
+
+Each negative result redirected the programme toward a stronger positive
+finding.
+
+### The three regimes of individuation
+
+The complete experimental record supports a taxonomy of three nested
+dynamical regimes:
+
+| Regime | Assemblages | Response rank | $\eta$ F-ratio | Bound type |
+|---|---|---|---|---|
+| Topological | 6--8 | 1--2 | $<1$ | Soft, no pruning |
+| Structural | 5--6 | 5.6 | --- | Hard, no pruning |
+| Metaplastic | 10+ | 5.6 | 4.9 | Hard, no pruning, local homeostasis |
+
+These are three phases of the same Hebbian process observed under different
+boundary conditions. Each subsumes the previous: structural individuation
+requires the hard clip, metaplastic individuation requires both the hard
+clip and local homeostasis.
+
+### The productive fracture
+
+The programme identifies a precise boundary between Simondonian
+individuation and Deleuzian differenciation. The Hebbian substrate achieves
+the former readily and the latter only partially. Even the metaplastic
+regime produces *parametric* differentiation --- different values of the same
+capacities --- not *qualitative* differenciation --- new kinds of dynamics.
+
+If differenciation in the strong Deleuzian sense requires the production of
+genuinely novel capacities, then Hebbian substrates require *rule-space
+expansion*: mechanisms that generate new kinds of update rules, not just
+distribute existing ones across space. This points toward substrate
+architectures with evolvable learning rules as the next step.
+
+## Programme Statistics
+
+| Metric | Value |
+|---|---|
+| Total simulation jobs | $\sim 15{,}000$ |
+| Total observations | $\sim 3{,}000{,}000$ |
+| Repositories | 4 |
+| Papers published/accepted | 5 |
+| Venue | *Artificial Life* |
+| Cluster | 68 CPUs across 3 nodes |
+| Compute | $\sim 200$ CPU-hours |

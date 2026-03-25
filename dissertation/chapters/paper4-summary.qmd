@@ -1,0 +1,36 @@
+# Paper 4: Local Homeostasis Stabilises Differentiation
+
+## Context
+
+Paper 3 showed the Hebbian substrate is self-sealing. This paper introduces
+per-node metaplastic learning rates with homeostatic adjustment.
+
+## Key Findings
+
+**Turing morphogenesis fails.** Structural incompatibility with sparse,
+rewiring topology.
+
+**Local homeostasis succeeds.** Response rank $5.6$ (over five independent
+functional dimensions), $\eta$ divergence $F = 4.9$ ($p < 0.0001$), $10+$
+assemblages.
+
+**Critical period.** Coupling from session 0 destroys differentiation
+(rank $\to 0.05$); coupling from session 50+ preserves it (rank $0.85$).
+Functionally validated (Exp 8fv).
+
+**Perturbation resilience.** Full recovery from 50\% $\eta$ scramble.
+Confirmed on response rank (Exp 9fv).
+
+**Metaplasticity's contribution.** The baseline also reaches rank $5.6$
+without pruning. Metaplasticity adds: (1) $\eta$ divergence, (2) assemblage
+count ($6 \to 10+$), (3) wider perturbation basin.
+
+**The productive fracture.** Differentiation remains parametric --- different
+values of the same capacities, not qualitatively novel kinds. Differenciation
+in the Deleuzian sense requires rule-space expansion.
+
+## Contribution
+
+Local homeostatic metaplasticity as a minimal mechanism for functional
+differentiation. The critical period finding. The "productive fracture"
+between differentiation and differenciation.

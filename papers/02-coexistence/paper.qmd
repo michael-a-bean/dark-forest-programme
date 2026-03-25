@@ -1,0 +1,367 @@
+---
+title: "Locality-Dependent Coexistence Mechanisms in Optimization-Free Hebbian Substrates"
+author:
+  - name: Michael Bean
+    affiliation: Independent Researcher
+  - name: Gen
+    affiliation: Independent Researcher
+date: 2026-03-14
+date-format: long
+abstract: |
+  When multiple assemblages individuate from identical nodes in a Hebbian
+  substrate, can they stably coexist? In a companion paper [@bean2026], we
+  showed that optimization-free Hebbian dynamics produce spontaneous
+  individuation but that multiplicity is unstable under shared encounter
+  dynamics. Here we identify the conditions for stable coexistence and
+  characterize how the *mechanism* of coexistence changes with spatial
+  scale. At tight encounter locality, coexistence operates through genuine
+  niche partitioning: assemblages develop exclusive coupling to distinct
+  energy sources (mean coupling similarity 0.37, with 29/30 seeds showing
+  different dominant hotspot associations). At broad locality, coexisting
+  assemblages are near-identical clones (coupling similarity 0.80--0.88),
+  sustained not by niche differentiation but by resource abundance. A sharp
+  phase transition separates these regimes ($\ell \approx 0.10$--$0.15$).
+  A 2D sweep of locality $\times$ hotspot count (1,120 simulations) reveals
+  a migrating ridge of peak coexistence, and a coupling profile analysis
+  (360 simulations) confirms that the ridge marks a transition between
+  coexistence mechanisms, not merely coexistence levels. The system
+  exhibits individuation without differenciation: a homogeneous Hebbian
+  substrate produces spatially distinct but functionally identical
+  assemblages. Genuine functional differentiation would require
+  heterogeneous dynamics --- a challenge we connect to anti-Hebbian
+  decorrelation and Deleuze's concept of the dark precursor.
+keywords:
+  - coexistence mechanisms
+  - Hebbian learning
+  - niche partitioning
+  - encounter locality
+  - individuation
+  - phase transition
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    code-fold: true
+    theme: cosmo
+    self-contained: true
+    fig-width: 7
+    fig-height: 4
+    fig-dpi: 150
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+#| include: false
+source("_setup.R")
+```
+
+# Introduction
+
+In a companion paper [@bean2026], we demonstrated that optimization-free Hebbian dynamics produce spontaneous individuation from uniform substrates, but that multiplicity is unstable: one assemblage monopolizes through differential persistence. This paper asks what conditions stabilize coexistence, and --- critically --- what *kind* of coexistence emerges.
+
+The distinction matters. In ecological theory, coexistence can arise through fundamentally different mechanisms [@chesson2000]. Populations may coexist through *niche partitioning*, where each species couples to the environment differently (stabilizing coexistence in Chesson's framework). Or they may coexist through *spatial isolation*, where limited dispersal prevents competitive displacement --- what ecologists call allopatry, and what Hubbell's [-@hubbell2001] neutral theory formalizes for functionally identical populations. These mechanisms make different predictions about the internal structure of coexisting populations: niche-partitioned populations are functionally differentiated, while allopatric populations are identical copies in different locations.
+
+We find that our Hebbian substrate exhibits *both* mechanisms, controlled by a single parameter: encounter locality. At tight locality, coexisting assemblages develop genuinely different coupling profiles to the energy landscape --- each assemblage becomes the exclusive client of its nearest hotspot. At broad locality, coexisting assemblages are near-identical clones sustained by resource abundance rather than niche differentiation. The transition between these mechanisms is sharp, and the coupling profile analysis provides direct evidence for which mechanism operates at each spatial scale.
+
+In Deleuzian terms [@deleuze1980], the system exhibits *individuation* (emergence of distinct entities) without *differenciation* (emergence of distinct kinds; we retain Deleuze's spelling to mark the technical concept). The tight-locality regime approaches differenciation through spatial constraint --- assemblages develop different relationships to the energy landscape because their encounter environments are different. But this is differenciation imposed by the environment's geometry, not produced by the assemblages' own dynamics. Whether genuine differenciation --- qualitatively different internal dynamics emerging from identical initial conditions --- requires mechanisms beyond pure Hebbian plasticity is the question we pose for future work.
+
+## Contributions
+
+1. A sharp phase transition between coexistence and monopoly at encounter locality $\ell \approx 0.10$--$0.15$, confirmed stable to 500 sessions
+2. Direct measurement of assemblage coupling profiles showing that the *mechanism* of coexistence shifts with locality: niche partitioning at tight locality (coupling similarity 0.37) versus clone coexistence at broad locality (0.80--0.88)
+3. A 2D coexistence surface with a migrating ridge marking the transition between coexistence mechanisms
+4. The diagnostic concept of *individuation without differenciation*: a homogeneous substrate produces spatially distinct but functionally identical assemblages
+
+# Theoretical Framework
+
+## Ecological Coexistence Theory
+
+@chesson2000 distinguishes two classes of coexistence mechanism. *Stabilizing mechanisms* create negative frequency dependence: each species has an advantage when rare, preventing competitive exclusion. These require species to differ in their environmental responses --- niche differentiation. *Equalizing mechanisms* reduce average fitness differences between species, slowing exclusion without preventing it. In spatially structured populations, dispersal limitation can create apparent coexistence among identical competitors by preventing the competitive displacement that would occur in a well-mixed system --- a pattern formalized by Hubbell's [-@hubbell2001] neutral theory and studied extensively in spatial competition models [@tilman1994].
+
+Our system's encounter locality parameter maps directly onto this framework. At tight locality, each assemblage's encounter neighborhood is restricted to its local region, creating functionally separate environments that enable niche partitioning. At broad locality, encounter neighborhoods overlap, environments homogenize, and any coexistence must be explained by mechanisms other than niche differentiation.
+
+## Deleuzian Milieu Theory
+
+@deleuze1980 describe territory as constituted through the *refrain* (ritournelle) --- a self-reinforcing expressive pattern that marks boundaries. Every territory operates at the intersection of four milieus, of which the *intermediary milieu* (the membrane between territories) is critical: its permeability determines whether assemblages fuse, coexist, or die from isolation. @simondon2017 adds the concept of the *associated milieu* --- the environment co-produced with the individual during individuation. Distinct associated milieus are the Simondonian condition for coexistence: each individual creates the conditions for its own persistence. As @combes2013 emphasizes, the transindividual emerges not from the fusion of individuated beings but from the *preindividual charge* each carries --- the unresolved potential that enables relation without homogenization.
+
+We note that associated milieus can be *given* by experimental design (when spatial isolation prevents encounter zone overlap) or *emergent* from the dynamics (when assemblages construct different relationships to a shared environment despite overlapping access). The coupling profile analysis distinguishes these cases empirically.
+
+## The Diagram
+
+Following @delanda2002, we test whether the growth-decay balance in Hebbian systems functions as a Deleuzian *diagram* --- an abstract machine producing the same three-regime structure (dissolution / productive multiplicity / saturation) across different parameterizations. We use the term in DeLanda's specific sense: a topological invariant of the phase space, not the full Deleuzian sense of a generative machine producing novelty from chaos.
+
+# Methods
+
+## System Summary
+
+We use the multi-field substrate from @bean2026: identical nodes on a 2D grid with energy hotspots injecting spatially localized noise. All nodes follow identical Hebbian dynamics ($\eta = 0.05$, $\lambda = 0.002$, $w_{\max} = 1.0$): connections strengthen through co-activation, decay multiplicatively, and are pruned below $10^{-4}$. New connections form through *activity-dependent encounters* at random spatial locations. An *assemblage* is a connected component of edges above the 75th percentile of absolute weight; a threshold sensitivity analysis (50th/75th/90th percentiles, 210 runs) produces identical assemblage counts, confirming bimodal weight distributions.
+
+**Note on pruning (added in revision).** Paper 4S demonstrates that the $10^{-4}$ pruning threshold interacts with weight bounding strategy: under soft bounds, pruning differentially eliminates weak edges and reverses the assemblage ranking relative to hard bounds. Since this paper uses hard bounds exclusively, the pruning threshold has minimal effect on assemblage counts ($\Delta \approx 1.7$ assemblages at $\ell = 0.10$). However, the coexistence--monopoly transition point ($\ell \approx 0.10$--$0.15$) may shift slightly without pruning, as additional assemblages survive at moderate localities. The qualitative finding---a sharp phase transition controlled by encounter locality---is robust. See Paper 4S for the complete pruning sensitivity analysis.
+
+## Experimental Design
+
+Seven experimental components:
+
+| Component | Design | Runs |
+|-----------|--------|------|
+| Locality sweep | $\ell \in \{0.03, ..., 1.00\}$, 20 seeds, 100 sessions | 200 |
+| 2D coexistence surface | $\ell$ (8) $\times$ hotspots (7), 20 seeds | 1,120 |
+| **Coupling profile analysis** | $\ell$ (8) $\times$ 30 seeds + broad $\times$ {5,7} hotspots | **360** |
+| Energy sweep | 7 values at $\ell = 0.12$ | 140 |
+| Encounter rate sweep | 6 values at $\ell = 0.12$ | 120 |
+| Grid size scaling | 4 grids $\times$ 3 hotspot counts | 240 |
+| Stability check | $\ell = 0.07$, 10 seeds, 500 sessions | 10 |
+
+Total: 2,190+ simulations, parallelized across a 3-node, 68-CPU compute cluster.
+
+## Coupling Profile Analysis
+
+For each simulation producing $\geq 2$ assemblages, we compute each assemblage's *coupling profile*: a vector of mean absolute weight from nodes near each hotspot to nodes in the assemblage. Cosine similarity between coupling profiles measures whether coexisting assemblages relate to the energy landscape identically (similarity $\to$ 1) or differently (similarity $\to$ 0). We also record which hotspot each assemblage is most strongly coupled to (its *dominant hotspot*).
+
+# Results
+
+## The Coexistence-Monopoly Phase Transition
+
+```{r}
+#| label: fig-locality
+#| fig-cap: "Encounter locality controls the coexistence-monopoly transition. Left: mean assemblage count at session 100 (± SD). Right: coexistence probability. A sharp transition occurs between ℓ = 0.10 and 0.20."
+#| fig-width: 8
+#| fig-height: 4
+
+loc <- read_experiment("locality_sweep")
+
+loc_final <- loc |>
+  filter(session == 100) |>
+  group_by(condition) |>
+  summarise(
+    locality = first(locality),
+    mean_a = mean(n_assemblages),
+    sd_a = sd(n_assemblages),
+    pct_coexist = mean(n_assemblages >= 2),
+    .groups = "drop"
+  )
+
+p1 <- loc_final |>
+  ggplot(aes(locality, mean_a)) +
+  geom_ribbon(aes(ymin = pmax(mean_a - sd_a, 0), ymax = mean_a + sd_a),
+              alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.8) +
+  geom_point(color = pal[1], size = 2) +
+  geom_rangeframe(sides = "lb") +
+  scale_x_log10() +
+  labs(title = "Assemblage count", x = "Encounter locality (ℓ)", y = "Mean assemblages")
+
+p2 <- loc_final |>
+  ggplot(aes(locality, pct_coexist)) +
+  geom_line(color = pal[2], linewidth = 0.8) +
+  geom_point(color = pal[2], size = 2) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "grey60") +
+  geom_rangeframe(sides = "lb") +
+  scale_x_log10() +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Coexistence probability", x = "Encounter locality (ℓ)", y = "% seeds with ≥ 2 assemblages")
+
+p1 + p2
+```
+
+At $\ell = 0.07$, 100% of seeds maintain coexistence (mean 6.9 assemblages). Above $\ell = 0.20$, monopoly is universal. A 500-session stability check confirms that tight-locality coexistence is genuinely stable (mean 6.1 assemblages from session 100 to 500, no decline, all seeds $\geq 2$).
+
+```{r}
+#| label: fig-logistic
+#| fig-cap: "Logistic fit to the coexistence probability curve. The inflection point at ℓ = 0.13 (95% CI: 0.11–0.16) confirms a sharp transition."
+#| fig-height: 3.5
+
+# Fit logistic regression to coexistence (binary) vs log-locality
+loc_binary <- loc |>
+  filter(session == 100) |>
+  mutate(coexist = as.integer(n_assemblages >= 2))
+
+fit <- glm(coexist ~ log(locality), data = loc_binary, family = binomial)
+inflection <- exp(-coef(fit)[1] / coef(fit)[2])
+se <- sqrt(vcov(fit)[1,1] / coef(fit)[2]^2 + vcov(fit)[2,2] * coef(fit)[1]^2 / coef(fit)[2]^4)
+ci_lo <- exp(log(inflection) - 1.96 * se)
+ci_hi <- exp(log(inflection) + 1.96 * se)
+
+new_data <- tibble(locality = seq(0.02, 0.5, length.out = 200))
+new_data$pred <- predict(fit, newdata = new_data, type = "response")
+
+ggplot() +
+  geom_ribbon(data = new_data, aes(locality, ymin = pred - 0.1, ymax = pred + 0.1),
+              alpha = 0.15, fill = pal[1]) +
+  geom_line(data = new_data, aes(locality, pred), color = pal[1], linewidth = 0.8) +
+  geom_point(data = loc_final, aes(locality, pct_coexist), size = 2.5) +
+  geom_vline(xintercept = inflection, linetype = "dashed", color = pal[2]) +
+  annotate("text", x = inflection * 1.15, y = 0.85,
+           label = sprintf("Inflection: ℓ = %.2f", inflection),
+           hjust = 0, size = 3.5, color = pal[2]) +
+  geom_rangeframe(data = loc_final, aes(locality, pct_coexist), sides = "lb") +
+  scale_x_log10() +
+  scale_y_continuous(labels = scales::percent) +
+  labs(x = "Encounter locality (ℓ)", y = "Coexistence probability")
+```
+
+## Coupling Profiles: How Coexistence Mechanisms Shift
+
+The phase transition is not merely quantitative (more vs. fewer assemblages) but qualitative: the *mechanism* of coexistence changes with locality.
+
+```{r}
+#| label: fig-coupling
+#| fig-cap: "Coupling similarity between coexisting assemblages as a function of encounter locality. At tight locality, assemblages are genuinely differently coupled to the hotspot landscape (similarity ~0.37). At broad locality, they are near-identical clones (similarity >0.80). The mechanism of coexistence shifts from niche partitioning to clone persistence."
+#| fig-height: 4
+
+coupling <- read_parquet_path(file.path(DATA_DIR, "coupling_analysis", "session_metrics.parquet"))
+
+coupling_3h <- coupling |>
+  filter(n_hotspots == 3, !is.na(coupling_similarity))
+
+coupling_3h |>
+  group_by(locality) |>
+  summarise(
+    mean_sim = mean(coupling_similarity),
+    sd_sim = sd(coupling_similarity),
+    n = n(),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(locality, mean_sim)) +
+  geom_ribbon(aes(ymin = pmax(mean_sim - sd_sim, 0), ymax = pmin(mean_sim + sd_sim, 1)),
+              alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.8) +
+  geom_point(color = pal[1], size = 2) +
+  geom_hline(yintercept = 0.5, linetype = "dashed", color = "grey50") +
+  annotate("text", x = 0.04, y = 0.35, label = "Niche partitioning\n(different coupling)",
+           size = 3, color = pal[4], hjust = 0) +
+  annotate("text", x = 0.16, y = 0.65, label = "Clone coexistence\n(identical coupling)",
+           size = 3, color = pal[2], hjust = 0) +
+  geom_rangeframe(sides = "lb") +
+  scale_x_log10() +
+  labs(x = "Encounter locality (ℓ)", y = "Mean coupling similarity between assemblages")
+```
+
+At tight locality ($\ell \leq 0.10$), coupling similarity is 0.32--0.40: assemblages develop exclusive relationships to distinct hotspots. At $\ell = 0.07$, 29 of 30 seeds show assemblages with *different* dominant hotspot associations --- each assemblage becomes the exclusive client of its nearest energy source. This is consistent with Chesson's [-@chesson2000] stabilizing coexistence: the spatial constraint of encounter locality creates functionally separate environments with negative frequency dependence (each assemblage has an advantage in its own encounter zone), and assemblages specialize on different resources.
+
+At broad locality ($\ell \geq 0.20$), the few seeds that maintain coexistence show coupling similarity of 0.60--0.88. Assemblages couple to the same hotspots in the same way. This is not niche differentiation --- it is what Hubbell [-@hubbell2001] would recognize as neutral coexistence: functionally identical populations persisting through spatial structure and demographic stochasticity rather than niche differences.
+
+The transition between mechanisms occurs at $\ell \approx 0.12$--$0.15$, coinciding with the coexistence-monopoly phase transition. Below this threshold, the system produces ecological niche partitioning from identical initial conditions with no explicit competition rule. Above it, niche partitioning fails because encounter zones overlap, homogenizing the environment that each assemblage experiences.
+
+## The Coexistence Surface
+
+```{r}
+#| label: fig-surface
+#| fig-cap: "The coexistence surface: proportion of seeds with ≥ 2 assemblages at session 100. The migrating ridge marks the transition between coexistence mechanisms."
+#| fig-width: 8
+#| fig-height: 5
+
+surface <- read_experiment("coexistence_surface")
+
+surface |>
+  filter(session == 100) |>
+  group_by(locality, n_hotspots) |>
+  summarise(pct_coexist = mean(n_assemblages >= 2), .groups = "drop") |>
+  ggplot(aes(factor(n_hotspots), factor(locality), fill = pct_coexist)) +
+  geom_tile() +
+  geom_text(aes(label = scales::percent(pct_coexist, accuracy = 1)),
+            size = 3, color = "white") +
+  scale_fill_viridis_c(option = "inferno", name = "Coexistence\nprobability",
+                       labels = scales::percent, limits = c(0, 1)) +
+  labs(x = "Number of hotspots", y = "Encounter locality (ℓ)") +
+  theme(legend.position = "right")
+```
+
+The migrating ridge is visible as the diagonal band of high coexistence. At tight locality, peak coexistence occurs at 2--3 hotspots (90--100%): each hotspot can support its own assemblage because encounter zones are well-separated. At broad locality ($\ell = 0.30$), the peak migrates to 5--7 hotspots (60--70%), but the coupling analysis reveals this is clone coexistence rather than niche partitioning --- assemblages coexist because the energy landscape is rich enough to sustain identical competitors, not because they have differentiated.
+
+The $d/2\ell$ ratio (inter-hotspot distance to encounter diameter) does not collapse the surface onto a single curve, confirming that node density is a second independent factor: more substrate per hotspot region means more robust assemblages that survive perturbation. The grid size sweep confirms this --- 7 hotspots recovers from 15% coexistence on a 20$\times$20 grid to 55% on a 40$\times$40 grid at identical $d/2\ell$.
+
+## Three-Regime Universality and Speed Parameters
+
+```{r}
+#| label: fig-energy-rate
+#| fig-cap: "Left: hotspot energy exhibits the three-regime pattern (productive at 0.30). Right: encounter rate has no effect. Both at ℓ = 0.12."
+#| fig-width: 8
+#| fig-height: 3.5
+
+energy <- read_experiment("energy_sweep")
+rate <- read_experiment("encounter_rate_sweep")
+
+p1 <- energy |>
+  filter(session == 100) |>
+  group_by(condition) |>
+  summarise(energy = first(hotspot_energy), mean_a = mean(n_assemblages),
+            sd_a = sd(n_assemblages), .groups = "drop") |>
+  ggplot(aes(energy, mean_a)) +
+  geom_ribbon(aes(ymin = pmax(mean_a - sd_a, 0), ymax = mean_a + sd_a),
+              alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.8) +
+  geom_point(color = pal[1], size = 2) +
+  geom_rangeframe(sides = "lb") +
+  labs(title = "Hotspot energy (structural)", x = "Energy", y = "Mean assemblages")
+
+p2 <- rate |>
+  filter(session == 100) |>
+  group_by(condition) |>
+  summarise(rate = first(encounter_rate), mean_a = mean(n_assemblages),
+            sd_a = sd(n_assemblages), .groups = "drop") |>
+  ggplot(aes(rate, mean_a)) +
+  geom_ribbon(aes(ymin = pmax(mean_a - sd_a, 0), ymax = mean_a + sd_a),
+              alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.8) +
+  geom_point(color = pal[1], size = 2) +
+  geom_rangeframe(sides = "lb") +
+  labs(title = "Encounter rate (speed)", x = "Rate (per step)", y = "Mean assemblages")
+
+p1 + p2
+```
+
+Hotspot energy exhibits the three-regime pattern (productive at 0.30). Encounter rate has no measurable effect (Kruskal-Wallis $H$ = `r kruskal.test(n_assemblages ~ condition, data = rate |> filter(session == 100))$statistic |> round(2)`, $p$ = `r kruskal.test(n_assemblages ~ condition, data = rate |> filter(session == 100))$p.value |> round(3)`). The three-regime universality extends to structural parameters but not speed parameters.
+
+# Discussion
+
+## Niche Partitioning from Minimal Mechanisms
+
+The tight-locality result is the paper's central contribution. A Hebbian substrate with no explicit competition rule, no fitness function, and no evolutionary algorithm spontaneously produces ecological niche partitioning: assemblages develop exclusive coupling to distinct energy sources. This occurs because spatial restriction of encounters creates functionally separate environments, forcing assemblages to specialize on whatever resource is locally available. The mechanism is consistent with Chesson's [-@chesson2000] stabilizing coexistence framework, though we note that a formal test of negative frequency dependence (measuring per-capita growth rates when rare) has not been conducted.
+
+This connects to the spatial competition literature. @tilman1994 demonstrated that spatial structure enables coexistence through competition-colonization tradeoffs, but this requires species to differ in competitive and colonization ability. Our result is closer to Hubbell's [-@hubbell2001] neutral theory in one respect --- the assemblages begin as functionally identical --- but diverges in the outcome: the tight-locality regime produces *functional differentiation* (different coupling profiles), which neutral theory does not predict. The Hebbian feedback loop ($\text{activity} \to \text{encounters} \to \text{stronger weights} \to \text{activity}$) amplifies initial spatial asymmetries into stable niche partitioning without any selection for differentiation.
+
+## Clone Coexistence at Broad Locality
+
+The broad-locality regime ($\ell \geq 0.20$) produces a qualitatively different form of coexistence. Assemblages that coexist in overlapping encounter zones are near-identical in their coupling profiles (similarity 0.80--0.88). They persist not because they occupy different niches but because the energy landscape is rich enough --- with multiple hotspots providing more total resource than any single assemblage can monopolize. This is abundance-mediated coexistence: the carrying capacity of the environment exceeds the demand of a single assemblage.
+
+This regime is ecologically less interesting but computationally informative. It reveals that the Hebbian feedback loop, when encounter zones overlap, acts as a *homogenizing* force: both assemblages converge to the same weight configuration because they experience the same input statistics. The passive mirror finding from @bean2026 manifests at the multi-assemblage level --- assemblages mirror their shared environment rather than differentiating.
+
+## Individuation Without Differenciation
+
+The coupling analysis provides the empirical foundation for a philosophical diagnosis: our system exhibits *individuation* without *differenciation* in the Deleuzian sense. Deleuze [-@deleuze1980] distinguishes between the emergence of distinct entities (individuation) and the emergence of distinct *kinds* (differenciation). Our substrate produces the former but not the latter.
+
+The reason is structural: the pre-individual field is *homogeneous*. One learning rule, one activation function, one decay rate, one encounter mechanism. A homogeneous substrate can individuate --- produce spatially distinct entities through symmetry-breaking under intensive difference --- but the individuals it produces are identical in kind. They are the same type of crystal growing at different nucleation sites.
+
+For genuine differenciation, the virtual must contain *internal multiplicity* --- competing differential relations whose actualization diverges [@delanda2002]. Computationally, this means the substrate needs heterogeneous dynamics: competing plasticity rules (Hebbian and anti-Hebbian), multiple timescales, or inhibitory connections that penalize correlated activity between assemblages. The anti-Hebbian decorrelation mechanism identified by @foldiak1990 --- where co-active units strengthen mutual inhibition --- provides exactly this: a second differential relation competing with Hebbian agreement. Anti-Hebbian dynamics instantiate intensive difference in Deleuze's sense because they do not merely decorrelate outputs but create an *asymmetric connector between heterogeneous series* --- each assemblage's activity becomes a force that pushes its neighbors toward different configurations, functioning as the dark precursor that relates differences to each other rather than reducing them to identity.
+
+## The Diagram: Topology vs. Rate
+
+The three-regime universality extends to every structural parameter tested across both papers but is absent from speed parameters (encounter rate, temporal frequency). Following @delanda2002, we interpret this as evidence that the growth-decay balance functions as a Deleuzian diagram in DeLanda's specific sense: a topological invariant of the phase space that determines what qualitative dynamics are possible, independent of how fast those dynamics unfold. We note that this is DeLanda's domestication of the concept rather than Deleuze's full notion, which implies generative force; our diagram describes recurrence, not novelty.
+
+## Limitations
+
+- **Threshold robustness**: Sensitivity analysis across 50th/75th/90th percentiles produces identical assemblage counts (bimodal weight distribution).
+- **Stability**: 500-session check at $\ell = 0.07$ confirms genuine equilibrium. The transition regime ($\ell = 0.15$) may contain slow monopolies not resolved at session 100.
+- **Hotspot geometry**: Positions follow a fixed pattern for $n \leq 4$ and a single random seed for $n > 4$. Robustness to random placement is untested.
+- **No functional differentiation beyond coupling**: Tight-locality assemblages couple to different hotspots but have identical internal dynamics (same weight magnitudes, same activation patterns within assemblage). The niche partitioning is in the *relationship to the environment*, not in the assemblages' own structure.
+
+# Conclusion
+
+Across 2,190+ simulations, we find that encounter locality controls not only whether coexistence is possible but what *kind* of coexistence emerges. At tight locality, assemblages develop genuinely different coupling profiles to the energy landscape --- niche partitioning produced by a substrate with no explicit competition, fitness, or evolutionary mechanism. At broad locality, coexisting assemblages are near-identical clones sustained by resource abundance rather than niche differentiation.
+
+This result places the system within the established framework of ecological coexistence theory: tight-locality coexistence is stabilizing in Chesson's sense (niche-mediated), while broad-locality coexistence is closer to Hubbell's neutral coexistence (identity-preserving through spatial structure). The Hebbian substrate spontaneously reproduces this ecological distinction, governed by a single parameter.
+
+The system exhibits individuation without differenciation. Spatial constraint forces assemblages to develop different environmental relationships, but the assemblages themselves remain structurally identical. This is the limit of what a homogeneous Hebbian substrate can achieve. Genuine differenciation --- the emergence of qualitatively different kinds from identical initial conditions --- requires heterogeneous dynamics: competing plasticity rules that penalize sameness and reward divergence. This connects the computational finding to both Deleuze's concept of the dark precursor (the intensive difference that forces divergent actualization) and the anti-Hebbian decorrelation literature in computational neuroscience --- a convergence that marks the natural direction for future work.
+
+# References
+
+::: {#refs}
+:::

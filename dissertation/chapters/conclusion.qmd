@@ -1,0 +1,183 @@
+# Conclusion
+
+## Summary of Contributions
+
+The Dark Forest programme demonstrates that functional differentiation in
+self-organising networks emerges from the interaction of four elements:
+spatial structure, Hebbian reinforcement, absorbing weight boundaries, and
+local homeostatic regulation. Remove any one and the system produces a less
+complex form of organisation.
+
+### Empirical contributions
+
+1. **Individuation is easy; differentiation is hard.** Pure Hebbian dynamics
+   produce spontaneous assemblage formation (Paper 1), and encounter locality
+   governs a sharp coexistence--monopoly phase transition (Paper 2). But
+   assemblages are structural clones, and the substrate is self-sealing
+   against every intervention within the Hebbian framework (Paper 3).
+
+2. **Local homeostasis breaks the barrier.** Per-node learning rate
+   adjustment toward local activity targets produces stable functional
+   differentiation (response rank $5.6$, $\eta$ divergence $F = 4.9$)
+   sustained over 1000 sessions with critical period dynamics (Paper 4).
+
+3. **Pruning suppresses the signal.** The standard pruning threshold
+   differentially eliminates soft-bounded edges, creating a disordinal
+   interaction with weight bounding strategy that distorted the programme's
+   central comparisons. Removing pruning reveals substantially stronger
+   functional diversity than originally measured (Paper 4S).
+
+4. **The hard clip is qualitatively irreducible.** No finite steepness of
+   soft saturation recovers hard clip behaviour. The hard boundary functions
+   as a Simondonian limit condition that scaffolds functional diversity
+   (Paper 4S).
+
+### Methodological contributions
+
+5. **CCD is spatially confounded.** Centroid cosine distance, widely used in
+   Hebbian network analysis, is indistinguishable from a spatial null
+   distribution. Response rank (SVD effective dimensionality) is the
+   appropriate functional metric.
+
+6. **Maintenance operations interact with self-organisation.** Any
+   computational model that removes weak connections may be destroying the
+   exploratory structure that enables functional diversity. This finding
+   generalises beyond the specific programme.
+
+### Philosophical contributions
+
+7. **Individuation without differenciation.** The programme provides an
+   experimental demonstration that Simondonian individuation and Deleuzian
+   differenciation come apart. The Hebbian substrate achieves the former
+   readily; the latter requires specific structural conditions (absorbing
+   boundaries, local regulation) and even then remains parametric.
+
+8. **The productive fracture.** The gap between differentiation (achieved)
+   and differenciation (not achieved) is precisely characterised as the
+   absence of rule-space expansion. This points toward what a
+   next-generation substrate would require.
+
+## Limitations
+
+The programme studies a specific substrate architecture (2D grid, Hebbian
+learning, hard weight clipping) and the findings may not generalise to all
+self-organising systems. The response rank metric, while an improvement over
+CCD, measures functional diversity within the substrate's existing dynamics
+and cannot detect capacities outside its vocabulary. The philosophical
+framework, while rigorously applied, involves interpretive choices that other
+readings of Simondon and Deleuze might contest.
+
+The 12\% assemblage yield for the eta ANOVA condition (6/50 seeds) indicates
+that multi-assemblage coexistence under hard weight + soft $\eta$ bounds is
+a rare dynamical regime. The effect is robust when present but does not
+represent the typical outcome.
+
+All experiments in the programme use regular two-dimensional lattices with
+von Neumann or distance-weighted connectivity. The coexistence--monopoly
+phase transition, the self-sealing timeline, the critical period dynamics,
+the steepness non-monotonicity, and the pruning confound may all be
+topology-dependent. The grid-size scaling law (the pruning interaction
+amplifies from $\Delta = 4.2$ at $15 \times 15$ to $\Delta = 14.5$ at
+$30 \times 30$) confirms that spatial scale matters but does not establish
+topology-independence. Testing on small-world, scale-free, and random
+geometric graph topologies is essential future work. The local homeostatic
+mechanism, which depends on spatial neighbours, may behave qualitatively
+differently when "local" is defined by graph distance rather than Euclidean
+distance on a lattice.
+
+## Broader Implications
+
+### Neurodevelopmental disorders
+
+The pruning-diversity interaction connects directly to the
+pruning-schizophrenia hypothesis. Sekar et al. (2016, *Nature*) identified
+complement component C4 gene variants as schizophrenia risk factors through
+their control of synaptic pruning rate. Yilmaz et al. (2021, *Nature
+Neuroscience*) confirmed that C4A overexpression reduces cortical synapse
+density. Our critical period finding (Exp 8fv) predicts that the *timing*
+of pruning relative to consolidation matters more than the amount ---
+excessive pruning during the critical period should be more damaging than
+the same pruning after consolidation. This is a testable clinical
+prediction.
+
+### Neural network compression
+
+The ML pruning fairness literature (Hooker et al. 2019; Tran et al. 2022)
+documents that compressed networks disproportionately lose rare-class
+performance. Our response rank metric could diagnose this as
+dimensionality collapse: measure the participation ratio of layer-wise
+responses before and after pruning. If pruned networks show rank collapse
+analogous to our substrate, this provides a mechanistic explanation and
+suggests pruning strategies that preserve representational diversity.
+
+### Immune repertoire maintenance
+
+T-cell homeostatic proliferation operates through mechanisms structurally
+isomorphic to our local homeostatic targets: clones compete in spatially
+structured niches, regulate toward local carrying capacity, and maintain
+diversity through hard activation thresholds. Immunosuppressive therapy
+destroying rare clonotypes parallels our pruning destroying weak
+assemblages. The programme's framework could inform models of immune
+repertoire maintenance and predict conditions under which therapeutic
+pruning destroys protective diversity.
+
+### The general principle
+
+Across every domain examined --- neural networks, metallurgy, ecology,
+markets, supply chains, immune systems --- removing weak elements from
+self-organising systems collapses functional diversity. The elements that
+single-metric optimisation identifies as "weak" are disproportionately the
+ones carrying inter-unit coupling that enables multi-dimensional response.
+This is a domain-general principle with the programme's disordinal
+interaction as its most precise computational demonstration.
+
+## Future Directions
+
+### Rule-space expansion
+
+The programme's central finding --- that differentiation remains parametric
+--- points directly toward the next research question. A substrate with
+*evolvable learning rules*, where assemblages can develop qualitatively
+different update dynamics, could bridge the gap between differentiation and
+differenciation. Candidates include neural network architectures with
+learnable activation functions, meta-learning systems, or developmental
+programmes with conditional gene expression analogs.
+
+### Pruning as a research programme
+
+The discovery that pruning interacts with self-organisation opens a broader
+investigation. Biological synaptic pruning during development is widely
+modelled as constructive (improving signal-to-noise ratio). The Dark Forest
+results suggest it may also be destructive for functional diversity. An
+experimental programme systematically varying pruning strategies
+(threshold-based, rank-based, activity-dependent, random) across different
+substrates could characterise this interaction in generality.
+
+### Scaling
+
+The grid-size scaling law (Paper 4S, $\Delta$ increasing from $4.2$ at
+$15 \times 15$ to $14.5$ at $30 \times 30$) suggests the pruning confound
+is more severe at larger scales. Whether the functional differentiation
+results (response rank $5.6$) scale similarly is an open question with
+implications for biologically realistic network sizes.
+
+### Non-lattice topologies
+
+The programme's substrate uses a regular 2D grid. Whether the findings ---
+particularly the local homeostatic mechanism and the critical period ---
+transfer to random geometric graphs, small-world networks, or
+scale-free topologies is unknown and would test the generality of the
+results.
+
+## Closing
+
+Self-organising networks on spatially structured substrates spontaneously
+produce functionally diverse assemblages through Hebbian reinforcement alone,
+but standard network maintenance systematically destroys this diversity by
+selectively removing the weak exploratory connections that distinguish one
+assemblage from another. Metaplasticity stabilises and amplifies this
+diversity. The result is a minimal model of how individuation emerges from
+homogeneous substrates: not through any single mechanism, but through the
+interaction of spatial structure, reinforcement dynamics, and adaptive
+learning rules, provided the maintenance regime does not destroy the
+evidence.

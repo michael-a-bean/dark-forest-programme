@@ -1,0 +1,278 @@
+---
+title: "Coexistence Without Differentiation: The Self-Sealing Dynamics of Hebbian Individuation"
+author:
+  - name: "Michael Bean"
+format:
+  html:
+    toc: true
+    code-fold: true
+    fig-width: 7
+    fig-height: 5
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+source("_setup.R")
+```
+
+## Abstract
+
+Papers 1 and 2 established that optimization-free Hebbian dynamics produce spatial individuation and coexistence through encounter locality, but assemblages remain qualitative clones — individuation without differenciation. We investigate whether temporal environmental variation, anti-Hebbian lateral inhibition, or artificially maintained cross-assemblage connectivity can produce functional differentiation. Cross-assemblage edges vanish within 15 sessions (median) across 840 simulations spanning 7 localities and 6 anti-Hebbian strengths (up to $10\times$ the Hebbian rate). When cross-assemblage edges are artificially maintained through continuous injection, two outcomes obtain: edges initialised at moderate-to-high weights are Hebbian-reinforced and absorbed into assemblages, producing monopoly; edges at near-threshold weights persist as cross-assemblage connections but produce no differentiation — anti-Hebbian decorrelation at these maintained connections *reduces* rather than increases assemblage divergence. Decay rate sensitivity analysis confirms that the coexistence regime occupies a narrow band ($\lambda = 0.002$) between network death and monopoly. Across 1,400 simulations and 196,000 observations, no parameter combination produces differentiation. We identify this as a *self-sealing* property of Hebbian individuation operating through two distinct mechanisms: topological isolation (cross-assemblage edges decay) and functional absorption (maintained cross-assemblage edges are co-opted into assemblage structure). This constitutes an empirical decomposition of Deleuze's distinction between individuation and differenciation: the Hebbian substrate achieves the former and is structurally incapable of the latter — not because assemblages cannot interact, but because interaction produces merger rather than difference.
+
+## Introduction
+
+Deleuze [-@deleuze1994] distinguished *individuation* — the emergence of discrete entities from a pre-individual field — from *differenciation* — the production of qualitative difference between those entities. Papers 1 and 2 in this series demonstrated that optimization-free Hebbian substrates achieve individuation readily: spatial encounter locality produces stable, modular assemblages around energy hotspots. But these assemblages are spatial clones, not qualitatively different entities. They occupy different regions of the grid but develop identical internal structure — what we will call *crystalline individuation*, following Simondon [-@simondon1958], who used crystallisation as the paradigm of physical individuation where the same mechanism resolves identically at every nucleation site. We invoke the crystal not as a model of the individuation *process* — our assemblages nucleate independently rather than propagating from a seed — but as a characterisation of the *result*: identical structure everywhere, with no residual metastability for further individuation.
+
+This matters for artificial life and the philosophy of emergent agency. If the substrate can only produce copies — individuation without differenciation — then it cannot generate the heterogeneous ecology that characterises biological systems. The question is whether supplementary mechanisms can break the symmetry that produces cloning, or whether the Hebbian substrate is structurally incapable of differenciation.
+
+We test three interventions, escalating in strength:
+
+1. **Temporal environmental variation** — hotspot configurations alternate on a fixed period, inspired by Kashtan and Alon's [-@kashtan2005] modularity-under-variation prediction.
+
+2. **Anti-Hebbian lateral inhibition** — cross-assemblage connections are weakened when endpoints co-activate [@foldiak1990], at strengths up to $10\times$ the Hebbian learning rate.
+
+3. **Artificially maintained cross-assemblage edges** — testing whether the obstacle is topological (edges don't exist) or functional (edges exist but don't produce differentiation).
+
+All three fail, but for different reasons. The substrate is *self-sealing* through two mechanisms: topological isolation (cross-assemblage edges decay to zero) and functional absorption (when edges are maintained, they are co-opted into assemblage structure, producing merger rather than differentiation). The finding is not merely that differentiation does not occur, but that the conditions required for it are structurally incompatible with Hebbian dynamics.
+
+## Background: Hebbian Learning and the PCA Fixed Point
+
+Hebbian learning strengthens connections between co-active nodes: $\Delta w_{ij} = \eta \cdot a_i \cdot a_j$. In the continuous case, this drives the weight vector toward the principal eigenvector of the input correlation matrix [@oja1982]. When multiple assemblages receive qualitatively similar input — energy from hotspots, modulated by Gaussian noise — they converge to the same eigenvector. This is why assemblages are clones: the learning rule is symmetric with respect to assemblage identity.
+
+Anti-Hebbian learning [@foldiak1990] weakens connections between co-active nodes in different populations: $\Delta w_{ij} = -\alpha \cdot a_i \cdot a_j$ for cross-population edges. In biological neural circuits, this produces decorrelation and functional specialisation. But it requires persistent connections between populations to operate on — and, as we will show, it requires those connections to carry a particular kind of signal.
+
+The critical question is whether cross-assemblage connections can persist in a Hebbian substrate with weight decay ($\lambda$ per step), and if so, whether they can carry a decorrelation signal rather than being absorbed into the correlation structure of adjacent assemblages.
+
+In Deleuze's [-@deleuze1994] terms, the question is whether the substrate supports two kinds of repetition. *Bare repetition* reproduces instances of an identical type — each assemblage is another token of the same structure. *Complex repetition* produces novelty through the internal difference of the repeating process itself. Our substrate, as we will show, is trapped in bare repetition: every assemblage converges to the same attractor, and every attempt to introduce difference is either ignored (topological isolation) or absorbed into sameness (functional absorption).
+
+## Methods
+
+### Temporal Field Substrate
+
+We extend the MultiField substrate from Papers 1--2 with three mechanisms:
+
+1. **Config switching**: Two hotspot configurations alternate every $T = 50$ steps. Configuration A: $(0.2, 0.3)$, $(0.8, 0.3)$, $(0.5, 0.8)$; Configuration B: $(0.2, 0.3)$, $(0.3, 0.7)$, $(0.7, 0.7)$. One position is shared, two differ.
+
+2. **Anti-Hebbian decorrelation**: Every 50 steps, assemblages are re-detected via connected components in the strong-edge subgraph. For cross-assemblage edges: $\Delta w_{ij} = -\alpha \cdot a_i \cdot a_j$.
+
+3. **Edge injection with controlled initialisation**: At each step, up to $k$ new edges are created between randomly selected nodes in different assemblages, initialised at weight $w_0 \in \{10^{-4}, 0.1, 1.0\}$. This tests whether the obstacle to differentiation is the absence of cross-assemblage edges or their inability to carry a differentiation signal.
+
+All other dynamics are unchanged from Paper 2. Grid: $20 \times 20$ (400 nodes). Encounter locality $\sigma = 0.10$. Weight decay $\lambda = 0.002$/step. Pruning threshold $10^{-4}$.
+
+**Note on pruning (added in revision).** The self-sealing timeline reported below (median 14 sessions) is measured under the standard pruning regime. Paper 4S demonstrates that the $10^{-4}$ threshold actively removes weak edges, which accelerates the decay of cross-assemblage connections. Without pruning, the analytical argument (zero expected Hebbian reinforcement for cross-assemblage edges due to uncorrelated activations) predicts self-sealing will still occur, but the timeline may be longer. Paper 4S also shows that CCD is indistinguishable from a spatial null distribution ($p = 1.0$). Since this paper's conclusion is that differentiation *fails*---CCD values are low---the CCD invalidity reinforces rather than undermines the finding.
+
+### Metrics
+
+**Cross-assemblage edge count**: Edges connecting nodes in different assemblages. The primary diagnostic.
+
+**Weight modularity** ($M$): Within-assemblage weight mass divided by total weight mass.
+
+**Centroid cosine distance**: Mean pairwise cosine distance between assemblage centroid weight vectors. 0 = clones, 1 = orthogonal. Replaces the classifier-based metric from preliminary analysis, which was ill-posed at the observed assemblage sizes (3--11 nodes in 400-dimensional weight space).
+
+Assemblage detection uses connected components in the strong-edge subgraph (edges above the 75th percentile of absolute weight). A sensitivity analysis across 50th, 75th, and 90th percentile thresholds (210 runs) produces identical assemblage counts ($\pm 0.1$), confirming that the bimodal weight distribution (most edges near 0 or $\pm w_{\max}$) makes detection robust to threshold choice.
+
+### Experimental Design
+
+**Experiment 1** (Locality $\times$ Anti-Hebbian): 7 localities $\in \{0.08, \ldots, 0.20\}$ $\times$ 6 anti-Hebbian strengths $\in \{0, \ldots, 0.50\}$ $\times$ 20 seeds = 840 simulations $\times$ 200 sessions. Maps the parameter space and establishes the self-sealing timeline.
+
+**Experiment 2** (Edge Injection): 3 initialisation weights $\in \{10^{-4}, 0.1, 1.0\}$ $\times$ 2 injection rates $\in \{0, 10\}$/step $\times$ 3 anti-Hebbian strengths $\times$ 20 seeds = 360 simulations $\times$ 50 sessions at $\sigma = 0.10$. Tests whether maintained cross-assemblage connectivity enables differentiation.
+
+**Experiment 3** (Decay Sensitivity): 5 decay rates $\in \{0.0005, \ldots, 0.01\}$ $\times$ 2 anti-Hebbian strengths $\times$ 20 seeds = 200 simulations $\times$ 50 sessions. Tests whether the self-sealing result is sensitive to the decay parameter.
+
+Total: 1,400 simulations producing 196,000 session-level observations, distributed across a 68-CPU Ray cluster.
+
+## Results
+
+### Cross-Assemblage Edges Vanish Within 15 Sessions
+
+```{r edge-trajectory, fig.cap="Cross-assemblage edges vanish within 15 sessions at σ=0.10. The median self-sealing completion session is 14 (range: 3–23)."}
+d1 <- read_experiment("r1_locality_alpha")
+
+d1_traj <- d1 |>
+  filter(locality == 0.10, anti_hebbian_strength == 0.0, session <= 30) |>
+  group_by(session) |>
+  summarise(
+    mean_cross = mean(cross_assemblage_edges),
+    se_cross = sd(cross_assemblage_edges) / sqrt(n()),
+    .groups = "drop"
+  )
+
+ggplot(d1_traj, aes(x = session)) +
+  geom_ribbon(aes(ymin = mean_cross - se_cross, ymax = mean_cross + se_cross),
+              fill = pal[2], alpha = 0.3) +
+  geom_line(aes(y = mean_cross), color = pal[2], linewidth = 1) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey50") +
+  labs(x = "Session", y = "Cross-assemblage edges",
+       title = "Cross-assemblage connectivity collapses within 15 sessions",
+       subtitle = "σ = 0.10, α = 0, 20 seeds. Mean ± SE. Median seal at session 14.")
+```
+
+At $\sigma = 0.10$ (the coexistence regime from Paper 2), cross-assemblage edges decline from 196 at session 1 to 15.8 at session 10 to near-zero by session 15. The median self-sealing completion session across all 840 Experiment 1 simulations is 14 (range: 3--23). At steady state, 1.1% of observations show transient non-zero cross-assemblage edges (max = 16), reflecting rare stochastic fluctuations rather than sustained connectivity.
+
+```{r cross-heatmap, fig.cap="Mean cross-assemblage edges at steady state across locality × anti-Hebbian strength. Near-zero everywhere."}
+d1_late <- d1 |>
+  filter(session > 150) |>
+  group_by(locality, anti_hebbian_strength) |>
+  summarise(mean_cross = mean(cross_assemblage_edges), .groups = "drop")
+
+ggplot(d1_late, aes(x = factor(locality), y = factor(anti_hebbian_strength),
+                    fill = mean_cross)) +
+  geom_tile(color = "white", linewidth = 0.5) +
+  geom_text(aes(label = sprintf("%.1f", mean_cross)), size = 3) +
+  scale_fill_gradient(low = "white", high = pal[2], name = "Cross-asm\nedges",
+                      limits = c(0, 2)) +
+  labs(x = "Encounter locality (σ)", y = "Anti-Hebbian strength (α)",
+       title = "Near-zero cross-assemblage edges at all parameter combinations",
+       subtitle = "Sessions 150–200, 20 seeds per cell")
+```
+
+This pattern is universal across the parameter space. Anti-Hebbian decorrelation at strengths up to $\alpha = 0.50$ ($10\times$ the Hebbian learning rate) has no effect because cross-assemblage edges have already vanished.
+
+The mechanism is analytically predictable. An edge between nodes in different assemblages at locality $\sigma = 0.10$ receives expected Hebbian reinforcement $\eta \cdot E[a_i \cdot a_j] \approx 0$ (since activations are driven by uncorrelated local energy sources), while decay is deterministic at rate $\lambda = 0.002$/step. The edge dies with probability approaching 1 within $\sim$$\ln(w_0 / 10^{-4}) / \lambda \cdot 300$ sessions.
+
+### The Coexistence-Monopoly Gradient
+
+```{r coexistence-gradient, fig.cap="Assemblage count and largest assemblage size across locality."}
+d1_coex <- d1 |>
+  filter(session > 150, anti_hebbian_strength == 0.0) |>
+  group_by(locality) |>
+  summarise(
+    mean_n = mean(n_assemblages), se_n = sd(n_assemblages) / sqrt(n()),
+    mean_larg = mean(largest_assemblage), se_larg = sd(largest_assemblage) / sqrt(n()),
+    .groups = "drop")
+
+p1 <- ggplot(d1_coex, aes(x = locality, y = mean_n)) +
+  geom_pointrange(aes(ymin = mean_n - se_n, ymax = mean_n + se_n), color = pal[3]) +
+  geom_line(color = pal[3]) +
+  labs(x = "Locality (σ)", y = "Assemblage count", title = "Coexistence declines with locality")
+p2 <- ggplot(d1_coex, aes(x = locality, y = mean_larg)) +
+  geom_pointrange(aes(ymin = mean_larg - se_larg, ymax = mean_larg + se_larg), color = pal[5]) +
+  geom_line(color = pal[5]) +
+  labs(x = "Locality (σ)", y = "Largest assemblage", title = "Monopoly increases with locality")
+p1 + p2
+```
+
+Tight locality ($\sigma \leq 0.10$): 5+ assemblages coexist, each containing 3--58 nodes. Broad locality ($\sigma \geq 0.16$): 1--2 assemblages, trending toward monopoly.
+
+### Edge Injection: Absorption Rather Than Differentiation
+
+```{r injection-cross, fig.cap="Cross-assemblage edges at steady state by initialisation weight. Only near-threshold initialisation (w₀ = 10⁻⁴) maintains cross-assemblage edges; higher weights cause absorption into assemblages."}
+d2 <- read_experiment("r2b_lean")
+
+d2_late <- d2 |>
+  filter(session > 40, inject_cross_edges == 10, anti_hebbian_strength == 0.0) |>
+  group_by(inject_init_weight) |>
+  summarise(
+    mean_cross = mean(cross_assemblage_edges),
+    se_cross = sd(cross_assemblage_edges) / sqrt(n()),
+    mean_nasm = mean(n_assemblages),
+    mean_edges = mean(n_edges),
+    .groups = "drop")
+
+ggplot(d2_late, aes(x = factor(inject_init_weight), y = mean_cross)) +
+  geom_col(fill = pal[2], alpha = 0.7) +
+  geom_errorbar(aes(ymin = mean_cross - se_cross, ymax = mean_cross + se_cross), width = 0.2) +
+  labs(x = "Initialisation weight (w₀)", y = "Cross-assemblage edges at steady state",
+       title = "Only near-threshold edges survive as cross-assemblage connections",
+       subtitle = "inject = 10/step, α = 0, sessions 40–50")
+```
+
+The edge injection experiment reveals a critical asymmetry:
+
+- **$w_0 = 10^{-4}$** (near pruning threshold): 17.3 cross-assemblage edges persist, with 1.4 assemblages. Edges are too weak to trigger Hebbian reinforcement, so they maintain their cross-assemblage identity.
+- **$w_0 = 0.1$**: Zero cross-assemblage edges, 1.0 assemblages (monopoly). Moderate-weight edges are strong enough to propagate activity across assemblages, triggering Hebbian reinforcement that *absorbs* the edge into the receiving assemblage.
+- **$w_0 = 1.0$**: Zero cross-assemblage edges, 1.0 assemblages (monopoly), 2,037 total edges. Full-strength edges immediately bridge assemblages, causing complete merger.
+
+This is the key finding: **maintained cross-assemblage edges do not produce differentiation. They produce merger.** The Hebbian substrate cannot sustain connections between assemblages that carry a differentiation signal — any connection strong enough to influence dynamics is strong enough to be absorbed.
+
+```{r injection-antihebb, fig.cap="Anti-Hebbian effect on centroid distance with maintained cross-assemblage edges. Stronger anti-Hebbian *reduces* differentiation."}
+d2_ah <- d2 |>
+  filter(session > 40, inject_cross_edges == 10, inject_init_weight == 0.0001) |>
+  group_by(anti_hebbian_strength) |>
+  summarise(
+    mean_cdist = mean(centroid_cosine_distance),
+    se_cdist = sd(centroid_cosine_distance) / sqrt(n()),
+    mean_cross = mean(cross_assemblage_edges),
+    .groups = "drop")
+
+ggplot(d2_ah, aes(x = factor(anti_hebbian_strength))) +
+  geom_col(aes(y = mean_cdist), fill = pal[5], alpha = 0.7) +
+  geom_errorbar(aes(ymin = mean_cdist - se_cdist, ymax = mean_cdist + se_cdist), width = 0.2) +
+  labs(x = "Anti-Hebbian strength (α)", y = "Centroid cosine distance",
+       title = "Anti-Hebbian reduces differentiation, not increases it",
+       subtitle = "w₀ = 10⁻⁴, inject = 10/step. Higher α → more similar assemblages.")
+```
+
+When cross-assemblage edges are maintained at near-threshold weight ($w_0 = 10^{-4}$), anti-Hebbian decorrelation *reduces* centroid cosine distance rather than increasing it: from 0.332 at $\alpha = 0$ to 0.211 at $\alpha = 0.10$ to 0.065 at $\alpha = 0.50$. The anti-Hebbian force weakens the few surviving cross-assemblage edges further, reducing inter-assemblage communication and pushing assemblages toward identical isolation — the opposite of the intended effect.
+
+### Decay Sensitivity
+
+```{r decay, fig.cap="Network survival across decay rates. The coexistence regime occupies a narrow band."}
+d4 <- read_experiment("r4_lean")
+d4_late <- d4 |>
+  filter(session > 40, anti_hebbian_strength == 0.0) |>
+  group_by(lam) |>
+  summarise(
+    mean_edges = mean(n_edges), mean_nasm = mean(n_assemblages),
+    mean_cross = mean(cross_assemblage_edges), .groups = "drop")
+
+p3 <- ggplot(d4_late, aes(x = factor(lam), y = mean_edges)) +
+  geom_col(fill = pal[3], alpha = 0.7) +
+  labs(x = "Decay rate (λ)", y = "Total edges", title = "Network survival vs decay")
+p4 <- ggplot(d4_late, aes(x = factor(lam), y = mean_nasm)) +
+  geom_col(fill = pal[4], alpha = 0.7) +
+  labs(x = "Decay rate (λ)", y = "Assemblage count", title = "Coexistence vs decay")
+p3 + p4
+```
+
+The coexistence regime is confined to a narrow decay band. At $\lambda \leq 0.001$: networks survive with 1,400+ edges but only 1.1 assemblages (monopoly). At $\lambda = 0.002$: 114 edges, 5.3 assemblages (coexistence). At $\lambda \geq 0.005$: zero edges (network death). Cross-assemblage edges are near-zero at all decay rates. The coexistence regime occupies a single tested value ($\lambda = 0.002$), suggesting this may represent a critical point rather than a broad topological invariant — the "diagram" of the growth-decay balance identified in Paper 1 operates over a narrower parameter range than previously appreciated.
+
+## Discussion
+
+### Two Mechanisms of Self-Sealing
+
+The self-sealing property operates through two distinct mechanisms, revealed by the edge injection experiment:
+
+**Topological isolation** (Experiment 1): In the natural dynamics, cross-assemblage edges decay to zero within 15 sessions because nodes in spatially separated assemblages are not co-active. Expected Hebbian reinforcement is $\eta \cdot E[a_i \cdot a_j] \approx 0$ for cross-assemblage pairs, while decay is deterministic. This is analytically predictable from the learning rule and confirms what Oja [-@oja1982] established for the continuous case: Hebbian dynamics converge to the dominant eigenvector of the local correlation matrix.
+
+**Functional absorption** (Experiment 2): When cross-assemblage edges are artificially maintained at moderate-to-high weights ($w_0 \geq 0.1$), they do not produce differentiation. Instead, they propagate activity between assemblages, triggering Hebbian reinforcement that incorporates the cross-assemblage edge into the receiving assemblage's correlation structure. The result is merger, not differentiation. Only edges maintained at near-threshold weights ($w_0 = 10^{-4}$) preserve their cross-assemblage identity, but these are too weak to carry any differentiation signal — and anti-Hebbian decorrelation at these edges makes assemblages *more* similar, not less.
+
+This dual mechanism constitutes a self-sealing dilemma: edges strong enough to carry a signal are strong enough to be absorbed; edges weak enough to resist absorption are too weak to carry a signal. There is no intermediate regime.
+
+### Structural Incompatibility of Coexistence and Interaction
+
+The results reveal a structural incompatibility in the Hebbian substrate. Three conditions are jointly required for differentiation: (1) multiple assemblages (coexistence), (2) cross-assemblage connectivity (interaction), and (3) connections that carry decorrelation rather than correlation signals. Our experiments show these cannot be simultaneously satisfied:
+
+- Tight locality ($\sigma \leq 0.10$) achieves condition 1 but not 2: assemblages coexist in topological isolation.
+- Edge injection at high weight achieves condition 2 but destroys condition 1: connections produce merger, not coexistence.
+- Edge injection at near-threshold weight achieves conditions 1 and 2 but not 3: connections persist but carry no decorrelation signal, and anti-Hebbian makes them weaker.
+- Low decay ($\lambda \leq 0.001$) achieves condition 2 but destroys condition 1: more edges survive, but assemblages merge into monopoly.
+
+This incompatibility is not parametric — it is structural. No combination of locality, anti-Hebbian strength, injection rate, injection weight, or decay rate within the tested ranges satisfies all three conditions.
+
+### Crystalline Individuation and Bare Repetition
+
+Our substrate exhibits what Simondon [-@simondon1958] called crystalline individuation: the metastable field resolves itself identically at every nucleation site through a single mechanism. Unlike biological individuation, which maintains internal metastability and resolves tensions differently in different regions, the Hebbian substrate exhausts its pre-individual potential during individuation, retaining none for transindividual relation. Assemblages cannot enter into relations with each other because the Hebbian mechanism that built them also sealed them.
+
+In Deleuze's [-@deleuze1994] terms, the substrate is trapped in *bare repetition* — the repetition of the Same, where each assemblage is another token of an identical type. Bare repetition is governed by the logic of identity: co-activation statistics are identical across assemblages because the input structure (local energy from hotspots) is qualitatively identical, and the learning rule treats all co-activations identically. There is no internal mechanism to produce *complex repetition* — repetition that generates novelty through the internal difference of the process itself.
+
+The three-paper arc maps onto this distinction. Paper 1 established that the substrate traces its input (passive mirroring). Paper 2 showed that it individuates through bare repetition — producing identical assemblages at different spatial locations. Paper 3 reveals that bare repetition is the *only* mode available: the self-sealing property ensures that complex repetition — interaction between assemblages that could produce genuine difference — is structurally precluded. The system undergoes one symmetry-breaking event (from homogeneous field to assemblages) but lacks the capacity for a second bifurcation [@delanda2002], because the first seals the conditions for further symmetry-breaking.
+
+### What Would Break the Self-Seal
+
+The self-sealing property depends on two features of the substrate: (1) the homogeneity of the learning rule, and (2) the correlation structure of Hebbian reinforcement. Breaking either could enable differentiation:
+
+- **Heterogeneous learning rules**: Different plasticity rules at different locations would produce different convergence points — the Deleuzian requirement for multiple differential relations in the virtual [@deleuze1994].
+- **BCM sliding threshold** [@bienenstock1982]: Activity-dependent thresholds could maintain cross-assemblage interaction by preventing high-activity assemblages from absorbing everything.
+- **Homeostatic plasticity** [@turrigiano2004]: Target activity levels would prevent the sparse network death at tight locality and the monopoly at broad locality.
+- **Architectural heterogeneity**: Pre-existing structural differences between locations would provide initial conditions that Hebbian learning could amplify rather than erase.
+
+Each corresponds to a mechanism present in biological neural circuits but absent from our minimal substrate. The self-sealing result identifies precisely what is missing: not a stronger decorrelation force, but a mechanism that maintains the structural conditions for interaction while preventing absorption.
+
+## Conclusion
+
+We tested three mechanisms for producing differentiation in optimization-free Hebbian substrates: temporal environmental variation, anti-Hebbian lateral inhibition, and artificially maintained cross-assemblage connectivity. None succeeded. The substrate self-seals through two mechanisms: topological isolation (cross-assemblage edges decay within 15 sessions) and functional absorption (maintained edges produce merger, not differentiation). These constitute a dilemma with no intermediate regime: edges strong enough to carry a signal are absorbed; edges weak enough to resist absorption carry no signal.
+
+This is an empirical decomposition of Deleuze's distinction between individuation and differenciation. The Hebbian substrate achieves crystalline individuation — identical structure at every nucleation site, bare repetition of the Same — while being structurally incapable of complex repetition that produces difference. Breaking this self-seal requires not stronger parameters but different mechanisms: heterogeneous learning rules, homeostatic regulation, or architectural symmetry-breaking. This is the boundary of what correlation-based learning can achieve alone.
+
+## References

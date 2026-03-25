@@ -1,0 +1,36 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "The Dark Forest: Individuation, Coexistence, and Differentiation in Self-Organising Hebbian Networks"
+  author: "Michael Bean"
+  date: "2026"
+  chapters:
+    - index.qmd
+    - chapters/introduction.qmd
+    - chapters/methods.qmd
+    - part: "Papers"
+      chapters:
+        - chapters/paper1-summary.qmd
+        - chapters/paper2-summary.qmd
+        - chapters/paper3-summary.qmd
+        - chapters/paper4-summary.qmd
+        - chapters/paper4s-summary.qmd
+    - chapters/synthesis.qmd
+    - chapters/conclusion.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    toc: true
+    theme: cosmo
+    code-fold: true
+  pdf:
+    documentclass: scrreprt
+    papersize: a4
+    fontsize: 11pt
+    margin-left: 3cm
+    margin-right: 2.5cm

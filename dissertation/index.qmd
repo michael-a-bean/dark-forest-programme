@@ -1,0 +1,23 @@
+# Preface {.unnumbered}
+
+This dissertation comprises four papers and one methodological supplement,
+produced between 2025 and 2026 as part of the Dark Forest research programme.
+Each paper was written as a self-contained contribution to *Artificial Life*,
+but together they form a cumulative argument about how functional complexity
+emerges from structurally simple substrates.
+
+The programme proceeds through five stages: individuation (Paper 1),
+coexistence (Paper 2), the self-sealing barrier (Paper 3), metaplastic
+differentiation (Paper 4), and the methodological reckoning that revealed a
+pruning confound and strengthened the programme's conclusions (Paper 4S).
+
+The chapters that follow provide the connecting narrative. Chapter 1
+introduces the research question and philosophical framework. Chapter 2
+describes the shared computational methods. Chapters 3--7 present the five
+papers with contextual commentary. Chapter 8 synthesises the cross-cutting
+themes, and Chapter 9 concludes with directions for future work.
+
+All simulation code, experimental data, and analysis scripts are available
+in the four programme repositories. The experimental programme comprises
+approximately 15,000 simulation jobs producing over 3 million session-level
+observations, executed on a distributed Ray cluster.

@@ -1,0 +1,25 @@
+# Paper 1: Emergent Structure in Optimization-Free Hebbian Networks
+
+## Context
+
+This paper establishes the baseline: what does a pure Hebbian substrate
+produce without any additional mechanisms?
+
+## Key Findings
+
+**Three dynamical regimes.** The ratio $\eta / \lambda$ governs dissolution,
+productive, and saturation regimes. Paper 4S later showed the saturation
+regime is an artifact of hard weight clipping.
+
+**Spontaneous individuation.** Coherent assemblages emerge from noise through
+Hebbian reinforcement alone. No optimisation is required.
+
+**Multiplicity is unstable.** Transient multi-individuation converges to
+monopoly by session 27. Paper 4S showed this is accelerated by pruning;
+without pruning, 4--6 assemblages persist.
+
+## Contribution
+
+Demonstration that optimisation-free Hebbian dynamics suffice for structural
+self-organisation. The three-regime structure provides the parameter space
+for all subsequent experiments.

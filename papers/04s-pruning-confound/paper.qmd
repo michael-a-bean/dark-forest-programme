@@ -1,0 +1,475 @@
+---
+title: "Pruning as Confound: How Maintenance Processes Obscure Functional Diversity in Self-Organising Networks"
+subtitle: "Weight Pruning, Metric Confounds, and the Conditions for Functional Differentiation"
+author:
+  - name: Michael Bean
+    affiliation: Independent Researcher
+format:
+  html:
+    toc: true
+    code-fold: true
+    fig-width: 7
+    fig-height: 5
+bibliography: references.bib
+---
+
+```{r setup, include=FALSE}
+source("_setup.R")
+fig_dir <- file.path(getwd(), "figures")
+meta_data <- file.path(dirname(dirname(getwd())), "..", "dark-forest-metaplastic", "data")
+
+bound_colours <- c("hard"="#E63946", "tanh"="#457B9D", "oja"="#E9C46A")
+bound_labels <- c("hard"="Hard clip", "tanh"="Tanh", "oja"="Oja")
+```
+
+## Abstract
+
+Papers 1--4 of this programme studied Hebbian self-organisation under a
+standard network maintenance regime: edges with absolute weight below a
+pruning threshold ($10^{-4}$) are removed each step. This maintenance
+operation interacts disordinally with weight bounding strategy. Under
+pruning, hard-clipped substrates produce 3.9 assemblages while tanh-bounded
+substrates produce 0.2. Disabling pruning reverses the ranking: tanh
+produces 7.0, hard clip 5.6. The interaction amplifies with network scale
+(15$\times$15: $\Delta=4.2$; 30$\times$30: $\Delta=14.5$) and is
+independent of edge-cap mechanism (identical results at caps of 5k, 10k,
+20k, 50k, and unlimited). The centroid cosine distance metric is
+indistinguishable from a spatial null ($p = 1.0$, 1000 permutations). A
+deconfounded response protocol using uniform stimuli reveals response rank
+$5.6$ (participation ratio $2.2$; robust across SVD thresholds from $0.1\%$
+to $10\%$). No-pruning replications show pruning actively destroyed
+functional differentiation: rank rises from $1.0$ (pruned) to $5.6$
+(no-prune) even without metaplasticity. The hard clip is qualitatively
+irreducible---no finite steepness recovers its behaviour---functioning as a
+limit condition^[In Simondon's [-@simondon2020individuation] terminology: a
+*condition limite* that constrains the space of possible individuations,
+distinct from both a *moule* (mould, which imposes form) and a *germe
+structural* (structural germ, which templates form through propagation).]
+that scaffolds diversity emerging from Hebbian dynamics on spatially
+structured substrates.
+
+
+## Introduction
+
+The Dark Forest research programme studies how self-organising Hebbian
+networks produce individuation---the emergence of distinct, persistent
+assemblages from homogeneous initial conditions. Papers 1--3 established
+that individuation occurs readily under hard weight clipping
+($w = \text{clip}(w, -w_\text{max}, w_\text{max})$), with
+locality-dependent coexistence, self-sealing, and structural persistence.
+Paper 4 introduced metaplasticity (per-node learning rates with homeostatic
+adjustment) and demonstrated that local homeostatic targets stabilise
+functional differentiation.
+
+Throughout the programme, a standard maintenance operation---pruning edges
+below $|w| < 10^{-4}$---was applied without systematic variation. This
+paper demonstrates that pruning is not neutral housekeeping. It is an active
+structural intervention that interacts with weight bounding strategy in ways
+that distort the programme's central comparisons. Recent work in deep
+network compression has established that pruning disproportionately harms
+underrepresented classes [@hooker2019compressed; @tran2022pruning], with
+clinical consequences in medical imaging [@holste2023pruning] and
+measurable subgroup disparities of up to 90\% [@lin2022fairgrape]. Our
+findings extend this pattern to self-organising substrates where no
+external training signal exists: the weak connections destroyed by pruning
+are not noise obscuring pre-existing structure but the differentiation
+mechanism itself.
+
+The pruning threshold functions as an unintended *mould* in Simondon's
+sense [@simondon2020individuation]: an external constraint that imposes
+form by selectively eliminating the weak exploratory connections through
+which soft-bounded substrates organise. Removing this mould reveals that
+soft bounds produce more assemblages than hard bounds, that the programme's
+primary differentiation metric (CCD) is spatially confounded, and that
+pruning was suppressing genuine functional diversity. The hard weight clip,
+by contrast, functions as a *limit condition*: a boundary that constrains
+the dynamics without imposing specific form, creating the structural
+scaffold on which functional diversity develops.
+
+
+## Results
+
+### The hard clip is qualitatively irreducible
+
+We parameterised the bounding function as $w_\text{max} \cdot \tanh(k
+\cdot w / w_\text{max})$, sweeping steepness $k$ from 1 (standard tanh) to
+50 (near-hard) with pruning disabled ($n = 20$ seeds, 100 sessions,
+locality $= 0.10$).
+
+```{r fig-steepness, fig.cap="Fig. 1: Non-monotonic steepness result. Both the softest bound (k=1) and the hard clip produce multiple assemblages. Intermediate steepness (k=2--50) produces monopoly.", fig.width=7, fig.height=5}
+d7b <- read_experiment("exp7b_steepness_noprune")
+d2b <- read_experiment("exp2b_baseline_noprune")
+
+if (!is.null(d7b) && !is.null(d2b)) {
+  d7b_final <- d7b |>
+    filter(session == max(session)) |>
+    group_by(steepness) |>
+    summarise(asm = mean(n_assemblages), se = sd(n_assemblages)/sqrt(n()), .groups = "drop")
+
+  hard_ref <- d2b |>
+    filter(session == max(session), bound_type == "hard") |>
+    summarise(asm = mean(n_assemblages), se = sd(n_assemblages)/sqrt(n()))
+
+  ggplot(d7b_final, aes(x = steepness, y = asm)) +
+    geom_line(linewidth = 0.8, colour = "#457B9D") +
+    geom_point(size = 2.5, colour = "#457B9D") +
+    geom_errorbar(aes(ymin = asm - se, ymax = asm + se), width = 0.08, colour = "#457B9D") +
+    geom_hline(yintercept = hard_ref$asm, linetype = "dashed", colour = "#E63946", linewidth = 0.6) +
+    annotate("text", x = 30, y = hard_ref$asm + 0.3, label = "Hard clip", colour = "#E63946", size = 3.5) +
+    scale_x_log10(breaks = c(1, 2, 3, 5, 10, 20, 50)) +
+    labs(x = "Steepness k (log scale)", y = "Assemblages (no pruning)") +
+    theme(panel.grid.minor = element_blank())
+}
+```
+
+The result is non-monotonic (Fig. 1). At $k = 1$ (tanh): 6.0 assemblages
+with $\bar{w} = 0.005$ and low activity ($0.053$). At $k \geq 1.5$:
+weights saturate ($\bar{w} \approx 1.0$), activity rises to $0.57$, and
+competitive exclusion drives the system toward monopoly ($1.0$--$1.8$
+assemblages). The hard clip ($4.9$ assemblages) is not recovered at any
+finite steepness. The sharp transition at $k = 1.5$ corresponds to the
+onset of weight saturation (0\% to 86\% of edges above $0.95 w_\text{max}$)
+and a tenfold increase in mean activation.
+
+
+### The pruning confound: a disordinal interaction
+
+We tested the pruning--bound-type interaction with a $2 \times 3$ factorial
+design: pruning on (threshold $10^{-4}$) or off (threshold $10^{-8}$),
+crossed with three weight bounding strategies (hard clip, tanh, oja;
+sigmoid omitted as it is identical to tanh to $\geq 4$ decimal places).
+Each cell: $n = 30$ seeds, 200 sessions, locality $= 0.10$.
+
+```{r fig-factorial, fig.cap="Fig. 2: Disordinal interaction between pruning and bound type (n=30 per cell). With pruning, hard clip dominates. Without pruning, tanh and oja produce more assemblages.", fig.width=8, fig.height=5}
+dF <- read_experiment("expF_factorial")
+if (!is.null(dF)) {
+  dF_final <- dF |>
+    filter(session == max(session), bound_type != "sigmoid") |>
+    mutate(prune_label = ifelse(prune_on, "Pruned (1e-4)", "No pruning")) |>
+    group_by(bound_type, prune_label) |>
+    summarise(asm = mean(n_assemblages), se = sd(n_assemblages)/sqrt(n()), .groups = "drop")
+
+  ggplot(dF_final, aes(x = bound_type, y = asm, fill = prune_label)) +
+    geom_col(position = position_dodge(0.8), width = 0.7, alpha = 0.85) +
+    geom_errorbar(aes(ymin = asm - se, ymax = asm + se),
+                  position = position_dodge(0.8), width = 0.2) +
+    scale_fill_manual(values = c("Pruned (1e-4)" = "#264653", "No pruning" = "#2A9D8F")) +
+    scale_x_discrete(labels = bound_labels) +
+    labs(x = "Weight bound type", y = "Assemblages at session 200",
+         fill = "Pruning regime") +
+    theme(legend.position = "bottom")
+}
+```
+
+The interaction is disordinal (Fig. 2). Under pruning, hard clip produces
+$3.9 \pm 2.1$ assemblages while tanh produces $0.2 \pm 0.4$. Without
+pruning, tanh produces $7.0 \pm 2.2$ while hard clip produces
+$5.6 \pm 3.2$. The ranking reverses.
+
+A threshold sweep identifies the critical region between $10^{-6}$
+(tanh $= 13.9$ assemblages) and $10^{-5}$ (tanh $= 0.7$), corresponding
+to the equilibrium weight magnitude for soft-bounded edges. Hard bounds are
+insensitive ($3.4$--$4.0$ across the entire range).
+
+**Edge cap independence.** The no-pruning condition uses a rank-based edge
+cap to prevent unbounded memory growth. A sensitivity sweep over cap values
+(5,000; 10,000; 20,000; 50,000; unlimited) shows identical assemblage
+counts at every value (hard: $5.6$; tanh: $6.9$; oja: $8.2$). Edge count
+self-stabilises at $\sim 1{,}350$ on the $20 \times 20$ grid---well below
+any cap---because the Hebbian dynamics reach a natural equilibrium between
+encounter-driven edge creation and decay-driven edge loss. The cap is never
+activated.
+
+**Grid size generality.** The interaction persists and amplifies across
+network scales:
+
+| Grid | Hard $\Delta$ | Tanh $\Delta$ | Oja $\Delta$ |
+|---|---|---|---|
+| $15 \times 15$ | $+0.0$ | $+4.2$ | $+4.2$ |
+| $20 \times 20$ | $+1.7$ | $+6.7$ | $+7.0$ |
+| $30 \times 30$ | $+7.8$ | $+14.5$ | $+15.2$ |
+
+The pruning effect on soft bounds scales with network size, consistent with
+the mechanism: larger networks sustain more weak edges in the critical
+$10^{-6}$--$10^{-5}$ range.
+
+
+### Pruning suppressed genuine functional differentiation
+
+No-pruning replications of Paper 4's perturbation-response experiment
+reveal that pruning actively destroyed functional diversity.
+
+```{r fig-rank, fig.cap="Fig. 3: Response rank with and without pruning. Pruning destroyed assemblages in the local hard condition entirely. Without pruning, both baseline and local hard reach rank 5.6.", fig.width=8, fig.height=5}
+d17_orig <- tryCatch(read_parquet(file.path(meta_data, "exp17_response_matrix", "session_metrics.parquet")), error = function(e) NULL)
+d17_np <- tryCatch(read_parquet(file.path(meta_data, "exp17np_response_noprune", "session_metrics.parquet")), error = function(e) NULL)
+
+if (!is.null(d17_orig) && !is.null(d17_np)) {
+  make_summary <- function(d, label) {
+    d |> filter(n_assemblages >= 2) |>
+      group_by(condition) |>
+      summarise(rank = mean(response_rank), se = sd(response_rank)/sqrt(n()),
+                n = n(), .groups = "drop") |>
+      mutate(pruning = label)
+  }
+
+  combined <- bind_rows(
+    make_summary(d17_orig, "Pruned"),
+    make_summary(d17_np, "No pruning")
+  ) |>
+    filter(condition != "global_target") |>
+    mutate(condition = recode(condition,
+      "baseline" = "Baseline\n(no meta)",
+      "local_hard" = "Local hard\n(meta=0.05)",
+      "local_target" = "Local hard\n(meta=0.05)",
+      "local_soft" = "Local soft\n(meta=0.05)"))
+
+  ggplot(combined, aes(x = condition, y = rank, fill = pruning)) +
+    geom_col(position = position_dodge(0.8), width = 0.7, alpha = 0.85) +
+    geom_errorbar(aes(ymin = rank - se, ymax = rank + se),
+                  position = position_dodge(0.8), width = 0.2) +
+    scale_fill_manual(values = c("Pruned" = "#264653", "No pruning" = "#E76F51")) +
+    labs(x = NULL, y = "Response rank (effective dimensions)",
+         fill = "Pruning regime") +
+    theme(legend.position = "bottom")
+}
+```
+
+Under pruning, response rank is $1.0$ across all conditions (flat across
+all SVD thresholds from $0.1\%$ to $10\%$). Without pruning, rank rises to
+$5.6$ for hard bounds and $5.5$ for tanh (Fig. 3). The rank estimate is
+robust across SVD threshold choices:
+
+| Threshold | Hard (no-prune) | Tanh (no-prune) | Oja (no-prune) |
+|---|---|---|---|
+| $0.1\%$ | $5.9$ | $5.8$ | $6.4$ |
+| $1\%$ (default) | $5.6$ | $5.5$ | $5.8$ |
+| $5\%$ | $4.8$ | $4.8$ | $5.1$ |
+| $10\%$ | $4.1$ | $4.2$ | $4.5$ |
+
+The participation ratio---a threshold-free measure of effective
+dimensionality computed as $(\sum \sigma_i^2)^2 / \sum \sigma_i^4$ over
+the singular values $\sigma_i$---gives $2.2$ (hard), $2.1$ (tanh), and
+$2.2$ (oja) under Gaussian probes, rising to $3.2$, $3.1$, and $3.3$
+under uniform (spatially deconfounded) probes.
+
+The baseline condition (no metaplasticity) reaches the same rank as the
+metaplastic condition. Hard clipping alone produces functional diversity.
+Metaplasticity adds $\eta$ divergence (below) and increases assemblage
+count from $\sim 6$ to $10+$, but is not necessary for functional
+differentiation per se.
+
+
+### Eta differentiation requires absorbing boundaries
+
+Per-assemblage learning rate ($\eta$) variance was measured under soft
+$\eta$ bounds ($n = 50$ seeds, 300 sessions). Of 50 seeds, 6 produced
+$\geq 2$ assemblages; the remaining 44 converged to monopoly (single
+assemblage). The failure mode is stochastic: monopoly and multi-assemblage
+seeds show identical $\eta$ statistics ($\bar{\eta} = 0.098$,
+$\sigma_\eta = 0.019$) and edge counts ($\sim 1{,}310$), and the
+qualifying seed count fluctuates between 5 and 8 across sessions with no
+trend, confirming that coexistence under hard weight + soft $\eta$ bounds
+is a rare but genuine dynamical regime.
+
+For the 6 qualifying seeds:
+
+| Statistic | Value |
+|---|---|
+| Mean $F$-ratio (between/within) | $4.91$ (SD $= 0.70$) |
+| Bootstrap 95\% CI (BCa, 10K) | $[4.40, 5.42]$ |
+| $t(5) = 13.77$, $p$ (one-tailed) | $0.000018$ |
+| Cohen's $d$ | $5.62$ |
+
+The $F$-ratio represents the ratio of between-assemblage $\eta$ variance to
+within-assemblage $\eta$ variance, computed separately within each seed and
+then aggregated via one-sample $t$-test against $F = 1$ across seeds. This
+avoids pseudoreplication from pooling assemblages across seeds. All soft
+weight bound conditions show $F < 1$ (tanh: $0.86$; oja: $0.76$). The
+absorbing weight boundary creates the structural asymmetry that the
+metaplastic instability requires.
+
+
+### CCD is spatially confounded
+
+Centroid cosine distance was tested against a spatial null: weight values
+were randomly permuted across edges (preserving the edge topology but
+randomising which edges carry which weights), assemblages were re-detected
+on the permuted weights using the same adaptive threshold (75th percentile),
+and CCD was recomputed. This was repeated 1,000 times per seed ($n = 20$
+seeds per condition). No condition reached $p < 0.05$.
+
+A deconfounded response protocol (Exp R2) revealed that Gaussian probes
+inflated JS divergence by $0.27$ (spatial overlap between probe position
+and assemblage location) while deflating response rank from $3.1$--$3.3$
+(uniform probes) to $2.0$--$2.2$ (Gaussian). The spatial structure of
+Gaussian probes created correlated activation across assemblages,
+collapsing independent functional dimensions.
+
+
+## Three Regimes of Individuation
+
+The experiments support three nested dynamical regimes, distinguished by
+their structural and functional properties. These are not static categories
+but three phases of the same Hebbian process, observed under different
+boundary conditions:
+
+| Regime | Assemblages | Response rank | $\eta$ $F$-ratio | Example |
+|---|---|---|---|---|
+| **Topological** | 6--8 | 1--2 | $<1$ | Soft bounds, no pruning |
+| **Structural** | 5--6 | 5.6 | --- | Hard bounds, no pruning, no meta |
+| **Metaplastic** | 10+ | 5.6 | 4.9 | Hard bounds, no pruning, local homeostasis |
+
+**Topological individuation**: structure through connectivity patterns with
+negligible weight magnitude ($\bar{w} \approx 0.005$). Detection is
+threshold-sensitive. Assemblages respond to stimuli with low functional
+diversity (rank $1$--$2$).
+
+**Structural individuation**: the absorbing weight boundary creates
+saturated edges that resist competitive displacement, producing a rigid
+scaffold. Detection is threshold-robust. Functional diversity (rank $5.6$)
+emerges without metaplasticity.
+
+**Metaplastic individuation**: local homeostasis drives $\eta$ divergence
+between assemblages ($F = 4.9$), increasing assemblage count and adding
+parametric differentiation---different learning dynamics across assemblages,
+not just different weight structures. Requires both the hard clip boundary
+and a local homeostatic mechanism.
+
+These are nested: each regime subsumes the previous. Structural
+individuation requires the hard clip. Metaplastic individuation requires
+both the hard clip and local homeostasis.
+
+
+## Discussion
+
+### Pruning as unintended mould
+
+The pruning threshold functions as a second absorbing boundary---one that
+was never theorised as part of the experimental mechanism. For hard-bounded
+edges (equilibrium $|w| \approx 1.0$), pruning at $10^{-4}$ removes only
+dead connections. For soft-bounded edges (equilibrium
+$|w| \approx 10^{-5.5}$), pruning destroys the substrate before
+individuation can occur. In Simondon's [-@simondon2020individuation]
+terminology, pruning is an unintended *mould*: an external constraint that
+imposes form by eliminating structures that fall below its threshold,
+regardless of their functional contribution.
+
+The disordinal interaction is direct evidence that the system's
+individuating capacity depends on boundary conditions in a way that cannot
+be predicted from either boundary alone. The pruning confound has
+implications beyond this programme: any computational model that removes
+weak connections may be destroying exactly the exploratory structure that
+enables functional diversity. This parallels concerns in the synaptic
+pruning literature, where pruning is typically modeled as constructive
+(improving generalization by removing noise) rather than destructive
+[@chechik1998synaptic]. Scholl, Rule, and Hennig [-@scholl2021information]
+showed formally that information-theoretic pruning criteria reduce
+generative diversity in deep Boltzmann machines, even when improving
+efficiency on surviving representations. Our work extends this in two
+directions: we characterise the *geometric* mechanism (response rank
+collapse, participation ratio reduction^[This parallels the $1/n$
+eigenspectrum observed in biological visual cortex by
+@stringer2019high --- healthy representational spaces maintain a specific
+spectral profile that pruning disrupts.]), and we demonstrate that the
+interaction is *disordinal* --- not merely that pruning hurts some
+conditions more than others, but that it reverses the ranking of approaches
+entirely. The vulnerability of weakly-represented structure to pruning
+echoes a broader pattern: Granovetter [-@granovetter1973strength] showed
+that weak ties carry disproportionate novel information in social networks;
+analogously, low-magnitude connections in self-organising networks encode
+precisely the exploratory structure that enables functional diversity. In
+the neural network compression literature, Frankle and Carlin
+[-@frankle2019lottery] showed that dense networks contain sparse
+"winning ticket" subnetworks that match full-network performance; our
+weak inter-assemblage connections are the complementary phenomenon ---
+"losing tickets" that carry no individual predictive value but whose
+collective presence scaffolds representational diversity. In biological
+development, silent synapses --- connections that carry no current but
+serve structural roles during critical periods --- provide a direct
+analog: they appear inactive by electrophysiological measures but are
+essential for circuit maturation.
+
+### The hard clip as limit condition
+
+The non-monotonic steepness result demonstrates that the hard clip is not
+the infinite-steepness limit of soft saturation. It is qualitatively
+different: a *limit condition* in Simondon's [-@simondon2020individuation]
+sense. A limit condition constrains the space of possible individuations
+without imposing specific form---it tells the system where it cannot go, not
+what it must become. The hard clip at $\pm w_\text{max}$ creates an
+absorbing state that edges can reach but not leave, producing a bimodal
+weight distribution that functions as a structural scaffold for functional
+diversity.
+
+This is distinct from a *mould* (which imposes external form, as pruning
+does). The hard clip does not propagate from a local singularity as a seed
+crystal would---it constrains uniformly. But by constraining, it creates the asymmetric
+conditions under which the metaplastic dynamics can generate
+between-assemblage $\eta$ divergence.
+
+### Programme implications
+
+The core narrative of the Dark Forest programme holds, but the mechanism
+is clarified. Papers 1--3 established individuation, coexistence, and
+self-sealing under hard bounds. Paper 4 demonstrated metaplastic
+differentiation. This paper reveals that pruning distorted the quantitative
+comparisons, that CCD was spatially confounded, and that functional
+differentiation is substantially stronger than originally reported (response
+rank $5.6$ vs $2.4$). The revised claim: local homeostatic metaplasticity
+stabilises and amplifies functional differentiation that Hebbian dynamics on
+spatially structured substrates spontaneously produce, provided the
+maintenance regime does not destroy the evidence.
+
+
+## Methods
+
+### Weight bounding strategies
+
+Four strategies were compared: hard clip
+($w = \text{clip}(w, -w_\text{max}, w_\text{max})$), tanh saturation
+($w = w_\text{max} \tanh(w/w_\text{max})$), sigmoid saturation, and Oja
+normalisation. Sigmoid $\equiv$ tanh across all experiments to $\geq 4$
+decimal places and is omitted from analysis.
+
+### Pruning conditions
+
+Standard pruning: edges with $|w| < 10^{-4}$ removed each step.
+No-pruning: threshold $10^{-8}$ (effectively disabled). To prevent
+unbounded edge accumulation, a rank-based cap removes the weakest edges
+when total count exceeds a limit (default 20,000). A sensitivity analysis
+(caps at 5,000; 10,000; 20,000; 50,000; unlimited) confirms the cap never
+activates: edge count self-stabilises at $\sim 1{,}350$ on the
+$20 \times 20$ grid.
+
+### Response rank
+
+After 200 training sessions, $K = 10$ structured input patterns (Gaussian
+bumps at random grid positions) are injected without further learning. Each
+assemblage's mean response is recorded, producing a $K \times A$ response
+matrix. Effective rank: number of singular values exceeding a threshold
+percentage of the largest. We report rank at five thresholds ($0.1\%$,
+$0.5\%$, $1\%$, $5\%$, $10\%$) and the participation ratio
+$(\sum \sigma_i^2)^2 / \sum \sigma_i^4$ as a threshold-free alternative.
+Deconfounded probes use spatially uniform random stimuli
+$U[-0.3, 0.3]$ per node.
+
+### CCD null model
+
+For each seed, weight values are randomly permuted across edges (preserving
+edge topology but randomising weight assignment). Assemblages are
+re-detected on the permuted weights using the same adaptive threshold
+(75th percentile of absolute weight). CCD is recomputed. This is repeated
+1,000 times. The $p$-value is the proportion of null CCD values $\geq$ the
+observed CCD.
+
+### Statistical methods
+
+Effect sizes: Cohen's $d$ with bootstrap CIs (10,000 BCa). $\eta$
+variance: per-seed $F$-ratios (between-assemblage / within-assemblage
+variance) aggregated via one-sample $t$-test against $F = 1$ across seeds,
+avoiding pseudoreplication from pooling assemblages across independent
+simulations. The 44/50 seeds converging to monopoly are reported as a
+failure-mode analysis rather than excluded silently.
+
+
+## References

@@ -1,0 +1,618 @@
+---
+title: "Emergent Structure in Optimization-Free Hebbian Networks"
+author:
+  - name: Michael Bean
+    affiliation: Independent Researcher
+  - name: Gen
+    affiliation: Independent Researcher
+date: 2026-03-13
+date-format: long
+abstract: |
+  We investigate what structures emerge from neural networks that operate
+  without loss functions, backpropagation, or optimization targets. We first
+  characterize Hebbian dynamics in a controlled 64-node fully connected
+  network, then test whether the findings generalize to a 400-node spatially
+  embedded substrate where topology must emerge rather than be imposed.
+  Interpreted through Deleuze and Guattari's concept of the Body without
+  Organs --- which guided both architectural design and the identification
+  of a critical regime between dissolution and rigidity --- our experiments
+  (replicated with 10--30 random seeds) yield three principal results. First,
+  optimization-free Hebbian networks are passive mirrors of instantaneous
+  co-activation density: they require dense simultaneous input and cannot
+  self-organize from noise, silence, or sparse structured input. Second, a
+  three-regime pattern --- dissolution, selective structure, saturation ---
+  recurs universally across both architectures and all parameterizations
+  tested, resonating with the Deleuzian Body without Organs and the
+  edge-of-chaos literature. Third, when the controlled architecture is
+  replaced by a substrate of identical nodes under a spatial energy gradient,
+  the passive mirror gives way to genuine individuation --- structure that is
+  not a direct trace of input --- but multiplicity is unstable: one
+  assemblage persists while others dissolve. These findings characterize
+  the conditions under which optimization-free Hebbian systems produce,
+  sustain, and lose structure.
+keywords:
+  - Hebbian learning
+  - optimization-free AI
+  - emergent dynamics
+  - self-organization
+  - individuation
+  - edge of chaos
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
+    code-fold: true
+    theme: cosmo
+    self-contained: true
+    fig-width: 7
+    fig-height: 4
+    fig-dpi: 150
+  pdf:
+    documentclass: article
+    papersize: letter
+    fontsize: 12pt
+    geometry:
+      - margin=1in
+    number-sections: true
+    colorlinks: true
+    linestretch: 2
+    biblio-style: apalike
+    cite-method: natbib
+    fig-width: 6
+    fig-height: 3.5
+    include-in-header:
+      text: |
+        \usepackage{booktabs}
+        \usepackage{float}
+execute:
+  echo: false
+  warning: false
+  message: false
+bibliography: references.bib
+---
+
+```{r}
+#| label: setup
+#| include: false
+source("_setup.R")
+```
+
+# Introduction
+
+Every dangerous AI scenario requires a goal. Instrumental convergence --- the tendency of goal-directed systems to acquire resources, preserve themselves, and resist shutdown --- presupposes an objective function worth pursuing. Remove the goal and the entire threat model collapses. But what replaces it?
+
+This paper investigates what happens when a neural network operates without any optimization target. No loss function. No backpropagation. No reward signal. Instead, we use the oldest learning rule in computational neuroscience: Hebbian plasticity, where connections between co-active nodes strengthen simply because they fire together [@hebb1949].
+
+The result is not a trained model but a dynamical system --- one that develops emergent structure through its own internal processes. We draw on Gilles Deleuze's philosophy to provide a vocabulary for describing these dynamics without defaulting to optimization-oriented framing: the Body without Organs, territorialization and deterritorialization, and the plane of immanence [@deleuze1972; @deleuze1980]. This framework is not merely decorative --- it guided concrete design decisions, including the rejection of normalization schemes that smuggle in hidden objectives, and the transition from predefined network topology to identical-node substrates where structure must emerge rather than be imposed.
+
+The investigation proceeds in two stages. We first characterize Hebbian dynamics in a controlled 64-node fully connected network, establishing that the system is a *tracing* machine in the Deleuzian sense [@deleuze1980]: it reproduces input statistics without generating novel structure. We then test whether these findings are properties of Hebbian dynamics per se or artifacts of the controlled architecture, by moving to a spatially embedded substrate of 120 identical nodes where topology must emerge from the dynamics. This transition reveals an incipient movement from tracing toward *mapping* --- the production of structure not directly present in the input --- while preserving the three-regime universality observed in the controlled system.
+
+## Contributions
+
+In a controlled 64-node fully connected network:
+
+1. Empirical demonstration, replicated across 30 seeds, that selective structure emerges from uniform initial conditions --- but only as a passive mirror of instantaneous co-activation density, not temporal correlation
+2. A three-regime pattern (dissolution / selective structure / saturation) governed by the learning-rate-to-decay ratio $\eta/\lambda$
+
+Testing generality in a sparse, spatially embedded substrate:
+
+3. The three-regime pattern recurs despite fundamentally different architecture, suggesting it is a property of Hebbian dynamics per se
+4. Spontaneous individuation from identical nodes under an energy gradient --- structure that is not a direct trace of input, partially overturning the passive mirror finding
+5. Multiplicity is unstable: multiple individuated assemblages cannot stably coexist under shared encounter dynamics
+
+# Related Work
+
+## Hebbian Self-Organization
+
+The observation that Hebbian dynamics produce emergent structure from uniform initial conditions has a long history. Kohonen's [-@kohonen1982] self-organizing maps demonstrate that competitive Hebbian learning with lateral inhibition produces topographic maps of input spaces. Linsker [-@linsker1988] showed that multi-layer Hebbian networks develop receptive field structure even from noise inputs --- a finding that complicates the passive mirror characterization we report, though his architecture includes spatial organization that our fully connected network lacks. More recently, @meulemans2022 demonstrated that Hebbian learning rules can perform approximate Bayesian inference, suggesting hidden computational capacities in these simple dynamics.
+
+@watson2016 argue that Hebbian learning operates as an evolutionary memory mechanism, connecting neural plasticity to evolutionary dynamics. This perspective is directly relevant to our multi-field findings, where Hebbian assemblages persist or perish through differential fitness of their weight configurations.
+
+Our contribution is not the observation of Hebbian structure formation per se, but the systematic characterization of its regime structure, input dependence, and behavior in multi-agent settings --- all without optimization targets.
+
+## Edge of Chaos and Criticality
+
+The three-regime pattern we observe --- dissolution, selective structure, saturation --- maps onto the subcritical / critical / supercritical classification studied extensively in the edge-of-chaos literature. Langton [-@langton1990] demonstrated that cellular automata exhibit maximal computational capacity at the phase transition between ordered and chaotic dynamics. Kauffman [-@kauffman1993] found analogous critical regimes in random Boolean networks. @bertschinger2004 extended these findings to recurrent neural networks, showing that computation is optimized at the edge of chaos.
+
+Our findings confirm that this critical regime structure extends to optimization-free Hebbian systems, where it manifests as a narrow parameter band between weight dissolution and weight saturation. The Deleuzian framework we employ emphasizes a different aspect of this phenomenon: not computational capacity at the phase transition, but the *productive capacity* for novel structure --- what Deleuze and Guattari describe as the Body without Organs that "causes intensities to pass" [@deleuze1980].
+
+## Digital Ecosystems and Emergent Organization
+
+Our substrate experiments connect to a rich literature on emergent organization in artificial life systems. Ray's [-@ray1991] Tierra system demonstrated that populations of self-replicating programs spontaneously develop ecological dynamics including parasitism and succession. @ofria2004 extended this with Avida, showing that niche differentiation emerges from digital organisms competing for CPU cycles. @fontana1994 explored emergent organization in AlChemy, where interactions between lambda-calculus expressions produce self-maintaining sets without predefined fitness.
+
+Our multi-field result --- where multiple individuated assemblages form transiently but cannot stably coexist --- connects to Gause's competitive exclusion principle [@hardin1960]. The distinctive feature is that our assemblages are not self-replicating programs or evolved organisms but spontaneously individuated patterns of weight strengths, arising and dissolving through the same Hebbian dynamics.
+
+# Background
+
+## Hebbian Learning
+
+Donald Hebb's postulate [-@hebb1949] states that "when an axon of cell A is near enough to excite a cell B and repeatedly or persistently takes part in firing it, some growth process or metabolic change takes place in one or both cells such that A's efficiency, as one of the cells firing B, is increased." In computational form:
+
+$$\Delta w_{ij} = \eta \cdot a_i \cdot a_j$$ {#eq-hebb}
+
+where $w_{ij}$ is the connection weight from node $i$ to node $j$, $a_i$ and $a_j$ are their activations, and $\eta$ is the learning rate.
+
+Unlike modern deep learning, Hebbian plasticity is purely local --- each connection updates based only on the activity of its two endpoint nodes, with no global error signal. This locality means the system cannot optimize toward any externally defined objective.
+
+### The Normalization Problem
+
+Raw Hebbian learning is unstable: weights grow without bound as correlated nodes mutually reinforce. Several solutions exist:
+
+- **Oja's rule** [@oja1982] adds a normalization term that constrains weight vectors to unit length, but this implicitly performs Principal Component Analysis --- an optimization target in disguise.
+- **BCM theory** [@bienenstock1982] introduces a sliding activation threshold that maximizes neuronal selectivity --- another hidden objective.
+- **Hard clipping** with multiplicative decay imposes no optimization target, only a boundary and a forgetting timescale.
+
+We adopt the third approach. This choice was motivated by the Deleuzian commitment to avoiding hidden teleology: normalization schemes that implicitly optimize a criterion would undermine the system's status as genuinely optimization-free.
+
+## Philosophical Framework
+
+### Body without Organs
+
+The Body without Organs (BwO) describes a field of pure potential before organizational structures are imposed [@deleuze1972]. A neural network without a loss function can be read as a BwO --- full connectivity, pure potential, no organizing principle directing it. The design challenge is inhabiting the *productive middle*: not the empty BwO (catatonic, no dynamics) nor the stratified BwO (rigidly organized around a single principle), but a partially organized system still fluid enough for novel structure to emerge.
+
+### Territorialization and Deterritorialization
+
+@deleuze1980 describe assemblages as operating along an axis between territorialization (processes that stabilize identity and sharpen boundaries) and deterritorialization (processes that destabilize and open to change). In our system:
+
+- **Territorialization** = Hebbian strengthening. Correlated activity consolidates connections.
+- **Deterritorialization** = Multiplicative decay. All weights shrink toward zero.
+
+The ratio $\eta / \lambda$ (learning rate / decay rate) directly parameterizes this axis.
+
+### The Diagram as Abstract Machine
+
+@delanda2002 translates Deleuze's ontology into the language of dynamical systems theory. A key concept is the *diagram* or abstract machine: an abstract set of relations that can be actualized in different material substrates. We propose that the balance between growth and decay in Hebbian systems functions as a Deleuzian diagram --- an abstract relation that can be actualized through different parameterizations ($\eta/\lambda$ in the fully connected network, gradient strength in the substrate) while producing the same three-regime pattern. The diagram is not the ratio $\eta/\lambda$ itself but the more general structural relation between reinforcement and dissolution of which $\eta/\lambda$ is one instantiation. This claim is tested empirically across all experiments reported below.
+
+### Individuation
+
+@simondon2005 describes individuation as the emergence of form from a metastable pre-individual field under intensive difference. The substrate experiments below instantiate a dynamical process structurally analogous to Simondon's schema: uniformly initialized nodes (pre-individual field) under an energy gradient (intensive difference) with activity-dependent feedback (transductive amplification) producing differentiated structures that did not exist in the initial conditions. We do not claim this is individuation in Simondon's full sense --- which involves information, communication between orders of magnitude, and the preservation of pre-individual charge --- but it shares the formal structure that Simondon identifies.
+
+# Methods
+
+## Network Architecture
+
+The Hebbian Drift Network consists of 64 nodes in a fully connected, directed graph. The weight matrix $W$ is $64 \times 64$ with zeros on the diagonal (no self-connections), giving 4,032 independent parameters. Connections are asymmetric ($w_{ij} \neq w_{ji}$) to permit richer dynamics than the fixed-point convergence guaranteed by symmetric Hopfield networks [@hopfield1982].
+
+### Activation Update
+
+At each timestep $t$:
+
+$$\mathbf{a}(t) = \tanh\left(\frac{W \cdot \mathbf{a}(t-1) + \mathbf{u}(t)}{\sqrt{n}}\right)$$ {#eq-activation}
+
+where $\mathbf{a}(t)$ is the 64-dimensional activation vector, $\mathbf{u}(t)$ is the external input, and $n = 64$. The $1/\sqrt{n}$ scaling prevents saturation of $\tanh$ at large network sizes.
+
+### Weight Update
+
+After each activation update, three operations are applied in sequence:
+
+$$W \leftarrow W + \eta \cdot \mathbf{a} \mathbf{a}^\top$$ {#eq-hebb-update}
+
+$$W \leftarrow W \cdot (1 - \lambda)$$ {#eq-decay}
+
+$$W \leftarrow \text{clip}(W, -1, 1)$$ {#eq-clip}
+
+followed by zeroing the diagonal. The default parameters are $\eta = 0.02$ (learning rate), $\lambda = 0.002$ (decay rate), giving a territorialization/deterritorialization ratio of $\eta/\lambda = 10$.
+
+## Input Design
+
+The network receives input through three channels, mixed into a single 64-dimensional vector:
+
+- **Channel A (nodes 0--20):** Structured signal. Text fragments encoded as activation values in $[-1, 1]$ via ASCII mapping.
+- **Channel B (nodes 21--41):** Stochastic noise. Uniform random values in $[-1, 1]$, freshly generated each step.
+- **Channel C (nodes 42--63):** Self-referential feedback. The network's own previous activations for these nodes.
+
+Input follows a rhythmic schedule: 10 steps of external driving followed by 10 steps of free-running (only Channel C active).
+
+### Control Conditions for Input Structure
+
+To dissociate the contributions of activation density and temporal correlation to Hebbian consolidation, we constructed two control conditions:
+
+1. **Shuffled text**: At each driven step, a text fragment is encoded via the same ASCII mapping as baseline, then its 21 activation values are randomly permuted. This preserves the activation density of text (all 21 positions active, same value distribution) while destroying the temporal co-occurrence patterns.
+
+2. **Markov chain**: A first-order chain over 21 states with strong self-transition (0.30), nearest-neighbor transitions (0.25 forward, 0.15 backward), and weak uniform transitions (0.02). Each state is encoded as a one-hot-like vector (1.0 at the active state, 0.5 at two nearest neighbors). This provides structured temporal transitions but sparse activation (primarily one position per step).
+
+## Observation Methodology
+
+Standard evaluation metrics (accuracy, loss, perplexity) presuppose a correct answer --- they are optimization targets. We adopt standard perturbation analysis techniques, which we frame as *palpation* to emphasize the non-evaluative intent: observe the system's capacities through perturbation and response, without defining what constitutes good behavior. This is an epistemological reorientation rather than a methodological innovation --- the probes themselves (impulse response, noise resilience) are standard dynamical systems characterization.
+
+## Reproducibility
+
+All experiments are run across multiple random seeds (30 for the baseline, 10 for all others). Results are reported as mean $\pm$ SD. The full pipeline --- Python simulation to Parquet data to R analysis to rendered paper --- is reproducible via `make all`. Each 20-session baseline run completes in approximately 15 seconds; the full 8-experiment pipeline with 30 seeds completes in under 30 minutes on a standard workstation. Code and data are available at the project repository.
+
+# Experiments and Results
+
+## Parameter Regime Structure
+
+The system exhibits three qualitatively distinct regimes, separated by narrow transitions. We swept eight parameter combinations across 10 seeds each:
+
+```{r}
+#| label: tbl-params
+#| tbl-cap: "Parameter sweep results (mean ± SD across 10 seeds, final session). The productive regime (η=0.02, λ=0.002) is highlighted."
+
+sweep <- read_experiment("param_sweep")
+
+sweep |>
+  group_by(condition) |>
+  filter(session == max(session)) |>
+  summarise(
+    `η` = first(condition) |> str_extract("eta[0-9.]+") |> str_remove("eta") |> as.numeric(),
+    `λ` = first(condition) |> str_extract("lam[0-9.]+") |> str_remove("lam") |> as.numeric(),
+    `Weight Std` = sprintf("%.4f ± %.4f", mean(weight_std), sd(weight_std)),
+    `Sparsity` = sprintf("%.0f%% ± %.0f%%", mean(sparsity) * 100, sd(sparsity) * 100),
+    .groups = "drop"
+  ) |>
+  mutate(`η/λ` = `η` / `λ`) |>
+  arrange(desc(`η/λ`)) |>
+  select(`η`, `λ`, `η/λ`, `Weight Std`, `Sparsity`) |>
+  knitr::kable()
+```
+
+This three-regime pattern --- dissolution at low $\eta/\lambda$, selective structure at moderate values, saturation at high values --- resonates with the Deleuzian account of the three dangers of the Body without Organs [@deleuze1980], while also exhibiting the dynamical signature that @langton1990 identified as the edge of chaos. The productive regime is not a midpoint but a *critical regime* --- a narrow parameter band where structure forms selectively. Moreover, both the ratio $\eta/\lambda$ and the absolute magnitudes matter: the same ratio of 10 produces different dynamics depending on the individual values.
+
+## Input Dependence: The Passive Mirror
+
+An input ablation study tested four conditions across 10 seeds each: baseline (text + noise + self-referential), noise-only, self-referential only, and silence.
+
+```{r}
+#| label: fig-ablation
+#| fig-cap: "Input ablation: weight standard deviation across sessions by condition. Only structured input (text) sustains non-trivial structure. Mean across 10 seeds."
+
+ablation <- read_experiment("ablation")
+
+ablation |>
+  group_by(condition, session) |>
+  summarise(m = mean(weight_std), s = sd(weight_std), .groups = "drop") |>
+  ggplot(aes(session, m, color = condition)) +
+  geom_ribbon(aes(ymin = pmax(m - s, 0), ymax = m + s, fill = condition), alpha = 0.15, color = NA) +
+  geom_line(linewidth = 0.6) +
+  geom_rangeframe(sides = "lb", color = "black") +
+  scale_color_manual(values = pal[1:4], name = NULL) +
+  scale_fill_manual(values = pal[1:4], guide = "none") +
+  labs(x = "Session", y = "Weight std. dev.")
+```
+
+```{r}
+#| label: tbl-ablation
+#| tbl-cap: "Input ablation results (mean ± SD across 10 seeds, final session)."
+
+ablation |>
+  group_by(condition) |>
+  filter(session == max(session)) |>
+  summarise(
+    `Weight Std` = sprintf("%.4f ± %.4f", mean(weight_std), sd(weight_std)),
+    `Near Zero` = sprintf("%.0f%% ± %.0f%%", mean(sparsity) * 100, sd(sparsity) * 100),
+    .groups = "drop"
+  ) |>
+  rename(Condition = condition) |>
+  knitr::kable()
+```
+
+The network cannot self-organize. Without external structured input, activations decay to zero through $\tanh(W \mathbf{a} / \sqrt{n}) \to 0$ as $\mathbf{a} \to 0$, and Hebbian updates vanish. The network is a *passive mirror* of its input statistics --- it develops structure that is a *trace* of experience, not a *representation* of it. In Deleuzian terms, the network is a *tracing* (calque) machine: it reproduces existing structure rather than producing new structure [@deleuze1980].
+
+### Input Structure: Text, Shuffled Text, and Markov Chain
+
+To isolate what properties of structured input drive Hebbian consolidation, we compared three conditions: (1) text input (rich temporal correlations, dense activation), (2) character-shuffled text (same activation density as text, destroyed temporal structure), and (3) first-order Markov chain (structured temporal transitions, sparse one-hot activation).
+
+```{r}
+#| label: fig-input-structure
+#| fig-cap: "Input structure comparison: weight standard deviation across sessions. Text and shuffled text produce nearly identical persistent structure, while the Markov chain produces near-zero structure. Activation density, not temporal correlation, is the dominant factor."
+
+input_data <- read_experiment("markov_input")
+
+input_data |>
+  group_by(condition, session) |>
+  summarise(m = mean(weight_std), s = sd(weight_std), .groups = "drop") |>
+  mutate(condition = recode(condition,
+    text = "Text", shuffled_text = "Shuffled text", markov = "Markov chain")) |>
+  ggplot(aes(session, m, color = condition)) +
+  geom_ribbon(aes(ymin = pmax(m - s, 0), ymax = m + s, fill = condition), alpha = 0.15, color = NA) +
+  geom_line(linewidth = 0.6) +
+  geom_rangeframe(sides = "lb", color = "black") +
+  scale_color_manual(values = pal[c(2, 1, 3)], name = NULL) +
+  scale_fill_manual(values = pal[c(2, 1, 3)], guide = "none") +
+  labs(x = "Session", y = "Weight std. dev.")
+```
+
+The result is striking: **text and shuffled text produce nearly identical structure** (weight std 0.0054 vs 0.0054), while the Markov chain produces 10× less (0.0005). Destroying temporal correlations --- permuting character positions at each step --- has almost no effect on the network's persistent structure. What matters is **activation density**: text and shuffled text both activate all 21 Channel A positions simultaneously, producing dense Hebbian outer products $\mathbf{a}\mathbf{a}^\top$ with many non-zero entries per update. The Markov chain activates primarily one position per step, producing sparse outer products that cannot accumulate above the decay threshold.
+
+This clarifies the passive mirror mechanism: the network mirrors the *instantaneous co-activation pattern* of its input, not the *temporal sequence*. Hebbian plasticity operates on simultaneous activity, and it is the density of that simultaneous activation --- how many node pairs fire together at each step --- that determines whether structure survives the decay process.
+
+## Emergent Structure
+
+The baseline network (30 seeds, 20 sessions each) develops selective weight structure that reflects input channel correlations.
+
+```{r}
+#| label: fig-weights
+#| fig-cap: "Weight matrix heatmaps (seed 0). Left: Session 1 --- structure emerging from uniform random initialization. Right: Session 20 --- stable selective structure. Text-channel connections (upper-left quadrant) survive; others decay."
+#| fig-width: 7
+#| fig-height: 3.5
+
+weights <- read_experiment("baseline", "weight_snapshots") |>
+  filter(seed == 0, session %in% c(1, 20))
+
+weights |>
+  mutate(session_label = paste("Session", session)) |>
+  ggplot(aes(col, row, fill = weight)) +
+  geom_raster() +
+  scale_fill_gradient2(
+    low = "#2166AC", mid = "white", high = "#B2182B",
+    midpoint = 0, limits = c(-1, 1), name = "Weight"
+  ) +
+  scale_x_continuous(expand = c(0, 0)) +
+  scale_y_reverse(expand = c(0, 0)) +
+  coord_equal() +
+  facet_wrap(~session_label) +
+  labs(x = "Node (to)", y = "Node (from)") +
+  theme(legend.position = "right")
+```
+
+```{r}
+#| label: tbl-evolution
+#| tbl-cap: "Weight landscape statistics across sessions (mean ± SD across 30 seeds)."
+
+metrics <- read_experiment("baseline")
+metrics |>
+  filter(session %in% c(1, 2, 3, 5, 10, 20)) |>
+  group_by(session) |>
+  summarise(
+    `Weight Std` = sprintf("%.4f ± %.4f", mean(weight_std), sd(weight_std)),
+    `Near Zero` = sprintf("%.0f%% ± %.0f%%", mean(sparsity) * 100, sd(sparsity) * 100),
+    `Saturated` = sprintf("%.0f%% ± %.0f%%", mean(saturation) * 100, sd(saturation) * 100),
+    .groups = "drop"
+  ) |>
+  rename(Session = session) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: fig-drift
+#| fig-cap: "Weight drift between consecutive sessions (Frobenius distance). Ribbon shows mean ± SD across 30 seeds. Rapid exponential convergence to a low baseline indicates a strong structural attractor."
+
+metrics |>
+  filter(!is.na(drift)) |>
+  group_by(session) |>
+  summarise(
+    mean_drift = mean(drift),
+    sd_drift = sd(drift),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(session, mean_drift)) +
+  geom_ribbon(aes(ymin = pmax(mean_drift - sd_drift, 0), ymax = mean_drift + sd_drift),
+              alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.6) +
+  geom_point(color = pal[1], size = 1.2) +
+  geom_rangeframe(sides = "lb") +
+  labs(x = "Session", y = "Frobenius distance")
+```
+
+By session 3, the network reaches a stable equilibrium that persists through session 20. Approximately 9% of connections maintain non-trivial weight while 91% have decayed to near-zero. This ratio is consistent across all 30 seeds (SD < 1%), confirming it is a property of the system rather than an artifact of initialization.
+
+## Testing Generality: From Controlled Network to Emergent Substrate
+
+The preceding experiments characterize Hebbian dynamics under controlled conditions: a fixed fully connected topology, designed input channels, and a predetermined 64-node architecture. Three findings emerged --- the passive mirror property, the three-regime pattern, and the dominance of co-activation density over temporal correlation. But are these properties of Hebbian dynamics per se, or artifacts of this particular architecture?
+
+To test generality, we remove the controlled architecture entirely. The substrate experiment replaces the fixed topology with a sparse, dynamic connection graph; replaces the designed input channels with a spatial energy gradient; and replaces the predetermined nodes with 120 identical units whose connections emerge through activity-dependent encounters. If the three-regime pattern recurs in this fundamentally different system, it is a property of the dynamics, not the architecture. And if the passive mirror property breaks down --- if the substrate produces structure not directly traceable to input statistics --- we will have identified the conditions under which Hebbian dynamics move from *tracing* to incipient *mapping*.
+
+### Design
+
+The substrate experiment removes predefined network topology entirely. 120 identical nodes are arranged on a 1D line from position 0 (high energy) to position 1 (low energy). Noise injection varies by position, creating an intensive difference across the substrate [@simondon2005]. Activity-dependent encounters provide positive feedback: active nodes are more likely to form new connections. All nodes follow identical Hebbian dynamics.
+
+### Gradient Sweep
+
+A parameter sweep over gradient strength reveals the same three-regime structure observed in the 64-node network:
+
+```{r}
+#| label: tbl-substrate
+#| tbl-cap: "Substrate gradient sweep results (mean ± SD across 10 seeds, final session)."
+
+sub_all <- read_experiment("substrate")
+
+sub_all |>
+  group_by(condition) |>
+  filter(session == max(session)) |>
+  summarise(
+    `Edges` = sprintf("%.0f ± %.0f", mean(n_edges), sd(n_edges)),
+    `Mean |w|` = sprintf("%.3f ± %.3f", mean(weight_mean_abs), sd(weight_mean_abs)),
+    `Communities` = sprintf("%.0f ± %.0f", mean(n_communities), sd(n_communities)),
+    `Largest` = sprintf("%.0f ± %.0f", mean(largest_community), sd(largest_community)),
+    .groups = "drop"
+  ) |>
+  rename(Gradient = condition) |>
+  knitr::kable()
+```
+
+```{r}
+#| label: fig-substrate
+#| fig-cap: "Substrate evolution at gradient=0.3 (productive regime). Top: active edges. Middle: mean weight and activation energy. Bottom: largest community size. Ribbon shows mean ± SD across 10 seeds."
+#| fig-height: 7
+
+sub <- sub_all |> filter(condition == "grad0.3")
+
+p1 <- sub |>
+  group_by(session) |>
+  summarise(m = mean(n_edges), s = sd(n_edges), .groups = "drop") |>
+  ggplot(aes(session, m)) +
+  geom_ribbon(aes(ymin = pmax(m - s, 0), ymax = m + s), alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.6) +
+  geom_rangeframe(sides = "lb") +
+  labs(title = "Active edges", x = NULL, y = "Count")
+
+p2 <- sub |>
+  group_by(session) |>
+  summarise(mw = mean(mean_weight), me = mean(activation_energy), .groups = "drop") |>
+  pivot_longer(c(mw, me), names_to = "metric", values_to = "value") |>
+  mutate(metric = recode(metric, mw = "Mean |weight|", me = "Mean energy")) |>
+  ggplot(aes(session, value, color = metric)) +
+  geom_line(linewidth = 0.6) +
+  geom_rangeframe(sides = "lb", color = "black") +
+  scale_color_manual(values = pal[c(1, 3)], name = NULL) +
+  labs(title = "Weight and energy", x = NULL, y = "Value")
+
+p3 <- sub |>
+  group_by(session) |>
+  summarise(m = mean(largest_community), s = sd(largest_community), .groups = "drop") |>
+  ggplot(aes(session, m)) +
+  geom_ribbon(aes(ymin = pmax(m - s, 0), ymax = m + s), alpha = 0.2, fill = pal[4]) +
+  geom_line(color = pal[4], linewidth = 0.6) +
+  geom_rangeframe(sides = "lb") +
+  labs(title = "Largest community", x = "Session", y = "Nodes")
+
+p1 / p2 / p3
+```
+
+The three-regime universality extends to the substrate level. Below gradient 0.3, the intensive difference is insufficient to bootstrap the positive feedback cycle. Above 0.3, energy is so abundant that every node saturates. Only at gradient $\approx$ 0.3 does the system produce *selective* individuation. This confirms that the $\eta/\lambda$ ratio functions as a Deleuzian diagram --- an abstract machine producing the same regime structure across fundamentally different architectures.
+
+```{r}
+#| label: fig-substrate-spatial
+#| fig-cap: "Spatial activity heatmap at gradient=0.3 (seed 0). Position 0 = high energy (top), position 1 = low energy (bottom). Activity concentrates in the high-energy region as individuation proceeds, while the remainder of the substrate goes quiescent."
+#| fig-width: 7
+#| fig-height: 4
+
+spatial_path <- file.path(DATA_DIR, "substrate", "spatial_activity.parquet")
+if (file.exists(spatial_path)) {
+  spatial <- read_parquet_path(spatial_path)
+
+  spatial |>
+    ggplot(aes(step, position, fill = activity)) +
+    geom_raster(interpolate = TRUE) +
+    scale_fill_viridis_c(option = "inferno", name = "Mean |activation|") +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_y_reverse(expand = c(0, 0)) +
+    labs(x = "Step", y = "Position (0 = high energy)") +
+    theme(legend.position = "right")
+}
+```
+
+The spatial activity heatmap (@fig-substrate-spatial) reveals the mechanism of individuation (shown for seed 0; all 10 seeds exhibit the same pattern of activity concentration in the high-energy region by session 15). Early in the run, activity is diffuse across all positions. As the positive feedback loop takes hold, activity concentrates in the high-energy region while the remainder of the substrate goes quiescent --- a spatial analogue of the selective weight consolidation observed in the 64-node network.
+
+## Stability of Multi-Individuation
+
+The single-gradient substrate demonstrated that individuation occurs from a single intensive difference. A natural question follows: can multiple individuated assemblages coexist in the same substrate? We extended the substrate to two dimensions with multiple energy hotspots to test whether parallel individuation produces stable or unstable multiplicity. 400 nodes on a 20×20 grid, three hotspots at positions (0.2, 0.3), (0.8, 0.3), and (0.5, 0.8).
+
+```{r}
+#| label: fig-multifield
+#| fig-cap: "Multi-field substrate evolution (10 seeds). Top: active edges. Middle: assemblage count --- transient multi-individuation followed by monopoly through differential persistence. Bottom: per-hotspot activity."
+#| fig-height: 7
+
+mf <- read_experiment("multifield")
+
+p1 <- mf |>
+  group_by(session) |>
+  summarise(m = mean(n_edges), s = sd(n_edges), .groups = "drop") |>
+  ggplot(aes(session, m)) +
+  geom_ribbon(aes(ymin = pmax(m - s, 0), ymax = m + s), alpha = 0.2, fill = pal[1]) +
+  geom_line(color = pal[1], linewidth = 0.6) +
+  geom_rangeframe(sides = "lb") +
+  labs(title = "Active edges", x = NULL, y = "Count")
+
+p2 <- mf |>
+  group_by(session) |>
+  summarise(m = mean(n_assemblages), s = sd(n_assemblages), .groups = "drop") |>
+  ggplot(aes(session, m)) +
+  geom_ribbon(aes(ymin = pmax(m - s, 0), ymax = m + s), alpha = 0.2, fill = pal[5]) +
+  geom_line(color = pal[5], linewidth = 0.6) +
+  geom_rangeframe(sides = "lb") +
+  labs(title = "Assemblage count", x = NULL, y = "Count")
+
+hotspot_cols <- grep("hotspot_\\d+_activity", names(mf), value = TRUE)
+if (length(hotspot_cols) > 0) {
+  p3 <- mf |>
+    select(session, seed, all_of(hotspot_cols)) |>
+    pivot_longer(all_of(hotspot_cols), names_to = "hotspot", values_to = "activity") |>
+    mutate(hotspot = gsub("hotspot_(\\d+)_activity", "Hotspot \\1", hotspot)) |>
+    group_by(session, hotspot) |>
+    summarise(m = mean(activity), .groups = "drop") |>
+    ggplot(aes(session, m, color = hotspot)) +
+    geom_line(linewidth = 0.5) +
+    geom_rangeframe(sides = "lb", color = "black") +
+    scale_color_manual(values = pal[c(2, 3, 4)], name = NULL) +
+    labs(title = "Per-hotspot activity", x = "Session", y = "Mean |activation|")
+
+  p1 / p2 / p3
+} else {
+  p1 / p2
+}
+```
+
+The system produces **transient multi-individuation**: assemblage count peaks at a mean of 38 around session 10 as the initial dense connectivity fragments into many small clusters, each sustained by local energy. However, multiplicity is unstable. All 10 seeds converged to a single surviving assemblage ($\leq 1$) by mean session 27 (range: 22--35).
+
+The mechanism is **differential persistence** [@hardin1960] rather than active suppression. The surviving assemblage does not attack, sense, or displace the others --- it simply persists longer because the Hebbian feedback loop (activity $\to$ encounters $\to$ stronger weights $\to$ activity) amplifies any small stochastic advantage exponentially. The identity of the surviving hotspot varies across seeds (Hotspot 0: 2/10, Hotspot 1: 4/10, Hotspot 2: 4/10), confirming that the winner is determined by stochastic symmetry-breaking rather than geometric advantage. Losing assemblages die from neglect: their connections decay while the winner's connections strengthen. Multiple individuated forms can emerge simultaneously from identical substrate, but they cannot stably coexist when sharing the same encounter budget --- a finding that constrains expectations about the complexity of self-organized ecologies achievable through Hebbian dynamics alone.
+
+In the multi-field context, an *assemblage* is operationally defined as a connected component of the strong-edge subgraph (edges above the 75th percentile of absolute weight). This threshold-based definition captures clusters of nodes with mutually reinforced connections while excluding weak or transient links.
+
+**Note on pruning (added in revision).** The multi-field substrate prunes edges with $|w| < 10^{-4}$ each step. Paper 4S demonstrates that this threshold accelerates monopoly: without pruning, $4.9$ assemblages persist at the equivalent locality (vs the convergence to $\leq 1$ reported above). The "multiplicity is unstable" finding should be understood as a property of the *pruned* substrate, not of pure Hebbian dynamics. The controlled network experiments (Sections 3.1--3.4) do not use pruning and are unaffected.
+
+# Discussion
+
+## Summary of Findings
+
+```{r}
+#| label: tbl-findings
+#| tbl-cap: "Summary of experimental findings."
+
+tibble(
+  Finding = c(
+    "Optimization-free networks are passive mirrors",
+    "Rich correlational structure required (text >> Markov)",
+    "Three-regime universality (dissolution / structure / saturation)",
+    "Spontaneous individuation from identical substrate",
+    "Multi-individuation is transient; multiplicity is unstable"
+  ),
+  Experiment = c("Ablation", "Markov input", "Param sweep + substrate", "Substrate", "Multi-field"),
+  Significance = c(
+    "Structure requires structured input",
+    "Not just any structure — needs rich correlations",
+    "Universal across architectures; edge-of-chaos analogue",
+    "Structurally analogous to Simondon's individuation",
+    "Differential persistence drives monopoly without agency"
+  )
+) |> knitr::kable()
+```
+
+## The Three-Regime Universality
+
+The pattern of dissolution / selective structure / saturation recurs at every level of the architecture:
+
+- **Parameter sweep** ($\eta/\lambda$): too much learning $\to$ saturation; too much decay $\to$ dissolution
+- **Substrate gradient**: zero gradient $\to$ dissolution; high gradient $\to$ undifferentiated saturation; moderate gradient $\to$ selective individuation
+
+This universality suggests that the critical regime is a genuine attractor type in Hebbian dynamical systems. The Deleuzian framework and the edge-of-chaos literature [@langton1990; @kauffman1993] describe the same phenomenon in different registers: the BwO framework emphasizes productive capacity for novel structure, while the edge-of-chaos framework emphasizes computational capacity. Our results are consistent with both characterizations.
+
+The growth-decay balance is not merely a parameter --- it functions as what @delanda2002 calls a *diagram* or abstract machine in the Deleuzian sense. A diagram is an abstract set of relations that can be actualized in different material substrates while preserving its structural character. Whether parameterized as $\eta/\lambda$ (in the fully connected network) or as gradient strength (in the substrate), the same abstract relation between reinforcement and dissolution produces the same three-regime pattern across fundamentally different architectures. This cross-architectural universality constitutes empirical evidence for DeLanda's thesis that Deleuzian ontology and dynamical systems theory are complementary frameworks describing the same morphogenetic processes.
+
+## From Tracing to Mapping
+
+The 64-node network is a *tracing* (calque) machine in the Deleuzian sense [@deleuze1980]: it reproduces the correlational structure already present in its input without generating anything new. The ablation study demonstrates this conclusively --- remove the structured input and the trace vanishes.
+
+The substrate experiment represents an incipient movement from tracing toward *mapping* (carte). The individuated assemblage at gradient 0.3 is not a direct reproduction of the input gradient --- the gradient is smooth and spatially distributed, while the assemblage is localized and discrete. The positive feedback loop (activity $\to$ encounters $\to$ Hebbian strengthening $\to$ activity) amplifies stochastic fluctuations into a structure that was not present in the initial conditions or the energy gradient alone. This is not yet full Deleuzian mapping --- which would require the production of genuinely novel connections --- but it marks the transition from passive reflection to active structuration.
+
+## The Role of the Philosophical Framework
+
+The Deleuzian framework contributed to this work in three concrete ways beyond post-hoc interpretation. First, it motivated the rejection of normalization schemes (Oja's rule, BCM theory) that smuggle in hidden optimization targets --- a design choice that standard computational neuroscience practice would not have made. Second, the concept of the BwO's three dangers suggested the existence of a critical regime between dissolution and rigidity, which the parameter sweep subsequently confirmed empirically. Third, the concept of the diagram provided a name and theoretical grounding for the universality of the three-regime pattern across architectures. These are instances of philosophy generating experimental design rather than merely decorating results.
+
+## Optimization-Free Does Not Mean Unbiased
+
+The system has no loss function, but it is not without designed structure. The input channels, spatial gradients, and activity-dependent encounter mechanisms are strong inductive biases. We distinguish between "no explicit objective function" (accurate) and "no designed structure" (not what we have). The system is optimization-free in the specific sense that no parameter is adjusted to reduce a defined error. This is a weaker but more precise claim than "goalless," which we used in earlier versions of this work. Following @delanda2002, we note that the designed elements function as a *diagram* or abstract machine: they constrain which becomings are possible without specifying what the system should become.
+
+## Limitations
+
+- **Scale**: 64 nodes is sufficient for proof of concept but may not exhibit the multi-attractor dynamics predicted by Hopfield theory at this size.
+- **Passivity**: The network requires external structured input to maintain any structure --- it cannot self-organize from noise or silence.
+- **Input specificity**: The shuffled-text control isolates activation density from temporal correlation, but the Markov chain condition additionally confounds density with activation magnitude distribution (continuous values vs. one-hot). A dense random activation control (uniform random across all 21 Channel A positions, no temporal structure) would complete the dissociation.
+- **Observer effects**: The choice of which probes to run and how to interpret their results is itself a form of implicit goal. True optimization-freedom may be asymptotic.
+- **Coexistence mechanisms**: The multi-field experiment produces monopoly in all seeds. Mechanisms that might stabilize coexistence (spatial barriers, asymmetric encounter budgets, resource partitioning) remain unexplored.
+
+# Conclusion
+
+This paper investigated what structures emerge from optimization-free Hebbian dynamics, across architectures ranging from a 64-node fully connected network to a 400-node spatially embedded substrate.
+
+Three principal findings emerge. First, optimization-free Hebbian networks are passive mirrors: they reflect input statistics but cannot self-organize. This constrains expectations about what purely local learning rules can achieve without external energy sources. Second, a three-regime pattern --- dissolution, selective structure, saturation --- recurs universally across every architecture tested, suggesting it is a fundamental property of Hebbian systems with competing growth and decay. Third, when identical nodes are placed under a spatial energy gradient, spontaneous individuation occurs --- but multiplicity is unstable, with one assemblage persisting while others dissolve through differential persistence.
+
+The transition from tracing (passive mirroring of input) to incipient mapping (individuated structure not directly present in the input) marks the boundary of what optimization-free Hebbian dynamics can achieve. Our assemblages have properties and persistence but lack the capacity to model their environment. Producing assemblages complex enough to compute, model, and respond --- moving from structure to agency --- is the challenge for future work.
+
+# References
+
+::: {#refs}
+:::

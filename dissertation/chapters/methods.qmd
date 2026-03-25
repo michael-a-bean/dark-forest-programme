@@ -1,0 +1,450 @@
+---
+title: "Methods"
+---
+
+# Methods {#sec-methods}
+
+This chapter describes the shared computational substrate, learning dynamics, measurement apparatus, and infrastructure that underlie all five papers in the dissertation. Each paper extends or reconfigures the base model in specific ways; those paper-specific variations are documented in the relevant chapters. Here we establish the common methodological foundation.
+
+## The Substrate {#sec-substrate}
+
+### Grid Geometry
+
+The simulation substrate is a two-dimensional square lattice of $N = G \times G$ nodes, where $G$ is the grid size (default $G = 20$, yielding $N = 400$ nodes). Each node $i$ is assigned a fixed spatial position $(x_i, y_i)$ on the unit square $[0,1]^2$, with positions uniformly distributed along each axis:
+
+$$
+x_i = \frac{i \bmod G}{G - 1}, \quad y_i = \frac{\lfloor i / G \rfloor}{G - 1}
+$$ {#eq-positions}
+
+Nodes carry real-valued activations $a_i(t) \in [-1, 1]$ and are connected by directed, weighted edges stored in a sparse dictionary $\mathbf{W} = \{(i,j) \mapsto w_{ij}\}$. The grid provides spatial structure that is essential to the model: locality constrains encounters, noise injection varies spatially, and assemblages emerge as spatially coherent clusters.
+
+### Energy Hotspots and Noise Injection
+
+The environment contains $K$ energy hotspots (default $K = 3$) placed at fixed positions within the unit square. For the default three-hotspot configuration, positions are $(0.2, 0.3)$, $(0.8, 0.3)$, and $(0.5, 0.8)$---a triangular arrangement that provides well-separated energy sources while maintaining asymmetry. For $K = 1, 2, 4$, deterministic symmetric placements are used; for $K > 4$, positions are drawn uniformly from $[0.1, 0.9]^2$.
+
+Each hotspot generates a Gaussian energy field. The composite noise profile at node $i$ is:
+
+$$
+\sigma_i = \sigma_{\text{base}} + \sum_{k=1}^{K} E_{\text{hot}} \cdot \exp\!\left(-\frac{d_{ik}^2}{2 r_{\text{hot}}^2}\right)
+$$ {#eq-noise-profile}
+
+where $d_{ik} = \sqrt{(x_i - x_k^{\text{hot}})^2 + (y_i - y_k^{\text{hot}})^2}$ is the Euclidean distance from node $i$ to hotspot $k$, $\sigma_{\text{base}} = 0.02$ is the background noise floor, $E_{\text{hot}} = 0.3$ is the hotspot energy, and $r_{\text{hot}} = 0.2$ is the hotspot radius. Nodes near hotspots receive substantially more noise than distant nodes, creating spatially structured variation in the energy landscape.
+
+At each timestep, noise is injected as:
+
+$$
+a_i(t) \leftarrow a_i(t) + \sigma_i \cdot u_i(t), \quad u_i(t) \sim \mathrm{Uniform}(-1, 1)
+$$ {#eq-noise-inject}
+
+### Activation Dynamics
+
+After noise injection, activations propagate through the weighted connections. For each node $j$, the incoming signal is the weighted sum of presynaptic activations:
+
+$$
+h_j(t) = \sum_{i : (i,j) \in \mathbf{W}} w_{ij} \cdot a_i(t)
+$$ {#eq-input}
+
+This input is normalised by the square root of the in-degree $d_j^{\text{in}} = |\{i : (i,j) \in \mathbf{W}\}|$ to prevent high-degree nodes from saturating:
+
+$$
+a_j(t+1) = \tanh\!\left(\frac{1}{2}\, a_j(t) + \frac{h_j(t)}{\sqrt{\max(d_j^{\text{in}}, 1)}}\right)
+$$ {#eq-activation}
+
+The $\frac{1}{2} a_j(t)$ term provides activation inertia, preventing instantaneous washout of state. The $\tanh$ nonlinearity bounds activations to $[-1, 1]$.
+
+For the fully connected `Network` class used in Paper 4S Experiment 1, the activation rule simplifies to a matrix form without the inertia term:
+
+$$
+\mathbf{a}(t+1) = \tanh\!\left(\frac{\mathbf{W} \cdot \mathbf{a}(t) + \mathbf{x}(t)}{\sqrt{N}}\right)
+$$ {#eq-network-activation}
+
+where $\mathbf{x}(t)$ is an external input vector.
+
+### Initialisation
+
+Node activations are initialised as $a_i(0) \sim \mathrm{Uniform}(-0.1, 0.1) + 0.1 \cdot \sigma_i$, providing a small bias toward hotspot regions. Initial connectivity is created by sampling approximately $4N$ directed edges with a locality bias: for each edge, a source node $i$ is chosen uniformly, a target displacement $(\delta x, \delta y) \sim \mathcal{N}(0, \ell^2)$ is sampled (where $\ell$ is the locality parameter), and the node nearest to $(x_i + \delta x, y_i + \delta y)$ becomes the target. Initial weights are drawn from $\mathrm{Uniform}(-0.3, 0.3)$.
+
+## Hebbian Learning Rule {#sec-hebbian}
+
+### Standard Hebbian Update
+
+At each timestep, all existing edges are updated according to a Hebbian rule with multiplicative weight decay and bounding:
+
+$$
+w_{ij}(t+1) = \mathcal{B}\!\Big[\big(w_{ij}(t) + \eta \cdot a_i(t) \cdot a_j(t)\big) \cdot (1 - \lambda)\Big]
+$$ {#eq-hebbian}
+
+where $\eta = 0.05$ is the learning rate, $\lambda = 0.002$ is the weight decay rate, and $\mathcal{B}[\cdot]$ is a bounding operator (see @sec-weight-bounds). The Hebbian product $a_i a_j$ strengthens edges between co-active nodes and weakens edges between nodes with opposite-sign activations. The multiplicative decay $(1 - \lambda)$ provides a constant fractional drag on all weights, ensuring that connections require sustained co-activation to survive.
+
+### Metaplastic Hebbian Update
+
+In the `MetaplasticField` extension (Papers 3--5), each node $i$ carries a per-node learning rate $\eta_i(t)$, and the edge-level learning rate is the mean of its endpoints:
+
+$$
+\eta_{ij}(t) = \frac{1}{2}\big(\eta_i(t) + \eta_j(t)\big)
+$$ {#eq-edge-eta}
+
+The update equation becomes:
+
+$$
+w_{ij}(t+1) = \mathcal{B}\!\Big[\big(w_{ij}(t) + \eta_{ij}(t) \cdot a_i(t) \cdot a_j(t)\big) \cdot (1 - \lambda)\Big]
+$$ {#eq-meta-hebbian}
+
+This ensures that edges in high-$\eta$ regions learn faster than edges in low-$\eta$ regions, creating the coupling between metaplastic state and synaptic plasticity that drives differentiation.
+
+## Encounter Mechanism {#sec-encounters}
+
+New edges are created through a locality-biased encounter process that models the spatial constraints on interaction. At each timestep, $R$ encounter attempts are made (default $R = 20$). Each encounter proceeds as follows:
+
+1. **Sample a spatial location.** A point $(p_x, p_y) \sim \mathrm{Uniform}([0,1]^2)$ is drawn. This spatially uniform sampling ensures that encounter opportunities are distributed across the entire field, preventing a single active region from monopolising the encounter budget.
+
+2. **Compute local encounter probabilities.** For each node $i$, the probability of participating in the encounter is proportional to the product of spatial proximity and activity history:
+
+$$
+P(i \mid p) \propto \exp\!\left(-\frac{(x_i - p_x)^2 + (y_i - p_y)^2}{2\ell^2}\right) \cdot \big(\bar{a}_i + \epsilon\big)
+$$ {#eq-encounter-prob}
+
+where $\ell$ is the locality parameter, $\bar{a}_i$ is the exponential moving average of $|a_i|$, and $\epsilon = 0.001$ prevents zero probabilities.
+
+3. **Select a pair.** Node $i$ is drawn from the distribution above. Node $j$ is drawn from the same distribution with $P(i) = 0$ (exclusion of the first node).
+
+4. **Create edge.** If $i \neq j$ and the edge $(i, j)$ does not already exist, it is created with weight $w_{ij} = 0$.
+
+The locality parameter $\ell$ (default 0.10) controls the spatial scale of encounters. Smaller $\ell$ values produce tightly localised encounters that favour multiple independent assemblages; larger values produce global mixing that favours monopolistic single-assemblage outcomes. This parameter is central to the coexistence--monopoly transition studied across Papers 1--4.
+
+### Activity History
+
+The activity history $\bar{a}_i$ used in encounter probabilities and metaplastic adjustment is maintained as an exponential moving average:
+
+$$
+\bar{a}_i(t+1) = (1 - \alpha) \cdot \bar{a}_i(t) + \alpha \cdot |a_i(t)|
+$$ {#eq-ema}
+
+where $\alpha = 0.05$ by default. This provides a smoothed estimate of recent activity that is robust to single-step fluctuations.
+
+## Pruning {#sec-pruning}
+
+Edges whose absolute weight falls below a threshold $\theta_{\text{prune}}$ are removed at each timestep:
+
+$$
+\text{if } |w_{ij}| < \theta_{\text{prune}}, \quad \text{delete } (i,j) \text{ from } \mathbf{W}
+$$ {#eq-prune}
+
+The default threshold is $\theta_{\text{prune}} = 10^{-4}$. This mechanism serves two purposes: it controls memory usage by preventing unbounded edge accumulation (since the encounter mechanism continually creates new edges at weight zero), and it models the biological reality that weak synapses are metabolically costly and tend to be eliminated.
+
+### The Pruning Confound
+
+Paper 4S discovered that pruning interacts with the weight bounding strategy in a way that confounds differentiation measurements. With the default $\theta_{\text{prune}} = 10^{-4}$ and hard clipping, newly created edges (initialised at $w = 0$) are immediately eligible for pruning if they do not receive sufficient Hebbian reinforcement within a single timestep. Because $\tanh$ and sigmoid bounds leave near-zero weights effectively unchanged (both functions are approximately linear near the origin), the pruning interaction differs across bound types in a way that is not attributable to the bounding strategy itself.
+
+To deconfound this, Paper 4S introduced a pruning-on/pruning-off factorial design. In the pruning-off condition, the threshold is reduced to $\theta_{\text{prune}} = 10^{-8}$ (effectively disabling pruning) and a soft edge cap of 5,000--20,000 edges is enforced by periodically removing the weakest edges when the total exceeds the cap. This revealed that some apparent bound-type effects on modularity were partially attributable to differential pruning dynamics rather than to the bounding function per se.
+
+## Assemblage Detection {#sec-assemblages}
+
+Assemblages---spatially coherent clusters of strongly connected nodes---are detected as connected components in a strong-edge subgraph. The procedure is:
+
+1. **Threshold selection.** If no threshold is provided, it defaults to the 75th percentile of the absolute weight distribution: $\tau = P_{75}(|w_{ij}|)$. This adaptive threshold ensures that assemblage detection scales with the overall weight distribution, which varies across conditions and timepoints.
+
+2. **Subgraph construction.** An undirected adjacency list is built from all edges with $|w_{ij}| \geq \tau$. The directionality of edges is ignored for assemblage detection, treating the subgraph as symmetric.
+
+3. **Connected component extraction.** A breadth-first search identifies connected components. Components with fewer than 2 nodes are discarded.
+
+The adaptive threshold means that assemblage counts and sizes are relative to the current weight distribution rather than an absolute scale. This is appropriate for measuring structural differentiation but requires care when comparing across conditions with very different weight magnitude distributions---an issue that motivated the development of alternative metrics in Papers 2--5.
+
+## Metaplastic Extension {#sec-metaplastic}
+
+The `MetaplasticField` class (introduced in Paper 3, extended in Papers 4 and 4S) adds two coupled mechanisms to the base substrate: per-node learning rate adaptation (metaplasticity) and an inhibitor diffusion field.
+
+### Per-Node Learning Rate (Metaplasticity)
+
+Each node $i$ carries a learning rate $\eta_i(t)$, initialised to the global value $\eta$. At each timestep, after the Hebbian update, $\eta_i$ is adjusted homeostatically based on the deviation of the node's activity from a target:
+
+$$
+\eta_i(t+1) = \eta_i(t) - \mu \cdot \big(\bar{a}_i(t) - a_i^*\big)
+$$ {#eq-meta-adjust}
+
+where $\mu$ is the meta-strength parameter (default 0 = no metaplasticity; typical nonzero values range from $10^{-4}$ to $0.05$) and $a_i^*$ is the target activity.
+
+The sign convention is homeostatic: nodes with activity above target ($\bar{a}_i > a_i^*$) have their $\eta$ reduced (consolidation), while nodes below target have their $\eta$ increased (exploration). This creates a negative feedback loop at the individual node level.
+
+### Local vs Global Target
+
+The target activity $a_i^*$ can be computed in two modes:
+
+**Global target** (`use_local_target = False`): All nodes share the same target $a_i^* = a^*_{\text{global}}$ (default 0.15). This was the original design but was found to be less effective at producing differentiation because it imposes a uniform standard that does not account for spatial variation in the energy landscape.
+
+**Local target** (`use_local_target = True`, default): Each node's target is the mean activity of its spatial neighbors within a given Manhattan radius $r$:
+
+$$
+a_i^* = \frac{1}{|\mathcal{N}_r(i)|} \sum_{j \in \mathcal{N}_r(i)} \bar{a}_j(t)
+$$ {#eq-local-target}
+
+where $\mathcal{N}_r(i)$ is the set of grid nodes within Manhattan distance $r$ of node $i$ (default $r = 1$, i.e., von Neumann neighbourhood). Local targets enable Turing-like symmetry breaking: small initial fluctuations in activity are amplified because a node's target adapts to its neighbourhood rather than being imposed globally.
+
+### Eta Bounds: Hard vs Soft
+
+The per-node learning rate is bounded to the interval $[\eta_{\min}, \eta_{\max}]$ (default $[0.005, 0.20]$) after each adjustment. Two bounding strategies are available:
+
+**Hard clip** (`use_soft_bounds = False`, default):
+
+$$
+\eta_i \leftarrow \mathrm{clip}(\eta_i, \eta_{\min}, \eta_{\max})
+$$ {#eq-eta-hard}
+
+**Soft (tanh) bounds** (`use_soft_bounds = True`):
+
+$$
+\eta_i \leftarrow \bar{\eta} + \Delta\eta \cdot \tanh\!\left(\frac{\eta_i - \bar{\eta}}{\Delta\eta}\right)
+$$ {#eq-eta-soft}
+
+where $\bar{\eta} = (\eta_{\min} + \eta_{\max})/2$ is the midpoint and $\Delta\eta = (\eta_{\max} - \eta_{\min})/2$ is the half-range. Soft bounds produce a continuously differentiable bounding function that avoids the absorbing-state dynamics of hard clipping, where nodes driven to the boundary remain stuck there.
+
+Paper 4S demonstrated that the choice between hard and soft eta bounds has measurable effects on the degree of eta differentiation across assemblages, with hard bounds producing larger eta divergence (partly as an artifact of boundary accumulation) and soft bounds producing smoother but smaller differentiation.
+
+### Inhibitor Field
+
+Nodes emit an inhibitor signal proportional to their total outgoing weight mass. The inhibitor diffuses spatially and decays, providing long-range communication between assemblages.
+
+**Emission.** At each step, each node adds to its local inhibitor concentration:
+
+$$
+I_i(t) \leftarrow I_i(t) + \rho \cdot m_i(t)
+$$ {#eq-inhibitor-emit}
+
+where $\rho = 0.01$ is the emission rate and $m_i(t) = \sum_{j: (i,j) \in \mathbf{W}} |w_{ij}|$ is the node's total outgoing weight mass.
+
+**Diffusion.** The inhibitor spreads via a discrete Laplacian on the von Neumann neighbourhood:
+
+$$
+I_i(t+\tfrac{1}{2}) = I_i(t) + D \cdot \left(\sum_{j \in \mathcal{N}_1(i)} I_j(t) - |\mathcal{N}_1(i)| \cdot I_i(t)\right)
+$$ {#eq-inhibitor-diffuse}
+
+where $D$ is the diffusion coefficient (default 0.05, capped at 0.20 for CFL stability). The inhibitor is clamped to non-negative values after diffusion.
+
+**Decay.** The inhibitor decays exponentially:
+
+$$
+I_i(t+1) = (1 - \delta) \cdot I_i(t + \tfrac{1}{2})
+$$ {#eq-inhibitor-decay}
+
+where $\delta = 0.10$ is the decay rate.
+
+**Inhibitor--Eta Coupling.** When the coupling strength $\kappa > 0$, the inhibitor field suppresses learning rates. Two coupling modes are available:
+
+*Absolute coupling* (`use_difference_coupling = False`):
+
+$$
+\eta_i \leftarrow \eta_i - \kappa \cdot I_i
+$$ {#eq-coupling-abs}
+
+*Difference-dependent coupling* (`use_difference_coupling = True`, default):
+
+$$
+\eta_i \leftarrow \eta_i - \kappa \cdot I_i \cdot \big(1 - (\eta_i - \bar{\eta}_i^{\text{local}})\big)
+$$ {#eq-coupling-diff}
+
+where $\bar{\eta}_i^{\text{local}} = \frac{1}{|\mathcal{N}_1(i)|} \sum_{j \in \mathcal{N}_1(i)} \eta_j$ is the mean eta of grid neighbours. The difference-dependent mode amplifies pre-existing eta heterogeneity: nodes whose eta is already above their local mean experience less suppression (the $(1 - \Delta\eta)$ factor is smaller when $\Delta\eta$ is large and positive), while nodes below their local mean are suppressed further. This creates a Turing-instability-like mechanism where Hebbian reinforcement acts as the short-range activator and inhibitor diffusion acts as the long-range inhibitor, with the variable that differentiates being the learning rule itself ($\eta$), not the weights directly.
+
+### Step Ordering
+
+Each metaplastic timestep executes the following operations in order:
+
+1. Noise injection (@eq-noise-inject)
+2. Activation propagation (@eq-activation)
+3. Hebbian weight update with per-edge $\eta_{ij}$ (@eq-meta-hebbian)
+4. Local encounters (@sec-encounters)
+5. Edge pruning (@sec-pruning)
+6. Activity history update (@eq-ema)
+7. Metaplastic eta adjustment (@eq-meta-adjust)
+8. Inhibitor emission, diffusion, decay, and coupling (@eq-inhibitor-emit through @eq-coupling-diff)
+
+This ordering ensures that eta adjustments are based on the activity resulting from the current step's dynamics, and that inhibitor coupling acts on the already-adjusted eta values.
+
+## Weight Bounding Strategies {#sec-weight-bounds}
+
+Paper 4S introduced configurable weight bounding as a first-class experimental variable. Four strategies are implemented for the bounding operator $\mathcal{B}[\cdot]$ in @eq-hebbian:
+
+### Hard Clip
+
+$$
+\mathcal{B}_{\text{hard}}[w] = \mathrm{clip}(w, -w_{\max}, w_{\max})
+$$ {#eq-bound-hard}
+
+This is the default used in Papers 1--4. Hard clipping creates absorbing states at $\pm w_{\max}$: once a weight reaches the boundary, the Hebbian increment is discarded and only decay can pull the weight back. This produces bimodal weight distributions with peaks near $\pm w_{\max}$ in high-activity regions.
+
+### Tanh Saturation
+
+$$
+\mathcal{B}_{\text{tanh}}[w] = w_{\max} \cdot \tanh\!\left(\frac{w}{w_{\max}}\right)
+$$ {#eq-bound-tanh}
+
+Smooth saturation that is approximately linear for $|w| \ll w_{\max}$ and asymptotically approaches $\pm w_{\max}$. The derivative $\mathcal{B}'_{\text{tanh}}[w] = \mathrm{sech}^2(w/w_{\max})$ is always positive, so no weight is fully absorbed---strong weights experience diminishing returns but never fully saturate.
+
+### Sigmoid Saturation
+
+$$
+\mathcal{B}_{\text{sigmoid}}[w] = 2 w_{\max} \cdot \sigma\!\left(\frac{2w}{w_{\max}}\right) - w_{\max}
+$$ {#eq-bound-sigmoid}
+
+where $\sigma(x) = 1/(1 + e^{-x})$. This provides a sharper transition than $\tanh$ between the linear and saturating regimes. The function maps $\mathbb{R} \to (-w_{\max}, w_{\max})$ with an inflection point at $w = 0$.
+
+### Oja Rule
+
+$$
+\Delta w_{ij} = \eta \cdot \big(a_i \cdot a_j - a_j^2 \cdot w_{ij}\big)
+$$ {#eq-oja}
+
+The Oja rule replaces the standard Hebbian update entirely rather than applying a post-hoc bound. The $-a_j^2 w_{ij}$ term provides self-normalisation: weights converge to the first principal component of the input covariance, with a natural scale determined by the input statistics rather than an externally imposed $w_{\max}$. Multiplicative decay $(1 - \lambda)$ is still applied after the Oja update. No explicit weight bounding is performed.
+
+In the `MetaplasticField`, all four strategies use the per-edge learning rate $\eta_{ij}$ (@eq-edge-eta) in place of the global $\eta$.
+
+## Metrics {#sec-metrics}
+
+### Centroid Cosine Distance (CCD) {#sec-ccd}
+
+CCD measures the structural differentiation between assemblages by comparing their outgoing weight profiles. For each assemblage $\mathcal{A}_k$, a centroid weight vector $\mathbf{c}_k \in \mathbb{R}^N$ is computed as the mean of the outgoing weight vectors of its constituent nodes:
+
+$$
+c_{k,j} = \frac{1}{|\mathcal{A}_k|} \sum_{i \in \mathcal{A}_k} w_{ij}
+$$ {#eq-centroid}
+
+CCD is then the mean pairwise cosine distance between centroids:
+
+$$
+\text{CCD} = \frac{2}{K(K-1)} \sum_{k < l} \left(1 - \frac{\mathbf{c}_k \cdot \mathbf{c}_l}{\|\mathbf{c}_k\| \|\mathbf{c}_l\|}\right)
+$$ {#eq-ccd}
+
+where $K$ is the number of assemblages. CCD ranges from 0 (all assemblages are identical clones) to 1 (all assemblages are pairwise orthogonal). If either centroid has zero norm, the distance is set to 1.0 (maximally different). CCD is undefined (returned as 0.0) for fewer than 2 assemblages.
+
+**Invalidity note.** CCD was developed as a replacement for an earlier classifier-based differentiation metric that failed in the $p \gg n$ regime (weight vector dimensionality greatly exceeds assemblage size). While CCD is more robust, Paper 4S identified a partial confound: because CCD compares outgoing weight profiles and assemblages are spatially localised, some CCD variation across conditions may reflect differences in assemblage geometry (spatial spread, overlap with hotspots) rather than genuine functional differentiation. The participation ratio metric (@sec-participation-ratio) was developed as a deconfounded alternative.
+
+### Weight Modularity
+
+Modularity measures the fraction of total weight mass that lies within assemblages rather than between them:
+
+$$
+Q = \frac{\sum_{(i,j) \in \mathbf{W}} |w_{ij}| \cdot \mathbb{1}[\text{asm}(i) = \text{asm}(j) \geq 0]}{\sum_{(i,j) \in \mathbf{W}} |w_{ij}|}
+$$ {#eq-modularity}
+
+where $\text{asm}(i)$ returns the assemblage index of node $i$ (or $-1$ if unassigned). Modularity ranges from 0 (all weight between assemblages or on unassigned nodes) to 1 (all weight within assemblages). A random graph yields modularity approximately equal to the fraction of edges within assemblages by chance, which depends on assemblage sizes.
+
+### Response Rank (SVD) and Participation Ratio {#sec-participation-ratio}
+
+Response rank quantifies the functional diversity of the system's response to external stimuli. After running a simulation to steady state, the system is probed with $P$ stimulus patterns (default $P = 10$). For each probe $p$, the mean activation of each assemblage is recorded, yielding a response matrix $\mathbf{R} \in \mathbb{R}^{K \times P}$ (assemblages by probes).
+
+The mean-centred response matrix is decomposed via SVD:
+
+$$
+\mathbf{R} - \bar{\mathbf{R}} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top
+$$ {#eq-svd}
+
+where $\mathbf{\Sigma} = \mathrm{diag}(\sigma_1, \sigma_2, \ldots)$ with $\sigma_1 \geq \sigma_2 \geq \cdots \geq 0$.
+
+**Threshold-based rank.** The number of singular values exceeding a fraction $f$ of the largest:
+
+$$
+\text{rank}_f = \left|\{k : \sigma_k > f \cdot \sigma_1\}\right|
+$$ {#eq-rank}
+
+This is computed at thresholds $f \in \{0.001, 0.005, 0.01, 0.05, 0.10\}$, providing a multi-resolution view of the response spectrum.
+
+**Participation ratio.** A threshold-free measure of effective dimensionality:
+
+$$
+\text{PR} = \frac{\left(\sum_k \sigma_k^2\right)^2}{\sum_k \sigma_k^4}
+$$ {#eq-pr}
+
+PR equals 1 when a single singular value dominates (all assemblages respond identically up to scale) and equals $K$ when all singular values are equal (maximally diverse responses). PR is robust to the threshold parameter that complicates rank-based measures.
+
+Two types of stimuli are used: **Gaussian probes** (localised spatial bumps with random centres) and **uniform probes** (spatially unstructured random vectors drawn from $\mathrm{Uniform}(-0.3, 0.3)^N$). The uniform probes serve as a spatial deconfound: if assemblage differentiation is purely geometric (reflecting spatial separation), then uniform probes will elicit similar responses from all assemblages, yielding $\text{PR} \approx 1$. Genuine functional differentiation produces $\text{PR} > 1$ under both stimulus types.
+
+### Response Diversity
+
+Response diversity (used in Paper 3, Experiment 12) is a proxy measure of functional heterogeneity computed without explicit probing. For each assemblage, a gain score is computed as the product of mean per-node learning rate and mean internal weight magnitude:
+
+$$
+g_k = \bar{\eta}_k \cdot \overline{|w|}_k^{\text{internal}}
+$$ {#eq-gain}
+
+Response diversity is the standard deviation of these gains across assemblages:
+
+$$
+\text{RD} = \mathrm{sd}(g_1, g_2, \ldots, g_K)
+$$ {#eq-response-div}
+
+This metric is computationally cheaper than SVD-based measures but confounds structural and parametric differentiation.
+
+### Eta Divergence
+
+Eta divergence measures the degree to which assemblages have differentiated their learning dynamics:
+
+$$
+D_\eta = \mathrm{Var}\!\left(\bar{\eta}_1, \bar{\eta}_2, \ldots, \bar{\eta}_K\right)
+$$ {#eq-eta-div}
+
+where $\bar{\eta}_k = \frac{1}{|\mathcal{A}_k|} \sum_{i \in \mathcal{A}_k} \eta_i$ is the mean learning rate of assemblage $k$. This is zero when all assemblages have the same mean eta (homogeneous learning rules) and positive when assemblages have differentiated into distinct learning regimes.
+
+### Capacity Diversity
+
+Capacity diversity (Paper 3) uses PCA followed by $k$-means clustering on assemblage centroid weight vectors to determine the optimal number of distinct functional profiles. Each assemblage's centroid vector (@eq-centroid) is projected into a reduced-dimensional space via PCA (retaining up to 10 components), then clustered for $k = 2, \ldots, K$ with silhouette scoring to select the optimal $k$. A result of $k = 1$ indicates all assemblages are functional clones; $k > 1$ indicates genuine diversity.
+
+## Computational Infrastructure {#sec-infrastructure}
+
+### Ray Cluster
+
+All experiments are executed on a Ray cluster, with each simulation run dispatched as an independent `@ray.remote` task. This provides embarrassingly parallel scaling across available CPUs. The cluster job scripts (`cluster_job.py` and variants) implement:
+
+- **Task-level parallelism.** Each (condition, seed) pair is an independent Ray task. For a typical experiment sweep of 7 parameter values $\times$ 7 parameter values $\times$ 20 seeds $= 980$ jobs, all 980 tasks are submitted simultaneously and scheduled by Ray across available workers.
+
+- **Progress tracking.** Completion is monitored via `ray.wait()` with batched collection (50 tasks per batch, 60-second timeout), providing real-time progress reporting including estimated time remaining.
+
+- **Resume capability.** Each task checks for the existence of its output file before executing, allowing interrupted experiments to be resumed without re-running completed jobs.
+
+### Output Format
+
+All experimental data is written as Apache Parquet files, one per (condition, seed) pair. After all tasks complete, per-job files are merged into a single `session_metrics.parquet` file per experiment using PyArrow's `concat_tables`. This two-stage approach (per-job write, post-hoc merge) ensures fault tolerance: if a task fails, only that task's data is lost.
+
+Each row in the merged output represents one census taken at the end of a session (a session consists of $S$ timesteps, default $S = 300$). Columns include all metrics described in @sec-metrics along with the full parameter vector, enabling post-hoc filtering and grouping without separate metadata files.
+
+### Seed Management and Reproducibility
+
+All random state is managed through NumPy's `default_rng(seed)` generator. Each simulation receives an integer seed (typically 0--19 for 20-seed experiments), which deterministically controls:
+
+- Hotspot placement (for $K > 4$)
+- Initial connectivity and weight values
+- Noise injection sequences
+- Encounter pair sampling
+- Perturbation events (using offset seeds, e.g., `seed + 99999`)
+- Probe stimuli (using offset seeds, e.g., `seed + 777777`)
+
+The use of offset seeds for different random processes within the same simulation ensures that perturbation and probing randomness is independent of simulation randomness while remaining reproducible.
+
+## Standard Parameters {#sec-params}
+
+@tbl-params lists the default parameter values shared across all five papers. Paper-specific deviations are documented in the relevant chapters.
+
+| Parameter | Symbol | Default | Justification |
+|:---|:---:|:---:|:---|
+| Grid size | $G$ | 20 | $N = 400$ nodes; sufficient for 3 assemblages with spatial separation. Papers 4 and 4S also test $G \in \{15, 25, 30\}$. |
+| Number of hotspots | $K$ | 3 | Three energy sources provide a minimal multi-assemblage scenario with asymmetric placement. |
+| Hotspot energy | $E_{\text{hot}}$ | 0.3 | Produces clear activity gradients without saturating activations. |
+| Hotspot radius | $r_{\text{hot}}$ | 0.2 | Each hotspot covers approximately 12% of the field area ($\pi r^2 \approx 0.126$); hotspots overlap minimally at the default separation. |
+| Base noise | $\sigma_{\text{base}}$ | 0.02 | Background activity floor; an order of magnitude below hotspot energy. |
+| Learning rate | $\eta$ | 0.05 | Balances learning speed against stability; higher values cause weight saturation, lower values produce insufficient differentiation within 200 sessions. |
+| Weight decay | $\lambda$ | 0.002 | Prevents weight explosion while allowing strong connections to persist. At $\lambda = 0.002$, a connection loses $\sim$33% of its magnitude over 200 steps without reinforcement. |
+| Weight maximum | $w_{\max}$ | 1.0 | Normalised scale; all bounding strategies map to $[-1, 1]$. |
+| Encounter rate | $R$ | 20 | Per-step edge creation attempts. At 300 steps/session, this yields up to 6,000 encounter attempts per session. |
+| Locality | $\ell$ | 0.10 | Spatial scale of encounters. At $\ell = 0.10$ on a unit square, the encounter kernel covers approximately 3% of the field area per standard deviation, favouring local interactions. |
+| Prune threshold | $\theta_{\text{prune}}$ | $10^{-4}$ | Removes edges contributing negligibly to dynamics. See @sec-pruning for the confound this introduces. |
+| Sessions | --- | 200 | Number of census intervals per run (300 steps each = 60,000 total steps). Paper 3, Experiment 6 uses 1,000 sessions. |
+| Steps per session | $S$ | 300 | Sufficient for activity patterns to stabilise between censuses. |
+| Seeds per condition | --- | 20 | Provides adequate statistical power for between-condition comparisons with nonparametric tests. |
+| Meta-strength | $\mu$ | 0.0 | Disabled by default; typical nonzero values are $10^{-4}$ to $0.05$. |
+| Target activity | $a^*$ | 0.15 | Activity level that leaves $\eta$ unchanged under global target. |
+| Eta bounds | $[\eta_{\min}, \eta_{\max}]$ | $[0.005, 0.20]$ | A 40-fold range permits substantial differentiation. The minimum prevents complete learning shutdown; the maximum prevents instability. |
+| Inhibitor diffusion | $D$ | 0.05 | Moderate diffusion; capped at 0.20 for CFL stability of the discrete Laplacian. |
+| Inhibitor decay | $\delta$ | 0.10 | 10% per step; inhibitor has an effective half-life of $\sim$7 steps. |
+| Inhibitor emission rate | $\rho$ | 0.01 | Low emission prevents runaway inhibitor accumulation. |
+| Inhibitor coupling | $\kappa$ | 0.0 | Disabled by default; typical nonzero values are $5 \times 10^{-4}$ to $0.05$. |
+| EMA rate | $\alpha$ | 0.05 | Activity history smoothing; equivalent to a $\sim$20-step memory window. |
+
+: Default parameter values for the simulation substrate. {#tbl-params}

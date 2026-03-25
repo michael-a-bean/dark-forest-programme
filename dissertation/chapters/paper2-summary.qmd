@@ -1,0 +1,22 @@
+# Paper 2: Locality-Dependent Coexistence Mechanisms
+
+## Context
+
+If multiplicity is unstable (Paper 1), what conditions permit stable
+coexistence?
+
+## Key Findings
+
+**Sharp phase transition.** Encounter locality $\ell \approx 0.10$--$0.15$
+separates coexistence (6--9 assemblages) from monopoly.
+
+**Two mechanisms.** Below the transition: niche partitioning. Above:
+competitive exclusion --- the "Dark Forest" dynamic.
+
+**Stability.** Coexistence at tight locality is genuinely stable to 500
+sessions. Paper 4S showed the transition point may shift without pruning.
+
+## Contribution
+
+The coexistence--monopoly phase transition, governed by a single spatial
+parameter. This establishes the ecological context for the programme.

@@ -1,0 +1,151 @@
+# Introduction
+
+## The Question
+
+What is the minimal substrate that produces genuine functional
+differentiation? Not mere spatial separation, not clonal repetition, but the
+emergence of qualitatively different kinds from initially identical
+components. This question sits at the intersection of three fields:
+computational self-organisation, philosophy of individuation, and theoretical
+neuroscience. This dissertation approaches it through a series of
+computational experiments on Hebbian neural networks, interpreted through the
+philosophical frameworks of Gilbert Simondon, Gilles Deleuze, and Manuel
+DeLanda.
+
+## Positioning
+
+This programme of research sits at the intersection of several
+independently developing literatures: efficiency-fairness tradeoffs in
+neural network compression (Hooker et al. 2019; Tran et al. 2022), neural
+population dimensionality theory (Stringer et al. 2019; Gao et al. 2017),
+critical period dynamics in both biological and artificial systems (Hensch
+2005; Achille et al. 2019), autopoietic theory and operational closure
+(Maturana & Varela 1980; Beer 2020), and the open-ended evolution problem
+(Adams et al. 2017; Banzhaf et al. 2016). While each literature has
+identified aspects of the phenomena we study, no prior work has unified
+these under a single mechanistic framework or characterised the
+compounding dynamics that emerge when pruning interacts with consolidation
+and metaplastic regulation across time on a self-organising substrate.
+
+Several of the programme's findings converge with results established
+independently in these literatures --- convergence that we interpret not as
+redundancy but as evidence that the underlying phenomena are real and
+domain-general, not artifacts of any single methodology. Within this
+convergent landscape, the programme identifies specific quantitative
+results (the disordinal pruning interaction, the hard clip irreducibility,
+the critical threshold boundaries, the grid-size scaling law) and a
+philosophical architecture (the Simondon-Deleuze-DeLanda diagnostic
+sequence) that are genuinely new.
+
+## Motivation
+
+Biological systems exhibit a striking capacity for self-organised
+differentiation. From a single fertilised cell, an organism develops tissues
+with qualitatively different functions. From a population of identical
+neurons, a cortex develops regions with distinct computational specialisms.
+These processes share a common structure: initially homogeneous components,
+subject to local interactions and boundary conditions, spontaneously develop
+persistent functional differences.
+
+Artificial life research has demonstrated many forms of self-organisation ---
+pattern formation, morphogenesis, evolutionary dynamics --- but functional
+differentiation from identical components remains poorly understood. Most
+computational models either impose differentiation through initial conditions
+(breaking symmetry by hand) or achieve it through optimisation (gradient
+descent, evolutionary selection). The question of whether differentiation
+can emerge from *purely local, optimisation-free dynamics* is largely open.
+
+## The Substrate
+
+This programme adopts a deliberate constraint: use the simplest possible
+learning rule and ask what it can and cannot produce. The substrate is a
+Hebbian neural network --- nodes on a two-dimensional grid, connected by
+sparse, activity-dependent weights updated by the standard Hebbian rule.
+There is no optimisation objective, no error signal, no backpropagation.
+Structure emerges entirely from the interaction of Hebbian reinforcement,
+multiplicative decay, spatial locality, and boundary conditions.
+
+Each paper adds one mechanism to this substrate and asks what changes:
+
+1. **Paper 1** adds nothing --- it asks what pure Hebbian dynamics produce.
+2. **Paper 2** varies encounter locality and maps the coexistence landscape.
+3. **Paper 3** tests three interventions for producing differentiation within
+   the Hebbian framework. All fail.
+4. **Paper 4** introduces per-node metaplastic learning rates with
+   homeostatic adjustment.
+5. **Paper 4S** examines whether the programme's assumptions (pruning,
+   metrics) were sound.
+
+## The Philosophical Framework
+
+Three thinkers structure the interpretation throughout the programme.
+
+### Simondon: Individuation as Process
+
+Gilbert Simondon's theory of individuation provides the foundational
+ontology. For Simondon, individuation is not the imposition of form on matter
+(hylomorphism) but the resolution of a metastable pre-individual field
+through *transduction* --- a process that propagates from a structural
+singularity, restructuring the field as it advances. The individual and its
+*associated milieu* co-emerge; neither precedes the other.
+
+Key Simondonian concepts deployed in this programme:
+
+- **Metastability**: a system poised between equilibrium states, containing
+  latent energy that can drive individuation.
+- **Transduction**: propagation of a structuration that resolves
+  metastability.
+- **Mould** (*moule*): an external constraint that imposes form. Pruning
+  functions as an unintended mould (Paper 4S).
+- **Limit condition** (*condition limite*): a boundary that constrains the
+  space of possible individuations without imposing specific form. The hard
+  weight clip functions as a limit condition (Paper 4S).
+- **Modulation**: continuous variation of internal parameters. The
+  metaplastic dynamics modulate learning rates (Paper 4).
+
+### Deleuze: Differenciation and Repetition
+
+Gilles Deleuze's ontology of difference provides the criterion for what
+counts as genuine differentiation. Deleuze distinguishes *individuation*
+(the emergence of discrete entities) from *differenciation* (the
+actualisation of virtual structure into qualitatively distinct kinds).
+Papers 1--3 demonstrate individuation without differenciation; Paper 4
+identifies the conditions under which differenciation begins.
+
+The programme retains Deleuze's spelling (*differenciation*) to mark the
+ontological concept, distinguishing it from the empirically measured
+divergence of properties (*differentiation*).
+
+### DeLanda: Capacities and Assemblages
+
+Manuel DeLanda operationalises Deleuze's framework for empirical
+application. His criterion for genuine differentiation requires that
+components possess qualitatively different *capacities* --- different open
+lists of what they can do and be affected by --- not merely different values
+of the same parameters. The response rank metric (SVD effective rank of the
+perturbation-response matrix) operationalises this criterion: rank $> 1$
+indicates assemblages that transform inputs through genuinely distinct
+mappings, not just scaled versions of the same response.
+
+## The Arc
+
+The programme proceeds through five stages:
+
+1. **Individuation** (Paper 1): Pure Hebbian dynamics produce spontaneous
+   assemblage formation. Multiplicity is unstable under standard pruning.
+
+2. **Coexistence** (Paper 2): Encounter locality controls a phase transition
+   between monopoly and stable coexistence.
+
+3. **Self-sealing** (Paper 3): Assemblages are structurally incapable of
+   differentiation. Every intervention within the Hebbian framework fails.
+   The substrate achieves individuation but not differenciation.
+
+4. **Differentiation** (Paper 4): Local homeostatic metaplasticity
+   stabilises and amplifies functional differentiation that Hebbian dynamics
+   spontaneously produce on spatially structured substrates.
+
+5. **Methodological reckoning** (Paper 4S): The pruning threshold and CCD
+   metric were both confounded. Correcting these reveals that functional
+   differentiation is substantially stronger than originally measured, and
+   that the hard weight clip is a qualitatively irreducible limit condition.

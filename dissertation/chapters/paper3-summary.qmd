@@ -1,0 +1,23 @@
+# Paper 3: Coexistence Without Differentiation
+
+## Context
+
+Papers 1--2 produce individuation and coexistence, but assemblages are
+structural clones. Can any mechanism within the Hebbian framework produce
+functional differentiation?
+
+## Key Findings
+
+**All interventions fail.** Temporal variation, anti-Hebbian inhibition, and
+edge injection all fail across 1,400 simulations.
+
+**Self-sealing.** The substrate seals through topological isolation
+(cross-assemblage edges decay within 15 sessions) and functional absorption
+(maintained edges are co-opted). Paper 4S showed the timeline is
+pruning-accelerated.
+
+## Contribution
+
+The identification of self-sealing as a structural property of Hebbian
+individuation, establishing that differenciation requires mechanisms beyond
+the basic Hebbian rule.

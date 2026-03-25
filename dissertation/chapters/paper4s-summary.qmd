@@ -1,0 +1,33 @@
+# Paper 4S: Pruning as Confound
+
+## Context
+
+Throughout the programme, edges below $|w| < 10^{-4}$ were pruned each step.
+This paper examines whether that choice was load-bearing.
+
+## Key Findings
+
+**Disordinal interaction.** Pruning reverses the bound-type ranking. With
+pruning: hard $3.9$, tanh $0.2$. Without: tanh $7.0$, hard $5.6$. The
+interaction is cap-independent and amplifies with grid size.
+
+**Critical threshold.** Between $10^{-6}$ and $10^{-5}$, precisely the
+soft-bounded equilibrium weight range. Hard bounds insensitive.
+
+**CCD invalid.** Indistinguishable from spatial null ($p = 1.0$).
+
+**Pruning destroyed diversity.** Response rank $1.0$ (pruned) $\to$ $5.6$
+(no-prune). Robust across SVD thresholds. Participation ratio $2.1$--$3.3$.
+
+**Hard clip irreducibility.** Non-monotonic steepness: $k = 1$ and hard
+clip both produce assemblages; $k = 2$--$50$ produces monopoly. The hard
+clip is a Simondonian *limit condition*.
+
+**Three regimes.** Topological (rank $1$--$2$), structural (rank $5.6$),
+metaplastic (rank $5.6$, $F = 4.9$). Nested.
+
+## Contribution
+
+The methodological reckoning that strengthened the programme. Pruning
+confound identification has implications for any model that removes weak
+connections.
