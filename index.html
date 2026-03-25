@@ -1,27 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="refresh" content="0; url=META-PAPER.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>The Dark Forest Programme</title>
   <style>
-    body { font-family: -apple-system, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-    a { color: #2563eb; }
-    h1 { font-size: 1.5em; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #1a1a1a; line-height: 1.6; }
+    .header { background: #1a1a2e; color: #e0e0e0; padding: 3rem 2rem; text-align: center; }
+    .header h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; color: #fff; }
+    .header p { font-size: 1.1rem; max-width: 700px; margin: 0 auto; color: #b0b0b0; }
+    .header .subtitle { font-style: italic; color: #8899aa; margin-top: 0.5rem; }
+    .nav { background: #16213e; padding: 0.75rem 2rem; text-align: center; position: sticky; top: 0; z-index: 100; }
+    .nav a { color: #8899aa; text-decoration: none; margin: 0 1rem; font-size: 0.9rem; }
+    .nav a:hover { color: #fff; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+    .section { margin-bottom: 3rem; }
+    .section h2 { font-size: 1.4rem; border-bottom: 2px solid #e0e0e0; padding-bottom: 0.5rem; margin-bottom: 1rem; color: #1a1a2e; }
+    .card-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+    .card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 1.25rem; transition: border-color 0.2s; }
+    .card:hover { border-color: #2563eb; }
+    .card a { text-decoration: none; color: inherit; display: block; }
+    .card .title { font-weight: 600; color: #2563eb; margin-bottom: 0.25rem; }
+    .card .desc { font-size: 0.9rem; color: #555; }
+    .badge { display: inline-block; font-size: 0.7rem; padding: 0.15rem 0.5rem; border-radius: 3px; margin-right: 0.5rem; font-weight: 600; }
+    .badge-paper { background: #dbeafe; color: #1e40af; }
+    .badge-process { background: #fef3c7; color: #92400e; }
+    .badge-meta { background: #d1fae5; color: #065f46; }
+    .callout { background: #f8f9fa; border-left: 4px solid #1a1a2e; padding: 1rem 1.25rem; margin: 1.5rem 0; font-size: 0.95rem; }
+    .callout strong { color: #1a1a2e; }
+    .footer { background: #f0f0f0; padding: 1.5rem 2rem; text-align: center; font-size: 0.85rem; color: #666; margin-top: 3rem; }
+    .footer a { color: #2563eb; }
+    @media (min-width: 600px) { .card-grid-2 { grid-template-columns: 1fr 1fr; } }
   </style>
 </head>
 <body>
+
+<div class="header">
   <h1>The Dark Forest Programme</h1>
-  <p>Redirecting to the <a href="META-PAPER.html">meta-paper</a>...</p>
-  <h2>Quick Links</h2>
-  <ul>
-    <li><a href="META-PAPER.html">META-PAPER: AI as Research Infrastructure</a></li>
-    <li><a href="papers/04s-pruning-confound/paper.html">Paper 4S: Pruning as Confound</a></li>
-    <li><a href="papers/04-metaplasticity/paper.html">Paper 4: Local Homeostasis Stabilises Differentiation</a></li>
-    <li><a href="papers/01-emergent-structure/paper.html">Paper 1: Emergent Structure</a></li>
-    <li><a href="papers/02-coexistence/paper.html">Paper 2: Coexistence</a></li>
-    <li><a href="papers/03-self-sealing/paper.html">Paper 3: Self-Sealing</a></li>
-    <li><a href="dissertation/_book/index.html">Dissertation (book format)</a></li>
-  </ul>
+  <p>A research programme in computational artificial life that grew from a late-night conversation about Deleuze and Hebbian networks.</p>
+  <p class="subtitle">Built with GEN / <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure" style="color:#8899aa">PAI</a> / Claude Code &middot; 12 days &middot; ~15,000 simulation jobs</p>
+</div>
+
+<div class="nav">
+  <a href="#papers">Papers</a>
+  <a href="#process">Process</a>
+  <a href="#dissertation">Dissertation</a>
+  <a href="META-PAPER.html">Meta-Paper</a>
+  <a href="https://github.com/michael-a-bean/dark-forest-programme">GitHub</a>
+</div>
+
+<div class="container">
+
+  <div class="callout">
+    <strong>What is real.</strong> The code runs, the data is real, the experiments executed on a physical cluster.
+    <strong>What is simulated.</strong> The academic process — committee meetings, peer review, defence — was simulated using AI agents. No papers were submitted to any journal.
+  </div>
+
+  <div class="section" id="meta">
+    <h2>Start Here</h2>
+    <div class="card-grid">
+      <div class="card"><a href="META-PAPER.html">
+        <span class="badge badge-meta">META</span>
+        <span class="title">AI as Research Infrastructure</span>
+        <span class="desc">The full story: how a conversation about Deleuze became a five-paper programme, how the programme discovered a confound in its own methods, and how a literature review revealed half its findings had been independently established elsewhere.</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="section" id="papers">
+    <h2>The Papers</h2>
+    <div class="card-grid">
+      <div class="card"><a href="papers/01-emergent-structure/paper.html">
+        <span class="badge badge-paper">PAPER 1</span>
+        <span class="title">Emergent Structure in Optimization-Free Hebbian Networks</span>
+        <span class="desc">Spontaneous assemblage formation from noise. Three dynamical regimes. Multiplicity is unstable under pruning.</span>
+      </a></div>
+      <div class="card"><a href="papers/02-coexistence/paper.html">
+        <span class="badge badge-paper">PAPER 2</span>
+        <span class="title">Locality-Dependent Coexistence Mechanisms</span>
+        <span class="desc">A sharp phase transition between coexistence and monopoly, controlled by encounter locality. The "Dark Forest" dynamic.</span>
+      </a></div>
+      <div class="card"><a href="papers/03-self-sealing/paper.html">
+        <span class="badge badge-paper">PAPER 3</span>
+        <span class="title">Coexistence Without Differentiation: Self-Sealing</span>
+        <span class="desc">Every intervention within the Hebbian framework fails. Cross-assemblage edges decay within 15 sessions. The substrate seals.</span>
+      </a></div>
+      <div class="card"><a href="papers/04-metaplasticity/paper.html">
+        <span class="badge badge-paper">PAPER 4</span>
+        <span class="title">Local Homeostasis Stabilises Differentiation</span>
+        <span class="desc">Per-node metaplasticity produces response rank 5.6 and eta divergence F=4.9. Critical period dynamics. The "productive fracture."</span>
+      </a></div>
+      <div class="card"><a href="papers/04s-pruning-confound/paper.html">
+        <span class="badge badge-paper">PAPER 4S</span>
+        <span class="title">Pruning as Confound</span>
+        <span class="desc">Pruning reverses the ranking of approaches. The disordinal interaction. CCD is spatially confounded. Response rank validated across SVD thresholds.</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="section" id="process">
+    <h2>The Process</h2>
+    <div class="card-grid card-grid-2">
+      <div class="card"><a href="process/committee-meetings/03-r3-briefing.md">
+        <span class="badge badge-process">COMMITTEE</span>
+        <span class="title">Committee Briefings</span>
+        <span class="desc">5 meetings with three AI personas. Disagreements that improved the work.</span>
+      </a></div>
+      <div class="card"><a href="process/peer-review/paper4s/editorial-decision.md">
+        <span class="badge badge-process">PEER REVIEW</span>
+        <span class="title">Editorial Decisions</span>
+        <span class="desc">5 rounds of simulated peer review. 900 revision jobs prompted by reviewer concerns.</span>
+      </a></div>
+      <div class="card"><a href="process/audit/academic-audit-report.md">
+        <span class="badge badge-process">AUDIT</span>
+        <span class="title">Academic Integrity Audit</span>
+        <span class="desc">7-phase audit: citations, data, statistics, consistency, philosophy, reproducibility, prose.</span>
+      </a></div>
+      <div class="card"><a href="dissertation/so-what-analysis.md">
+        <span class="badge badge-process">LITERATURE</span>
+        <span class="title">"So What?" Analysis</span>
+        <span class="desc">14 agents, 5 API backends, ~100 papers. The honest reckoning with prior art.</span>
+      </a></div>
+      <div class="card"><a href="dissertation/defence-prep.md">
+        <span class="badge badge-process">DEFENCE</span>
+        <span class="title">Mock Defence Preparation</span>
+        <span class="desc">The 5 hardest questions an examiner could ask, with answers.</span>
+      </a></div>
+      <div class="card"><a href="dissertation/so-what-analysis-references.md">
+        <span class="badge badge-process">REFERENCES</span>
+        <span class="title">Literature Reference Catalogue</span>
+        <span class="desc">~100 papers with DOIs organised by domain: ML pruning, neural dimensionality, ALife, philosophy.</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="section" id="dissertation">
+    <h2>The Dissertation</h2>
+    <div class="card-grid">
+      <div class="card"><a href="dissertation/_book/index.html">
+        <span class="badge badge-meta">BOOK</span>
+        <span class="title">Full Dissertation (Book Format)</span>
+        <span class="desc">Introduction, Methods, Paper Summaries, Synthesis, Conclusion — rendered as a navigable Quarto book.</span>
+      </a></div>
+    </div>
+    <div class="card-grid card-grid-2" style="margin-top: 1rem;">
+      <div class="card"><a href="dissertation/_book/chapters/introduction.html">
+        <span class="title">Introduction</span>
+        <span class="desc">The question, the philosophical framework, the arc.</span>
+      </a></div>
+      <div class="card"><a href="dissertation/_book/chapters/methods.html">
+        <span class="title">Methods</span>
+        <span class="desc">Substrate, Hebbian rule, encounters, pruning, metaplasticity, metrics.</span>
+      </a></div>
+      <div class="card"><a href="dissertation/_book/chapters/synthesis.html">
+        <span class="title">Synthesis</span>
+        <span class="desc">Convergent frameworks, cross-cutting themes, three regimes of individuation.</span>
+      </a></div>
+      <div class="card"><a href="dissertation/_book/chapters/conclusion.html">
+        <span class="title">Conclusion</span>
+        <span class="desc">Contributions, limitations, broader implications, future directions.</span>
+      </a></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Run the Code</h2>
+    <div class="card-grid card-grid-2">
+      <div class="card"><a href="https://github.com/michael-a-bean/dark-forest-programme/blob/main/examples/quickstart.py">
+        <span class="title">quickstart.py</span>
+        <span class="desc">40-line minimal example. Instantiate the substrate and run it.</span>
+      </a></div>
+      <div class="card"><a href="https://github.com/michael-a-bean/dark-forest-programme/tree/main/src/substrate">
+        <span class="title">Substrate Source</span>
+        <span class="desc">MultiField, MetaplasticField, TemporalField — the computational core.</span>
+      </a></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="footer">
+  <p>
+    <a href="https://github.com/michael-a-bean/dark-forest-programme">GitHub Repository</a> &middot;
+    Built with <a href="https://github.com/danielmiessler/Personal_AI_Infrastructure">GEN/PAI</a> + <a href="https://claude.ai/claude-code">Claude Code</a> &middot;
+    Code: MIT &middot; Papers: CC-BY 4.0
+  </p>
+  <p style="margin-top: 0.5rem; color: #999; font-size: 0.8rem;">
+    All academic processes documented here were simulated using AI agents. The computational experiments and their results are real.
+  </p>
+</div>
+
 </body>
 </html>
