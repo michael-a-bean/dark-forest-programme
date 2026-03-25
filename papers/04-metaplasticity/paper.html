@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Michael Bean">
+
+<title>Local Homeostasis Stabilises Differentiation in Hebbian Substrates</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paper_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="paper_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paper_files/libs/bootstrap/bootstrap-175f587307e0cd48ee646de96f0af297.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#substrate" id="toc-substrate" class="nav-link" data-scroll-target="#substrate">Substrate</a></li>
+  <li><a href="#metaplastic-learning-rate" id="toc-metaplastic-learning-rate" class="nav-link" data-scroll-target="#metaplastic-learning-rate">Metaplastic learning rate</a></li>
+  <li><a href="#inhibitor-field" id="toc-inhibitor-field" class="nav-link" data-scroll-target="#inhibitor-field">Inhibitor field</a></li>
+  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
+  <li><a href="#experimental-design" id="toc-experimental-design" class="nav-link" data-scroll-target="#experimental-design">Experimental design</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#the-turing-hypothesis-fails" id="toc-the-turing-hypothesis-fails" class="nav-link" data-scroll-target="#the-turing-hypothesis-fails">The Turing hypothesis fails</a></li>
+  <li><a href="#local-homeostatic-targets-prevent-monopoly" id="toc-local-homeostatic-targets-prevent-monopoly" class="nav-link" data-scroll-target="#local-homeostatic-targets-prevent-monopoly">Local homeostatic targets prevent monopoly</a></li>
+  <li><a href="#persistence-stable-not-transient" id="toc-persistence-stable-not-transient" class="nav-link" data-scroll-target="#persistence-stable-not-transient">Persistence: stable, not transient</a></li>
+  <li><a href="#critical-period-the-sequence-of-individuation-and-communication" id="toc-critical-period-the-sequence-of-individuation-and-communication" class="nav-link" data-scroll-target="#critical-period-the-sequence-of-individuation-and-communication">Critical period: the sequence of individuation and communication</a></li>
+  <li><a href="#perturbation-resilience-the-differentiated-state-is-an-attractor" id="toc-perturbation-resilience-the-differentiated-state-is-an-attractor" class="nav-link" data-scroll-target="#perturbation-resilience-the-differentiated-state-is-an-attractor">Perturbation resilience: the differentiated state is an attractor</a></li>
+  <li><a href="#robustness" id="toc-robustness" class="nav-link" data-scroll-target="#robustness">Robustness</a></li>
+  <li><a href="#geometric-vs.-functional-differentiation" id="toc-geometric-vs.-functional-differentiation" class="nav-link" data-scroll-target="#geometric-vs.-functional-differentiation">Geometric vs.&nbsp;functional differentiation</a></li>
+  <li><a href="#bound-type-sensitivity-discretisation-as-mechanism" id="toc-bound-type-sensitivity-discretisation-as-mechanism" class="nav-link" data-scroll-target="#bound-type-sensitivity-discretisation-as-mechanism">Bound-type sensitivity: discretisation as mechanism</a></li>
+  <li><a href="#homeostatic-timescale-robustness" id="toc-homeostatic-timescale-robustness" class="nav-link" data-scroll-target="#homeostatic-timescale-robustness">Homeostatic timescale robustness</a></li>
+  <li><a href="#transplant-test-differentiation-is-context-dependent" id="toc-transplant-test-differentiation-is-context-dependent" class="nav-link" data-scroll-target="#transplant-test-differentiation-is-context-dependent">Transplant test: differentiation is context-dependent</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#the-three-way-comparison" id="toc-the-three-way-comparison" class="nav-link" data-scroll-target="#the-three-way-comparison">The three-way comparison</a></li>
+  <li><a href="#why-turing-partially-fails-on-hebbian-substrates" id="toc-why-turing-partially-fails-on-hebbian-substrates" class="nav-link" data-scroll-target="#why-turing-partially-fails-on-hebbian-substrates">Why Turing partially fails on Hebbian substrates</a></li>
+  <li><a href="#philosophical-grounding-a-productive-fracture" id="toc-philosophical-grounding-a-productive-fracture" class="nav-link" data-scroll-target="#philosophical-grounding-a-productive-fracture">Philosophical grounding: a productive fracture</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#data-and-code-availability" id="toc-data-and-code-availability" class="nav-link" data-scroll-target="#data-and-code-availability">Data and Code Availability</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Local Homeostasis Stabilises Differentiation in Hebbian Substrates</h1>
+<p class="subtitle lead">Critical Periods, Attractor Resilience, and the Limits of Turing Morphogenesis</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Michael Bean </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Independent Researcher
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>Papers 1–3 of this programme demonstrated that pure Hebbian substrates produce individuation—assemblages emerge spontaneously from noise—but are structurally incapable of differenciation<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: self-sealing eliminates the prerequisites for lateral inhibition and inter-unit communication. Here we test the theoretically motivated hypothesis that a Turing morphogenesis analog (per-node metaplastic learning rate + diffusing inhibitor field) can break this barrier. Under hard <span class="math inline">\(\eta\)</span> bounds, the Turing mechanism fails completely: inhibitor coupling is purely destructive regardless of sign, strength, or coupling topology. Under soft <span class="math inline">\(\eta\)</span> bounds, coupling is partially rescued but remains inferior to a simpler mechanism. Replacing the global homeostatic target with a <em>local</em> target—each node regulates toward its spatial neighbors’ mean activity—transforms the system without requiring any inter-assemblage communication. Local homeostatic metaplasticity stabilises and amplifies functional differentiation among initially identical assemblages, sustained over 1000 sessions with no decay. A perturbation-response matrix protocol reveals that assemblages develop genuinely independent functional dimensions: response rank reaches <span class="math inline">\(5.6\)</span> (over five independent response modes) under hard bounds without pruning, compared to <span class="math inline">\(\approx 1.2\)</span> under standard maintenance (Paper 4S). The metaplastic mechanism adds learning-rate divergence between assemblages (<span class="math inline">\(F = 4.9\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>, <span class="math inline">\(\eta^2_p = 0.83\)</span>), producing <span class="math inline">\(10+\)</span> assemblages with distinct functional profiles. The system exhibits critical period dynamics: inter-assemblage coupling introduced after differentiation preserves diversity, while coupling from the start destroys it. We interpret these findings through a triple philosophical framework: Simondon’s transduction explains the mechanism, Deleuze’s ontology of problems explains why differentiation occurs, and DeLanda’s capacity criterion distinguishes genuine functional differentiation from mere spatial separation. The work identifies a productive fracture: the hard weight clip functions as a limit condition in Simondon’s sense—a qualitatively irreducible boundary condition that creates the scaffold for metaplastic differentiation (Paper 4S).</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>The question motivating this programme is deceptively simple: <em>what is the minimal substrate that produces genuine functional differentiation?</em> Not mere spatial separation, not clonal repetition, but the emergence of qualitatively different kinds from initially identical components.</p>
+<p>Papers 1–3 established the baseline. A Hebbian substrate—nodes on a 2D grid connected by sparse, activity-dependent weights updated by a standard Hebbian rule—spontaneously produces <em>individuation</em>: coherent assemblages emerge from noise, consolidate through self-reinforcing weight dynamics, and persist as distinct entities <span class="citation" data-cites="watson2016evolutionary">(<a href="#ref-watson2016evolutionary" role="doc-biblioref">Watson and Szathmáry 2016</a>)</span>. But every assemblage is a structural clone of every other. They differ in spatial position but not in internal organisation, connectivity profile, or functional capacity.</p>
+<p>The mechanism responsible is <em>self-sealing</em>. As assemblages consolidate, they strengthen internal connections and prune external ones. The self-reinforcing Hebbian dynamic creates an absorbing boundary: once sealed, no local perturbation can reopen the assemblage to external influence. Paper 3 tested every intervention available within the Hebbian framework—anti-Hebbian learning, cross-assemblage edge injection, temporal variation of the energy landscape—and all failed. Self-sealing eliminates the two prerequisites for differenciation identified by the pattern formation literature: lateral inhibition and inter-unit communication <span class="citation" data-cites="turing1952chemical gierer1972theory">(<a href="#ref-turing1952chemical" role="doc-biblioref">Turing 1952</a>; <a href="#ref-gierer1972theory" role="doc-biblioref">Gierer and Meinhardt 1972</a>)</span>.</p>
+<p>In the Deleuzian framework that structures this programme, self-sealing corresponds to <em>bare repetition</em>: the same intensive process applied identically at multiple locations produces identical copies. <em>Complex repetition</em>—differenciation—requires that the process itself change, producing genuinely novel structures rather than spatial duplicates <span class="citation" data-cites="deleuze1994difference delanda2002intensive">(<a href="#ref-deleuze1994difference" role="doc-biblioref">Deleuze 1994</a>; <a href="#ref-delanda2002intensive" role="doc-biblioref">DeLanda 2002</a>)</span>.</p>
+<p>The natural hypothesis, then, is a Turing morphogenesis analog. If Hebbian reinforcement acts as a short-range activator and a diffusing inhibitor field acts as the long-range inhibitor, Turing instability at the <em>metaplastic</em> level—modifying the learning rules themselves rather than the weights directly—might break the symmetry that self-sealing preserves.</p>
+<p>This paper tests that hypothesis and finds a more complex answer than anticipated. Under hard <span class="math inline">\(\eta\)</span> bounds, the Turing mechanism fails completely for structural reasons consistent with the network pattern formation literature <span class="citation" data-cites="wolfrum2012turing nakao2010turing krause2024turing">(<a href="#ref-wolfrum2012turing" role="doc-biblioref">Wolfrum 2012</a>; <a href="#ref-nakao2010turing" role="doc-biblioref">Nakao and Mikhailov 2010</a>; <a href="#ref-krause2024turing" role="doc-biblioref">Krause et al. 2024</a>)</span>. Under soft <span class="math inline">\(\eta\)</span> bounds, coupling is partially rescued, confirming that the initial failure was partly an implementation artifact (hard <span class="math inline">\(\eta\)</span> clipping violates the continuity of intensive quantities that the Deleuzian framework assumes). But even with soft bounds, coupling remains inferior to a simpler, more robust mechanism: local homeostatic targets that produce stable differentiation without any inter-assemblage communication. The critical result is that communication becomes constructive only <em>after</em> differentiation has been established, exhibiting critical period dynamics analogous to those in cortical development <span class="citation" data-cites="bienenstock1982theory sweeney2015diffusive">(<a href="#ref-bienenstock1982theory" role="doc-biblioref">Bienenstock, Cooper, and Munro 1982</a>; <a href="#ref-sweeney2015diffusive" role="doc-biblioref">Sweeney et al. 2015</a>)</span>. A functional probe confirms that the resulting differentiation is not merely geometric: assemblages develop distinct signal amplification profiles, partially satisfying DeLanda’s criterion for differentiation of capacities <span class="citation" data-cites="delanda2006new">(<a href="#ref-delanda2006new" role="doc-biblioref">DeLanda 2006</a>)</span>. This stabilisation is contingent on the network maintenance regime: the companion Paper 4S demonstrates that the standard pruning threshold (<span class="math inline">\(10^{-4}\)</span>) differentially eliminates soft-bounded edges, and that removing pruning substantially increases the measured functional diversity (see Methods).</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="substrate" class="level3">
+<h3 class="anchored" data-anchor-id="substrate">Substrate</h3>
+<p>The MetaplasticField extends the MultiField substrate from Paper 2. Nodes are arranged on a 2D grid (default 20 <span class="math inline">\(\times\)</span> 20 = 400 nodes). Energy sources (hotspots) drive spatially varying noise injection. Weights are sparse, updated by the Hebbian rule, and pruned below a threshold. Activity-dependent encounters create new connections biased toward spatial neighbours, governed by a locality parameter.</p>
+<p><strong>Methodological note on pruning.</strong> All experiments in this paper use a pruning threshold of <span class="math inline">\(10^{-4}\)</span>: edges with <span class="math inline">\(|w| &lt; 10^{-4}\)</span> are removed each step. Paper 4S demonstrates that this threshold interacts disordinally with weight bounding strategy, differentially eliminating soft-bounded edges whose equilibrium magnitudes fall near the threshold. Under hard weight bounds (the only bound type used in this paper’s primary analyses), the pruning threshold has minimal effect on assemblage counts (3.9 with pruning vs 5.6 without; see Paper 4S, Exp F). However, no-pruning replications reveal that functional differentiation (response rank) increases substantially from 1.3 to 5.6 when pruning is removed (Paper 4S, 10-probe methodology). The results reported here should therefore be understood as conservative estimates of the substrate’s differentiating capacity. See Paper 4S for full analysis.</p>
+</section>
+<section id="metaplastic-learning-rate" class="level3">
+<h3 class="anchored" data-anchor-id="metaplastic-learning-rate">Metaplastic learning rate</h3>
+<p>Each node <span class="math inline">\(i\)</span> maintains its own learning rate <span class="math inline">\(\eta_i\)</span>, initialised identically to the global <span class="math inline">\(\eta = 0.05\)</span>. The Hebbian update for edge <span class="math inline">\((i, j)\)</span> uses the average: <span class="math inline">\(\eta_{ij} = \tfrac{1}{2}(\eta_i + \eta_j)\)</span>.</p>
+<p>A homeostatic adjustment modifies <span class="math inline">\(\eta_i\)</span> each step:</p>
+<p><span class="math display">\[\Delta\eta_i = -\alpha \cdot (\bar{a}_i - \tau_i)\]</span></p>
+<p>where <span class="math inline">\(\alpha\)</span> is the metaplastic strength, <span class="math inline">\(\bar{a}_i\)</span> is the exponential moving average of activity history (default rate <span class="math inline">\(= 0.05\)</span>, i.e.&nbsp;95% old + 5% new, following the conventional value used in homeostatic plasticity models <span class="citation" data-cites="sweeney2015diffusive">(<a href="#ref-sweeney2015diffusive" role="doc-biblioref">Sweeney et al. 2015</a>)</span>; Exp 18 confirms robustness across an order of magnitude), and <span class="math inline">\(\tau_i\)</span> is the homeostatic target.</p>
+<p>Two target regimes are compared:</p>
+<ul>
+<li><strong>Global target</strong> (original): <span class="math inline">\(\tau_i = 0.15\)</span> for all nodes.</li>
+<li><strong>Local target</strong> (corrective): <span class="math inline">\(\tau_i = \text{mean}(\bar{a}_j : j \in
+\mathcal{N}_r(i))\)</span>, where <span class="math inline">\(\mathcal{N}_r(i)\)</span> is the set of grid neighbours within Manhattan radius <span class="math inline">\(r\)</span>.</li>
+</ul>
+<p>Learning rates are bounded: <span class="math inline">\(\eta_i \in [0.005, 0.20]\)</span>. Two bounding regimes are compared: <strong>hard clipping</strong> (<span class="math inline">\(\eta_i\)</span> set to the nearer bound when exceeded) and <strong>soft bounding</strong> (tanh saturation that asymptotically approaches but never reaches the bounds). Weights are always hard-clipped at <span class="math inline">\(w_\text{max}\)</span> regardless of <span class="math inline">\(\eta\)</span>-bounding regime. This distinction matters: hard <span class="math inline">\(\eta\)</span> clipping creates absorbing states where 40% of nodes accumulate at the bounds, producing a bimodal distribution of learning rates. Soft bounding preserves a continuous, unimodal distribution. The synaptic plasticity literature has established that this hard/soft distinction produces qualitatively different dynamics: hard-bounded STDP drives weights to bimodal distributions, while weight-dependent (soft) rules produce stable unimodal distributions <span class="citation" data-cites="vanrossum2000stable miller1994role song2000competitive">(<a href="#ref-vanrossum2000stable" role="doc-biblioref">Rossum, Bi, and Turrigiano 2000</a>; <a href="#ref-miller1994role" role="doc-biblioref">Miller and MacKay 1994</a>; <a href="#ref-song2000competitive" role="doc-biblioref">Song, Miller, and Abbott 2000</a>)</span>.</p>
+</section>
+<section id="inhibitor-field" class="level3">
+<h3 class="anchored" data-anchor-id="inhibitor-field">Inhibitor field</h3>
+<p>Nodes emit inhibitor proportional to their total weight mass. The inhibitor diffuses via a discrete Laplacian (coefficient <span class="math inline">\(\leq 0.20\)</span> for CFL stability), decays multiplicatively each step, and modulates <span class="math inline">\(\eta\)</span> via a coupling term. Two coupling regimes were tested:</p>
+<ul>
+<li><strong>Upward</strong> (original): inhibitor pushes <span class="math inline">\(\eta\)</span> up.</li>
+<li><strong>Downward + difference-dependent</strong> (corrective): inhibitor suppresses <span class="math inline">\(\eta\)</span> proportional to the difference between the node’s <span class="math inline">\(\eta\)</span> and its neighbours’ mean <span class="math inline">\(\eta\)</span>.</li>
+</ul>
+</section>
+<section id="metrics" class="level3">
+<h3 class="anchored" data-anchor-id="metrics">Metrics</h3>
+<p><strong>Primary functional metrics:</strong></p>
+<ul>
+<li><strong>Response rank</strong>: effective rank of the perturbation-response matrix (SVD, threshold at 1% of largest singular value). Rank <span class="math inline">\(= 1\)</span> indicates parametric differentiation (assemblages scale inputs identically); rank <span class="math inline">\(&gt; 1\)</span> indicates genuinely functional differentiation (assemblages transform inputs through distinct mappings). This is the gold-standard measure of capacity differentiation.</li>
+<li><strong>Response diversity</strong>: standard deviation of assemblage gains (gain <span class="math inline">\(= \bar{\eta} \times \bar{w}_\text{internal}\)</span>), a proxy for signal amplification capacity.</li>
+<li><strong><span class="math inline">\(\eta\)</span> divergence</strong>: variance of per-assemblage mean <span class="math inline">\(\eta\)</span>.</li>
+</ul>
+<p><strong>Structural metrics:</strong></p>
+<ul>
+<li><strong>Centroid cosine distance (CCD)</strong>: mean pairwise cosine distance between assemblage centroid weight vectors. 0 = clones, 1 = orthogonal. Paper 4S demonstrates that CCD is statistically indistinguishable from a spatial null distribution (<span class="math inline">\(p = 1.0\)</span>); it reflects geometric separation, not functional differentiation. CCD values reported here should be interpreted as spatial structure measures only.</li>
+<li><strong>Weight modularity</strong>: fraction of total weight mass within assemblages.</li>
+<li><strong>Assemblage count</strong>: connected components in the strong-edge subgraph.</li>
+</ul>
+</section>
+<section id="experimental-design" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-design">Experimental design</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>Experiment, <span class="sc">~</span>Question, <span class="sc">~</span>Design, <span class="sc">~</span>Jobs,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"1. Meta sweep"</span>, <span class="st">"Metaplasticity alone?"</span>, <span class="st">"7 strengths × 7 localities × 20 seeds"</span>, <span class="dv">980</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"2. Comm sweep"</span>, <span class="st">"Communication alone?"</span>, <span class="st">"6 diffusions × 6 couplings × 20 seeds"</span>, <span class="dv">720</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"3. Combined"</span>, <span class="st">"Turing synergy?"</span>, <span class="st">"7 meta × 7 coupling × 20 seeds"</span>, <span class="dv">980</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"5. Corrective"</span>, <span class="st">"Sign + local + diff-coupling?"</span>, <span class="st">"7 meta × 7 coupling × 20 seeds"</span>, <span class="dv">980</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"6. Persistence"</span>, <span class="st">"How long does it last?"</span>, <span class="st">"5 meta × 3 grids × 20 seeds (1000 sessions)"</span>, <span class="dv">300</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">"7. Target radius"</span>, <span class="st">"Does radius matter?"</span>, <span class="st">"5 radii × 20 seeds"</span>, <span class="dv">100</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"8. Sequence"</span>, <span class="st">"Critical period?"</span>, <span class="st">"5 switch-points × 4 couplings × 20 seeds"</span>, <span class="dv">400</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"9. Perturbation"</span>, <span class="st">"Attractor?"</span>, <span class="st">"4 levels × 20 seeds"</span>, <span class="dv">80</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"10. Locality"</span>, <span class="st">"Encounter locality?"</span>, <span class="st">"7 localities × 20 seeds"</span>, <span class="dv">140</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"11. Soft bounds"</span>, <span class="st">"Hard-clipping artifact?"</span>, <span class="st">"7 meta × 7 coupling × 20 seeds"</span>, <span class="dv">980</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"12. Functional probe"</span>, <span class="st">"Geometric or functional?"</span>, <span class="st">"4 conditions × 20 seeds"</span>, <span class="dv">80</span>,</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"13. Bound factorial"</span>, <span class="st">"Full bound-type × target"</span>, <span class="st">"6 conditions × 20 seeds"</span>, <span class="dv">120</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"15. Dynamics compare"</span>, <span class="st">"WHY do bounds matter?"</span>, <span class="st">"2 conditions × 20 seeds"</span>, <span class="dv">40</span>,</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"16. η dump"</span>, <span class="st">"Distribution shape?"</span>, <span class="st">"2 conditions × 5 seeds (snapshots)"</span>, <span class="dv">10</span>,</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"17. Response matrix"</span>, <span class="st">"Genuinely functional?"</span>, <span class="st">"4 conditions × 20 seeds (5 probes)"</span>, <span class="dv">80</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"18. EMA sensitivity"</span>, <span class="st">"Timescale matters?"</span>, <span class="st">"3 EMA rates × 20 seeds"</span>, <span class="dv">60</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="st">"19. Transplant"</span>, <span class="st">"DeLanda exteriority?"</span>, <span class="st">"2 conditions × 20 seeds"</span>, <span class="dv">40</span>,</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">"Experimental design. All experiments use 200 sessions of 300 steps unless noted."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Experimental design. All experiments use 200 sessions of 300 steps unless noted.</caption>
+<colgroup>
+<col style="width: 21%">
+<col style="width: 30%">
+<col style="width: 44%">
+<col style="width: 5%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Experiment</th>
+<th style="text-align: left;">Question</th>
+<th style="text-align: left;">Design</th>
+<th style="text-align: right;">Jobs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1. Meta sweep</td>
+<td style="text-align: left;">Metaplasticity alone?</td>
+<td style="text-align: left;">7 strengths × 7 localities × 20 seeds</td>
+<td style="text-align: right;">980</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2. Comm sweep</td>
+<td style="text-align: left;">Communication alone?</td>
+<td style="text-align: left;">6 diffusions × 6 couplings × 20 seeds</td>
+<td style="text-align: right;">720</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3. Combined</td>
+<td style="text-align: left;">Turing synergy?</td>
+<td style="text-align: left;">7 meta × 7 coupling × 20 seeds</td>
+<td style="text-align: right;">980</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">5. Corrective</td>
+<td style="text-align: left;">Sign + local + diff-coupling?</td>
+<td style="text-align: left;">7 meta × 7 coupling × 20 seeds</td>
+<td style="text-align: right;">980</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">6. Persistence</td>
+<td style="text-align: left;">How long does it last?</td>
+<td style="text-align: left;">5 meta × 3 grids × 20 seeds (1000 sessions)</td>
+<td style="text-align: right;">300</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">7. Target radius</td>
+<td style="text-align: left;">Does radius matter?</td>
+<td style="text-align: left;">5 radii × 20 seeds</td>
+<td style="text-align: right;">100</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">8. Sequence</td>
+<td style="text-align: left;">Critical period?</td>
+<td style="text-align: left;">5 switch-points × 4 couplings × 20 seeds</td>
+<td style="text-align: right;">400</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">9. Perturbation</td>
+<td style="text-align: left;">Attractor?</td>
+<td style="text-align: left;">4 levels × 20 seeds</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">10. Locality</td>
+<td style="text-align: left;">Encounter locality?</td>
+<td style="text-align: left;">7 localities × 20 seeds</td>
+<td style="text-align: right;">140</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">11. Soft bounds</td>
+<td style="text-align: left;">Hard-clipping artifact?</td>
+<td style="text-align: left;">7 meta × 7 coupling × 20 seeds</td>
+<td style="text-align: right;">980</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">12. Functional probe</td>
+<td style="text-align: left;">Geometric or functional?</td>
+<td style="text-align: left;">4 conditions × 20 seeds</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">13. Bound factorial</td>
+<td style="text-align: left;">Full bound-type × target</td>
+<td style="text-align: left;">6 conditions × 20 seeds</td>
+<td style="text-align: right;">120</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">15. Dynamics compare</td>
+<td style="text-align: left;">WHY do bounds matter?</td>
+<td style="text-align: left;">2 conditions × 20 seeds</td>
+<td style="text-align: right;">40</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">16. η dump</td>
+<td style="text-align: left;">Distribution shape?</td>
+<td style="text-align: left;">2 conditions × 5 seeds (snapshots)</td>
+<td style="text-align: right;">10</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">17. Response matrix</td>
+<td style="text-align: left;">Genuinely functional?</td>
+<td style="text-align: left;">4 conditions × 20 seeds (5 probes)</td>
+<td style="text-align: right;">80</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">18. EMA sensitivity</td>
+<td style="text-align: left;">Timescale matters?</td>
+<td style="text-align: left;">3 EMA rates × 20 seeds</td>
+<td style="text-align: right;">60</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">19. Transplant</td>
+<td style="text-align: left;">DeLanda exteriority?</td>
+<td style="text-align: left;">2 conditions × 20 seeds</td>
+<td style="text-align: right;">40</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>All simulations were executed on a 68-CPU Ray cluster across three nodes. Per-job parquet output with resume support enabled fault-tolerant execution. Total compute: approximately 6,070 simulation jobs.<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="the-turing-hypothesis-fails" class="level3">
+<h3 class="anchored" data-anchor-id="the-turing-hypothesis-fails">The Turing hypothesis fails</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>exp3 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp3_combined"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>exp3_final <span class="ot">&lt;-</span> exp3 <span class="sc">|&gt;</span> <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>exp3_final <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(meta_strength, inhibitor_coupling) <span class="sc">|&gt;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(inhibitor_coupling), <span class="fu">factor</span>(meta_strength), <span class="at">fill =</span> cdist)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(cdist, <span class="dv">2</span>)), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"magma"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Inhibitor coupling"</span>, <span class="at">y =</span> <span class="st">"Meta strength"</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Centroid</span><span class="sc">\n</span><span class="st">cosine dist."</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 3: Combined mechanism (original, upward coupling)"</span>) <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-exp3-heatmap" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-exp3-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-exp3-heatmap-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-exp3-heatmap-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Centroid cosine distance (geometric separation) across the combined parameter space (Exp 3). The highest spatial separation occurs at meta_strength = 0 (mechanisms off). Note: CCD measures geometric structure, not functional differentiation (Paper 4S). No parameter combination produces synergistic spatial patterning beyond the baseline.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Experiments 1–3 tested the Turing hypothesis with the original mechanism (global homeostatic target, upward inhibitor coupling).</p>
+<p><strong>Metaplasticity alone</strong> (Exp 1) produces monopoly at <span class="math inline">\(\alpha \geq 0.0005\)</span>: all assemblages consolidate into a single mega-assemblage. The global target (<span class="math inline">\(\tau = 0.15\)</span>) crushes <span class="math inline">\(\eta\)</span> toward <span class="math inline">\(\eta_\text{min}\)</span> for all assemblage nodes (activity <span class="math inline">\(\approx 0.85 \gg 0.15\)</span>), producing identical homeostatic adjustments across assemblages. The first assemblage to consolidate wins.</p>
+<p><strong>Communication alone</strong> (Exp 2) pushes all <span class="math inline">\(\eta\)</span> to <span class="math inline">\(\eta_\text{max}\)</span> uniformly. Without metaplasticity creating heterogeneous <span class="math inline">\(\eta\)</span>, the inhibitor acts as a uniform positive pressure with no differences to amplify.</p>
+<p><strong>The combination</strong> (Exp 3) produces no synergy. The best parameters are <span class="math inline">\(\alpha = 0\)</span>, coupling <span class="math inline">\(= 0\)</span>—the baseline with both mechanisms off.</p>
+<p>The corrective experiment (Exp 5) applied three fixes identified through mechanistic analysis: sign reversal (inhibitor suppresses <span class="math inline">\(\eta\)</span>), local homeostatic target, and difference-dependent coupling. Under hard <span class="math inline">\(\eta\)</span> bounds, inhibitor coupling remained purely destructive at every parameter combination, reducing centroid distance relative to the coupling-free condition.</p>
+<p>However, the soft-bounds experiment (Exp 11) reveals that this destruction is partly artifactual. When hard <span class="math inline">\(\eta\)</span> clipping is replaced with soft <span class="math inline">\(\eta\)</span> bounding (tanh saturation), coupling exhibits the U-shaped dose-response predicted by Turing theory: low coupling (<span class="math inline">\(c \leq 0.001\)</span>) is mildly destructive, but strong coupling (<span class="math inline">\(c \geq 0.02\)</span>) becomes constructive. At <span class="math inline">\(\alpha = 0.05\)</span>, <span class="math inline">\(c = 0.05\)</span>, centroid cosine distance rises from 0.00 (hard bounds) to 0.65 (soft bounds)—a qualitative reversal.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>exp5 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp5_corrective"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>exp11 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp11_soft_bounds"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>p_hard <span class="ot">&lt;-</span> exp5 <span class="sc">|&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(meta_strength, inhibitor_coupling) <span class="sc">|&gt;</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(inhibitor_coupling), <span class="fu">factor</span>(meta_strength), <span class="at">fill =</span> cdist)) <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(cdist, <span class="dv">2</span>)), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"magma"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coupling"</span>, <span class="at">y =</span> <span class="st">"Meta strength"</span>,</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"CCD"</span>, <span class="at">title =</span> <span class="st">"Hard bounds (Exp 5)"</span>) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>p_soft <span class="ot">&lt;-</span> exp11 <span class="sc">|&gt;</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(meta_strength, inhibitor_coupling) <span class="sc">|&gt;</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(inhibitor_coupling), <span class="fu">factor</span>(meta_strength), <span class="at">fill =</span> cdist)) <span class="sc">+</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(cdist, <span class="dv">2</span>)), <span class="at">size =</span> <span class="fl">2.5</span>) <span class="sc">+</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis</span>(<span class="at">option =</span> <span class="st">"magma"</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Coupling"</span>, <span class="at">y =</span> <span class="st">"Meta strength"</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"CCD"</span>, <span class="at">title =</span> <span class="st">"Soft bounds (Exp 11)"</span>) <span class="sc">+</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>p_hard <span class="sc">+</span> p_soft <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-soft-bounds" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-soft-bounds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-soft-bounds-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-soft-bounds-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Soft bounds partially rescue inhibitor coupling. Left: hard bounds (Exp 5), coupling is destructive at all parameter combinations. Right: soft bounds (Exp 11), strong coupling becomes constructive, with CCD (geometric separation) reaching 0.65. CCD values reflect spatial structure only (Paper 4S). Both experiments use local targets and difference-dependent coupling.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The mechanism involves <span class="math inline">\(\eta\)</span> bounding, not weight clipping (weights are always hard-clipped). Under hard <span class="math inline">\(\eta\)</span> bounds, the homeostatic adjustment pushes learning rates to the floor (<span class="math inline">\(\eta_\text{min}\)</span>) for high-activity nodes and the ceiling (<span class="math inline">\(\eta_\text{max}\)</span>) for low-activity nodes. Once pinned, <span class="math inline">\(\eta\)</span> cannot respond to further coupling signals—the learning rate is informationally dead at the bound. Soft <span class="math inline">\(\eta\)</span> bounding (tanh saturation) preserves responsiveness: <span class="math inline">\(\eta\)</span> asymptotically approaches but never reaches the limits, maintaining the continuous modulation that reaction-diffusion dynamics require. This parallels a well-established finding in the STDP literature: hard-bounded (additive) update rules drive synaptic variables to bimodal distributions concentrated at the bounds, while weight-dependent (multiplicative/soft) rules produce stable unimodal distributions <span class="citation" data-cites="vanrossum2000stable song2000competitive rubin2001equilibrium">(<a href="#ref-vanrossum2000stable" role="doc-biblioref">Rossum, Bi, and Turrigiano 2000</a>; <a href="#ref-song2000competitive" role="doc-biblioref">Song, Miller, and Abbott 2000</a>; <a href="#ref-rubin2001equilibrium" role="doc-biblioref">Rubin, Lee, and Sompolinsky 2001</a>)</span>. Our finding extends this principle from the synaptic level to the metaplastic level.</p>
+<p>Nevertheless, even at its best, soft-bounds coupling (CCD <span class="math inline">\(= 0.65\)</span>) remains below local homeostasis without coupling (CCD <span class="math inline">\(= 0.84\)</span> under hard bounds). <strong>Note:</strong> Paper 4S demonstrates that CCD is statistically indistinguishable from a spatial null distribution (<span class="math inline">\(p = 1.0\)</span>, 1000 permutations) and reflects geometric separation rather than functional differentiation. The CCD values reported here should be interpreted as measures of spatial assemblage separation, not as evidence of functional differentiation per se. The functional differentiation evidence rests on response diversity and response rank (see below and Paper 4S, Exp 17np). Two structural arguments against Turing patterns on this substrate persist, consistent with the network Turing literature. <span class="citation" data-cites="wolfrum2012turing">Wolfrum (<a href="#ref-wolfrum2012turing" role="doc-biblioref">2012</a>)</span> showed that Turing bifurcations on sparse networks generically produce single-differentiated-node solutions rather than distributed patterns. <span class="citation" data-cites="krause2024turing">Krause et al. (<a href="#ref-krause2024turing" role="doc-biblioref">2024</a>)</span> proved that satisfying Turing instability conditions is insufficient to guarantee sustained pattern formation. <span class="citation" data-cites="nakao2010turing">Nakao and Mikhailov (<a href="#ref-nakao2010turing" role="doc-biblioref">2010</a>)</span> established that network Turing patterns are governed by the Laplacian eigenspectrum, which in sparse graphs supports only binary differentiation. Our substrate compounds these difficulties: the topology dynamically rewires under Hebbian learning, making the diffusion matrix non-stationary.</p>
+</section>
+<section id="local-homeostatic-targets-prevent-monopoly" class="level3">
+<h3 class="anchored" data-anchor-id="local-homeostatic-targets-prevent-monopoly">Local homeostatic targets prevent monopoly</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Three-way comparison at meta=0.05 or baseline</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>exp1 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp1_meta_sweep"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>exp5 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp5_corrective"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> exp1 <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(meta_strength <span class="sc">==</span> <span class="dv">0</span>, locality <span class="sc">==</span> <span class="fl">0.10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="st">"No homeostasis</span><span class="sc">\n</span><span class="st">(baseline)"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>global <span class="ot">&lt;-</span> exp1 <span class="sc">|&gt;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(meta_strength <span class="sc">==</span> <span class="fl">0.05</span>, locality <span class="sc">==</span> <span class="fl">0.10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="st">"Global target</span><span class="sc">\n</span><span class="st">(monopoly)"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>local <span class="ot">&lt;-</span> exp5 <span class="sc">|&gt;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(meta_strength <span class="sc">==</span> <span class="fl">0.05</span>, inhibitor_coupling <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="st">"Local target</span><span class="sc">\n</span><span class="st">(differentiation)"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>three_way <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(baseline, global, local)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> three_way <span class="sc">|&gt;</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, session) <span class="sc">|&gt;</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(session, cdist, <span class="at">colour =</span> condition)) <span class="sc">+</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session"</span>, <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Differentiation over time"</span>) <span class="sc">+</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> three_way <span class="sc">|&gt;</span></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, session) <span class="sc">|&gt;</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n_asm =</span> <span class="fu">mean</span>(n_assemblages), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(session, n_asm, <span class="at">colour =</span> condition)) <span class="sc">+</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session"</span>, <span class="at">y =</span> <span class="st">"Assemblage count"</span>,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Assemblage count over time"</span>) <span class="sc">+</span></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>())</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-three-way" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-three-way-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-three-way-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-three-way-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The three-way comparison: no homeostasis produces self-sealing clones (Paper 2 baseline), global homeostasis produces monopoly (Exp 1), and local homeostasis produces stable, differentiated assemblages (Exp 5, coupling = 0).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The critical finding emerges from a single modification: replacing the global homeostatic target with a local one. At <span class="math inline">\(\alpha = 0.05\)</span>, the global target produces monopoly (<span class="math inline">\(n_\text{asm} \approx 1\)</span>), while the local target produces <span class="math inline">\(5.2\)</span> differentiated assemblages with centroid cosine distance <span class="math inline">\(0.84\)</span> [0.81, 0.87] and <span class="math inline">\(\eta\)</span> divergence <span class="math inline">\(0.003\)</span>.</p>
+<p>The mechanism: with a global target, every assemblage node receives an identical homeostatic adjustment. With a local target, each node’s reference point is its own neighbourhood’s activity. Nodes inside assemblages are surrounded by other active nodes—their target is high, their <span class="math inline">\(\eta\)</span> barely adjusts. Nodes at assemblage boundaries see a mix of activity levels—their <span class="math inline">\(\eta\)</span> adjusts differently. Different spatial positions create different effective problems, breaking the symmetry that produces clones.</p>
+<p>This maps precisely onto <span class="citation" data-cites="sweeney2015diffusive">Sweeney et al. (<a href="#ref-sweeney2015diffusive" role="doc-biblioref">2015</a>)</span>, who showed that diffusive homeostasis maintains heterogeneous firing rate distributions in cortical networks, while non-diffusive (global) homeostasis produces narrow, homogeneous distributions.</p>
+</section>
+<section id="persistence-stable-not-transient" class="level3">
+<h3 class="anchored" data-anchor-id="persistence-stable-not-transient">Persistence: stable, not transient</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>exp6 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp6_persistence"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>exp6 <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(meta_strength <span class="sc">==</span> <span class="fl">0.05</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(grid_size, session) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(session, cdist, <span class="at">colour =</span> <span class="fu">factor</span>(grid_size))) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.6</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal[<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>], <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"15×15"</span>, <span class="st">"20×20"</span>, <span class="st">"25×25"</span>)) <span class="sc">+</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session"</span>, <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Grid size"</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 6: Differentiation stability over 1000 sessions"</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"meta_strength = 0.05, coupling = 0, local targets"</span>) <span class="sc">+</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-persistence" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-persistence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-persistence-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-persistence-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Geometric separation is sustained over 1000 sessions with no decay trend. CCD fluctuates between 0.80 and 1.00. Grid size 25 produces even stronger spatial patterning. Functional differentiation (response rank, Exp 17) confirms these geometrically stable assemblages also possess distinct functional profiles.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Experiment 6 extended the productive regime (<span class="math inline">\(\alpha = 0.05\)</span>, coupling <span class="math inline">\(= 0\)</span>, local targets) to 1000 sessions. The centroid cosine distance shows no decay trend, fluctuating between 0.80 and 1.00 throughout (final 100 sessions: <span class="math inline">\(0.85\)</span> [0.83, 0.86]). Assemblage count stabilises at <span class="math inline">\(\approx 5.5\)</span> for grid size 20 and <span class="math inline">\(\approx 18.9\)</span> for grid size 25. The <span class="math inline">\(\eta\)</span> divergence across assemblages <em>increases</em> slightly over time (<span class="math inline">\(0.003 \to 0.005\)</span>), indicating the differentiation deepens rather than decays.</p>
+</section>
+<section id="critical-period-the-sequence-of-individuation-and-communication" class="level3">
+<h3 class="anchored" data-anchor-id="critical-period-the-sequence-of-individuation-and-communication">Critical period: the sequence of individuation and communication</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>exp8 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp8_sequence"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>exp8 <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(coupling_switch_session, inhibitor_coupling) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="fu">factor</span>(coupling_switch_session), cdist,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> <span class="fu">factor</span>(inhibitor_coupling))) <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session when coupling introduced"</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Centroid cosine distance (final)"</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Coupling</span><span class="sc">\n</span><span class="st">strength"</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 8: Critical period for inter-assemblage coupling"</span>) <span class="sc">+</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-critical-period" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-critical-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-critical-period-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-critical-period-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: CCD (geometric separation) at session 200 as a function of when coupling was introduced. Coupling from session 0 destroys spatial patterning; coupling delayed to session 50+ preserves it even at the strongest coupling tested (0.01). This critical period effect indicates that differentiation, once established, resists disruption.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Experiment 8 is the decisive test of whether communication is fundamentally incompatible with differentiation in this substrate. The answer is nuanced: timing determines everything.</p>
+<p>Coupling introduced at session 0 reduces centroid cosine distance from <span class="math inline">\(0.84\)</span> [0.81, 0.87] to <span class="math inline">\(0.07\)</span> [0.05, 0.10] at the strongest coupling (<span class="math inline">\(c = 0.01\)</span>). Coupling delayed to session 50 preserves differentiation at <span class="math inline">\(0.74\)</span> [0.70, 0.78] even at <span class="math inline">\(c = 0.01\)</span>. By session 100, the effect of coupling is indistinguishable from the coupling-free condition (<span class="math inline">\(0.78\)</span> [0.74, 0.82]).</p>
+<p>This is a critical period in the developmental sense <span class="citation" data-cites="bienenstock1982theory">(<a href="#ref-bienenstock1982theory" role="doc-biblioref">Bienenstock, Cooper, and Munro 1982</a>)</span>: early plasticity establishes structure, and premature constraint destroys it. The assemblages must consolidate their internal organisation before external coupling can be tolerated. Once consolidated, the coupling encounters basins of attraction that are already carved—it navigates within a structured landscape rather than homogenising a flat one.</p>
+<p><strong>Functional validation (Exp 8fv).</strong> A replication of Exp 8 using 10-probe response rank (SVD, 1% threshold) confirms the critical period holds for functional diversity, not merely geometric separation. At coupling <span class="math inline">\(c = 0.01\)</span>, session 200:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Switch session</th>
+<th>Assemblages</th>
+<th>CCD</th>
+<th>Response rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 (from start)</td>
+<td>0.9</td>
+<td>0.050</td>
+<td>0.05</td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>4.8</td>
+<td>0.751</td>
+<td>0.85</td>
+</tr>
+<tr class="odd">
+<td>100 (after consolidation)</td>
+<td>5.2</td>
+<td>0.800</td>
+<td>0.85</td>
+</tr>
+</tbody>
+</table>
+<p>Coupling from session 0 destroys both spatial patterning (CCD <span class="math inline">\(\to 0.05\)</span>) and functional diversity (rank <span class="math inline">\(\to 0.05\)</span>). Coupling delayed to session 50+ preserves both. The critical period is not a CCD artifact.</p>
+<p>This result converges with recent findings that critical periods emerge spontaneously in deep networks from learning dynamics alone, without explicit programming <span class="citation" data-cites="achille2019critical">(<a href="#ref-achille2019critical" role="doc-biblioref">Achille, Rovere, and Soatto 2019</a>)</span>, and that depth alone suffices to produce them even in linear networks <span class="citation" data-cites="kleinman2024critical">(<a href="#ref-kleinman2024critical" role="doc-biblioref">Kleinman, Achille, and Soatto 2024</a>)</span>. Our substrate differs in that the critical period arises from <em>structural consolidation</em> (Hebbian weight reinforcement creating rigid basins) rather than from information-theoretic sensitivity windows. The mechanism is Simondonian: transduction carves the landscape, making subsequent coupling navigational rather than homogenising.</p>
+</section>
+<section id="perturbation-resilience-the-differentiated-state-is-an-attractor" class="level3">
+<h3 class="anchored" data-anchor-id="perturbation-resilience-the-differentiated-state-is-an-attractor">Perturbation resilience: the differentiated state is an attractor</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>exp9 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp9_perturbation"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>exp9 <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(perturb_fraction, session) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(session, cdist,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>             <span class="at">colour =</span> <span class="fu">factor</span>(perturb_fraction,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                             <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"10%"</span>, <span class="st">"25%"</span>, <span class="st">"50%"</span>)))) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">100</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">102</span>, <span class="at">y =</span> <span class="fl">0.6</span>, <span class="at">label =</span> <span class="st">"Perturbation"</span>, <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="dv">3</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session"</span>, <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">colour =</span> <span class="st">"Fraction</span><span class="sc">\n</span><span class="st">perturbed"</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 9: Perturbation resilience"</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Dashed line: perturbation applied at session 100"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-perturbation" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-perturbation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-perturbation-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-perturbation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;6: Perturbation resilience. Shuffling 10%, 25%, or 50% of node learning rates at session 100 has no effect on the system’s trajectory. The differentiated state is a wide-basin attractor.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Experiment 9 tests whether the differentiated state is a fragile arrangement or a genuine attractor. At session 100, 10%, 25%, or 50% of node learning rates are randomly shuffled. All conditions produce trajectories indistinguishable from the unperturbed control by session 200: centroid cosine distance <span class="math inline">\(= 0.84\)</span> [0.81, 0.87], <span class="math inline">\(n_\text{asm} \approx 5.2\)</span>–<span class="math inline">\(5.3\)</span> (TOST equivalence test with margin <span class="math inline">\(\delta = 0.05\)</span>: <span class="math inline">\(p &lt; 0.001\)</span> for all perturbation levels).</p>
+<p>This rules out the “frozen disorder” interpretation: if differentiation depended on specific <span class="math inline">\(\eta\)</span> values, perturbation would destroy it. Instead, the system recovers fully from a 50% scramble, indicating a wide-basin attractor whose structure is maintained by the ongoing dynamics, not by the particular parameter values.</p>
+<p><strong>Functional validation (Exp 9fv).</strong> Response rank (10-probe, SVD) shows identical perturbation resilience: rank at session 200 is <span class="math inline">\(0.85\)</span> across all perturbation levels (<span class="math inline">\(0\%\)</span>, <span class="math inline">\(10\%\)</span>, <span class="math inline">\(25\%\)</span>, <span class="math inline">\(50\%\)</span>), with no measurable deflection at or after the perturbation event (session 100). The attractor is functional, not merely geometric.</p>
+</section>
+<section id="robustness" class="level3">
+<h3 class="anchored" data-anchor-id="robustness">Robustness</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>exp7 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp7_target_radius"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>exp7 <span class="sc">|&gt;</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(target_radius) <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance),</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_asm =</span> <span class="fu">mean</span>(n_assemblages), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(target_radius, cdist)) <span class="sc">+</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Target radius (Manhattan hops)"</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 7: Homeostatic target radius"</span>,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"All radii produce differentiation"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-radius" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-radius-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-radius-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-radius-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;7: Target radius has minimal effect on geometric separation. All radii from 1 (nearest neighbours) to 10 (near-global on a 20×20 grid) produce CCD ≥ 0.84.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>exp10 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp10_locality"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>exp10 <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(locality) <span class="sc">|&gt;</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance),</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_asm =</span> <span class="fu">mean</span>(n_assemblages), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(locality, cdist)) <span class="sc">+</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="fl">1.1</span>) <span class="sc">+</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Encounter locality (σ)"</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 10: Encounter locality under local targets"</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Robust across all locality values"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-locality" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-locality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-locality-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-locality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Encounter locality has minimal effect under local homeostatic targets. All localities from 0.05 (tight) to 0.30 (broad) produce CCD ≥ 0.84 (geometric separation).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The result is robust to target radius (Exp 7: all radii 1–10 produce <span class="math inline">\(\text{cdist} \geq 0.84\)</span>), encounter locality (Exp 10: all <span class="math inline">\(\sigma\)</span> from 0.05 to 0.30), and grid size (Exp 6: 15$<span class="math inline">\(15 to 25\)</span>$25). This robustness—invariant across three independent structural parameters—is not the signature of a tuned system. It suggests a structural inevitability: any homeostatic mechanism that prevents the degenerate monopoly attractor reveals the differentiation latent in the self-sealing topology.</p>
+</section>
+<section id="geometric-vs.-functional-differentiation" class="level3">
+<h3 class="anchored" data-anchor-id="geometric-vs.-functional-differentiation">Geometric vs.&nbsp;functional differentiation</h3>
+<p>Centroid cosine distance measures geometric differentiation—distinct weight structures. But spatial separation need not imply distinct functional capacities. DeLanda’s assemblage theory requires that genuinely differentiated components possess qualitatively different <em>capacities</em>—different open lists of what they can do—not merely different positions <span class="citation" data-cites="delanda2006new delanda2002intensive">(<a href="#ref-delanda2006new" role="doc-biblioref">DeLanda 2006</a>, <a href="#ref-delanda2002intensive" role="doc-biblioref">2002</a>)</span>.</p>
+<p>Experiment 12 tests this directly. We measure <em>response diversity</em>: the standard deviation of assemblage gains, where each assemblage’s gain is the product of its mean learning rate and mean internal edge weight—a proxy for signal amplification capacity.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>exp12 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp12_functional"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>cond_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"baseline"</span> <span class="ot">=</span> <span class="st">"Baseline"</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"global_target"</span> <span class="ot">=</span> <span class="st">"Global target"</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">"local_soft"</span> <span class="ot">=</span> <span class="st">"Local (soft)"</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">"local_target"</span> <span class="ot">=</span> <span class="st">"Local (hard)"</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> exp12 <span class="sc">|&gt;</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">recode</span>(condition, <span class="sc">!!!</span>cond_labels)) <span class="sc">|&gt;</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance),</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>            <span class="at">resp =</span> <span class="fu">mean</span>(response_diversity), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">c</span>(cdist, resp), <span class="at">names_to =</span> <span class="st">"metric"</span>, <span class="at">values_to =</span> <span class="st">"value"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">metric =</span> <span class="fu">ifelse</span>(metric <span class="sc">==</span> <span class="st">"cdist"</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>                         <span class="st">"Centroid cosine dist."</span>, <span class="st">"Response diversity"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(condition, value, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>metric, <span class="at">scales =</span> <span class="st">"free_y"</span>) <span class="sc">+</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Value"</span>,</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 12: Geometric vs. functional differentiation"</span>) <span class="sc">+</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> exp12 <span class="sc">|&gt;</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">recode</span>(condition, <span class="sc">!!!</span>cond_labels)) <span class="sc">|&gt;</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, session) <span class="sc">|&gt;</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">resp =</span> <span class="fu">mean</span>(response_diversity), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(session, resp, <span class="at">colour =</span> condition)) <span class="sc">+</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session"</span>, <span class="at">y =</span> <span class="st">"Response diversity"</span>,</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Functional diversity over time"</span>) <span class="sc">+</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>(), <span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">/</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-functional" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-functional-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-functional-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-functional-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;9: Geometric vs.&nbsp;functional differentiation. The baseline condition (no metaplasticity) achieves high CCD (0.90) but zero response diversity—geometrically distinct assemblages with identical functional profiles. This dissociation confirms CCD alone cannot measure functional differentiation (Paper 4S). Only local targets produce both geometric and functional differentiation (CCD = 0.84, response diversity = 0.047). Response diversity increases over time under local targets.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The result is philosophically decisive. The baseline condition (no metaplasticity) achieves CCD <span class="math inline">\(= 0.90\)</span>—assemblages are geometrically distinct—but response diversity <span class="math inline">\(= 0.000\)</span>. These assemblages look different but <em>do</em> the same thing. They are, in DeLanda’s terms, instances of a single type differing only in spatial position, not genuinely different kinds with different capacities.</p>
+<p>The global target collapses both metrics (CCD <span class="math inline">\(= 0.01\)</span>, response diversity <span class="math inline">\(= 0.001\)</span>). Local homeostasis with soft bounds produces moderate differentiation (CCD <span class="math inline">\(= 0.30\)</span>, response diversity <span class="math inline">\(= 0.015\)</span>). Only local homeostasis with hard bounds produces both strong geometric <em>and</em> functional differentiation (CCD <span class="math inline">\(= 0.84\)</span>, response diversity <span class="math inline">\(= 0.047\)</span>), with response diversity actively <em>increasing</em> over time.</p>
+<p>Response diversity, however, is a single scalar derived from <span class="math inline">\(\eta\)</span> and weight values already measured. To confirm that functional differentiation is not algebraically entailed by the geometric metrics, Experiment 17 applies a genuinely independent probe: five structured spatial input patterns are injected after training, and each assemblage’s response is recorded. The effective rank of the resulting response matrix measures how many independent functional dimensions the assemblages span. This metric—SVD effective dimensionality, also known as participation ratio—is standard in systems neuroscience, where it characterises the dimensionality of neural population responses <span class="citation" data-cites="gao2017theory stringer2019high">(<a href="#ref-gao2017theory" role="doc-biblioref">Gao and Ganguli 2017</a>; <a href="#ref-stringer2019high" role="doc-biblioref">Stringer et al. 2019</a>)</span>. Higher dimensionality has been shown to predict both flexible readout in complex cognitive tasks <span class="citation" data-cites="rigotti2013importance">(<a href="#ref-rigotti2013importance" role="doc-biblioref">Rigotti et al. 2013</a>)</span> and better episodic memory performance <span class="citation" data-cites="tang2022higher">(<a href="#ref-tang2022higher" role="doc-biblioref">Tang et al. 2022</a>)</span>.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>exp17 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp17_response_matrix"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>exp17 <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">rank_mean =</span> <span class="fu">mean</span>(response_rank),</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">rank_sd =</span> <span class="fu">sd</span>(response_rank),</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">ccd =</span> <span class="fu">mean</span>(ccd),</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(condition, rank_mean, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> <span class="fu">pmax</span>(rank_mean <span class="sc">-</span> rank_sd, <span class="dv">0</span>),</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>                    <span class="at">ymax =</span> rank_mean <span class="sc">+</span> rank_sd),</span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>                <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.7</span>, <span class="at">y =</span> <span class="fl">1.15</span>, <span class="at">label =</span> <span class="st">"Parametric</span><span class="sc">\n</span><span class="st">threshold"</span>,</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">2.5</span>, <span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> pal) <span class="sc">+</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Effective response rank"</span>,</span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 17: Independent functional probe"</span>) <span class="sc">+</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>),</span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-response-rank" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-response-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-response-rank-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-response-rank-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;10: Perturbation-response matrix rank across conditions. Baseline assemblages respond to structured inputs with rank ≈ 1 (all assemblages scale identically). Local homeostasis with hard bounds achieves rank ≈ 2.4 [1.7, 3.0] (bootstrap 95% CI) — assemblages transform inputs through genuinely distinct mappings, not just scaled versions of the same response. Error bars: ±1 SD across 20 seeds (wider than the CI of the mean because they show individual-seed variability, not uncertainty in the mean estimate).
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The result confirms that functional differentiation under local homeostasis is genuine and not entailed by geometric differentiation. Baseline assemblages, despite high CCD (<span class="math inline">\(0.90\)</span>), respond to structured inputs with rank <span class="math inline">\(\approx 1.2\)</span>—effectively parametric, scaling inputs identically. Local homeostasis with hard <span class="math inline">\(\eta\)</span> bounds achieves rank <span class="math inline">\(\approx 2.4\)</span> [1.7, 3.0]: assemblages transform inputs through genuinely distinct mappings. This cannot be derived from centroid cosine distance or <span class="math inline">\(\eta\)</span> divergence alone; it reflects emergent differences in how assemblages process information, not just how they store weights.</p>
+<p><strong>Probe count and rank ceiling.</strong> Exp 17 uses <span class="math inline">\(K = 5\)</span> probes, giving a response matrix of dimension <span class="math inline">\(5 \times A\)</span> (<span class="math inline">\(A\)</span> = assemblage count). The effective rank is bounded by <span class="math inline">\(\min(K, A)\)</span>, so the observed rank <span class="math inline">\(2.4\)</span> is not ceiling-limited (<span class="math inline">\(K = 5 &gt; 2.4\)</span>). Paper 4S (Exp 17np) uses <span class="math inline">\(K = 10\)</span> probes and reports rank <span class="math inline">\(5.6\)</span> without pruning—the increase from <span class="math inline">\(2.4\)</span> to <span class="math inline">\(5.6\)</span> reflects both the removal of pruning (which destroyed weak exploratory structure) and the larger probe space (which allows more functional dimensions to be detected). The participation ratio (a threshold-free dimensionality measure) gives <span class="math inline">\(2.2\)</span> under 10-probe Gaussian probes and <span class="math inline">\(3.2\)</span> under uniform probes, confirming genuine multidimensionality.</p>
+<p><strong>No-pruning replication (Paper 4S, Exp 17np).</strong> The response rank results above were measured under the standard pruning regime (<span class="math inline">\(|w| &lt; 10^{-4}\)</span> removed each step). Paper 4S demonstrates that pruning suppresses functional diversity by eliminating weak exploratory connections. Without pruning:</p>
+<ul>
+<li>Baseline (no metaplasticity): rank rises from <span class="math inline">\(1.2\)</span> to <span class="math inline">\(\mathbf{5.6}\)</span> (<span class="math inline">\(n = 15/20\)</span> seeds with <span class="math inline">\(\geq 2\)</span> assemblages; 10-probe methodology, Paper 4S)</li>
+<li>Local hard (meta <span class="math inline">\(= 0.05\)</span>): from <span class="math inline">\(0\)</span> assemblages (pruning destroyed them) to <span class="math inline">\(\mathbf{10.3}\)</span> assemblages with rank <span class="math inline">\(\mathbf{5.6}\)</span> (<span class="math inline">\(n = 19/20\)</span>)</li>
+<li>Local soft: rank remains <span class="math inline">\(\approx 2.0\)</span> regardless of pruning</li>
+</ul>
+<p>The baseline result demands a precise account of what metaplasticity contributes. Both baseline and metaplastic conditions reach rank <span class="math inline">\(5.6\)</span> without pruning—the hard clip alone scaffolds functional diversity. Metaplasticity’s contribution is threefold:</p>
+<ol type="1">
+<li><strong><span class="math inline">\(\eta\)</span> divergence</strong> (<span class="math inline">\(F = 4.9\)</span>, <span class="math inline">\(p &lt; 0.0001\)</span>; Wilcoxon <span class="math inline">\(W = 21\)</span>, <span class="math inline">\(p = 0.016\)</span>; Shapiro-Wilk normality <span class="math inline">\(p = 0.99\)</span>): assemblages develop distinct learning dynamics, a parametric dimension absent from the baseline.</li>
+<li><strong>Assemblage count</strong>: metaplasticity increases the number of differentiated units from <span class="math inline">\(\sim 6\)</span> to <span class="math inline">\(10+\)</span>, expanding the system’s combinatorial diversity.</li>
+<li><strong>Robustness</strong>: the metaplastic state recovers from 50% <span class="math inline">\(\eta\)</span> scramble (Exp 9/9fv), indicating a wider basin of attraction than the baseline.</li>
+</ol>
+<p>Metaplasticity does not create functional diversity from nothing—it stabilises and amplifies diversity that Hebbian dynamics on a spatially structured substrate spontaneously produce.</p>
+<p><strong>Power and yield analysis.</strong> The <span class="math inline">\(\eta\)</span> divergence result (<span class="math inline">\(F = 4.9\)</span>) derives from 6 of 50 seeds that produced <span class="math inline">\(\geq 3\)</span> assemblages under hard weight + soft <span class="math inline">\(\eta\)</span> bounds. With <span class="math inline">\(n = 6\)</span> and <span class="math inline">\(d = 5.62\)</span>, the achieved statistical power exceeds <span class="math inline">\(0.999\)</span> (non-central <span class="math inline">\(t\)</span>-distribution). The concern is not power but <em>yield</em>: 88% of seeds converge to monopoly, and the qualifying criterion (sufficient assemblages for between-group comparison) is spatial, applied before examining <span class="math inline">\(\eta\)</span> values. The 44 monopoly seeds show identical <span class="math inline">\(\eta\)</span> statistics (<span class="math inline">\(\bar{\eta} = 0.098\)</span>, <span class="math inline">\(\sigma = 0.019\)</span>) to the 6 qualifying seeds, confirming that selection is on spatial configuration, not on the effect variable. Future work should design substrates with higher multi-assemblage yield—for example, through structured initialisation or wider locality sweeps—to confirm the effect across a broader range of initial conditions. For a moderate effect (<span class="math inline">\(d = 1.0\)</span>), 80% power would require <span class="math inline">\(n = 8\)</span> qualifying seeds.</p>
+<p>Three caveats remain. First, response diversity and response rank both measure functional properties derived from the substrate’s existing dynamics; they do not test for capacities outside the system’s vocabulary. Second, soft <span class="math inline">\(\eta\)</span> bounds produce rank <span class="math inline">\(\approx 2.0\)</span> (no-pruning) or <span class="math inline">\(\approx 0.8\)</span> (pruned)—below the hard-bound rank of <span class="math inline">\(5.6\)</span>, confirming that the absorbing boundary is load-bearing for functional diversity. Third, even rank <span class="math inline">\(5.6\)</span> represents differentiation along a moderate number of functional dimensions; whether this constitutes DeLanda’s “open list” of qualitatively distinct capacities, or a richer parametric variation, is taken up in the Discussion.</p>
+</section>
+<section id="bound-type-sensitivity-discretisation-as-mechanism" class="level3">
+<h3 class="anchored" data-anchor-id="bound-type-sensitivity-discretisation-as-mechanism">Bound-type sensitivity: discretisation as mechanism</h3>
+<p>The full bound-type factorial (Exp 13) reveals that the <span class="math inline">\(\eta\)</span>-bounding regime is a primary control parameter for differentiation strength:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>exp13 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp13_bound_factorial"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Bootstrap CIs of the mean (not raw quantile ranges)</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>boot_ci <span class="ot">&lt;-</span> <span class="cf">function</span>(x, <span class="at">n =</span> <span class="dv">5000</span>) {</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(n, <span class="fu">mean</span>(<span class="fu">sample</span>(x, <span class="at">replace =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(means, <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>exp13_summary <span class="ot">&lt;-</span> exp13 <span class="sc">|&gt;</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">ccd_mean =</span> <span class="fu">mean</span>(centroid_cosine_distance),</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">ccd_lo =</span> <span class="fu">boot_ci</span>(centroid_cosine_distance)[<span class="dv">1</span>],</span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">ccd_hi =</span> <span class="fu">boot_ci</span>(centroid_cosine_distance)[<span class="dv">2</span>],</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">rd_mean =</span> <span class="fu">mean</span>(response_diversity),</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">rd_lo =</span> <span class="fu">boot_ci</span>(response_diversity)[<span class="dv">1</span>],</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">rd_hi =</span> <span class="fu">boot_ci</span>(response_diversity)[<span class="dv">2</span>],</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">bound =</span> <span class="fu">ifelse</span>(<span class="fu">grepl</span>(<span class="st">"soft"</span>, condition), <span class="st">"Soft η bounds"</span>, <span class="st">"Hard η bounds"</span>),</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">target =</span> <span class="fu">case_when</span>(</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"baseline"</span>, condition) <span class="sc">~</span> <span class="st">"No homeostasis"</span>,</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"global"</span>, condition) <span class="sc">~</span> <span class="st">"Global target"</span>,</span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>      <span class="fu">grepl</span>(<span class="st">"local"</span>, condition) <span class="sc">~</span> <span class="st">"Local target"</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> exp13_summary <span class="sc">|&gt;</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(target, ccd_mean, <span class="at">fill =</span> bound)) <span class="sc">+</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> ccd_lo, <span class="at">ymax =</span> ccd_hi),</span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.7</span>), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(pal[<span class="dv">1</span>], pal[<span class="dv">3</span>])) <span class="sc">+</span></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Geometric differentiation"</span>) <span class="sc">+</span></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> exp13_summary <span class="sc">|&gt;</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(target, rd_mean, <span class="at">fill =</span> bound)) <span class="sc">+</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> rd_lo, <span class="at">ymax =</span> rd_hi),</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>                <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="at">width =</span> <span class="fl">0.7</span>), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(pal[<span class="dv">1</span>], pal[<span class="dv">3</span>])) <span class="sc">+</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Response diversity"</span>,</span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Functional differentiation"</span>) <span class="sc">+</span></span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">guides =</span> <span class="st">"collect"</span>) <span class="sc">&amp;</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-factorial" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-factorial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-factorial-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-factorial-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;11: Full bound-type factorial. Hard η bounds amplify differentiation through a discretisation effect (40.7% of nodes pinned at bounds, bimodal η distribution). Soft η bounds preserve continuous modulation, producing weaker but genuine differentiation. Baseline and global conditions are unaffected by bound type. Error bars: bootstrap 95% CI.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Baseline conditions are identical under both bound types (CCD <span class="math inline">\(= 0.90\)</span>, response diversity <span class="math inline">\(= 0.000\)</span>), confirming that the bound distinction is irrelevant without metaplasticity. Global targets collapse differentiation regardless of bounds (CCD <span class="math inline">\(\leq 0.02\)</span>). Only local targets are bound-sensitive: hard bounds produce CCD <span class="math inline">\(= 0.84\)</span> [0.81, 0.87] and response diversity <span class="math inline">\(= 0.047\)</span> [0.044, 0.050]; soft bounds produce CCD <span class="math inline">\(= 0.30\)</span> [0.26, 0.34] and response diversity <span class="math inline">\(= 0.015\)</span> [0.012, 0.017].</p>
+<p>The mechanism is a discretisation effect. Experiment 15 records the <span class="math inline">\(\eta\)</span> distribution dynamics under both regimes:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>exp15 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"exp15_dynamics_compare"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get individual eta values from summary statistics</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>exp15_final <span class="ot">&lt;-</span> exp15 <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;=</span> <span class="dv">180</span>) <span class="sc">|&gt;</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">eta_std =</span> <span class="fu">mean</span>(eta_std),</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_bound =</span> <span class="fu">mean</span>(pct_eta_at_bound),</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">eta_skew =</span> <span class="fu">mean</span>(eta_skew),</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">ccd =</span> <span class="fu">mean</span>(centroid_cosine_distance),</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">rd =</span> <span class="fu">mean</span>(response_diversity),</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">wmax =</span> <span class="fu">mean</span>(weight_max),</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>exp15_final <span class="sc">|&gt;</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>condition) <span class="sc">|&gt;</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="fu">factor</span>(name,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>      <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"ccd"</span>, <span class="st">"rd"</span>, <span class="st">"eta_std"</span>, <span class="st">"pct_bound"</span>, <span class="st">"eta_skew"</span>, <span class="st">"wmax"</span>),</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"CCD"</span>, <span class="st">"Response div."</span>, <span class="st">"η std"</span>, <span class="st">"% η at bound"</span>,</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"η skew"</span>, <span class="st">"Weight max"</span>))</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(condition, value, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>name, <span class="at">scales =</span> <span class="st">"free_y"</span>, <span class="at">nrow =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(pal[<span class="dv">1</span>], pal[<span class="dv">3</span>]),</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Hard η bounds"</span>, <span class="st">"Soft η bounds"</span>)) <span class="sc">+</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">fill =</span> <span class="cn">NULL</span>,</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Exp 15: Hard vs soft η bound dynamics"</span>) <span class="sc">+</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"bottom"</span>,</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_blank</span>(), <span class="at">axis.ticks.x =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div id="fig-eta-dist" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-eta-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="paper_files/figure-html/fig-eta-dist-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-eta-dist-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;12: Summary diagnostics comparing hard vs soft η bounds (Exp 15, sessions ≥ 180). Hard bounds produce higher CCD (geometric separation), higher response diversity, wider η spread (std = 0.077 vs 0.040), and 40.7% of nodes pinned at the η floor or ceiling (vs 0% under soft bounds). The negative skew under hard bounds reflects the bimodal concentration of nodes at boundary values. The η divergence (F = 4.9, Paper 4S Exp E2) confirms that between-assemblage η variance significantly exceeds within-assemblage variance only under hard bounds.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Under hard bounds, 40.7% of nodes have <span class="math inline">\(\eta\)</span> pinned at either <span class="math inline">\(\eta_\text{min}\)</span> or <span class="math inline">\(\eta_\text{max}\)</span>, creating a bimodal distribution (skew <span class="math inline">\(= -0.31\)</span>) of “consolidated” nodes (low <span class="math inline">\(\eta\)</span>, high activity, strong weights) and “exploratory” nodes (high <span class="math inline">\(\eta\)</span>, low activity, weak weights). Different assemblages accumulate different proportions of each type, driving weight vector divergence. Under soft bounds, no nodes reach the limits (by construction), <span class="math inline">\(\eta\)</span> is continuously distributed (skew <span class="math inline">\(= +0.55\)</span>, std <span class="math inline">\(= 0.040\)</span> vs <span class="math inline">\(0.077\)</span>), and the reduced separation yields lower CCD.</p>
+<p>This extends a well-established principle in synaptic plasticity: <span class="citation" data-cites="vanrossum2000stable">Rossum, Bi, and Turrigiano (<a href="#ref-vanrossum2000stable" role="doc-biblioref">2000</a>)</span> showed that additive (hard-bounded) STDP produces bimodal weight distributions, while multiplicative (soft) rules produce unimodal distributions. <span class="citation" data-cites="miller1994role">Miller and MacKay (<a href="#ref-miller1994role" role="doc-biblioref">1994</a>)</span> demonstrated that subtractive constraints drive variables to extrema while multiplicative constraints yield graded profiles. <span class="citation" data-cites="fusi2007limits">Fusi and Abbott (<a href="#ref-fusi2007limits" role="doc-biblioref">2007</a>)</span> established that hard-bounded synapses exhibit qualitatively different memory dynamics than soft-bounded ones. Our contribution is showing that this same principle, applied one level up—to the metaplastic learning rate rather than synaptic weights—controls the strength of inter-assemblage differentiation.</p>
+<p>A confound should be noted: under soft <span class="math inline">\(\eta\)</span> bounds, weights reach <span class="math inline">\(w_\text{max} = 1.0\)</span> more frequently (mean maximum weight <span class="math inline">\(= 1.000\)</span>) than under hard <span class="math inline">\(\eta\)</span> bounds (<span class="math inline">\(0.878\)</span>). This occurs because soft-bounded <span class="math inline">\(\eta\)</span> values remain higher on average (not pinned to the floor), sustaining stronger Hebbian updates that drive weights to the hard weight ceiling. The weight saturation could independently reduce CCD by compressing the weight space in which assemblages can diverge. Disentangling the <span class="math inline">\(\eta\)</span> discretisation effect from this weight saturation interaction remains for future work.</p>
+<p>Critically, however, local homeostasis under soft bounds still produces statistically significant functional differentiation: response diversity <span class="math inline">\(= 0.015\)</span> [0.012, 0.017] versus baseline <span class="math inline">\(= 0.000\)</span> [0.000, 0.000] (Mann-Whitney <span class="math inline">\(p &lt; 10^{-40}\)</span>, Cohen’s <span class="math inline">\(d = 1.97\)</span>). The effect is quantitatively weaker (32% of the hard-bound value) but qualitatively present. Local homeostasis produces genuine functional differentiation under both bounding regimes; hard bounds amplify it through a bimodal concentration effect that has well-characterised precedents in the synaptic plasticity literature.</p>
+</section>
+<section id="homeostatic-timescale-robustness" class="level3">
+<h3 class="anchored" data-anchor-id="homeostatic-timescale-robustness">Homeostatic timescale robustness</h3>
+<p>The EMA smoothing parameter controls the timescale of homeostatic sensing (Exp 18). Fast sensing (EMA rate <span class="math inline">\(= 0.10\)</span>) and slow sensing (<span class="math inline">\(0.01\)</span>) both produce strong differentiation: CCD <span class="math inline">\(= 0.888\)</span> and <span class="math inline">\(0.869\)</span> respectively, compared to the default (<span class="math inline">\(0.05\)</span>, CCD <span class="math inline">\(= 0.841\)</span>). Response diversity is similarly robust (<span class="math inline">\(0.057\)</span>, <span class="math inline">\(0.062\)</span>, <span class="math inline">\(0.047\)</span>). The only notable difference is assemblage count: slow sensing produces more assemblages (<span class="math inline">\(11.1\)</span> vs <span class="math inline">\(5.2\)</span>), likely because the sluggish target allows transient fluctuations to seed additional individuation events before the homeostatic signal catches up. The core differentiation result is invariant to homeostatic timescale across an order of magnitude.</p>
+</section>
+<section id="transplant-test-differentiation-is-context-dependent" class="level3">
+<h3 class="anchored" data-anchor-id="transplant-test-differentiation-is-context-dependent">Transplant test: differentiation is context-dependent</h3>
+<p>Experiment 19 tests whether assemblage identity is intrinsic or context-dependent by swapping the <span class="math inline">\(\eta\)</span> values and activity histories of the two largest assemblages at session 100. If differentiation reflects intrinsic assemblage properties (DeLanda’s relations of exteriority), transplanted assemblages should retain their functional profiles in their new spatial context.</p>
+<p>They do not. The transplant produces no measurable disruption at any timescale: CCD, response diversity, and assemblage count are indistinguishable from the control condition by session 101—one session (300 steps) after the swap. The transplanted <span class="math inline">\(\eta\)</span> values are immediately overwritten by the local homeostatic target at the new spatial location. Assemblage identity is determined entirely by spatial context, not by intrinsic properties of the component nodes.</p>
+<p>This result bears on DeLanda’s <span class="citation" data-cites="delanda2006new">(<a href="#ref-delanda2006new" role="doc-biblioref">2006</a>)</span> relations of exteriority, though the falsification is not absolute. DeLanda acknowledges that exteriority admits of degrees—components need not be fully detachable to possess some degree of external relations. The assemblages do resist perturbation (Exp 9), which indicates partial exteriority: they are not infinitely context-sensitive. But the transplant result shows that the <em>identity-constituting</em> relations are spatial, not intrinsic. The differentiation is genuine (assemblages have measurably different functional profiles) but not <em>portable</em>: it is constituted by the relationship between assemblage and milieu, not by properties the assemblage carries with it.</p>
+<p>The self-sealing dynamics observed here—where consolidated pathways preferentially reinforce themselves, resist perturbation, and maintain their organisation through their own activity—exhibit structural parallels to operational closure as described in autopoietic theory <span class="citation" data-cites="maturana1980autopoiesis">(<a href="#ref-maturana1980autopoiesis" role="doc-biblioref">Maturana and Varela 1980</a>)</span>. Three levels of closure should be distinguished. (a) <em>Simondonian operational closure</em>: the operation that constituted the individual (Hebbian reinforcement of co-active edges) is the same operation that now maintains it. The assemblages satisfy this criterion. (b) <em>Varela’s organisational closure</em>: the network of processes that produces the system’s components is identical to the network that those components constitute. This is stronger — it requires the system to produce its own processes, not just maintain its own state. The assemblages do not satisfy this criterion: the Hebbian rule is imposed, not self-produced. (c) <em>Full autopoiesis</em>: organisational closure plus self-production of a topological boundary in physical space <span class="citation" data-cites="beer2020autopoiesis">(<a href="#ref-beer2020autopoiesis" role="doc-biblioref">Beer 2020</a>)</span>. The assemblages do not produce their own boundary — it emerges from the weight dynamics but is not a distinct physical structure. This positions the assemblages at level (a), between minimal autonomy and full autopoiesis in the hierarchy described by Thompson <span class="citation" data-cites="thompson2007mind">(<a href="#ref-thompson2007mind" role="doc-biblioref">2007</a>)</span>.</p>
+<p>In Simondon’s terms, the assemblage and its associated milieu are co-individuated—neither has an identity independent of the other. In DeLanda’s terms, relations of exteriority do not hold: components cannot be detached from their assemblage and plugged into another while retaining their functional identity.</p>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<section id="the-three-way-comparison" class="level3">
+<h3 class="anchored" data-anchor-id="the-three-way-comparison">The three-way comparison</h3>
+<p>The central finding of this paper can be stated as a three-way comparison across the full programme:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 68%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Homeostatic regime</th>
+<th>Outcome</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>None (Papers 1–3)</td>
+<td>Self-sealing: individuation without differenciation</td>
+</tr>
+<tr class="even">
+<td>Global target</td>
+<td>Monopoly: one assemblage dominates</td>
+</tr>
+<tr class="odd">
+<td>Local target</td>
+<td>Stable differentiation: multiple distinct assemblages</td>
+</tr>
+</tbody>
+</table>
+<p>Self-sealing, previously diagnosed as the obstacle to differenciation (Paper 3), is reinterpreted here as its <em>precondition</em>. Without self-sealing, no assemblage maintains its boundaries long enough to consolidate a distinct identity. With self-sealing but no homeostatic regulation, assemblages individuate but remain clones. With self-sealing and local homeostatic regulation, each assemblage consolidates in its own neighbourhood, subject to its own local reference signal, producing genuinely different internal dynamics.</p>
+</section>
+<section id="why-turing-partially-fails-on-hebbian-substrates" class="level3">
+<h3 class="anchored" data-anchor-id="why-turing-partially-fails-on-hebbian-substrates">Why Turing partially fails on Hebbian substrates</h3>
+<p>The Turing result is more nuanced than a simple falsification. Two structural features of the Hebbian substrate are genuinely incompatible with the reaction-diffusion framework, while a third turned out to be partly artifactual:</p>
+<ol type="1">
+<li><p><strong>Dynamic topology.</strong> Classical Turing analysis assumes a fixed diffusion graph. The Hebbian substrate rewires at every step—the Laplacian eigenspectrum is non-stationary. This is a structural incompatibility that no implementation change can resolve.</p></li>
+<li><p><strong>Sparse connectivity.</strong> <span class="citation" data-cites="wolfrum2012turing">Wolfrum (<a href="#ref-wolfrum2012turing" role="doc-biblioref">2012</a>)</span> showed that sparse networks generically produce single-differentiated-node solutions. Distributed Turing patterns require dense, regular connectivity.</p></li>
+<li><p><strong>Absorbing <span class="math inline">\(\eta\)</span> boundaries (partly artifactual).</strong> Under hard learning rate clipping (<span class="math inline">\(\eta_i \in [\eta_\text{min}, \eta_\text{max}]\)</span> with hard clip), bounded <span class="math inline">\(\eta\)</span> values create absorbing states where inhibitor coupling cannot modulate the learning rate once it reaches a bound. Experiment 11 showed that soft <span class="math inline">\(\eta\)</span> bounding (tanh saturation) partially rescues coupling, confirming this was an implementation artifact rather than a fundamental incompatibility. This matters philosophically: the Deleuzian framework from which we derived the Turing hypothesis assumes continuous intensive quantities <span class="citation" data-cites="deleuze1994difference">(<a href="#ref-deleuze1994difference" role="doc-biblioref">Deleuze 1994</a>, ch.&nbsp;5)</span>. Hard <span class="math inline">\(\eta\)</span> clipping violates this assumption, and our initial failure to recognise this introduced an unnecessary discontinuity into the very mechanism we were testing.</p></li>
+</ol>
+<p>The honest assessment is therefore: Turing morphogenesis on this substrate is <em>structurally impaired</em> (points 1–2) and was <em>additionally sabotaged</em> by an implementation choice inconsistent with its theoretical grounding (point 3). With soft <span class="math inline">\(\eta\)</span> bounds, coupling achieves CCD <span class="math inline">\(= 0.65\)</span>—genuine differentiation, though still significantly below local homeostasis (CCD <span class="math inline">\(= 0.84\)</span> under hard <span class="math inline">\(\eta\)</span> bounds, <span class="math inline">\(0.30\)</span> under soft). The structural impairments explain the residual gap.</p>
+</section>
+<section id="philosophical-grounding-a-productive-fracture" class="level3">
+<h3 class="anchored" data-anchor-id="philosophical-grounding-a-productive-fracture">Philosophical grounding: a productive fracture</h3>
+<p>This programme began within a Deleuzian framework: individuation as actualisation of virtual multiplicities, differenciation as the production of genuinely novel kinds through intensive processes <span class="citation" data-cites="deleuze1994difference">(<a href="#ref-deleuze1994difference" role="doc-biblioref">Deleuze 1994</a>)</span>. Papers 1–3 found that Hebbian dynamics produce individuation (actualisation) but only bare repetition (same process, identical copies). The question was: what produces complex repetition?</p>
+<p>The answer—local homeostatic targets—creates tensions within this framework that we believe are more productive to name than to resolve. A third philosophical voice, DeLanda’s assemblage theory, provides a diagnostic that neither Deleuze nor Simondon alone supplies.</p>
+<p><strong>Where Deleuze holds.</strong> Local targets create genuinely heterogeneous problematic fields in the Deleuzian sense. Each node confronts a <em>singular</em> problem defined by its neighbourhood’s contingent history. The differentiation that emerges is not prescribed by the targets—the targets co-evolve with the dynamics, and perturbation experiments confirm the outcomes are not determined by specific parameter values. Different localities constitute different differential fields, each demanding its own resolution. This is differenciation through the problem <span class="citation" data-cites="deleuze1994difference">(<a href="#ref-deleuze1994difference" role="doc-biblioref">Deleuze 1994</a>, ch.&nbsp;4)</span>.</p>
+<p>The soft-bounds finding reinforces this reading for the Turing mechanism. Our initial Turing test violated a Deleuzian premise: intensive quantities are continuous, and hard <span class="math inline">\(\eta\)</span> clipping introduced a non-Deleuzian discontinuity. When we restored continuity (soft <span class="math inline">\(\eta\)</span> bounds), the Deleuzian mechanism partially succeeded (CCD <span class="math inline">\(= 0.65\)</span>).</p>
+<p>However, the bound-type factorial (Exp 13) reveals a tension that must be confronted honestly. The strongest local homeostasis result (CCD <span class="math inline">\(= 0.84\)</span>) depends on the same hard <span class="math inline">\(\eta\)</span> bounds that we criticise for sabotaging the Turing mechanism. Under soft <span class="math inline">\(\eta\)</span> bounds, local homeostasis produces CCD <span class="math inline">\(= 0.30\)</span>—weaker geometric separation, with response diversity of <span class="math inline">\(0.015\)</span> confirming genuine but reduced functional differentiation. The philosophical framework cannot simultaneously condemn hard <span class="math inline">\(\eta\)</span> bounds for Turing and rely on them for homeostasis without addressing the asymmetry.</p>
+<p>The resolution lies in Simondon’s distinction between <em>moulding</em> and <em>modulation</em> <span class="citation" data-cites="simondon2020individuation">(<a href="#ref-simondon2020individuation" role="doc-biblioref">Simondon 2020</a>)</span>. Moulding imposes form from without through fixed boundary conditions; modulation continuously regulates an ongoing process through variable constraints. Hard <span class="math inline">\(\eta\)</span> bounds create absorbing states that classify nodes into binary types (consolidated vs. exploratory)—this is moulding. The discretisation is not intrinsic to the dynamics but imposed by the boundary. Soft <span class="math inline">\(\eta\)</span> bounds preserve the intensive character of the learning rate, allowing continuous regulation—this is modulation. The stronger differentiation under hard bounds is Simondonian moulding: effective but externally constrained. Moulding is not pejorative in Simondon’s framework—it is a legitimate operation, as in casting, that forecloses further individuation while producing stable form. The weaker differentiation under soft bounds is Simondonian modulation: open-ended but dynamically modest. Moulding is, in Simondon’s analysis, a limit case of modulation—modulation frozen at its boundary values.</p>
+<p>Both regimes produce functional differentiation (response diversity <span class="math inline">\(&gt; 0\)</span>). The moulding regime amplifies it through a discretisation effect that has well-characterised precedents in the synaptic plasticity literature <span class="citation" data-cites="vanrossum2000stable miller1994role fusi2005cascade">(<a href="#ref-vanrossum2000stable" role="doc-biblioref">Rossum, Bi, and Turrigiano 2000</a>; <a href="#ref-miller1994role" role="doc-biblioref">Miller and MacKay 1994</a>; <a href="#ref-fusi2005cascade" role="doc-biblioref">Fusi, Drew, and Abbott 2005</a>)</span>. Whether biological metaplastic variables exhibit hard or soft saturation is an empirical question; evidence supports both possibilities <span class="citation" data-cites="abraham2001heterosynaptic he2016experience">(<a href="#ref-abraham2001heterosynaptic" role="doc-biblioref">Abraham et al. 2001</a>; <a href="#ref-he2016experience" role="doc-biblioref">He et al. 2016</a>)</span>.</p>
+<p><strong>Where Simondon wins.</strong> The critical period finding introduces an irreversible temporal ordering: individuation must precede communication. Coupling before consolidation destroys differentiation; coupling after preserves it. The outcomes are qualitatively different and the ordering cannot be reversed. This is Simondon’s transduction—the coupled individuation of milieu and individual, where the milieu individuates alongside the entity it supports <span class="citation" data-cites="simondon2020individuation">(<a href="#ref-simondon2020individuation" role="doc-biblioref">Simondon 2020</a>)</span>.</p>
+<p>Deleuze’s treatment of time in <em>Difference and Repetition</em> (Chapter 2) is not achronological—the three syntheses of time (habit, memory, eternal return) provide a rich temporal ontology. But Deleuze resists <em>irreversible developmental ordering</em>: the eternal return as third synthesis implies that all configurations of the virtual are in principle revisitable. The critical period contradicts this. Once assemblages consolidate under local homeostatic targets, the basin structure is carved; introducing coupling <em>before</em> this consolidation produces a qualitatively different (and irrecoverable) outcome. This irreversibility maps naturally onto Simondon’s transduction, which is explicitly directional, and sits uneasily with Deleuze’s emphasis on the virtual as eternally available for re-actualisation.</p>
+<p><strong>Where DeLanda diagnoses.</strong> The functional probe (Exp 12) operationalises DeLanda’s criterion for genuine capacity differentiation <span class="citation" data-cites="delanda2006new delanda2002intensive">(<a href="#ref-delanda2006new" role="doc-biblioref">DeLanda 2006</a>, <a href="#ref-delanda2002intensive" role="doc-biblioref">2002</a>)</span>. DeLanda distinguishes between properties (actual, denumerable) and capacities (virtual, forming an open list). Genuine differentiation requires that components possess qualitatively different <em>sets of capacities</em>, not merely different positions or parameter values.</p>
+<p>The baseline result is the critical test: CCD <span class="math inline">\(= 0.90\)</span> but response diversity <span class="math inline">\(= 0.000\)</span>. Assemblages that are geometrically distinct are functionally identical—different instances of a single type, not different kinds. DeLanda’s five conditions for capacity formation <span class="citation" data-cites="delanda2006new">(<a href="#ref-delanda2006new" role="doc-biblioref">DeLanda 2006</a>, ch.&nbsp;1)</span> map onto our substrate as follows:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>DeLanda condition</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1. Heterogeneous components</td>
+<td>Yes: <span class="math inline">\(\eta\)</span> divergence <span class="math inline">\(&gt; 0\)</span>, response rank <span class="math inline">\(&gt; 1\)</span> (Exps 12, 17)</td>
+</tr>
+<tr class="even">
+<td>2. Relations of exteriority</td>
+<td><strong>No</strong>: transplant shows identity is context-dependent (Exp 19)</td>
+</tr>
+<tr class="odd">
+<td>3. Intensive processes + thresholds</td>
+<td>Partial: gradients present, no kind-transition</td>
+</tr>
+<tr class="even">
+<td>4. Semi-permeable boundaries</td>
+<td>Replaced by developmental sequence (Exp 8)</td>
+</tr>
+<tr class="odd">
+<td>5. Top-down constraint preserving variation</td>
+<td>Yes: local targets (Exp 9 perturbation resilience)</td>
+</tr>
+</tbody>
+</table>
+<p>Three of five conditions are satisfied, one is temporally substituted, and one—relations of exteriority—is experimentally falsified. The transplant result (Exp 19) shows that assemblage identity cannot be detached from spatial context: components relocated to a new neighbourhood are immediately assimilated, their transplanted <span class="math inline">\(\eta\)</span> values overwritten by the local homeostatic target within a single session. This is not attractor stability (which Exp 9 confirms) but its opposite: the attractor is spatially indexed, and nodes converge to whichever basin their spatial position defines, regardless of their initial state.</p>
+<p>This falsification is itself a contribution. It precisely characterises the kind of differentiation this substrate achieves: Simondonian co-individuation (assemblage and milieu constitute each other) rather than DeLandian exteriority (components retain portable identity). The differentiation is real but relational—it exists in the coupling between entity and context, not in the entity alone.</p>
+<p><strong>The fracture.</strong> The system may achieve <em>differentiation</em>—symmetry-breaking into basins with measurably different functional profiles—without achieving <em>differenciation</em> in the full Deleuzian sense—the production of qualitatively novel virtual structures. The vocabulary of outcomes (activity level, connectivity, learning rate, gain) is fixed from the start; the system selects among pre-given possibilities rather than creating new ones. Even the functional differentiation documented in Exp 12 is parametric: assemblages vary in the <em>value</em> of their signal amplification gain, not in the <em>kind</em> of function they perform. Whether parametric variation across a fixed capacity space constitutes genuine novelty or mere distribution is an open philosophical question that computational evidence alone cannot adjudicate.</p>
+<p>We propose that this fracture between differentiation and differenciation marks a precise boundary: what a purely Hebbian substrate with homeostatic regulation <em>can</em> and <em>cannot</em> do. It can break symmetry, consolidate distinct attractors, resist perturbation, and produce assemblages with measurably different functional profiles. It cannot generate qualitatively new dynamics that were not latent in its initial rule-set. If differenciation in the strong Deleuzian sense requires the production of genuinely novel capacities—new kinds of rules, not new values of existing rules—then even the locally regulated Hebbian substrate falls short. But it falls short in a precisely characterised way that points toward what a next-generation substrate would require: rule-space expansion, not merely parameter-space exploration. Adams et al. <span class="citation" data-cites="adams2017formal">(<a href="#ref-adams2017formal" role="doc-biblioref">2017</a>)</span> demonstrated formally that only state-dependent update rules—where the system’s current state modifies the rule governing its next state—produce unbounded evolutionary dynamics. A fixed Hebbian rule, however richly parameterised, constrains the system to a bounded transition graph that must eventually repeat. The metaplastic extension localises a <em>parameter</em> (<span class="math inline">\(\eta\)</span>) but not the <em>form</em> of the rule (Hebbian correlation). Crossing the productive fracture requires making the update equation itself state-dependent—a direction exemplified by Flow-Lenia’s parameter localisation <span class="citation" data-cites="plantec2023flowlenia">(<a href="#ref-plantec2023flowlenia" role="doc-biblioref">Plantec et al. 2023a</a>)</span>.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>Assemblages under local homeostatic regulation develop genuinely independent functional profiles: response rank reaches <span class="math inline">\(2.4\)</span> [<span class="math inline">\(1.7\)</span>, <span class="math inline">\(3.0\)</span>] under the standard pruning regime (Exp 17) and <span class="math inline">\(5.6\)</span> when pruning is removed (Exp 17np; see Paper 4S), compared to a baseline of <span class="math inline">\(1.2\)</span> (parametric). Response diversity increases from <span class="math inline">\(0.000\)</span> (baseline) to <span class="math inline">\(0.047\)</span> (local homeostasis), and <span class="math inline">\(\eta\)</span> divergence between assemblages reaches <span class="math inline">\(F = 4.9\)</span> (<span class="math inline">\(p &lt; 0.0001\)</span>). These independent functional probes establish that local homeostatic targets produce genuine capacity differentiation, not merely geometric separation (which CCD alone cannot distinguish; Paper 4S). The resulting differentiation is sustained (1000 sessions), perturbation-resilient (50% scramble, full recovery), robust to structural parameters (grid size, locality, target radius), and exhibits critical period dynamics (coupling after consolidation preserves diversity; coupling before consolidation destroys it).</p>
+<p>Four findings carry forward. First, the partial Turing rescue under soft <span class="math inline">\(\eta\)</span> bounds reveals that the original failure was partly an implementation artifact inconsistent with the Deleuzian framework that motivated the hypothesis—a methodological lesson in attending to a theory’s own assumptions when designing its tests. Second, the functional probe establishes that geometric differentiation (distinct weight structures) can exist without functional differentiation (distinct capacities), vindicating DeLanda’s insistence that genuine differentiation requires capacity divergence, not merely spatial separation. Third, the bound-type sensitivity is itself a finding: hard <span class="math inline">\(\eta\)</span> bounds amplify differentiation through a discretisation effect (Simondonian moulding) that extends a well-known principle from synaptic to metaplastic dynamics <span class="citation" data-cites="vanrossum2000stable miller1994role">(<a href="#ref-vanrossum2000stable" role="doc-biblioref">Rossum, Bi, and Turrigiano 2000</a>; <a href="#ref-miller1994role" role="doc-biblioref">Miller and MacKay 1994</a>)</span>. Soft <span class="math inline">\(\eta\)</span> bounds produce weaker but philosophically cleaner differentiation (Simondonian modulation). Both regimes produce genuine functional differentiation; the bound type controls its strength. Fourth, the differentiation achieved—while real, stable, and functional—remains parametric: different values of the same capacities, not qualitatively novel kinds. If complex repetition in the full Deleuzian sense requires the production of genuinely new capacities, then differenciation in Hebbian substrates requires not merely heterogeneous regulation but <em>rule-space expansion</em>—a substrate capable of generating new kinds of dynamics, not just distributing existing ones across space.</p>
+<p>What would differenciation look like computationally? We can now state this precisely: assemblages that develop qualitatively different <em>update rules</em>, not just different parameter values of the same rule. In our substrate, all nodes execute the same Hebbian learning with homeostatic <span class="math inline">\(\eta\)</span> adjustment; the rules are parametrically varied (<span class="math inline">\(\eta\)</span> values differ) but structurally identical. Genuine differenciation would require some assemblages to spontaneously develop anti-Hebbian dynamics, competitive inhibition, or temporal integration properties not present in the initial rule-set. This connects to the open-ended evolution literature’s distinction between variation within a fixed genotype-phenotype map and the expansion of the map itself <span class="citation" data-cites="aguilar2014openended banzhaf2016defining">(<a href="#ref-aguilar2014openended" role="doc-biblioref">Aguilar et al. 2014</a>; <a href="#ref-banzhaf2016defining" role="doc-biblioref">Banzhaf et al. 2016</a>)</span>. The transplant result (Exp 19) sharpens the point: even the parametric variation achieved is context-dependent, immediately overwritten when the spatial context changes. Portable, intrinsic functional identity—the hallmark of DeLandian exteriority and a prerequisite for open-ended evolution—requires a substrate whose components can carry their rules with them. Flow-Lenia’s parameter localisation <span class="citation" data-cites="plantec2023flow">(<a href="#ref-plantec2023flow" role="doc-biblioref">Plantec et al. 2023b</a>)</span> achieves this; our Hebbian substrate does not. The gap between local homeostatic differentiation and genuine rule-carrying individuation defines the research frontier for the next phase of this programme.</p>
+</section>
+<section id="data-and-code-availability" class="level2">
+<h2 class="anchored" data-anchor-id="data-and-code-availability">Data and Code Availability</h2>
+<p>All simulation code, experiment runners, and analysis scripts are available at [repository URL]. Raw parquet data files (approximately 260 MB across 18 experiments) are archived at [data repository URL]. All experiments use fixed random seeds (0–19) for reproducibility. The simulation was executed using Python 3.12.3, NumPy 1.26, PyArrow 14.0, scikit-learn 1.3, and Ray 2.54.0 on a three-node cluster (68 CPUs, 2 GPUs). Figures were generated using R 4.3 with ggplot2, patchwork, and ggthemes via Quarto.</p>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-abraham2001heterosynaptic" class="csl-entry" role="listitem">
+Abraham, Wickliffe C, Sara E Mason-Parker, Mark F Bear, Sara Webb, and Warren P Tate. 2001. <span>“Heterosynaptic Metaplasticity in the Hippocampus in Vivo: A <span>BCM</span>-Like Modifiable Threshold for <span>LTP</span>.”</span> <em>Proceedings of the National Academy of Sciences</em> 98 (19): 10924–29.
+</div>
+<div id="ref-achille2019critical" class="csl-entry" role="listitem">
+Achille, Alessandro, Matteo Rovere, and Stefano Soatto. 2019. <span>“Critical Learning Periods in Deep Networks.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-adams2017formal" class="csl-entry" role="listitem">
+Adams, Alyssa, Hector Zenil, Paul C. W. Davies, and Sara Imari Walker. 2017. <span>“Formal Definitions of Unbounded Evolution and Innovation Reveal Universal Mechanisms for Open-Ended Evolution in Dynamical Systems.”</span> <em>Scientific Reports</em> 7: 997.
+</div>
+<div id="ref-aguilar2014openended" class="csl-entry" role="listitem">
+Aguilar, Wendy, Guillermo Santamarı́a-Bonfil, Tom Froese, and Carlos Gershenson. 2014. <span>“The Open-Ended Evolution of Artificial Life.”</span> In <em>Artificial Life</em>, 20:241–68. 2. MIT Press.
+</div>
+<div id="ref-banzhaf2016defining" class="csl-entry" role="listitem">
+Banzhaf, Wolfgang, Bert Baumgaertner, Guillaume Beslon, René Doursat, James A Foster, Barry McMullin, Virgilio H R de Melo, et al. 2016. <span>“Defining and Simulating Open-Ended Novelty: Requirements, Guidelines, and Challenges.”</span> <em>Theory in Biosciences</em> 135: 131–61.
+</div>
+<div id="ref-beer2020autopoiesis" class="csl-entry" role="listitem">
+Beer, Randall D. 2020. <span>“An Investigation into the Origin of Autopoiesis.”</span> <em>Adaptive Behavior</em> 28 (6): 383–407.
+</div>
+<div id="ref-bienenstock1982theory" class="csl-entry" role="listitem">
+Bienenstock, Elie L, Leon N Cooper, and Paul W Munro. 1982. <span>“Theory for the Development of Neuron Selectivity: Orientation Specificity and Binocular Interaction in Visual Cortex.”</span> <em>Journal of Neuroscience</em> 2 (1): 32–48.
+</div>
+<div id="ref-delanda2002intensive" class="csl-entry" role="listitem">
+DeLanda, Manuel. 2002. <em>Intensive Science and Virtual Philosophy</em>. Continuum.
+</div>
+<div id="ref-delanda2006new" class="csl-entry" role="listitem">
+———. 2006. <em>A New Philosophy of Society: Assemblage Theory and Social Complexity</em>. Continuum.
+</div>
+<div id="ref-deleuze1994difference" class="csl-entry" role="listitem">
+Deleuze, Gilles. 1994. <em>Difference and Repetition</em>. Columbia University Press.
+</div>
+<div id="ref-fusi2007limits" class="csl-entry" role="listitem">
+Fusi, Stefano, and L F Abbott. 2007. <span>“Limits on the Memory Storage Capacity of Bounded Synapses.”</span> <em>Nature Neuroscience</em> 10 (4): 485–93.
+</div>
+<div id="ref-fusi2005cascade" class="csl-entry" role="listitem">
+Fusi, Stefano, Patrick J Drew, and L F Abbott. 2005. <span>“Cascade Models of Synaptically Stored Memories.”</span> <em>Neuron</em> 45 (4): 599–611.
+</div>
+<div id="ref-gao2017theory" class="csl-entry" role="listitem">
+Gao, Peiran, and Surya Ganguli. 2017. <span>“A Theory of Multineuronal Dimensionality, Dynamics and Measurement.”</span> <em>bioRxiv</em>, 214262.
+</div>
+<div id="ref-gierer1972theory" class="csl-entry" role="listitem">
+Gierer, Alfred, and Hans Meinhardt. 1972. <span>“A Theory of Biological Pattern Formation.”</span> <em>Kybernetik</em> 12 (1): 30–39.
+</div>
+<div id="ref-he2016experience" class="csl-entry" role="listitem">
+He, Hai-Yan, Wanhua Shen, Masaki Hiramoto, and Dhriti K Bhatt. 2016. <span>“Experience-Dependent Bimodal Plasticity of Inhibitory Neurons in Early Development.”</span> <em>Neuron</em> 90 (5): 1203–14.
+</div>
+<div id="ref-kleinman2024critical" class="csl-entry" role="listitem">
+Kleinman, Michael, Alessandro Achille, and Stefano Soatto. 2024. <span>“Critical Learning Periods Emerge Even in Deep Linear Networks.”</span> In <em>International Conference on Learning Representations</em>.
+</div>
+<div id="ref-krause2024turing" class="csl-entry" role="listitem">
+Krause, Andrew L, Eamonn A Gaffney, Thomas J Jewell, Václav Klika, and Benjamin J Walker. 2024. <span>“Turing Instabilities Are Not Enough to Ensure Pattern Formation.”</span> <em>Bulletin of Mathematical Biology</em> 86 (2): 21.
+</div>
+<div id="ref-maturana1980autopoiesis" class="csl-entry" role="listitem">
+Maturana, Humberto R., and Francisco J. Varela. 1980. <em>Autopoiesis and Cognition: The Realization of the Living</em>. Dordrecht: D. Reidel.
+</div>
+<div id="ref-miller1994role" class="csl-entry" role="listitem">
+Miller, Kenneth D, and David J C MacKay. 1994. <span>“The Role of Constraints in <span>H</span>ebbian Learning.”</span> <em>Neural Computation</em> 6 (1): 100–126.
+</div>
+<div id="ref-nakao2010turing" class="csl-entry" role="listitem">
+Nakao, Hiroya, and Alexander S Mikhailov. 2010. <span>“Turing Patterns in Network-Organized Activator-Inhibitor Systems.”</span> <em>Nature Physics</em> 6 (7): 544–50.
+</div>
+<div id="ref-plantec2023flow" class="csl-entry" role="listitem">
+Plantec, Erwan, Gautier Hamon, Mayalen Etcheverry, Pierre-Yves Oudeyer, Clément Moulin-Frier, and Bert Wang-Chak Chan. 2023b. <span>“Flow-<span>L</span>enia: Towards Open-Ended Evolution in Cellular Automata Through Mass Conservation and Parameter Localization.”</span> In <em>Artificial Life Conference Proceedings</em>.
+</div>
+<div id="ref-plantec2023flowlenia" class="csl-entry" role="listitem">
+———. 2023a. <span>“Flow-Lenia: Towards Open-Ended Evolution in Cellular Automata Through Mass Conservation and Parameter Localization.”</span> <em>arXiv Preprint arXiv:2212.07906</em>.
+</div>
+<div id="ref-rigotti2013importance" class="csl-entry" role="listitem">
+Rigotti, Mattia, Omri Barak, Melissa R. Warden, Xiao-Jing Wang, Nathaniel D. Daw, Earl K. Miller, and Stefano Fusi. 2013. <span>“The Importance of Mixed Selectivity in Complex Cognitive Tasks.”</span> <em>Nature</em> 497: 585–90.
+</div>
+<div id="ref-vanrossum2000stable" class="csl-entry" role="listitem">
+Rossum, Mark C W van, Guo-Qiang Bi, and Gina G Turrigiano. 2000. <span>“Stable <span>H</span>ebbian Learning from Spike Timing-Dependent Plasticity.”</span> <em>Journal of Neuroscience</em> 20 (23): 8812–21.
+</div>
+<div id="ref-rubin2001equilibrium" class="csl-entry" role="listitem">
+Rubin, Jonathan, Daniel D Lee, and Haim Sompolinsky. 2001. <span>“Equilibrium Properties of Temporally Asymmetric <span>H</span>ebbian Plasticity.”</span> <em>Physical Review Letters</em> 86 (2): 364–67.
+</div>
+<div id="ref-simondon2020individuation" class="csl-entry" role="listitem">
+Simondon, Gilbert. 2020. <em>Individuation in Light of Notions of Form and Information</em>. University of Minnesota Press.
+</div>
+<div id="ref-song2000competitive" class="csl-entry" role="listitem">
+Song, Sen, Kenneth D Miller, and L F Abbott. 2000. <span>“Competitive <span>H</span>ebbian Learning Through Spike-Timing-Dependent Synaptic Plasticity.”</span> <em>Nature Neuroscience</em> 3 (9): 919–26.
+</div>
+<div id="ref-stringer2019high" class="csl-entry" role="listitem">
+Stringer, Carsen, Marius Pachitariu, Nicholas Steinmetz, Matteo Carandini, and Kenneth D. Harris. 2019. <span>“High-Dimensional Geometry of Population Responses in Visual Cortex.”</span> <em>Nature</em> 571: 361–65.
+</div>
+<div id="ref-sweeney2015diffusive" class="csl-entry" role="listitem">
+Sweeney, Yann, Jeanette Hellgren Kotaleski, Dhruv H Bhatt, Upinder S Bhalla, and Matthias H Hennig. 2015. <span>“A Diffusive Homeostatic Signal Maintains Neural Heterogeneity and Responsiveness in Cortical Networks.”</span> <em>PLoS Computational Biology</em> 11 (7): e1004389.
+</div>
+<div id="ref-tang2022higher" class="csl-entry" role="listitem">
+Tang, Esther et al. 2022. <span>“Higher-Dimensional Neural Representations Predict Better Episodic Memory.”</span> <em>Science Advances</em> 8 (16): eabm3829.
+</div>
+<div id="ref-thompson2007mind" class="csl-entry" role="listitem">
+Thompson, Evan. 2007. <em>Mind in Life: Biology, Phenomenology, and the Sciences of Mind</em>. Cambridge, MA: Harvard University Press.
+</div>
+<div id="ref-turing1952chemical" class="csl-entry" role="listitem">
+Turing, Alan Mathison. 1952. <span>“The Chemical Basis of Morphogenesis.”</span> <em>Philosophical Transactions of the Royal Society of London B</em> 237 (641): 37–72.
+</div>
+<div id="ref-watson2016evolutionary" class="csl-entry" role="listitem">
+Watson, Richard A, and Eörs Szathmáry. 2016. <span>“The Evolution of Phenotypic Correlations and <span>‘Developmental Memory’</span>.”</span> <em>Evolution</em> 70 (2): 241–56.
+</div>
+<div id="ref-wolfrum2012turing" class="csl-entry" role="listitem">
+Wolfrum, Matthias. 2012. <span>“The <span>T</span>uring Bifurcation in Network Systems: Collective Patterns and Single Differentiated Nodes.”</span> <em>Physica D</em> 241 (16): 1351–57.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>We retain Deleuze’s <span class="citation" data-cites="deleuze1994difference">(<a href="#ref-deleuze1994difference" role="doc-biblioref">1994</a>)</span> spelling <em>differenciation</em> to distinguish the ontological process (actualisation of virtual structure into distinct kinds) from standard “differentiation” (empirically measured divergence of properties). The substrate achieves the latter; whether it achieves the former is a central question of this paper.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Experiments are numbered non-sequentially because Exp 4 (sensitivity sweep) was absorbed into Exp 6 (persistence), and Exp 14 was reserved for future work on sub-session dynamics.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

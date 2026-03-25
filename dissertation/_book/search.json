@@ -1,0 +1,437 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "The Dark Forest: Individuation, Coexistence, and Differentiation in Self-Organising Hebbian Networks",
+    "section": "",
+    "text": "Preface\nThis dissertation comprises four papers and one methodological supplement, produced between 2025 and 2026 as part of the Dark Forest research programme. Each paper was written as a self-contained contribution to Artificial Life, but together they form a cumulative argument about how functional complexity emerges from structurally simple substrates.\nThe programme proceeds through five stages: individuation (Paper 1), coexistence (Paper 2), the self-sealing barrier (Paper 3), metaplastic differentiation (Paper 4), and the methodological reckoning that revealed a pruning confound and strengthened the programme’s conclusions (Paper 4S).\nThe chapters that follow provide the connecting narrative. Chapter 1 introduces the research question and philosophical framework. Chapter 2 describes the shared computational methods. Chapters 3–7 present the five papers with contextual commentary. Chapter 8 synthesises the cross-cutting themes, and Chapter 9 concludes with directions for future work.\nAll simulation code, experimental data, and analysis scripts are available in the four programme repositories. The experimental programme comprises approximately 15,000 simulation jobs producing over 3 million session-level observations, executed on a distributed Ray cluster.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html",
+    "href": "chapters/introduction.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "1.1 The Question\nWhat is the minimal substrate that produces genuine functional differentiation? Not mere spatial separation, not clonal repetition, but the emergence of qualitatively different kinds from initially identical components. This question sits at the intersection of three fields: computational self-organisation, philosophy of individuation, and theoretical neuroscience. This dissertation approaches it through a series of computational experiments on Hebbian neural networks, interpreted through the philosophical frameworks of Gilbert Simondon, Gilles Deleuze, and Manuel DeLanda.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#positioning",
+    "href": "chapters/introduction.html#positioning",
+    "title": "1  Introduction",
+    "section": "1.2 Positioning",
+    "text": "1.2 Positioning\nThis programme of research sits at the intersection of several independently developing literatures: efficiency-fairness tradeoffs in neural network compression (Hooker et al. 2019; Tran et al. 2022), neural population dimensionality theory (Stringer et al. 2019; Gao et al. 2017), critical period dynamics in both biological and artificial systems (Hensch 2005; Achille et al. 2019), autopoietic theory and operational closure (Maturana & Varela 1980; Beer 2020), and the open-ended evolution problem (Adams et al. 2017; Banzhaf et al. 2016). While each literature has identified aspects of the phenomena we study, no prior work has unified these under a single mechanistic framework or characterised the compounding dynamics that emerge when pruning interacts with consolidation and metaplastic regulation across time on a self-organising substrate.\nSeveral of the programme’s findings converge with results established independently in these literatures — convergence that we interpret not as redundancy but as evidence that the underlying phenomena are real and domain-general, not artifacts of any single methodology. Within this convergent landscape, the programme identifies specific quantitative results (the disordinal pruning interaction, the hard clip irreducibility, the critical threshold boundaries, the grid-size scaling law) and a philosophical architecture (the Simondon-Deleuze-DeLanda diagnostic sequence) that are genuinely new.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#motivation",
+    "href": "chapters/introduction.html#motivation",
+    "title": "1  Introduction",
+    "section": "1.3 Motivation",
+    "text": "1.3 Motivation\nBiological systems exhibit a striking capacity for self-organised differentiation. From a single fertilised cell, an organism develops tissues with qualitatively different functions. From a population of identical neurons, a cortex develops regions with distinct computational specialisms. These processes share a common structure: initially homogeneous components, subject to local interactions and boundary conditions, spontaneously develop persistent functional differences.\nArtificial life research has demonstrated many forms of self-organisation — pattern formation, morphogenesis, evolutionary dynamics — but functional differentiation from identical components remains poorly understood. Most computational models either impose differentiation through initial conditions (breaking symmetry by hand) or achieve it through optimisation (gradient descent, evolutionary selection). The question of whether differentiation can emerge from purely local, optimisation-free dynamics is largely open.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#the-substrate",
+    "href": "chapters/introduction.html#the-substrate",
+    "title": "1  Introduction",
+    "section": "1.4 The Substrate",
+    "text": "1.4 The Substrate\nThis programme adopts a deliberate constraint: use the simplest possible learning rule and ask what it can and cannot produce. The substrate is a Hebbian neural network — nodes on a two-dimensional grid, connected by sparse, activity-dependent weights updated by the standard Hebbian rule. There is no optimisation objective, no error signal, no backpropagation. Structure emerges entirely from the interaction of Hebbian reinforcement, multiplicative decay, spatial locality, and boundary conditions.\nEach paper adds one mechanism to this substrate and asks what changes:\n\nPaper 1 adds nothing — it asks what pure Hebbian dynamics produce.\nPaper 2 varies encounter locality and maps the coexistence landscape.\nPaper 3 tests three interventions for producing differentiation within the Hebbian framework. All fail.\nPaper 4 introduces per-node metaplastic learning rates with homeostatic adjustment.\nPaper 4S examines whether the programme’s assumptions (pruning, metrics) were sound.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#the-philosophical-framework",
+    "href": "chapters/introduction.html#the-philosophical-framework",
+    "title": "1  Introduction",
+    "section": "1.5 The Philosophical Framework",
+    "text": "1.5 The Philosophical Framework\nThree thinkers structure the interpretation throughout the programme.\n\n1.5.1 Simondon: Individuation as Process\nGilbert Simondon’s theory of individuation provides the foundational ontology. For Simondon, individuation is not the imposition of form on matter (hylomorphism) but the resolution of a metastable pre-individual field through transduction — a process that propagates from a structural singularity, restructuring the field as it advances. The individual and its associated milieu co-emerge; neither precedes the other.\nKey Simondonian concepts deployed in this programme:\n\nMetastability: a system poised between equilibrium states, containing latent energy that can drive individuation.\nTransduction: propagation of a structuration that resolves metastability.\nMould (moule): an external constraint that imposes form. Pruning functions as an unintended mould (Paper 4S).\nLimit condition (condition limite): a boundary that constrains the space of possible individuations without imposing specific form. The hard weight clip functions as a limit condition (Paper 4S).\nModulation: continuous variation of internal parameters. The metaplastic dynamics modulate learning rates (Paper 4).\n\n\n\n1.5.2 Deleuze: Differenciation and Repetition\nGilles Deleuze’s ontology of difference provides the criterion for what counts as genuine differentiation. Deleuze distinguishes individuation (the emergence of discrete entities) from differenciation (the actualisation of virtual structure into qualitatively distinct kinds). Papers 1–3 demonstrate individuation without differenciation; Paper 4 identifies the conditions under which differenciation begins.\nThe programme retains Deleuze’s spelling (differenciation) to mark the ontological concept, distinguishing it from the empirically measured divergence of properties (differentiation).\n\n\n1.5.3 DeLanda: Capacities and Assemblages\nManuel DeLanda operationalises Deleuze’s framework for empirical application. His criterion for genuine differentiation requires that components possess qualitatively different capacities — different open lists of what they can do and be affected by — not merely different values of the same parameters. The response rank metric (SVD effective rank of the perturbation-response matrix) operationalises this criterion: rank \\(&gt; 1\\) indicates assemblages that transform inputs through genuinely distinct mappings, not just scaled versions of the same response.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/introduction.html#the-arc",
+    "href": "chapters/introduction.html#the-arc",
+    "title": "1  Introduction",
+    "section": "1.6 The Arc",
+    "text": "1.6 The Arc\nThe programme proceeds through five stages:\n\nIndividuation (Paper 1): Pure Hebbian dynamics produce spontaneous assemblage formation. Multiplicity is unstable under standard pruning.\nCoexistence (Paper 2): Encounter locality controls a phase transition between monopoly and stable coexistence.\nSelf-sealing (Paper 3): Assemblages are structurally incapable of differentiation. Every intervention within the Hebbian framework fails. The substrate achieves individuation but not differenciation.\nDifferentiation (Paper 4): Local homeostatic metaplasticity stabilises and amplifies functional differentiation that Hebbian dynamics spontaneously produce on spatially structured substrates.\nMethodological reckoning (Paper 4S): The pruning threshold and CCD metric were both confounded. Correcting these reveals that functional differentiation is substantially stronger than originally measured, and that the hard weight clip is a qualitatively irreducible limit condition.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html",
+    "href": "chapters/methods.html",
+    "title": "2  Methods",
+    "section": "",
+    "text": "3 Methods\nThis chapter describes the shared computational substrate, learning dynamics, measurement apparatus, and infrastructure that underlie all five papers in the dissertation. Each paper extends or reconfigures the base model in specific ways; those paper-specific variations are documented in the relevant chapters. Here we establish the common methodological foundation.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-substrate",
+    "href": "chapters/methods.html#sec-substrate",
+    "title": "2  Methods",
+    "section": "3.1 The Substrate",
+    "text": "3.1 The Substrate\n\n3.1.1 Grid Geometry\nThe simulation substrate is a two-dimensional square lattice of \\(N = G \\times G\\) nodes, where \\(G\\) is the grid size (default \\(G = 20\\), yielding \\(N = 400\\) nodes). Each node \\(i\\) is assigned a fixed spatial position \\((x_i, y_i)\\) on the unit square \\([0,1]^2\\), with positions uniformly distributed along each axis:\n\\[\nx_i = \\frac{i \\bmod G}{G - 1}, \\quad y_i = \\frac{\\lfloor i / G \\rfloor}{G - 1}\n\\tag{3.1}\\]\nNodes carry real-valued activations \\(a_i(t) \\in [-1, 1]\\) and are connected by directed, weighted edges stored in a sparse dictionary \\(\\mathbf{W} = \\{(i,j) \\mapsto w_{ij}\\}\\). The grid provides spatial structure that is essential to the model: locality constrains encounters, noise injection varies spatially, and assemblages emerge as spatially coherent clusters.\n\n\n3.1.2 Energy Hotspots and Noise Injection\nThe environment contains \\(K\\) energy hotspots (default \\(K = 3\\)) placed at fixed positions within the unit square. For the default three-hotspot configuration, positions are \\((0.2, 0.3)\\), \\((0.8, 0.3)\\), and \\((0.5, 0.8)\\)—a triangular arrangement that provides well-separated energy sources while maintaining asymmetry. For \\(K = 1, 2, 4\\), deterministic symmetric placements are used; for \\(K &gt; 4\\), positions are drawn uniformly from \\([0.1, 0.9]^2\\).\nEach hotspot generates a Gaussian energy field. The composite noise profile at node \\(i\\) is:\n\\[\n\\sigma_i = \\sigma_{\\text{base}} + \\sum_{k=1}^{K} E_{\\text{hot}} \\cdot \\exp\\!\\left(-\\frac{d_{ik}^2}{2 r_{\\text{hot}}^2}\\right)\n\\tag{3.2}\\]\nwhere \\(d_{ik} = \\sqrt{(x_i - x_k^{\\text{hot}})^2 + (y_i - y_k^{\\text{hot}})^2}\\) is the Euclidean distance from node \\(i\\) to hotspot \\(k\\), \\(\\sigma_{\\text{base}} = 0.02\\) is the background noise floor, \\(E_{\\text{hot}} = 0.3\\) is the hotspot energy, and \\(r_{\\text{hot}} = 0.2\\) is the hotspot radius. Nodes near hotspots receive substantially more noise than distant nodes, creating spatially structured variation in the energy landscape.\nAt each timestep, noise is injected as:\n\\[\na_i(t) \\leftarrow a_i(t) + \\sigma_i \\cdot u_i(t), \\quad u_i(t) \\sim \\mathrm{Uniform}(-1, 1)\n\\tag{3.3}\\]\n\n\n3.1.3 Activation Dynamics\nAfter noise injection, activations propagate through the weighted connections. For each node \\(j\\), the incoming signal is the weighted sum of presynaptic activations:\n\\[\nh_j(t) = \\sum_{i : (i,j) \\in \\mathbf{W}} w_{ij} \\cdot a_i(t)\n\\tag{3.4}\\]\nThis input is normalised by the square root of the in-degree \\(d_j^{\\text{in}} = |\\{i : (i,j) \\in \\mathbf{W}\\}|\\) to prevent high-degree nodes from saturating:\n\\[\na_j(t+1) = \\tanh\\!\\left(\\frac{1}{2}\\, a_j(t) + \\frac{h_j(t)}{\\sqrt{\\max(d_j^{\\text{in}}, 1)}}\\right)\n\\tag{3.5}\\]\nThe \\(\\frac{1}{2} a_j(t)\\) term provides activation inertia, preventing instantaneous washout of state. The \\(\\tanh\\) nonlinearity bounds activations to \\([-1, 1]\\).\nFor the fully connected Network class used in Paper 4S Experiment 1, the activation rule simplifies to a matrix form without the inertia term:\n\\[\n\\mathbf{a}(t+1) = \\tanh\\!\\left(\\frac{\\mathbf{W} \\cdot \\mathbf{a}(t) + \\mathbf{x}(t)}{\\sqrt{N}}\\right)\n\\tag{3.6}\\]\nwhere \\(\\mathbf{x}(t)\\) is an external input vector.\n\n\n3.1.4 Initialisation\nNode activations are initialised as \\(a_i(0) \\sim \\mathrm{Uniform}(-0.1, 0.1) + 0.1 \\cdot \\sigma_i\\), providing a small bias toward hotspot regions. Initial connectivity is created by sampling approximately \\(4N\\) directed edges with a locality bias: for each edge, a source node \\(i\\) is chosen uniformly, a target displacement \\((\\delta x, \\delta y) \\sim \\mathcal{N}(0, \\ell^2)\\) is sampled (where \\(\\ell\\) is the locality parameter), and the node nearest to \\((x_i + \\delta x, y_i + \\delta y)\\) becomes the target. Initial weights are drawn from \\(\\mathrm{Uniform}(-0.3, 0.3)\\).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-hebbian",
+    "href": "chapters/methods.html#sec-hebbian",
+    "title": "2  Methods",
+    "section": "3.2 Hebbian Learning Rule",
+    "text": "3.2 Hebbian Learning Rule\n\n3.2.1 Standard Hebbian Update\nAt each timestep, all existing edges are updated according to a Hebbian rule with multiplicative weight decay and bounding:\n\\[\nw_{ij}(t+1) = \\mathcal{B}\\!\\Big[\\big(w_{ij}(t) + \\eta \\cdot a_i(t) \\cdot a_j(t)\\big) \\cdot (1 - \\lambda)\\Big]\n\\tag{3.7}\\]\nwhere \\(\\eta = 0.05\\) is the learning rate, \\(\\lambda = 0.002\\) is the weight decay rate, and \\(\\mathcal{B}[\\cdot]\\) is a bounding operator (see Section 3.7). The Hebbian product \\(a_i a_j\\) strengthens edges between co-active nodes and weakens edges between nodes with opposite-sign activations. The multiplicative decay \\((1 - \\lambda)\\) provides a constant fractional drag on all weights, ensuring that connections require sustained co-activation to survive.\n\n\n3.2.2 Metaplastic Hebbian Update\nIn the MetaplasticField extension (Papers 3–5), each node \\(i\\) carries a per-node learning rate \\(\\eta_i(t)\\), and the edge-level learning rate is the mean of its endpoints:\n\\[\n\\eta_{ij}(t) = \\frac{1}{2}\\big(\\eta_i(t) + \\eta_j(t)\\big)\n\\tag{3.8}\\]\nThe update equation becomes:\n\\[\nw_{ij}(t+1) = \\mathcal{B}\\!\\Big[\\big(w_{ij}(t) + \\eta_{ij}(t) \\cdot a_i(t) \\cdot a_j(t)\\big) \\cdot (1 - \\lambda)\\Big]\n\\tag{3.9}\\]\nThis ensures that edges in high-\\(\\eta\\) regions learn faster than edges in low-\\(\\eta\\) regions, creating the coupling between metaplastic state and synaptic plasticity that drives differentiation.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-encounters",
+    "href": "chapters/methods.html#sec-encounters",
+    "title": "2  Methods",
+    "section": "3.3 Encounter Mechanism",
+    "text": "3.3 Encounter Mechanism\nNew edges are created through a locality-biased encounter process that models the spatial constraints on interaction. At each timestep, \\(R\\) encounter attempts are made (default \\(R = 20\\)). Each encounter proceeds as follows:\n\nSample a spatial location. A point \\((p_x, p_y) \\sim \\mathrm{Uniform}([0,1]^2)\\) is drawn. This spatially uniform sampling ensures that encounter opportunities are distributed across the entire field, preventing a single active region from monopolising the encounter budget.\nCompute local encounter probabilities. For each node \\(i\\), the probability of participating in the encounter is proportional to the product of spatial proximity and activity history:\n\n\\[\nP(i \\mid p) \\propto \\exp\\!\\left(-\\frac{(x_i - p_x)^2 + (y_i - p_y)^2}{2\\ell^2}\\right) \\cdot \\big(\\bar{a}_i + \\epsilon\\big)\n\\tag{3.10}\\]\nwhere \\(\\ell\\) is the locality parameter, \\(\\bar{a}_i\\) is the exponential moving average of \\(|a_i|\\), and \\(\\epsilon = 0.001\\) prevents zero probabilities.\n\nSelect a pair. Node \\(i\\) is drawn from the distribution above. Node \\(j\\) is drawn from the same distribution with \\(P(i) = 0\\) (exclusion of the first node).\nCreate edge. If \\(i \\neq j\\) and the edge \\((i, j)\\) does not already exist, it is created with weight \\(w_{ij} = 0\\).\n\nThe locality parameter \\(\\ell\\) (default 0.10) controls the spatial scale of encounters. Smaller \\(\\ell\\) values produce tightly localised encounters that favour multiple independent assemblages; larger values produce global mixing that favours monopolistic single-assemblage outcomes. This parameter is central to the coexistence–monopoly transition studied across Papers 1–4.\n\n3.3.1 Activity History\nThe activity history \\(\\bar{a}_i\\) used in encounter probabilities and metaplastic adjustment is maintained as an exponential moving average:\n\\[\n\\bar{a}_i(t+1) = (1 - \\alpha) \\cdot \\bar{a}_i(t) + \\alpha \\cdot |a_i(t)|\n\\tag{3.11}\\]\nwhere \\(\\alpha = 0.05\\) by default. This provides a smoothed estimate of recent activity that is robust to single-step fluctuations.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-pruning",
+    "href": "chapters/methods.html#sec-pruning",
+    "title": "2  Methods",
+    "section": "3.4 Pruning",
+    "text": "3.4 Pruning\nEdges whose absolute weight falls below a threshold \\(\\theta_{\\text{prune}}\\) are removed at each timestep:\n\\[\n\\text{if } |w_{ij}| &lt; \\theta_{\\text{prune}}, \\quad \\text{delete } (i,j) \\text{ from } \\mathbf{W}\n\\tag{3.12}\\]\nThe default threshold is \\(\\theta_{\\text{prune}} = 10^{-4}\\). This mechanism serves two purposes: it controls memory usage by preventing unbounded edge accumulation (since the encounter mechanism continually creates new edges at weight zero), and it models the biological reality that weak synapses are metabolically costly and tend to be eliminated.\n\n3.4.1 The Pruning Confound\nPaper 4S discovered that pruning interacts with the weight bounding strategy in a way that confounds differentiation measurements. With the default \\(\\theta_{\\text{prune}} = 10^{-4}\\) and hard clipping, newly created edges (initialised at \\(w = 0\\)) are immediately eligible for pruning if they do not receive sufficient Hebbian reinforcement within a single timestep. Because \\(\\tanh\\) and sigmoid bounds leave near-zero weights effectively unchanged (both functions are approximately linear near the origin), the pruning interaction differs across bound types in a way that is not attributable to the bounding strategy itself.\nTo deconfound this, Paper 4S introduced a pruning-on/pruning-off factorial design. In the pruning-off condition, the threshold is reduced to \\(\\theta_{\\text{prune}} = 10^{-8}\\) (effectively disabling pruning) and a soft edge cap of 5,000–20,000 edges is enforced by periodically removing the weakest edges when the total exceeds the cap. This revealed that some apparent bound-type effects on modularity were partially attributable to differential pruning dynamics rather than to the bounding function per se.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-assemblages",
+    "href": "chapters/methods.html#sec-assemblages",
+    "title": "2  Methods",
+    "section": "3.5 Assemblage Detection",
+    "text": "3.5 Assemblage Detection\nAssemblages—spatially coherent clusters of strongly connected nodes—are detected as connected components in a strong-edge subgraph. The procedure is:\n\nThreshold selection. If no threshold is provided, it defaults to the 75th percentile of the absolute weight distribution: \\(\\tau = P_{75}(|w_{ij}|)\\). This adaptive threshold ensures that assemblage detection scales with the overall weight distribution, which varies across conditions and timepoints.\nSubgraph construction. An undirected adjacency list is built from all edges with \\(|w_{ij}| \\geq \\tau\\). The directionality of edges is ignored for assemblage detection, treating the subgraph as symmetric.\nConnected component extraction. A breadth-first search identifies connected components. Components with fewer than 2 nodes are discarded.\n\nThe adaptive threshold means that assemblage counts and sizes are relative to the current weight distribution rather than an absolute scale. This is appropriate for measuring structural differentiation but requires care when comparing across conditions with very different weight magnitude distributions—an issue that motivated the development of alternative metrics in Papers 2–5.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-metaplastic",
+    "href": "chapters/methods.html#sec-metaplastic",
+    "title": "2  Methods",
+    "section": "3.6 Metaplastic Extension",
+    "text": "3.6 Metaplastic Extension\nThe MetaplasticField class (introduced in Paper 3, extended in Papers 4 and 4S) adds two coupled mechanisms to the base substrate: per-node learning rate adaptation (metaplasticity) and an inhibitor diffusion field.\n\n3.6.1 Per-Node Learning Rate (Metaplasticity)\nEach node \\(i\\) carries a learning rate \\(\\eta_i(t)\\), initialised to the global value \\(\\eta\\). At each timestep, after the Hebbian update, \\(\\eta_i\\) is adjusted homeostatically based on the deviation of the node’s activity from a target:\n\\[\n\\eta_i(t+1) = \\eta_i(t) - \\mu \\cdot \\big(\\bar{a}_i(t) - a_i^*\\big)\n\\tag{3.13}\\]\nwhere \\(\\mu\\) is the meta-strength parameter (default 0 = no metaplasticity; typical nonzero values range from \\(10^{-4}\\) to \\(0.05\\)) and \\(a_i^*\\) is the target activity.\nThe sign convention is homeostatic: nodes with activity above target (\\(\\bar{a}_i &gt; a_i^*\\)) have their \\(\\eta\\) reduced (consolidation), while nodes below target have their \\(\\eta\\) increased (exploration). This creates a negative feedback loop at the individual node level.\n\n\n3.6.2 Local vs Global Target\nThe target activity \\(a_i^*\\) can be computed in two modes:\nGlobal target (use_local_target = False): All nodes share the same target \\(a_i^* = a^*_{\\text{global}}\\) (default 0.15). This was the original design but was found to be less effective at producing differentiation because it imposes a uniform standard that does not account for spatial variation in the energy landscape.\nLocal target (use_local_target = True, default): Each node’s target is the mean activity of its spatial neighbors within a given Manhattan radius \\(r\\):\n\\[\na_i^* = \\frac{1}{|\\mathcal{N}_r(i)|} \\sum_{j \\in \\mathcal{N}_r(i)} \\bar{a}_j(t)\n\\tag{3.14}\\]\nwhere \\(\\mathcal{N}_r(i)\\) is the set of grid nodes within Manhattan distance \\(r\\) of node \\(i\\) (default \\(r = 1\\), i.e., von Neumann neighbourhood). Local targets enable Turing-like symmetry breaking: small initial fluctuations in activity are amplified because a node’s target adapts to its neighbourhood rather than being imposed globally.\n\n\n3.6.3 Eta Bounds: Hard vs Soft\nThe per-node learning rate is bounded to the interval \\([\\eta_{\\min}, \\eta_{\\max}]\\) (default \\([0.005, 0.20]\\)) after each adjustment. Two bounding strategies are available:\nHard clip (use_soft_bounds = False, default):\n\\[\n\\eta_i \\leftarrow \\mathrm{clip}(\\eta_i, \\eta_{\\min}, \\eta_{\\max})\n\\tag{3.15}\\]\nSoft (tanh) bounds (use_soft_bounds = True):\n\\[\n\\eta_i \\leftarrow \\bar{\\eta} + \\Delta\\eta \\cdot \\tanh\\!\\left(\\frac{\\eta_i - \\bar{\\eta}}{\\Delta\\eta}\\right)\n\\tag{3.16}\\]\nwhere \\(\\bar{\\eta} = (\\eta_{\\min} + \\eta_{\\max})/2\\) is the midpoint and \\(\\Delta\\eta = (\\eta_{\\max} - \\eta_{\\min})/2\\) is the half-range. Soft bounds produce a continuously differentiable bounding function that avoids the absorbing-state dynamics of hard clipping, where nodes driven to the boundary remain stuck there.\nPaper 4S demonstrated that the choice between hard and soft eta bounds has measurable effects on the degree of eta differentiation across assemblages, with hard bounds producing larger eta divergence (partly as an artifact of boundary accumulation) and soft bounds producing smoother but smaller differentiation.\n\n\n3.6.4 Inhibitor Field\nNodes emit an inhibitor signal proportional to their total outgoing weight mass. The inhibitor diffuses spatially and decays, providing long-range communication between assemblages.\nEmission. At each step, each node adds to its local inhibitor concentration:\n\\[\nI_i(t) \\leftarrow I_i(t) + \\rho \\cdot m_i(t)\n\\tag{3.17}\\]\nwhere \\(\\rho = 0.01\\) is the emission rate and \\(m_i(t) = \\sum_{j: (i,j) \\in \\mathbf{W}} |w_{ij}|\\) is the node’s total outgoing weight mass.\nDiffusion. The inhibitor spreads via a discrete Laplacian on the von Neumann neighbourhood:\n\\[\nI_i(t+\\tfrac{1}{2}) = I_i(t) + D \\cdot \\left(\\sum_{j \\in \\mathcal{N}_1(i)} I_j(t) - |\\mathcal{N}_1(i)| \\cdot I_i(t)\\right)\n\\tag{3.18}\\]\nwhere \\(D\\) is the diffusion coefficient (default 0.05, capped at 0.20 for CFL stability). The inhibitor is clamped to non-negative values after diffusion.\nDecay. The inhibitor decays exponentially:\n\\[\nI_i(t+1) = (1 - \\delta) \\cdot I_i(t + \\tfrac{1}{2})\n\\tag{3.19}\\]\nwhere \\(\\delta = 0.10\\) is the decay rate.\nInhibitor–Eta Coupling. When the coupling strength \\(\\kappa &gt; 0\\), the inhibitor field suppresses learning rates. Two coupling modes are available:\nAbsolute coupling (use_difference_coupling = False):\n\\[\n\\eta_i \\leftarrow \\eta_i - \\kappa \\cdot I_i\n\\tag{3.20}\\]\nDifference-dependent coupling (use_difference_coupling = True, default):\n\\[\n\\eta_i \\leftarrow \\eta_i - \\kappa \\cdot I_i \\cdot \\big(1 - (\\eta_i - \\bar{\\eta}_i^{\\text{local}})\\big)\n\\tag{3.21}\\]\nwhere \\(\\bar{\\eta}_i^{\\text{local}} = \\frac{1}{|\\mathcal{N}_1(i)|} \\sum_{j \\in \\mathcal{N}_1(i)} \\eta_j\\) is the mean eta of grid neighbours. The difference-dependent mode amplifies pre-existing eta heterogeneity: nodes whose eta is already above their local mean experience less suppression (the \\((1 - \\Delta\\eta)\\) factor is smaller when \\(\\Delta\\eta\\) is large and positive), while nodes below their local mean are suppressed further. This creates a Turing-instability-like mechanism where Hebbian reinforcement acts as the short-range activator and inhibitor diffusion acts as the long-range inhibitor, with the variable that differentiates being the learning rule itself (\\(\\eta\\)), not the weights directly.\n\n\n3.6.5 Step Ordering\nEach metaplastic timestep executes the following operations in order:\n\nNoise injection (Equation 3.3)\nActivation propagation (Equation 3.5)\nHebbian weight update with per-edge \\(\\eta_{ij}\\) (Equation 3.9)\nLocal encounters (Section 3.3)\nEdge pruning (Section 3.4)\nActivity history update (Equation 3.11)\nMetaplastic eta adjustment (Equation 3.13)\nInhibitor emission, diffusion, decay, and coupling (Equation 3.17 through Equation 3.21)\n\nThis ordering ensures that eta adjustments are based on the activity resulting from the current step’s dynamics, and that inhibitor coupling acts on the already-adjusted eta values.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-weight-bounds",
+    "href": "chapters/methods.html#sec-weight-bounds",
+    "title": "2  Methods",
+    "section": "3.7 Weight Bounding Strategies",
+    "text": "3.7 Weight Bounding Strategies\nPaper 4S introduced configurable weight bounding as a first-class experimental variable. Four strategies are implemented for the bounding operator \\(\\mathcal{B}[\\cdot]\\) in Equation 3.7:\n\n3.7.1 Hard Clip\n\\[\n\\mathcal{B}_{\\text{hard}}[w] = \\mathrm{clip}(w, -w_{\\max}, w_{\\max})\n\\tag{3.22}\\]\nThis is the default used in Papers 1–4. Hard clipping creates absorbing states at \\(\\pm w_{\\max}\\): once a weight reaches the boundary, the Hebbian increment is discarded and only decay can pull the weight back. This produces bimodal weight distributions with peaks near \\(\\pm w_{\\max}\\) in high-activity regions.\n\n\n3.7.2 Tanh Saturation\n\\[\n\\mathcal{B}_{\\text{tanh}}[w] = w_{\\max} \\cdot \\tanh\\!\\left(\\frac{w}{w_{\\max}}\\right)\n\\tag{3.23}\\]\nSmooth saturation that is approximately linear for \\(|w| \\ll w_{\\max}\\) and asymptotically approaches \\(\\pm w_{\\max}\\). The derivative \\(\\mathcal{B}'_{\\text{tanh}}[w] = \\mathrm{sech}^2(w/w_{\\max})\\) is always positive, so no weight is fully absorbed—strong weights experience diminishing returns but never fully saturate.\n\n\n3.7.3 Sigmoid Saturation\n\\[\n\\mathcal{B}_{\\text{sigmoid}}[w] = 2 w_{\\max} \\cdot \\sigma\\!\\left(\\frac{2w}{w_{\\max}}\\right) - w_{\\max}\n\\tag{3.24}\\]\nwhere \\(\\sigma(x) = 1/(1 + e^{-x})\\). This provides a sharper transition than \\(\\tanh\\) between the linear and saturating regimes. The function maps \\(\\mathbb{R} \\to (-w_{\\max}, w_{\\max})\\) with an inflection point at \\(w = 0\\).\n\n\n3.7.4 Oja Rule\n\\[\n\\Delta w_{ij} = \\eta \\cdot \\big(a_i \\cdot a_j - a_j^2 \\cdot w_{ij}\\big)\n\\tag{3.25}\\]\nThe Oja rule replaces the standard Hebbian update entirely rather than applying a post-hoc bound. The \\(-a_j^2 w_{ij}\\) term provides self-normalisation: weights converge to the first principal component of the input covariance, with a natural scale determined by the input statistics rather than an externally imposed \\(w_{\\max}\\). Multiplicative decay \\((1 - \\lambda)\\) is still applied after the Oja update. No explicit weight bounding is performed.\nIn the MetaplasticField, all four strategies use the per-edge learning rate \\(\\eta_{ij}\\) (Equation 3.8) in place of the global \\(\\eta\\).",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-metrics",
+    "href": "chapters/methods.html#sec-metrics",
+    "title": "2  Methods",
+    "section": "3.8 Metrics",
+    "text": "3.8 Metrics\n\n3.8.1 Centroid Cosine Distance (CCD)\nCCD measures the structural differentiation between assemblages by comparing their outgoing weight profiles. For each assemblage \\(\\mathcal{A}_k\\), a centroid weight vector \\(\\mathbf{c}_k \\in \\mathbb{R}^N\\) is computed as the mean of the outgoing weight vectors of its constituent nodes:\n\\[\nc_{k,j} = \\frac{1}{|\\mathcal{A}_k|} \\sum_{i \\in \\mathcal{A}_k} w_{ij}\n\\tag{3.26}\\]\nCCD is then the mean pairwise cosine distance between centroids:\n\\[\n\\text{CCD} = \\frac{2}{K(K-1)} \\sum_{k &lt; l} \\left(1 - \\frac{\\mathbf{c}_k \\cdot \\mathbf{c}_l}{\\|\\mathbf{c}_k\\| \\|\\mathbf{c}_l\\|}\\right)\n\\tag{3.27}\\]\nwhere \\(K\\) is the number of assemblages. CCD ranges from 0 (all assemblages are identical clones) to 1 (all assemblages are pairwise orthogonal). If either centroid has zero norm, the distance is set to 1.0 (maximally different). CCD is undefined (returned as 0.0) for fewer than 2 assemblages.\nInvalidity note. CCD was developed as a replacement for an earlier classifier-based differentiation metric that failed in the \\(p \\gg n\\) regime (weight vector dimensionality greatly exceeds assemblage size). While CCD is more robust, Paper 4S identified a partial confound: because CCD compares outgoing weight profiles and assemblages are spatially localised, some CCD variation across conditions may reflect differences in assemblage geometry (spatial spread, overlap with hotspots) rather than genuine functional differentiation. The participation ratio metric (Section 3.8.3) was developed as a deconfounded alternative.\n\n\n3.8.2 Weight Modularity\nModularity measures the fraction of total weight mass that lies within assemblages rather than between them:\n\\[\nQ = \\frac{\\sum_{(i,j) \\in \\mathbf{W}} |w_{ij}| \\cdot \\mathbb{1}[\\text{asm}(i) = \\text{asm}(j) \\geq 0]}{\\sum_{(i,j) \\in \\mathbf{W}} |w_{ij}|}\n\\tag{3.28}\\]\nwhere \\(\\text{asm}(i)\\) returns the assemblage index of node \\(i\\) (or \\(-1\\) if unassigned). Modularity ranges from 0 (all weight between assemblages or on unassigned nodes) to 1 (all weight within assemblages). A random graph yields modularity approximately equal to the fraction of edges within assemblages by chance, which depends on assemblage sizes.\n\n\n3.8.3 Response Rank (SVD) and Participation Ratio\nResponse rank quantifies the functional diversity of the system’s response to external stimuli. After running a simulation to steady state, the system is probed with \\(P\\) stimulus patterns (default \\(P = 10\\)). For each probe \\(p\\), the mean activation of each assemblage is recorded, yielding a response matrix \\(\\mathbf{R} \\in \\mathbb{R}^{K \\times P}\\) (assemblages by probes).\nThe mean-centred response matrix is decomposed via SVD:\n\\[\n\\mathbf{R} - \\bar{\\mathbf{R}} = \\mathbf{U} \\mathbf{\\Sigma} \\mathbf{V}^\\top\n\\tag{3.29}\\]\nwhere \\(\\mathbf{\\Sigma} = \\mathrm{diag}(\\sigma_1, \\sigma_2, \\ldots)\\) with \\(\\sigma_1 \\geq \\sigma_2 \\geq \\cdots \\geq 0\\).\nThreshold-based rank. The number of singular values exceeding a fraction \\(f\\) of the largest:\n\\[\n\\text{rank}_f = \\left|\\{k : \\sigma_k &gt; f \\cdot \\sigma_1\\}\\right|\n\\tag{3.30}\\]\nThis is computed at thresholds \\(f \\in \\{0.001, 0.005, 0.01, 0.05, 0.10\\}\\), providing a multi-resolution view of the response spectrum.\nParticipation ratio. A threshold-free measure of effective dimensionality:\n\\[\n\\text{PR} = \\frac{\\left(\\sum_k \\sigma_k^2\\right)^2}{\\sum_k \\sigma_k^4}\n\\tag{3.31}\\]\nPR equals 1 when a single singular value dominates (all assemblages respond identically up to scale) and equals \\(K\\) when all singular values are equal (maximally diverse responses). PR is robust to the threshold parameter that complicates rank-based measures.\nTwo types of stimuli are used: Gaussian probes (localised spatial bumps with random centres) and uniform probes (spatially unstructured random vectors drawn from \\(\\mathrm{Uniform}(-0.3, 0.3)^N\\)). The uniform probes serve as a spatial deconfound: if assemblage differentiation is purely geometric (reflecting spatial separation), then uniform probes will elicit similar responses from all assemblages, yielding \\(\\text{PR} \\approx 1\\). Genuine functional differentiation produces \\(\\text{PR} &gt; 1\\) under both stimulus types.\n\n\n3.8.4 Response Diversity\nResponse diversity (used in Paper 3, Experiment 12) is a proxy measure of functional heterogeneity computed without explicit probing. For each assemblage, a gain score is computed as the product of mean per-node learning rate and mean internal weight magnitude:\n\\[\ng_k = \\bar{\\eta}_k \\cdot \\overline{|w|}_k^{\\text{internal}}\n\\tag{3.32}\\]\nResponse diversity is the standard deviation of these gains across assemblages:\n\\[\n\\text{RD} = \\mathrm{sd}(g_1, g_2, \\ldots, g_K)\n\\tag{3.33}\\]\nThis metric is computationally cheaper than SVD-based measures but confounds structural and parametric differentiation.\n\n\n3.8.5 Eta Divergence\nEta divergence measures the degree to which assemblages have differentiated their learning dynamics:\n\\[\nD_\\eta = \\mathrm{Var}\\!\\left(\\bar{\\eta}_1, \\bar{\\eta}_2, \\ldots, \\bar{\\eta}_K\\right)\n\\tag{3.34}\\]\nwhere \\(\\bar{\\eta}_k = \\frac{1}{|\\mathcal{A}_k|} \\sum_{i \\in \\mathcal{A}_k} \\eta_i\\) is the mean learning rate of assemblage \\(k\\). This is zero when all assemblages have the same mean eta (homogeneous learning rules) and positive when assemblages have differentiated into distinct learning regimes.\n\n\n3.8.6 Capacity Diversity\nCapacity diversity (Paper 3) uses PCA followed by \\(k\\)-means clustering on assemblage centroid weight vectors to determine the optimal number of distinct functional profiles. Each assemblage’s centroid vector (Equation 3.26) is projected into a reduced-dimensional space via PCA (retaining up to 10 components), then clustered for \\(k = 2, \\ldots, K\\) with silhouette scoring to select the optimal \\(k\\). A result of \\(k = 1\\) indicates all assemblages are functional clones; \\(k &gt; 1\\) indicates genuine diversity.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-infrastructure",
+    "href": "chapters/methods.html#sec-infrastructure",
+    "title": "2  Methods",
+    "section": "3.9 Computational Infrastructure",
+    "text": "3.9 Computational Infrastructure\n\n3.9.1 Ray Cluster\nAll experiments are executed on a Ray cluster, with each simulation run dispatched as an independent @ray.remote task. This provides embarrassingly parallel scaling across available CPUs. The cluster job scripts (cluster_job.py and variants) implement:\n\nTask-level parallelism. Each (condition, seed) pair is an independent Ray task. For a typical experiment sweep of 7 parameter values \\(\\times\\) 7 parameter values \\(\\times\\) 20 seeds \\(= 980\\) jobs, all 980 tasks are submitted simultaneously and scheduled by Ray across available workers.\nProgress tracking. Completion is monitored via ray.wait() with batched collection (50 tasks per batch, 60-second timeout), providing real-time progress reporting including estimated time remaining.\nResume capability. Each task checks for the existence of its output file before executing, allowing interrupted experiments to be resumed without re-running completed jobs.\n\n\n\n3.9.2 Output Format\nAll experimental data is written as Apache Parquet files, one per (condition, seed) pair. After all tasks complete, per-job files are merged into a single session_metrics.parquet file per experiment using PyArrow’s concat_tables. This two-stage approach (per-job write, post-hoc merge) ensures fault tolerance: if a task fails, only that task’s data is lost.\nEach row in the merged output represents one census taken at the end of a session (a session consists of \\(S\\) timesteps, default \\(S = 300\\)). Columns include all metrics described in Section 3.8 along with the full parameter vector, enabling post-hoc filtering and grouping without separate metadata files.\n\n\n3.9.3 Seed Management and Reproducibility\nAll random state is managed through NumPy’s default_rng(seed) generator. Each simulation receives an integer seed (typically 0–19 for 20-seed experiments), which deterministically controls:\n\nHotspot placement (for \\(K &gt; 4\\))\nInitial connectivity and weight values\nNoise injection sequences\nEncounter pair sampling\nPerturbation events (using offset seeds, e.g., seed + 99999)\nProbe stimuli (using offset seeds, e.g., seed + 777777)\n\nThe use of offset seeds for different random processes within the same simulation ensures that perturbation and probing randomness is independent of simulation randomness while remaining reproducible.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/methods.html#sec-params",
+    "href": "chapters/methods.html#sec-params",
+    "title": "2  Methods",
+    "section": "3.10 Standard Parameters",
+    "text": "3.10 Standard Parameters\nTable 3.1 lists the default parameter values shared across all five papers. Paper-specific deviations are documented in the relevant chapters.\n\n\n\nTable 3.1: Default parameter values for the simulation substrate.\n\n\n\n\n\n\n\n\n\n\n\nParameter\nSymbol\nDefault\nJustification\n\n\n\n\nGrid size\n\\(G\\)\n20\n\\(N = 400\\) nodes; sufficient for 3 assemblages with spatial separation. Papers 4 and 4S also test \\(G \\in \\{15, 25, 30\\}\\).\n\n\nNumber of hotspots\n\\(K\\)\n3\nThree energy sources provide a minimal multi-assemblage scenario with asymmetric placement.\n\n\nHotspot energy\n\\(E_{\\text{hot}}\\)\n0.3\nProduces clear activity gradients without saturating activations.\n\n\nHotspot radius\n\\(r_{\\text{hot}}\\)\n0.2\nEach hotspot covers approximately 12% of the field area (\\(\\pi r^2 \\approx 0.126\\)); hotspots overlap minimally at the default separation.\n\n\nBase noise\n\\(\\sigma_{\\text{base}}\\)\n0.02\nBackground activity floor; an order of magnitude below hotspot energy.\n\n\nLearning rate\n\\(\\eta\\)\n0.05\nBalances learning speed against stability; higher values cause weight saturation, lower values produce insufficient differentiation within 200 sessions.\n\n\nWeight decay\n\\(\\lambda\\)\n0.002\nPrevents weight explosion while allowing strong connections to persist. At \\(\\lambda = 0.002\\), a connection loses $$33% of its magnitude over 200 steps without reinforcement.\n\n\nWeight maximum\n\\(w_{\\max}\\)\n1.0\nNormalised scale; all bounding strategies map to \\([-1, 1]\\).\n\n\nEncounter rate\n\\(R\\)\n20\nPer-step edge creation attempts. At 300 steps/session, this yields up to 6,000 encounter attempts per session.\n\n\nLocality\n\\(\\ell\\)\n0.10\nSpatial scale of encounters. At \\(\\ell = 0.10\\) on a unit square, the encounter kernel covers approximately 3% of the field area per standard deviation, favouring local interactions.\n\n\nPrune threshold\n\\(\\theta_{\\text{prune}}\\)\n\\(10^{-4}\\)\nRemoves edges contributing negligibly to dynamics. See Section 3.4 for the confound this introduces.\n\n\nSessions\n—\n200\nNumber of census intervals per run (300 steps each = 60,000 total steps). Paper 3, Experiment 6 uses 1,000 sessions.\n\n\nSteps per session\n\\(S\\)\n300\nSufficient for activity patterns to stabilise between censuses.\n\n\nSeeds per condition\n—\n20\nProvides adequate statistical power for between-condition comparisons with nonparametric tests.\n\n\nMeta-strength\n\\(\\mu\\)\n0.0\nDisabled by default; typical nonzero values are \\(10^{-4}\\) to \\(0.05\\).\n\n\nTarget activity\n\\(a^*\\)\n0.15\nActivity level that leaves \\(\\eta\\) unchanged under global target.\n\n\nEta bounds\n\\([\\eta_{\\min}, \\eta_{\\max}]\\)\n\\([0.005, 0.20]\\)\nA 40-fold range permits substantial differentiation. The minimum prevents complete learning shutdown; the maximum prevents instability.\n\n\nInhibitor diffusion\n\\(D\\)\n0.05\nModerate diffusion; capped at 0.20 for CFL stability of the discrete Laplacian.\n\n\nInhibitor decay\n\\(\\delta\\)\n0.10\n10% per step; inhibitor has an effective half-life of $$7 steps.\n\n\nInhibitor emission rate\n\\(\\rho\\)\n0.01\nLow emission prevents runaway inhibitor accumulation.\n\n\nInhibitor coupling\n\\(\\kappa\\)\n0.0\nDisabled by default; typical nonzero values are \\(5 \\times 10^{-4}\\) to \\(0.05\\).\n\n\nEMA rate\n\\(\\alpha\\)\n0.05\nActivity history smoothing; equivalent to a $$20-step memory window.",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Methods</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper1-summary.html",
+    "href": "chapters/paper1-summary.html",
+    "title": "3  Paper 1: Emergent Structure in Optimization-Free Hebbian Networks",
+    "section": "",
+    "text": "3.1 Context\nThis paper establishes the baseline: what does a pure Hebbian substrate produce without any additional mechanisms?",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paper 1: Emergent Structure in Optimization-Free Hebbian Networks</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper1-summary.html#key-findings",
+    "href": "chapters/paper1-summary.html#key-findings",
+    "title": "3  Paper 1: Emergent Structure in Optimization-Free Hebbian Networks",
+    "section": "3.2 Key Findings",
+    "text": "3.2 Key Findings\nThree dynamical regimes. The ratio \\(\\eta / \\lambda\\) governs dissolution, productive, and saturation regimes. Paper 4S later showed the saturation regime is an artifact of hard weight clipping.\nSpontaneous individuation. Coherent assemblages emerge from noise through Hebbian reinforcement alone. No optimisation is required.\nMultiplicity is unstable. Transient multi-individuation converges to monopoly by session 27. Paper 4S showed this is accelerated by pruning; without pruning, 4–6 assemblages persist.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paper 1: Emergent Structure in Optimization-Free Hebbian Networks</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper1-summary.html#contribution",
+    "href": "chapters/paper1-summary.html#contribution",
+    "title": "3  Paper 1: Emergent Structure in Optimization-Free Hebbian Networks",
+    "section": "3.3 Contribution",
+    "text": "3.3 Contribution\nDemonstration that optimisation-free Hebbian dynamics suffice for structural self-organisation. The three-regime structure provides the parameter space for all subsequent experiments.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Paper 1: Emergent Structure in Optimization-Free Hebbian Networks</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper2-summary.html",
+    "href": "chapters/paper2-summary.html",
+    "title": "4  Paper 2: Locality-Dependent Coexistence Mechanisms",
+    "section": "",
+    "text": "4.1 Context\nIf multiplicity is unstable (Paper 1), what conditions permit stable coexistence?",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Paper 2: Locality-Dependent Coexistence Mechanisms</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper2-summary.html#key-findings",
+    "href": "chapters/paper2-summary.html#key-findings",
+    "title": "4  Paper 2: Locality-Dependent Coexistence Mechanisms",
+    "section": "4.2 Key Findings",
+    "text": "4.2 Key Findings\nSharp phase transition. Encounter locality \\(\\ell \\approx 0.10\\)–\\(0.15\\) separates coexistence (6–9 assemblages) from monopoly.\nTwo mechanisms. Below the transition: niche partitioning. Above: competitive exclusion — the “Dark Forest” dynamic.\nStability. Coexistence at tight locality is genuinely stable to 500 sessions. Paper 4S showed the transition point may shift without pruning.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Paper 2: Locality-Dependent Coexistence Mechanisms</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper2-summary.html#contribution",
+    "href": "chapters/paper2-summary.html#contribution",
+    "title": "4  Paper 2: Locality-Dependent Coexistence Mechanisms",
+    "section": "4.3 Contribution",
+    "text": "4.3 Contribution\nThe coexistence–monopoly phase transition, governed by a single spatial parameter. This establishes the ecological context for the programme.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Paper 2: Locality-Dependent Coexistence Mechanisms</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper3-summary.html",
+    "href": "chapters/paper3-summary.html",
+    "title": "5  Paper 3: Coexistence Without Differentiation",
+    "section": "",
+    "text": "5.1 Context\nPapers 1–2 produce individuation and coexistence, but assemblages are structural clones. Can any mechanism within the Hebbian framework produce functional differentiation?",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Paper 3: Coexistence Without Differentiation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper3-summary.html#key-findings",
+    "href": "chapters/paper3-summary.html#key-findings",
+    "title": "5  Paper 3: Coexistence Without Differentiation",
+    "section": "5.2 Key Findings",
+    "text": "5.2 Key Findings\nAll interventions fail. Temporal variation, anti-Hebbian inhibition, and edge injection all fail across 1,400 simulations.\nSelf-sealing. The substrate seals through topological isolation (cross-assemblage edges decay within 15 sessions) and functional absorption (maintained edges are co-opted). Paper 4S showed the timeline is pruning-accelerated.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Paper 3: Coexistence Without Differentiation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper3-summary.html#contribution",
+    "href": "chapters/paper3-summary.html#contribution",
+    "title": "5  Paper 3: Coexistence Without Differentiation",
+    "section": "5.3 Contribution",
+    "text": "5.3 Contribution\nThe identification of self-sealing as a structural property of Hebbian individuation, establishing that differenciation requires mechanisms beyond the basic Hebbian rule.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Paper 3: Coexistence Without Differentiation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper4-summary.html",
+    "href": "chapters/paper4-summary.html",
+    "title": "6  Paper 4: Local Homeostasis Stabilises Differentiation",
+    "section": "",
+    "text": "6.1 Context\nPaper 3 showed the Hebbian substrate is self-sealing. This paper introduces per-node metaplastic learning rates with homeostatic adjustment.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Paper 4: Local Homeostasis Stabilises Differentiation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper4-summary.html#key-findings",
+    "href": "chapters/paper4-summary.html#key-findings",
+    "title": "6  Paper 4: Local Homeostasis Stabilises Differentiation",
+    "section": "6.2 Key Findings",
+    "text": "6.2 Key Findings\nTuring morphogenesis fails. Structural incompatibility with sparse, rewiring topology.\nLocal homeostasis succeeds. Response rank \\(5.6\\) (over five independent functional dimensions), \\(\\eta\\) divergence \\(F = 4.9\\) (\\(p &lt; 0.0001\\)), \\(10+\\) assemblages.\nCritical period. Coupling from session 0 destroys differentiation (rank \\(\\to 0.05\\)); coupling from session 50+ preserves it (rank \\(0.85\\)). Functionally validated (Exp 8fv).\nPerturbation resilience. Full recovery from 50% \\(\\eta\\) scramble. Confirmed on response rank (Exp 9fv).\nMetaplasticity’s contribution. The baseline also reaches rank \\(5.6\\) without pruning. Metaplasticity adds: (1) \\(\\eta\\) divergence, (2) assemblage count (\\(6 \\to 10+\\)), (3) wider perturbation basin.\nThe productive fracture. Differentiation remains parametric — different values of the same capacities, not qualitatively novel kinds. Differenciation in the Deleuzian sense requires rule-space expansion.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Paper 4: Local Homeostasis Stabilises Differentiation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper4-summary.html#contribution",
+    "href": "chapters/paper4-summary.html#contribution",
+    "title": "6  Paper 4: Local Homeostasis Stabilises Differentiation",
+    "section": "6.3 Contribution",
+    "text": "6.3 Contribution\nLocal homeostatic metaplasticity as a minimal mechanism for functional differentiation. The critical period finding. The “productive fracture” between differentiation and differenciation.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>Paper 4: Local Homeostasis Stabilises Differentiation</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper4s-summary.html",
+    "href": "chapters/paper4s-summary.html",
+    "title": "7  Paper 4S: Pruning as Confound",
+    "section": "",
+    "text": "7.1 Context\nThroughout the programme, edges below \\(|w| &lt; 10^{-4}\\) were pruned each step. This paper examines whether that choice was load-bearing.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Paper 4S: Pruning as Confound</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper4s-summary.html#key-findings",
+    "href": "chapters/paper4s-summary.html#key-findings",
+    "title": "7  Paper 4S: Pruning as Confound",
+    "section": "7.2 Key Findings",
+    "text": "7.2 Key Findings\nDisordinal interaction. Pruning reverses the bound-type ranking. With pruning: hard \\(3.9\\), tanh \\(0.2\\). Without: tanh \\(7.0\\), hard \\(5.6\\). The interaction is cap-independent and amplifies with grid size.\nCritical threshold. Between \\(10^{-6}\\) and \\(10^{-5}\\), precisely the soft-bounded equilibrium weight range. Hard bounds insensitive.\nCCD invalid. Indistinguishable from spatial null (\\(p = 1.0\\)).\nPruning destroyed diversity. Response rank \\(1.0\\) (pruned) \\(\\to\\) \\(5.6\\) (no-prune). Robust across SVD thresholds. Participation ratio \\(2.1\\)–\\(3.3\\).\nHard clip irreducibility. Non-monotonic steepness: \\(k = 1\\) and hard clip both produce assemblages; \\(k = 2\\)–\\(50\\) produces monopoly. The hard clip is a Simondonian limit condition.\nThree regimes. Topological (rank \\(1\\)–\\(2\\)), structural (rank \\(5.6\\)), metaplastic (rank \\(5.6\\), \\(F = 4.9\\)). Nested.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Paper 4S: Pruning as Confound</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/paper4s-summary.html#contribution",
+    "href": "chapters/paper4s-summary.html#contribution",
+    "title": "7  Paper 4S: Pruning as Confound",
+    "section": "7.3 Contribution",
+    "text": "7.3 Contribution\nThe methodological reckoning that strengthened the programme. Pruning confound identification has implications for any model that removes weak connections.",
+    "crumbs": [
+      "Papers",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Paper 4S: Pruning as Confound</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/synthesis.html",
+    "href": "chapters/synthesis.html",
+    "title": "8  Synthesis",
+    "section": "",
+    "text": "8.1 Convergent Frameworks Across Scales\nSeveral of the programme’s findings converge with results established independently in other fields. This convergence is not a weakness — it is evidence that the phenomena identified are real and domain-general.\nPruning and functional diversity. The finding that pruning destroys functional diversity (Paper 4S) converges with the ML compression literature: Hooker et al. (2019) showed compressed networks disproportionately forget rare classes; Tran et al. (NeurIPS 2022) identified gradient-norm asymmetry as the mechanism; Holste et al. (MICCAI 2023) demonstrated clinical consequences. Across six non-neural domains — metallurgy (grain boundaries), ecology (mass extinction), markets (killer acquisitions), supply chains (redundancy removal), immune systems (thymic selection), and social networks (Granovetter’s weak ties) — the same pattern holds: removing “weak” elements collapses the system’s functional response dimensionality.\nNeural dimensionality. The response rank metric (SVD participation ratio) is the standard dimensionality measure in systems neuroscience (Stringer et al. 2019; Gao et al. 2017; Rigotti et al. 2013). Our independent derivation of the same metric confirms its appropriateness. The finding that pruning reduces rank from 5.6 to 1.0 is a testable prediction for experimental neuroscience: does developmental synaptic pruning reduce the participation ratio of cortical population responses?\nCritical periods. Emergent critical periods have been demonstrated in deep networks (Achille et al. 2019; Kleinman et al. 2024). Our substrate produces them through a different mechanism — structural consolidation rather than information-theoretic sensitivity — but the convergence confirms that critical periods are a fundamental property of hierarchical learning systems, not specific to biological neurons.\nOperational closure. The self-sealing property (Paper 3) is structurally equivalent to operational closure in autopoietic theory (Maturana & Varela 1980). We note this connection without claiming full autopoietic organisation: the assemblages are operationally closed but not self-producing (Beer 2020).\nOpen-endedness. The “productive fracture” (parametric differentiation without qualitative novelty) maps onto the open-ended evolution literature. Adams et al. (2017) demonstrated formally that only state-dependent update rules produce unbounded evolution. Our fixed Hebbian rule produces bounded dynamics by the Poincaré recurrence argument. The path forward — rule-space expansion — is the same conclusion reached independently by the Flow-Lenia programme (Plantec et al. 2023).\nThe general principle. Across all domains, one finding generalises: maintenance operations in self-organising systems interact with the phenomena they are supposed to maintain, and this interaction can be disordinal — reversing the apparent ranking of approaches. This specific result (the ranking reversal) has no prior art in any domain we surveyed.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Synthesis</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/synthesis.html#cross-cutting-themes",
+    "href": "chapters/synthesis.html#cross-cutting-themes",
+    "title": "8  Synthesis",
+    "section": "8.2 Cross-Cutting Themes",
+    "text": "8.2 Cross-Cutting Themes\n\n8.2.1 The role of boundary conditions\nA recurring finding: boundary conditions are not implementation details.\n\nThe hard weight clip creates qualitatively different dynamics from smooth saturation (Paper 4S). No finite steepness of soft saturation recovers hard clip behaviour.\nThe pruning threshold functions as an unintended mould, selectively eliminating soft-bounded assemblages (Paper 4S).\nThe \\(\\eta\\) bounds (hard vs soft) determine whether metaplastic differentiation occurs (Paper 4).\n\nIn each case, what appears to be a neutral parameter choice shapes the system’s individuating capacity. Simondon’s framework predicts this: individuation proceeds from singularities in the pre-individual field, and boundary conditions are precisely such singularities.\n\n\n8.2.2 Self-organisation requires constraint\nThe programme demonstrates, against a naive reading of Deleuze, that individuation requires boundary conditions. The fully continuous substrate (soft weights, soft \\(\\eta\\), no pruning) produces topological structure (6–8 assemblages) but not functional differentiation (response rank \\(1\\)–\\(2\\)). Functional differentiation requires the absorbing boundary of hard clipping (rank \\(5.6\\)). The constraint is not an imposition of form — it is the condition under which the system can resolve its own metastability.\nThis is consistent with Simondon’s analysis: modulation is the more general operation, but moulding (a limit case of modulation) produces the strongest individuation. The hard clip is productive precisely because it forecloses certain dynamics, channelling the system’s energy into fewer, more distinct configurations.\n\n\n8.2.3 Negative results as contributions\nThree negative results proved essential:\n\nPaper 3’s finding that self-sealing prevents differentiation established the barrier that motivated Paper 4’s metaplastic mechanism.\nPaper 4S’s finding that CCD is spatially confounded forced the adoption of response rank as the primary metric, yielding a more rigorous measure of functional differentiation.\nPaper 4S’s null response-profile results under Gaussian probes led to the discovery that spatially structured probes deflate response rank by creating correlated activation across assemblages.\n\nEach negative result redirected the programme toward a stronger positive finding.\n\n\n8.2.4 The three regimes of individuation\nThe complete experimental record supports a taxonomy of three nested dynamical regimes:\n\n\n\nRegime\nAssemblages\nResponse rank\n\\(\\eta\\) F-ratio\nBound type\n\n\n\n\nTopological\n6–8\n1–2\n\\(&lt;1\\)\nSoft, no pruning\n\n\nStructural\n5–6\n5.6\n—\nHard, no pruning\n\n\nMetaplastic\n10+\n5.6\n4.9\nHard, no pruning, local homeostasis\n\n\n\nThese are three phases of the same Hebbian process observed under different boundary conditions. Each subsumes the previous: structural individuation requires the hard clip, metaplastic individuation requires both the hard clip and local homeostasis.\n\n\n8.2.5 The productive fracture\nThe programme identifies a precise boundary between Simondonian individuation and Deleuzian differenciation. The Hebbian substrate achieves the former readily and the latter only partially. Even the metaplastic regime produces parametric differentiation — different values of the same capacities — not qualitative differenciation — new kinds of dynamics.\nIf differenciation in the strong Deleuzian sense requires the production of genuinely novel capacities, then Hebbian substrates require rule-space expansion: mechanisms that generate new kinds of update rules, not just distribute existing ones across space. This points toward substrate architectures with evolvable learning rules as the next step.",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Synthesis</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/synthesis.html#programme-statistics",
+    "href": "chapters/synthesis.html#programme-statistics",
+    "title": "8  Synthesis",
+    "section": "8.3 Programme Statistics",
+    "text": "8.3 Programme Statistics\n\n\n\nMetric\nValue\n\n\n\n\nTotal simulation jobs\n\\(\\sim 15{,}000\\)\n\n\nTotal observations\n\\(\\sim 3{,}000{,}000\\)\n\n\nRepositories\n4\n\n\nPapers published/accepted\n5\n\n\nVenue\nArtificial Life\n\n\nCluster\n68 CPUs across 3 nodes\n\n\nCompute\n\\(\\sim 200\\) CPU-hours",
+    "crumbs": [
+      "<span class='chapter-number'>8</span>  <span class='chapter-title'>Synthesis</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/conclusion.html",
+    "href": "chapters/conclusion.html",
+    "title": "9  Conclusion",
+    "section": "",
+    "text": "9.1 Summary of Contributions\nThe Dark Forest programme demonstrates that functional differentiation in self-organising networks emerges from the interaction of four elements: spatial structure, Hebbian reinforcement, absorbing weight boundaries, and local homeostatic regulation. Remove any one and the system produces a less complex form of organisation.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/conclusion.html#summary-of-contributions",
+    "href": "chapters/conclusion.html#summary-of-contributions",
+    "title": "9  Conclusion",
+    "section": "",
+    "text": "9.1.1 Empirical contributions\n\nIndividuation is easy; differentiation is hard. Pure Hebbian dynamics produce spontaneous assemblage formation (Paper 1), and encounter locality governs a sharp coexistence–monopoly phase transition (Paper 2). But assemblages are structural clones, and the substrate is self-sealing against every intervention within the Hebbian framework (Paper 3).\nLocal homeostasis breaks the barrier. Per-node learning rate adjustment toward local activity targets produces stable functional differentiation (response rank \\(5.6\\), \\(\\eta\\) divergence \\(F = 4.9\\)) sustained over 1000 sessions with critical period dynamics (Paper 4).\nPruning suppresses the signal. The standard pruning threshold differentially eliminates soft-bounded edges, creating a disordinal interaction with weight bounding strategy that distorted the programme’s central comparisons. Removing pruning reveals substantially stronger functional diversity than originally measured (Paper 4S).\nThe hard clip is qualitatively irreducible. No finite steepness of soft saturation recovers hard clip behaviour. The hard boundary functions as a Simondonian limit condition that scaffolds functional diversity (Paper 4S).\n\n\n\n9.1.2 Methodological contributions\n\nCCD is spatially confounded. Centroid cosine distance, widely used in Hebbian network analysis, is indistinguishable from a spatial null distribution. Response rank (SVD effective dimensionality) is the appropriate functional metric.\nMaintenance operations interact with self-organisation. Any computational model that removes weak connections may be destroying the exploratory structure that enables functional diversity. This finding generalises beyond the specific programme.\n\n\n\n9.1.3 Philosophical contributions\n\nIndividuation without differenciation. The programme provides an experimental demonstration that Simondonian individuation and Deleuzian differenciation come apart. The Hebbian substrate achieves the former readily; the latter requires specific structural conditions (absorbing boundaries, local regulation) and even then remains parametric.\nThe productive fracture. The gap between differentiation (achieved) and differenciation (not achieved) is precisely characterised as the absence of rule-space expansion. This points toward what a next-generation substrate would require.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/conclusion.html#limitations",
+    "href": "chapters/conclusion.html#limitations",
+    "title": "9  Conclusion",
+    "section": "9.2 Limitations",
+    "text": "9.2 Limitations\nThe programme studies a specific substrate architecture (2D grid, Hebbian learning, hard weight clipping) and the findings may not generalise to all self-organising systems. The response rank metric, while an improvement over CCD, measures functional diversity within the substrate’s existing dynamics and cannot detect capacities outside its vocabulary. The philosophical framework, while rigorously applied, involves interpretive choices that other readings of Simondon and Deleuze might contest.\nThe 12% assemblage yield for the eta ANOVA condition (6/50 seeds) indicates that multi-assemblage coexistence under hard weight + soft \\(\\eta\\) bounds is a rare dynamical regime. The effect is robust when present but does not represent the typical outcome.\nAll experiments in the programme use regular two-dimensional lattices with von Neumann or distance-weighted connectivity. The coexistence–monopoly phase transition, the self-sealing timeline, the critical period dynamics, the steepness non-monotonicity, and the pruning confound may all be topology-dependent. The grid-size scaling law (the pruning interaction amplifies from \\(\\Delta = 4.2\\) at \\(15 \\times 15\\) to \\(\\Delta = 14.5\\) at \\(30 \\times 30\\)) confirms that spatial scale matters but does not establish topology-independence. Testing on small-world, scale-free, and random geometric graph topologies is essential future work. The local homeostatic mechanism, which depends on spatial neighbours, may behave qualitatively differently when “local” is defined by graph distance rather than Euclidean distance on a lattice.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/conclusion.html#broader-implications",
+    "href": "chapters/conclusion.html#broader-implications",
+    "title": "9  Conclusion",
+    "section": "9.3 Broader Implications",
+    "text": "9.3 Broader Implications\n\n9.3.1 Neurodevelopmental disorders\nThe pruning-diversity interaction connects directly to the pruning-schizophrenia hypothesis. Sekar et al. (2016, Nature) identified complement component C4 gene variants as schizophrenia risk factors through their control of synaptic pruning rate. Yilmaz et al. (2021, Nature Neuroscience) confirmed that C4A overexpression reduces cortical synapse density. Our critical period finding (Exp 8fv) predicts that the timing of pruning relative to consolidation matters more than the amount — excessive pruning during the critical period should be more damaging than the same pruning after consolidation. This is a testable clinical prediction.\n\n\n9.3.2 Neural network compression\nThe ML pruning fairness literature (Hooker et al. 2019; Tran et al. 2022) documents that compressed networks disproportionately lose rare-class performance. Our response rank metric could diagnose this as dimensionality collapse: measure the participation ratio of layer-wise responses before and after pruning. If pruned networks show rank collapse analogous to our substrate, this provides a mechanistic explanation and suggests pruning strategies that preserve representational diversity.\n\n\n9.3.3 Immune repertoire maintenance\nT-cell homeostatic proliferation operates through mechanisms structurally isomorphic to our local homeostatic targets: clones compete in spatially structured niches, regulate toward local carrying capacity, and maintain diversity through hard activation thresholds. Immunosuppressive therapy destroying rare clonotypes parallels our pruning destroying weak assemblages. The programme’s framework could inform models of immune repertoire maintenance and predict conditions under which therapeutic pruning destroys protective diversity.\n\n\n9.3.4 The general principle\nAcross every domain examined — neural networks, metallurgy, ecology, markets, supply chains, immune systems — removing weak elements from self-organising systems collapses functional diversity. The elements that single-metric optimisation identifies as “weak” are disproportionately the ones carrying inter-unit coupling that enables multi-dimensional response. This is a domain-general principle with the programme’s disordinal interaction as its most precise computational demonstration.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/conclusion.html#future-directions",
+    "href": "chapters/conclusion.html#future-directions",
+    "title": "9  Conclusion",
+    "section": "9.4 Future Directions",
+    "text": "9.4 Future Directions\n\n9.4.1 Rule-space expansion\nThe programme’s central finding — that differentiation remains parametric — points directly toward the next research question. A substrate with evolvable learning rules, where assemblages can develop qualitatively different update dynamics, could bridge the gap between differentiation and differenciation. Candidates include neural network architectures with learnable activation functions, meta-learning systems, or developmental programmes with conditional gene expression analogs.\n\n\n9.4.2 Pruning as a research programme\nThe discovery that pruning interacts with self-organisation opens a broader investigation. Biological synaptic pruning during development is widely modelled as constructive (improving signal-to-noise ratio). The Dark Forest results suggest it may also be destructive for functional diversity. An experimental programme systematically varying pruning strategies (threshold-based, rank-based, activity-dependent, random) across different substrates could characterise this interaction in generality.\n\n\n9.4.3 Scaling\nThe grid-size scaling law (Paper 4S, \\(\\Delta\\) increasing from \\(4.2\\) at \\(15 \\times 15\\) to \\(14.5\\) at \\(30 \\times 30\\)) suggests the pruning confound is more severe at larger scales. Whether the functional differentiation results (response rank \\(5.6\\)) scale similarly is an open question with implications for biologically realistic network sizes.\n\n\n9.4.4 Non-lattice topologies\nThe programme’s substrate uses a regular 2D grid. Whether the findings — particularly the local homeostatic mechanism and the critical period — transfer to random geometric graphs, small-world networks, or scale-free topologies is unknown and would test the generality of the results.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  },
+  {
+    "objectID": "chapters/conclusion.html#closing",
+    "href": "chapters/conclusion.html#closing",
+    "title": "9  Conclusion",
+    "section": "9.5 Closing",
+    "text": "9.5 Closing\nSelf-organising networks on spatially structured substrates spontaneously produce functionally diverse assemblages through Hebbian reinforcement alone, but standard network maintenance systematically destroys this diversity by selectively removing the weak exploratory connections that distinguish one assemblage from another. Metaplasticity stabilises and amplifies this diversity. The result is a minimal model of how individuation emerges from homogeneous substrates: not through any single mechanism, but through the interaction of spatial structure, reinforcement dynamics, and adaptive learning rules, provided the maintenance regime does not destroy the evidence.",
+    "crumbs": [
+      "<span class='chapter-number'>9</span>  <span class='chapter-title'>Conclusion</span>"
+    ]
+  }
+]

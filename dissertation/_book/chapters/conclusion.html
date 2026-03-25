@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>9&nbsp; Conclusion – The Dark Forest: Individuation, Coexistence, and Differentiation in Self-Organising Hebbian Networks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../references.html" rel="next">
+<link href="../chapters/synthesis.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dcff15f5541169a26fa272d0a4ccbe24.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/conclusion.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">The Dark Forest: Individuation, Coexistence, and Differentiation in Self-Organising Hebbian Networks</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/methods.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paper 1: Emergent Structure in Optimization-Free Hebbian Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper2-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paper 2: Locality-Dependent Coexistence Mechanisms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper3-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paper 3: Coexistence Without Differentiation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper4-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Paper 4: Local Homeostasis Stabilises Differentiation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper4s-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Paper 4S: Pruning as Confound</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/synthesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Synthesis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/conclusion.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#summary-of-contributions" id="toc-summary-of-contributions" class="nav-link active" data-scroll-target="#summary-of-contributions"><span class="header-section-number">9.1</span> Summary of Contributions</a>
+  <ul class="collapse">
+  <li><a href="#empirical-contributions" id="toc-empirical-contributions" class="nav-link" data-scroll-target="#empirical-contributions"><span class="header-section-number">9.1.1</span> Empirical contributions</a></li>
+  <li><a href="#methodological-contributions" id="toc-methodological-contributions" class="nav-link" data-scroll-target="#methodological-contributions"><span class="header-section-number">9.1.2</span> Methodological contributions</a></li>
+  <li><a href="#philosophical-contributions" id="toc-philosophical-contributions" class="nav-link" data-scroll-target="#philosophical-contributions"><span class="header-section-number">9.1.3</span> Philosophical contributions</a></li>
+  </ul></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations"><span class="header-section-number">9.2</span> Limitations</a></li>
+  <li><a href="#broader-implications" id="toc-broader-implications" class="nav-link" data-scroll-target="#broader-implications"><span class="header-section-number">9.3</span> Broader Implications</a>
+  <ul class="collapse">
+  <li><a href="#neurodevelopmental-disorders" id="toc-neurodevelopmental-disorders" class="nav-link" data-scroll-target="#neurodevelopmental-disorders"><span class="header-section-number">9.3.1</span> Neurodevelopmental disorders</a></li>
+  <li><a href="#neural-network-compression" id="toc-neural-network-compression" class="nav-link" data-scroll-target="#neural-network-compression"><span class="header-section-number">9.3.2</span> Neural network compression</a></li>
+  <li><a href="#immune-repertoire-maintenance" id="toc-immune-repertoire-maintenance" class="nav-link" data-scroll-target="#immune-repertoire-maintenance"><span class="header-section-number">9.3.3</span> Immune repertoire maintenance</a></li>
+  <li><a href="#the-general-principle" id="toc-the-general-principle" class="nav-link" data-scroll-target="#the-general-principle"><span class="header-section-number">9.3.4</span> The general principle</a></li>
+  </ul></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions"><span class="header-section-number">9.4</span> Future Directions</a>
+  <ul class="collapse">
+  <li><a href="#rule-space-expansion" id="toc-rule-space-expansion" class="nav-link" data-scroll-target="#rule-space-expansion"><span class="header-section-number">9.4.1</span> Rule-space expansion</a></li>
+  <li><a href="#pruning-as-a-research-programme" id="toc-pruning-as-a-research-programme" class="nav-link" data-scroll-target="#pruning-as-a-research-programme"><span class="header-section-number">9.4.2</span> Pruning as a research programme</a></li>
+  <li><a href="#scaling" id="toc-scaling" class="nav-link" data-scroll-target="#scaling"><span class="header-section-number">9.4.3</span> Scaling</a></li>
+  <li><a href="#non-lattice-topologies" id="toc-non-lattice-topologies" class="nav-link" data-scroll-target="#non-lattice-topologies"><span class="header-section-number">9.4.4</span> Non-lattice topologies</a></li>
+  </ul></li>
+  <li><a href="#closing" id="toc-closing" class="nav-link" data-scroll-target="#closing"><span class="header-section-number">9.5</span> Closing</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="summary-of-contributions" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="summary-of-contributions"><span class="header-section-number">9.1</span> Summary of Contributions</h2>
+<p>The Dark Forest programme demonstrates that functional differentiation in self-organising networks emerges from the interaction of four elements: spatial structure, Hebbian reinforcement, absorbing weight boundaries, and local homeostatic regulation. Remove any one and the system produces a less complex form of organisation.</p>
+<section id="empirical-contributions" class="level3" data-number="9.1.1">
+<h3 data-number="9.1.1" class="anchored" data-anchor-id="empirical-contributions"><span class="header-section-number">9.1.1</span> Empirical contributions</h3>
+<ol type="1">
+<li><p><strong>Individuation is easy; differentiation is hard.</strong> Pure Hebbian dynamics produce spontaneous assemblage formation (Paper 1), and encounter locality governs a sharp coexistence–monopoly phase transition (Paper 2). But assemblages are structural clones, and the substrate is self-sealing against every intervention within the Hebbian framework (Paper 3).</p></li>
+<li><p><strong>Local homeostasis breaks the barrier.</strong> Per-node learning rate adjustment toward local activity targets produces stable functional differentiation (response rank <span class="math inline">\(5.6\)</span>, <span class="math inline">\(\eta\)</span> divergence <span class="math inline">\(F = 4.9\)</span>) sustained over 1000 sessions with critical period dynamics (Paper 4).</p></li>
+<li><p><strong>Pruning suppresses the signal.</strong> The standard pruning threshold differentially eliminates soft-bounded edges, creating a disordinal interaction with weight bounding strategy that distorted the programme’s central comparisons. Removing pruning reveals substantially stronger functional diversity than originally measured (Paper 4S).</p></li>
+<li><p><strong>The hard clip is qualitatively irreducible.</strong> No finite steepness of soft saturation recovers hard clip behaviour. The hard boundary functions as a Simondonian limit condition that scaffolds functional diversity (Paper 4S).</p></li>
+</ol>
+</section>
+<section id="methodological-contributions" class="level3" data-number="9.1.2">
+<h3 data-number="9.1.2" class="anchored" data-anchor-id="methodological-contributions"><span class="header-section-number">9.1.2</span> Methodological contributions</h3>
+<ol start="5" type="1">
+<li><p><strong>CCD is spatially confounded.</strong> Centroid cosine distance, widely used in Hebbian network analysis, is indistinguishable from a spatial null distribution. Response rank (SVD effective dimensionality) is the appropriate functional metric.</p></li>
+<li><p><strong>Maintenance operations interact with self-organisation.</strong> Any computational model that removes weak connections may be destroying the exploratory structure that enables functional diversity. This finding generalises beyond the specific programme.</p></li>
+</ol>
+</section>
+<section id="philosophical-contributions" class="level3" data-number="9.1.3">
+<h3 data-number="9.1.3" class="anchored" data-anchor-id="philosophical-contributions"><span class="header-section-number">9.1.3</span> Philosophical contributions</h3>
+<ol start="7" type="1">
+<li><p><strong>Individuation without differenciation.</strong> The programme provides an experimental demonstration that Simondonian individuation and Deleuzian differenciation come apart. The Hebbian substrate achieves the former readily; the latter requires specific structural conditions (absorbing boundaries, local regulation) and even then remains parametric.</p></li>
+<li><p><strong>The productive fracture.</strong> The gap between differentiation (achieved) and differenciation (not achieved) is precisely characterised as the absence of rule-space expansion. This points toward what a next-generation substrate would require.</p></li>
+</ol>
+</section>
+</section>
+<section id="limitations" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="limitations"><span class="header-section-number">9.2</span> Limitations</h2>
+<p>The programme studies a specific substrate architecture (2D grid, Hebbian learning, hard weight clipping) and the findings may not generalise to all self-organising systems. The response rank metric, while an improvement over CCD, measures functional diversity within the substrate’s existing dynamics and cannot detect capacities outside its vocabulary. The philosophical framework, while rigorously applied, involves interpretive choices that other readings of Simondon and Deleuze might contest.</p>
+<p>The 12% assemblage yield for the eta ANOVA condition (6/50 seeds) indicates that multi-assemblage coexistence under hard weight + soft <span class="math inline">\(\eta\)</span> bounds is a rare dynamical regime. The effect is robust when present but does not represent the typical outcome.</p>
+<p>All experiments in the programme use regular two-dimensional lattices with von Neumann or distance-weighted connectivity. The coexistence–monopoly phase transition, the self-sealing timeline, the critical period dynamics, the steepness non-monotonicity, and the pruning confound may all be topology-dependent. The grid-size scaling law (the pruning interaction amplifies from <span class="math inline">\(\Delta = 4.2\)</span> at <span class="math inline">\(15 \times 15\)</span> to <span class="math inline">\(\Delta = 14.5\)</span> at <span class="math inline">\(30 \times 30\)</span>) confirms that spatial scale matters but does not establish topology-independence. Testing on small-world, scale-free, and random geometric graph topologies is essential future work. The local homeostatic mechanism, which depends on spatial neighbours, may behave qualitatively differently when “local” is defined by graph distance rather than Euclidean distance on a lattice.</p>
+</section>
+<section id="broader-implications" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="broader-implications"><span class="header-section-number">9.3</span> Broader Implications</h2>
+<section id="neurodevelopmental-disorders" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="neurodevelopmental-disorders"><span class="header-section-number">9.3.1</span> Neurodevelopmental disorders</h3>
+<p>The pruning-diversity interaction connects directly to the pruning-schizophrenia hypothesis. Sekar et al.&nbsp;(2016, <em>Nature</em>) identified complement component C4 gene variants as schizophrenia risk factors through their control of synaptic pruning rate. Yilmaz et al.&nbsp;(2021, <em>Nature Neuroscience</em>) confirmed that C4A overexpression reduces cortical synapse density. Our critical period finding (Exp 8fv) predicts that the <em>timing</em> of pruning relative to consolidation matters more than the amount — excessive pruning during the critical period should be more damaging than the same pruning after consolidation. This is a testable clinical prediction.</p>
+</section>
+<section id="neural-network-compression" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="neural-network-compression"><span class="header-section-number">9.3.2</span> Neural network compression</h3>
+<p>The ML pruning fairness literature (Hooker et al.&nbsp;2019; Tran et al.&nbsp;2022) documents that compressed networks disproportionately lose rare-class performance. Our response rank metric could diagnose this as dimensionality collapse: measure the participation ratio of layer-wise responses before and after pruning. If pruned networks show rank collapse analogous to our substrate, this provides a mechanistic explanation and suggests pruning strategies that preserve representational diversity.</p>
+</section>
+<section id="immune-repertoire-maintenance" class="level3" data-number="9.3.3">
+<h3 data-number="9.3.3" class="anchored" data-anchor-id="immune-repertoire-maintenance"><span class="header-section-number">9.3.3</span> Immune repertoire maintenance</h3>
+<p>T-cell homeostatic proliferation operates through mechanisms structurally isomorphic to our local homeostatic targets: clones compete in spatially structured niches, regulate toward local carrying capacity, and maintain diversity through hard activation thresholds. Immunosuppressive therapy destroying rare clonotypes parallels our pruning destroying weak assemblages. The programme’s framework could inform models of immune repertoire maintenance and predict conditions under which therapeutic pruning destroys protective diversity.</p>
+</section>
+<section id="the-general-principle" class="level3" data-number="9.3.4">
+<h3 data-number="9.3.4" class="anchored" data-anchor-id="the-general-principle"><span class="header-section-number">9.3.4</span> The general principle</h3>
+<p>Across every domain examined — neural networks, metallurgy, ecology, markets, supply chains, immune systems — removing weak elements from self-organising systems collapses functional diversity. The elements that single-metric optimisation identifies as “weak” are disproportionately the ones carrying inter-unit coupling that enables multi-dimensional response. This is a domain-general principle with the programme’s disordinal interaction as its most precise computational demonstration.</p>
+</section>
+</section>
+<section id="future-directions" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="future-directions"><span class="header-section-number">9.4</span> Future Directions</h2>
+<section id="rule-space-expansion" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="rule-space-expansion"><span class="header-section-number">9.4.1</span> Rule-space expansion</h3>
+<p>The programme’s central finding — that differentiation remains parametric — points directly toward the next research question. A substrate with <em>evolvable learning rules</em>, where assemblages can develop qualitatively different update dynamics, could bridge the gap between differentiation and differenciation. Candidates include neural network architectures with learnable activation functions, meta-learning systems, or developmental programmes with conditional gene expression analogs.</p>
+</section>
+<section id="pruning-as-a-research-programme" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="pruning-as-a-research-programme"><span class="header-section-number">9.4.2</span> Pruning as a research programme</h3>
+<p>The discovery that pruning interacts with self-organisation opens a broader investigation. Biological synaptic pruning during development is widely modelled as constructive (improving signal-to-noise ratio). The Dark Forest results suggest it may also be destructive for functional diversity. An experimental programme systematically varying pruning strategies (threshold-based, rank-based, activity-dependent, random) across different substrates could characterise this interaction in generality.</p>
+</section>
+<section id="scaling" class="level3" data-number="9.4.3">
+<h3 data-number="9.4.3" class="anchored" data-anchor-id="scaling"><span class="header-section-number">9.4.3</span> Scaling</h3>
+<p>The grid-size scaling law (Paper 4S, <span class="math inline">\(\Delta\)</span> increasing from <span class="math inline">\(4.2\)</span> at <span class="math inline">\(15 \times 15\)</span> to <span class="math inline">\(14.5\)</span> at <span class="math inline">\(30 \times 30\)</span>) suggests the pruning confound is more severe at larger scales. Whether the functional differentiation results (response rank <span class="math inline">\(5.6\)</span>) scale similarly is an open question with implications for biologically realistic network sizes.</p>
+</section>
+<section id="non-lattice-topologies" class="level3" data-number="9.4.4">
+<h3 data-number="9.4.4" class="anchored" data-anchor-id="non-lattice-topologies"><span class="header-section-number">9.4.4</span> Non-lattice topologies</h3>
+<p>The programme’s substrate uses a regular 2D grid. Whether the findings — particularly the local homeostatic mechanism and the critical period — transfer to random geometric graphs, small-world networks, or scale-free topologies is unknown and would test the generality of the results.</p>
+</section>
+</section>
+<section id="closing" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="closing"><span class="header-section-number">9.5</span> Closing</h2>
+<p>Self-organising networks on spatially structured substrates spontaneously produce functionally diverse assemblages through Hebbian reinforcement alone, but standard network maintenance systematically destroys this diversity by selectively removing the weak exploratory connections that distinguish one assemblage from another. Metaplasticity stabilises and amplifies this diversity. The result is a minimal model of how individuation emerges from homogeneous substrates: not through any single mechanism, but through the interaction of spatial structure, reinforcement dynamics, and adaptive learning rules, provided the maintenance regime does not destroy the evidence.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/synthesis.html" class="pagination-link" aria-label="Synthesis">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Synthesis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../references.html" class="pagination-link" aria-label="References">
+        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

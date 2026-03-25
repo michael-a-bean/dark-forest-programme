@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>2&nbsp; Methods – The Dark Forest: Individuation, Coexistence, and Differentiation in Self-Organising Hebbian Networks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../chapters/paper1-summary.html" rel="next">
+<link href="../chapters/introduction.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-dcff15f5541169a26fa272d0a4ccbe24.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../chapters/methods.html"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../">The Dark Forest: Individuation, Coexistence, and Differentiation in Self-Organising Hebbian Networks</a> 
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Preface</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/methods.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper1-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paper 1: Emergent Structure in Optimization-Free Hebbian Networks</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper2-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Paper 2: Locality-Dependent Coexistence Mechanisms</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper3-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Paper 3: Coexistence Without Differentiation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper4-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Paper 4: Local Homeostasis Stabilises Differentiation</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/paper4s-summary.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Paper 4S: Pruning as Confound</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/synthesis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Synthesis</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../chapters/conclusion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Conclusion</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#sec-methods" id="toc-sec-methods" class="nav-link active" data-scroll-target="#sec-methods"><span class="header-section-number">3</span> Methods</a>
+  <ul class="collapse">
+  <li><a href="#sec-substrate" id="toc-sec-substrate" class="nav-link" data-scroll-target="#sec-substrate"><span class="header-section-number">3.1</span> The Substrate</a>
+  <ul class="collapse">
+  <li><a href="#grid-geometry" id="toc-grid-geometry" class="nav-link" data-scroll-target="#grid-geometry"><span class="header-section-number">3.1.1</span> Grid Geometry</a></li>
+  <li><a href="#energy-hotspots-and-noise-injection" id="toc-energy-hotspots-and-noise-injection" class="nav-link" data-scroll-target="#energy-hotspots-and-noise-injection"><span class="header-section-number">3.1.2</span> Energy Hotspots and Noise Injection</a></li>
+  <li><a href="#activation-dynamics" id="toc-activation-dynamics" class="nav-link" data-scroll-target="#activation-dynamics"><span class="header-section-number">3.1.3</span> Activation Dynamics</a></li>
+  <li><a href="#initialisation" id="toc-initialisation" class="nav-link" data-scroll-target="#initialisation"><span class="header-section-number">3.1.4</span> Initialisation</a></li>
+  </ul></li>
+  <li><a href="#sec-hebbian" id="toc-sec-hebbian" class="nav-link" data-scroll-target="#sec-hebbian"><span class="header-section-number">3.2</span> Hebbian Learning Rule</a>
+  <ul class="collapse">
+  <li><a href="#standard-hebbian-update" id="toc-standard-hebbian-update" class="nav-link" data-scroll-target="#standard-hebbian-update"><span class="header-section-number">3.2.1</span> Standard Hebbian Update</a></li>
+  <li><a href="#metaplastic-hebbian-update" id="toc-metaplastic-hebbian-update" class="nav-link" data-scroll-target="#metaplastic-hebbian-update"><span class="header-section-number">3.2.2</span> Metaplastic Hebbian Update</a></li>
+  </ul></li>
+  <li><a href="#sec-encounters" id="toc-sec-encounters" class="nav-link" data-scroll-target="#sec-encounters"><span class="header-section-number">3.3</span> Encounter Mechanism</a>
+  <ul class="collapse">
+  <li><a href="#activity-history" id="toc-activity-history" class="nav-link" data-scroll-target="#activity-history"><span class="header-section-number">3.3.1</span> Activity History</a></li>
+  </ul></li>
+  <li><a href="#sec-pruning" id="toc-sec-pruning" class="nav-link" data-scroll-target="#sec-pruning"><span class="header-section-number">3.4</span> Pruning</a>
+  <ul class="collapse">
+  <li><a href="#the-pruning-confound" id="toc-the-pruning-confound" class="nav-link" data-scroll-target="#the-pruning-confound"><span class="header-section-number">3.4.1</span> The Pruning Confound</a></li>
+  </ul></li>
+  <li><a href="#sec-assemblages" id="toc-sec-assemblages" class="nav-link" data-scroll-target="#sec-assemblages"><span class="header-section-number">3.5</span> Assemblage Detection</a></li>
+  <li><a href="#sec-metaplastic" id="toc-sec-metaplastic" class="nav-link" data-scroll-target="#sec-metaplastic"><span class="header-section-number">3.6</span> Metaplastic Extension</a>
+  <ul class="collapse">
+  <li><a href="#per-node-learning-rate-metaplasticity" id="toc-per-node-learning-rate-metaplasticity" class="nav-link" data-scroll-target="#per-node-learning-rate-metaplasticity"><span class="header-section-number">3.6.1</span> Per-Node Learning Rate (Metaplasticity)</a></li>
+  <li><a href="#local-vs-global-target" id="toc-local-vs-global-target" class="nav-link" data-scroll-target="#local-vs-global-target"><span class="header-section-number">3.6.2</span> Local vs Global Target</a></li>
+  <li><a href="#eta-bounds-hard-vs-soft" id="toc-eta-bounds-hard-vs-soft" class="nav-link" data-scroll-target="#eta-bounds-hard-vs-soft"><span class="header-section-number">3.6.3</span> Eta Bounds: Hard vs Soft</a></li>
+  <li><a href="#inhibitor-field" id="toc-inhibitor-field" class="nav-link" data-scroll-target="#inhibitor-field"><span class="header-section-number">3.6.4</span> Inhibitor Field</a></li>
+  <li><a href="#step-ordering" id="toc-step-ordering" class="nav-link" data-scroll-target="#step-ordering"><span class="header-section-number">3.6.5</span> Step Ordering</a></li>
+  </ul></li>
+  <li><a href="#sec-weight-bounds" id="toc-sec-weight-bounds" class="nav-link" data-scroll-target="#sec-weight-bounds"><span class="header-section-number">3.7</span> Weight Bounding Strategies</a>
+  <ul class="collapse">
+  <li><a href="#hard-clip" id="toc-hard-clip" class="nav-link" data-scroll-target="#hard-clip"><span class="header-section-number">3.7.1</span> Hard Clip</a></li>
+  <li><a href="#tanh-saturation" id="toc-tanh-saturation" class="nav-link" data-scroll-target="#tanh-saturation"><span class="header-section-number">3.7.2</span> Tanh Saturation</a></li>
+  <li><a href="#sigmoid-saturation" id="toc-sigmoid-saturation" class="nav-link" data-scroll-target="#sigmoid-saturation"><span class="header-section-number">3.7.3</span> Sigmoid Saturation</a></li>
+  <li><a href="#oja-rule" id="toc-oja-rule" class="nav-link" data-scroll-target="#oja-rule"><span class="header-section-number">3.7.4</span> Oja Rule</a></li>
+  </ul></li>
+  <li><a href="#sec-metrics" id="toc-sec-metrics" class="nav-link" data-scroll-target="#sec-metrics"><span class="header-section-number">3.8</span> Metrics</a>
+  <ul class="collapse">
+  <li><a href="#sec-ccd" id="toc-sec-ccd" class="nav-link" data-scroll-target="#sec-ccd"><span class="header-section-number">3.8.1</span> Centroid Cosine Distance (CCD)</a></li>
+  <li><a href="#weight-modularity" id="toc-weight-modularity" class="nav-link" data-scroll-target="#weight-modularity"><span class="header-section-number">3.8.2</span> Weight Modularity</a></li>
+  <li><a href="#sec-participation-ratio" id="toc-sec-participation-ratio" class="nav-link" data-scroll-target="#sec-participation-ratio"><span class="header-section-number">3.8.3</span> Response Rank (SVD) and Participation Ratio</a></li>
+  <li><a href="#response-diversity" id="toc-response-diversity" class="nav-link" data-scroll-target="#response-diversity"><span class="header-section-number">3.8.4</span> Response Diversity</a></li>
+  <li><a href="#eta-divergence" id="toc-eta-divergence" class="nav-link" data-scroll-target="#eta-divergence"><span class="header-section-number">3.8.5</span> Eta Divergence</a></li>
+  <li><a href="#capacity-diversity" id="toc-capacity-diversity" class="nav-link" data-scroll-target="#capacity-diversity"><span class="header-section-number">3.8.6</span> Capacity Diversity</a></li>
+  </ul></li>
+  <li><a href="#sec-infrastructure" id="toc-sec-infrastructure" class="nav-link" data-scroll-target="#sec-infrastructure"><span class="header-section-number">3.9</span> Computational Infrastructure</a>
+  <ul class="collapse">
+  <li><a href="#ray-cluster" id="toc-ray-cluster" class="nav-link" data-scroll-target="#ray-cluster"><span class="header-section-number">3.9.1</span> Ray Cluster</a></li>
+  <li><a href="#output-format" id="toc-output-format" class="nav-link" data-scroll-target="#output-format"><span class="header-section-number">3.9.2</span> Output Format</a></li>
+  <li><a href="#seed-management-and-reproducibility" id="toc-seed-management-and-reproducibility" class="nav-link" data-scroll-target="#seed-management-and-reproducibility"><span class="header-section-number">3.9.3</span> Seed Management and Reproducibility</a></li>
+  </ul></li>
+  <li><a href="#sec-params" id="toc-sec-params" class="nav-link" data-scroll-target="#sec-params"><span class="header-section-number">3.10</span> Standard Parameters</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Methods</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="sec-methods" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Methods</h1>
+<p>This chapter describes the shared computational substrate, learning dynamics, measurement apparatus, and infrastructure that underlie all five papers in the dissertation. Each paper extends or reconfigures the base model in specific ways; those paper-specific variations are documented in the relevant chapters. Here we establish the common methodological foundation.</p>
+<section id="sec-substrate" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="sec-substrate"><span class="header-section-number">3.1</span> The Substrate</h2>
+<section id="grid-geometry" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="grid-geometry"><span class="header-section-number">3.1.1</span> Grid Geometry</h3>
+<p>The simulation substrate is a two-dimensional square lattice of <span class="math inline">\(N = G \times G\)</span> nodes, where <span class="math inline">\(G\)</span> is the grid size (default <span class="math inline">\(G = 20\)</span>, yielding <span class="math inline">\(N = 400\)</span> nodes). Each node <span class="math inline">\(i\)</span> is assigned a fixed spatial position <span class="math inline">\((x_i, y_i)\)</span> on the unit square <span class="math inline">\([0,1]^2\)</span>, with positions uniformly distributed along each axis:</p>
+<p><span id="eq-positions"><span class="math display">\[
+x_i = \frac{i \bmod G}{G - 1}, \quad y_i = \frac{\lfloor i / G \rfloor}{G - 1}
+\tag{3.1}\]</span></span></p>
+<p>Nodes carry real-valued activations <span class="math inline">\(a_i(t) \in [-1, 1]\)</span> and are connected by directed, weighted edges stored in a sparse dictionary <span class="math inline">\(\mathbf{W} = \{(i,j) \mapsto w_{ij}\}\)</span>. The grid provides spatial structure that is essential to the model: locality constrains encounters, noise injection varies spatially, and assemblages emerge as spatially coherent clusters.</p>
+</section>
+<section id="energy-hotspots-and-noise-injection" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="energy-hotspots-and-noise-injection"><span class="header-section-number">3.1.2</span> Energy Hotspots and Noise Injection</h3>
+<p>The environment contains <span class="math inline">\(K\)</span> energy hotspots (default <span class="math inline">\(K = 3\)</span>) placed at fixed positions within the unit square. For the default three-hotspot configuration, positions are <span class="math inline">\((0.2, 0.3)\)</span>, <span class="math inline">\((0.8, 0.3)\)</span>, and <span class="math inline">\((0.5, 0.8)\)</span>—a triangular arrangement that provides well-separated energy sources while maintaining asymmetry. For <span class="math inline">\(K = 1, 2, 4\)</span>, deterministic symmetric placements are used; for <span class="math inline">\(K &gt; 4\)</span>, positions are drawn uniformly from <span class="math inline">\([0.1, 0.9]^2\)</span>.</p>
+<p>Each hotspot generates a Gaussian energy field. The composite noise profile at node <span class="math inline">\(i\)</span> is:</p>
+<p><span id="eq-noise-profile"><span class="math display">\[
+\sigma_i = \sigma_{\text{base}} + \sum_{k=1}^{K} E_{\text{hot}} \cdot \exp\!\left(-\frac{d_{ik}^2}{2 r_{\text{hot}}^2}\right)
+\tag{3.2}\]</span></span></p>
+<p>where <span class="math inline">\(d_{ik} = \sqrt{(x_i - x_k^{\text{hot}})^2 + (y_i - y_k^{\text{hot}})^2}\)</span> is the Euclidean distance from node <span class="math inline">\(i\)</span> to hotspot <span class="math inline">\(k\)</span>, <span class="math inline">\(\sigma_{\text{base}} = 0.02\)</span> is the background noise floor, <span class="math inline">\(E_{\text{hot}} = 0.3\)</span> is the hotspot energy, and <span class="math inline">\(r_{\text{hot}} = 0.2\)</span> is the hotspot radius. Nodes near hotspots receive substantially more noise than distant nodes, creating spatially structured variation in the energy landscape.</p>
+<p>At each timestep, noise is injected as:</p>
+<p><span id="eq-noise-inject"><span class="math display">\[
+a_i(t) \leftarrow a_i(t) + \sigma_i \cdot u_i(t), \quad u_i(t) \sim \mathrm{Uniform}(-1, 1)
+\tag{3.3}\]</span></span></p>
+</section>
+<section id="activation-dynamics" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="activation-dynamics"><span class="header-section-number">3.1.3</span> Activation Dynamics</h3>
+<p>After noise injection, activations propagate through the weighted connections. For each node <span class="math inline">\(j\)</span>, the incoming signal is the weighted sum of presynaptic activations:</p>
+<p><span id="eq-input"><span class="math display">\[
+h_j(t) = \sum_{i : (i,j) \in \mathbf{W}} w_{ij} \cdot a_i(t)
+\tag{3.4}\]</span></span></p>
+<p>This input is normalised by the square root of the in-degree <span class="math inline">\(d_j^{\text{in}} = |\{i : (i,j) \in \mathbf{W}\}|\)</span> to prevent high-degree nodes from saturating:</p>
+<p><span id="eq-activation"><span class="math display">\[
+a_j(t+1) = \tanh\!\left(\frac{1}{2}\, a_j(t) + \frac{h_j(t)}{\sqrt{\max(d_j^{\text{in}}, 1)}}\right)
+\tag{3.5}\]</span></span></p>
+<p>The <span class="math inline">\(\frac{1}{2} a_j(t)\)</span> term provides activation inertia, preventing instantaneous washout of state. The <span class="math inline">\(\tanh\)</span> nonlinearity bounds activations to <span class="math inline">\([-1, 1]\)</span>.</p>
+<p>For the fully connected <code>Network</code> class used in Paper 4S Experiment 1, the activation rule simplifies to a matrix form without the inertia term:</p>
+<p><span id="eq-network-activation"><span class="math display">\[
+\mathbf{a}(t+1) = \tanh\!\left(\frac{\mathbf{W} \cdot \mathbf{a}(t) + \mathbf{x}(t)}{\sqrt{N}}\right)
+\tag{3.6}\]</span></span></p>
+<p>where <span class="math inline">\(\mathbf{x}(t)\)</span> is an external input vector.</p>
+</section>
+<section id="initialisation" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="initialisation"><span class="header-section-number">3.1.4</span> Initialisation</h3>
+<p>Node activations are initialised as <span class="math inline">\(a_i(0) \sim \mathrm{Uniform}(-0.1, 0.1) + 0.1 \cdot \sigma_i\)</span>, providing a small bias toward hotspot regions. Initial connectivity is created by sampling approximately <span class="math inline">\(4N\)</span> directed edges with a locality bias: for each edge, a source node <span class="math inline">\(i\)</span> is chosen uniformly, a target displacement <span class="math inline">\((\delta x, \delta y) \sim \mathcal{N}(0, \ell^2)\)</span> is sampled (where <span class="math inline">\(\ell\)</span> is the locality parameter), and the node nearest to <span class="math inline">\((x_i + \delta x, y_i + \delta y)\)</span> becomes the target. Initial weights are drawn from <span class="math inline">\(\mathrm{Uniform}(-0.3, 0.3)\)</span>.</p>
+</section>
+</section>
+<section id="sec-hebbian" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="sec-hebbian"><span class="header-section-number">3.2</span> Hebbian Learning Rule</h2>
+<section id="standard-hebbian-update" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="standard-hebbian-update"><span class="header-section-number">3.2.1</span> Standard Hebbian Update</h3>
+<p>At each timestep, all existing edges are updated according to a Hebbian rule with multiplicative weight decay and bounding:</p>
+<p><span id="eq-hebbian"><span class="math display">\[
+w_{ij}(t+1) = \mathcal{B}\!\Big[\big(w_{ij}(t) + \eta \cdot a_i(t) \cdot a_j(t)\big) \cdot (1 - \lambda)\Big]
+\tag{3.7}\]</span></span></p>
+<p>where <span class="math inline">\(\eta = 0.05\)</span> is the learning rate, <span class="math inline">\(\lambda = 0.002\)</span> is the weight decay rate, and <span class="math inline">\(\mathcal{B}[\cdot]\)</span> is a bounding operator (see <a href="#sec-weight-bounds" class="quarto-xref"><span>Section 3.7</span></a>). The Hebbian product <span class="math inline">\(a_i a_j\)</span> strengthens edges between co-active nodes and weakens edges between nodes with opposite-sign activations. The multiplicative decay <span class="math inline">\((1 - \lambda)\)</span> provides a constant fractional drag on all weights, ensuring that connections require sustained co-activation to survive.</p>
+</section>
+<section id="metaplastic-hebbian-update" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="metaplastic-hebbian-update"><span class="header-section-number">3.2.2</span> Metaplastic Hebbian Update</h3>
+<p>In the <code>MetaplasticField</code> extension (Papers 3–5), each node <span class="math inline">\(i\)</span> carries a per-node learning rate <span class="math inline">\(\eta_i(t)\)</span>, and the edge-level learning rate is the mean of its endpoints:</p>
+<p><span id="eq-edge-eta"><span class="math display">\[
+\eta_{ij}(t) = \frac{1}{2}\big(\eta_i(t) + \eta_j(t)\big)
+\tag{3.8}\]</span></span></p>
+<p>The update equation becomes:</p>
+<p><span id="eq-meta-hebbian"><span class="math display">\[
+w_{ij}(t+1) = \mathcal{B}\!\Big[\big(w_{ij}(t) + \eta_{ij}(t) \cdot a_i(t) \cdot a_j(t)\big) \cdot (1 - \lambda)\Big]
+\tag{3.9}\]</span></span></p>
+<p>This ensures that edges in high-<span class="math inline">\(\eta\)</span> regions learn faster than edges in low-<span class="math inline">\(\eta\)</span> regions, creating the coupling between metaplastic state and synaptic plasticity that drives differentiation.</p>
+</section>
+</section>
+<section id="sec-encounters" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="sec-encounters"><span class="header-section-number">3.3</span> Encounter Mechanism</h2>
+<p>New edges are created through a locality-biased encounter process that models the spatial constraints on interaction. At each timestep, <span class="math inline">\(R\)</span> encounter attempts are made (default <span class="math inline">\(R = 20\)</span>). Each encounter proceeds as follows:</p>
+<ol type="1">
+<li><p><strong>Sample a spatial location.</strong> A point <span class="math inline">\((p_x, p_y) \sim \mathrm{Uniform}([0,1]^2)\)</span> is drawn. This spatially uniform sampling ensures that encounter opportunities are distributed across the entire field, preventing a single active region from monopolising the encounter budget.</p></li>
+<li><p><strong>Compute local encounter probabilities.</strong> For each node <span class="math inline">\(i\)</span>, the probability of participating in the encounter is proportional to the product of spatial proximity and activity history:</p></li>
+</ol>
+<p><span id="eq-encounter-prob"><span class="math display">\[
+P(i \mid p) \propto \exp\!\left(-\frac{(x_i - p_x)^2 + (y_i - p_y)^2}{2\ell^2}\right) \cdot \big(\bar{a}_i + \epsilon\big)
+\tag{3.10}\]</span></span></p>
+<p>where <span class="math inline">\(\ell\)</span> is the locality parameter, <span class="math inline">\(\bar{a}_i\)</span> is the exponential moving average of <span class="math inline">\(|a_i|\)</span>, and <span class="math inline">\(\epsilon = 0.001\)</span> prevents zero probabilities.</p>
+<ol start="3" type="1">
+<li><p><strong>Select a pair.</strong> Node <span class="math inline">\(i\)</span> is drawn from the distribution above. Node <span class="math inline">\(j\)</span> is drawn from the same distribution with <span class="math inline">\(P(i) = 0\)</span> (exclusion of the first node).</p></li>
+<li><p><strong>Create edge.</strong> If <span class="math inline">\(i \neq j\)</span> and the edge <span class="math inline">\((i, j)\)</span> does not already exist, it is created with weight <span class="math inline">\(w_{ij} = 0\)</span>.</p></li>
+</ol>
+<p>The locality parameter <span class="math inline">\(\ell\)</span> (default 0.10) controls the spatial scale of encounters. Smaller <span class="math inline">\(\ell\)</span> values produce tightly localised encounters that favour multiple independent assemblages; larger values produce global mixing that favours monopolistic single-assemblage outcomes. This parameter is central to the coexistence–monopoly transition studied across Papers 1–4.</p>
+<section id="activity-history" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="activity-history"><span class="header-section-number">3.3.1</span> Activity History</h3>
+<p>The activity history <span class="math inline">\(\bar{a}_i\)</span> used in encounter probabilities and metaplastic adjustment is maintained as an exponential moving average:</p>
+<p><span id="eq-ema"><span class="math display">\[
+\bar{a}_i(t+1) = (1 - \alpha) \cdot \bar{a}_i(t) + \alpha \cdot |a_i(t)|
+\tag{3.11}\]</span></span></p>
+<p>where <span class="math inline">\(\alpha = 0.05\)</span> by default. This provides a smoothed estimate of recent activity that is robust to single-step fluctuations.</p>
+</section>
+</section>
+<section id="sec-pruning" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="sec-pruning"><span class="header-section-number">3.4</span> Pruning</h2>
+<p>Edges whose absolute weight falls below a threshold <span class="math inline">\(\theta_{\text{prune}}\)</span> are removed at each timestep:</p>
+<p><span id="eq-prune"><span class="math display">\[
+\text{if } |w_{ij}| &lt; \theta_{\text{prune}}, \quad \text{delete } (i,j) \text{ from } \mathbf{W}
+\tag{3.12}\]</span></span></p>
+<p>The default threshold is <span class="math inline">\(\theta_{\text{prune}} = 10^{-4}\)</span>. This mechanism serves two purposes: it controls memory usage by preventing unbounded edge accumulation (since the encounter mechanism continually creates new edges at weight zero), and it models the biological reality that weak synapses are metabolically costly and tend to be eliminated.</p>
+<section id="the-pruning-confound" class="level3" data-number="3.4.1">
+<h3 data-number="3.4.1" class="anchored" data-anchor-id="the-pruning-confound"><span class="header-section-number">3.4.1</span> The Pruning Confound</h3>
+<p>Paper 4S discovered that pruning interacts with the weight bounding strategy in a way that confounds differentiation measurements. With the default <span class="math inline">\(\theta_{\text{prune}} = 10^{-4}\)</span> and hard clipping, newly created edges (initialised at <span class="math inline">\(w = 0\)</span>) are immediately eligible for pruning if they do not receive sufficient Hebbian reinforcement within a single timestep. Because <span class="math inline">\(\tanh\)</span> and sigmoid bounds leave near-zero weights effectively unchanged (both functions are approximately linear near the origin), the pruning interaction differs across bound types in a way that is not attributable to the bounding strategy itself.</p>
+<p>To deconfound this, Paper 4S introduced a pruning-on/pruning-off factorial design. In the pruning-off condition, the threshold is reduced to <span class="math inline">\(\theta_{\text{prune}} = 10^{-8}\)</span> (effectively disabling pruning) and a soft edge cap of 5,000–20,000 edges is enforced by periodically removing the weakest edges when the total exceeds the cap. This revealed that some apparent bound-type effects on modularity were partially attributable to differential pruning dynamics rather than to the bounding function per se.</p>
+</section>
+</section>
+<section id="sec-assemblages" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="sec-assemblages"><span class="header-section-number">3.5</span> Assemblage Detection</h2>
+<p>Assemblages—spatially coherent clusters of strongly connected nodes—are detected as connected components in a strong-edge subgraph. The procedure is:</p>
+<ol type="1">
+<li><p><strong>Threshold selection.</strong> If no threshold is provided, it defaults to the 75th percentile of the absolute weight distribution: <span class="math inline">\(\tau = P_{75}(|w_{ij}|)\)</span>. This adaptive threshold ensures that assemblage detection scales with the overall weight distribution, which varies across conditions and timepoints.</p></li>
+<li><p><strong>Subgraph construction.</strong> An undirected adjacency list is built from all edges with <span class="math inline">\(|w_{ij}| \geq \tau\)</span>. The directionality of edges is ignored for assemblage detection, treating the subgraph as symmetric.</p></li>
+<li><p><strong>Connected component extraction.</strong> A breadth-first search identifies connected components. Components with fewer than 2 nodes are discarded.</p></li>
+</ol>
+<p>The adaptive threshold means that assemblage counts and sizes are relative to the current weight distribution rather than an absolute scale. This is appropriate for measuring structural differentiation but requires care when comparing across conditions with very different weight magnitude distributions—an issue that motivated the development of alternative metrics in Papers 2–5.</p>
+</section>
+<section id="sec-metaplastic" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="sec-metaplastic"><span class="header-section-number">3.6</span> Metaplastic Extension</h2>
+<p>The <code>MetaplasticField</code> class (introduced in Paper 3, extended in Papers 4 and 4S) adds two coupled mechanisms to the base substrate: per-node learning rate adaptation (metaplasticity) and an inhibitor diffusion field.</p>
+<section id="per-node-learning-rate-metaplasticity" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="per-node-learning-rate-metaplasticity"><span class="header-section-number">3.6.1</span> Per-Node Learning Rate (Metaplasticity)</h3>
+<p>Each node <span class="math inline">\(i\)</span> carries a learning rate <span class="math inline">\(\eta_i(t)\)</span>, initialised to the global value <span class="math inline">\(\eta\)</span>. At each timestep, after the Hebbian update, <span class="math inline">\(\eta_i\)</span> is adjusted homeostatically based on the deviation of the node’s activity from a target:</p>
+<p><span id="eq-meta-adjust"><span class="math display">\[
+\eta_i(t+1) = \eta_i(t) - \mu \cdot \big(\bar{a}_i(t) - a_i^*\big)
+\tag{3.13}\]</span></span></p>
+<p>where <span class="math inline">\(\mu\)</span> is the meta-strength parameter (default 0 = no metaplasticity; typical nonzero values range from <span class="math inline">\(10^{-4}\)</span> to <span class="math inline">\(0.05\)</span>) and <span class="math inline">\(a_i^*\)</span> is the target activity.</p>
+<p>The sign convention is homeostatic: nodes with activity above target (<span class="math inline">\(\bar{a}_i &gt; a_i^*\)</span>) have their <span class="math inline">\(\eta\)</span> reduced (consolidation), while nodes below target have their <span class="math inline">\(\eta\)</span> increased (exploration). This creates a negative feedback loop at the individual node level.</p>
+</section>
+<section id="local-vs-global-target" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="local-vs-global-target"><span class="header-section-number">3.6.2</span> Local vs Global Target</h3>
+<p>The target activity <span class="math inline">\(a_i^*\)</span> can be computed in two modes:</p>
+<p><strong>Global target</strong> (<code>use_local_target = False</code>): All nodes share the same target <span class="math inline">\(a_i^* = a^*_{\text{global}}\)</span> (default 0.15). This was the original design but was found to be less effective at producing differentiation because it imposes a uniform standard that does not account for spatial variation in the energy landscape.</p>
+<p><strong>Local target</strong> (<code>use_local_target = True</code>, default): Each node’s target is the mean activity of its spatial neighbors within a given Manhattan radius <span class="math inline">\(r\)</span>:</p>
+<p><span id="eq-local-target"><span class="math display">\[
+a_i^* = \frac{1}{|\mathcal{N}_r(i)|} \sum_{j \in \mathcal{N}_r(i)} \bar{a}_j(t)
+\tag{3.14}\]</span></span></p>
+<p>where <span class="math inline">\(\mathcal{N}_r(i)\)</span> is the set of grid nodes within Manhattan distance <span class="math inline">\(r\)</span> of node <span class="math inline">\(i\)</span> (default <span class="math inline">\(r = 1\)</span>, i.e., von Neumann neighbourhood). Local targets enable Turing-like symmetry breaking: small initial fluctuations in activity are amplified because a node’s target adapts to its neighbourhood rather than being imposed globally.</p>
+</section>
+<section id="eta-bounds-hard-vs-soft" class="level3" data-number="3.6.3">
+<h3 data-number="3.6.3" class="anchored" data-anchor-id="eta-bounds-hard-vs-soft"><span class="header-section-number">3.6.3</span> Eta Bounds: Hard vs Soft</h3>
+<p>The per-node learning rate is bounded to the interval <span class="math inline">\([\eta_{\min}, \eta_{\max}]\)</span> (default <span class="math inline">\([0.005, 0.20]\)</span>) after each adjustment. Two bounding strategies are available:</p>
+<p><strong>Hard clip</strong> (<code>use_soft_bounds = False</code>, default):</p>
+<p><span id="eq-eta-hard"><span class="math display">\[
+\eta_i \leftarrow \mathrm{clip}(\eta_i, \eta_{\min}, \eta_{\max})
+\tag{3.15}\]</span></span></p>
+<p><strong>Soft (tanh) bounds</strong> (<code>use_soft_bounds = True</code>):</p>
+<p><span id="eq-eta-soft"><span class="math display">\[
+\eta_i \leftarrow \bar{\eta} + \Delta\eta \cdot \tanh\!\left(\frac{\eta_i - \bar{\eta}}{\Delta\eta}\right)
+\tag{3.16}\]</span></span></p>
+<p>where <span class="math inline">\(\bar{\eta} = (\eta_{\min} + \eta_{\max})/2\)</span> is the midpoint and <span class="math inline">\(\Delta\eta = (\eta_{\max} - \eta_{\min})/2\)</span> is the half-range. Soft bounds produce a continuously differentiable bounding function that avoids the absorbing-state dynamics of hard clipping, where nodes driven to the boundary remain stuck there.</p>
+<p>Paper 4S demonstrated that the choice between hard and soft eta bounds has measurable effects on the degree of eta differentiation across assemblages, with hard bounds producing larger eta divergence (partly as an artifact of boundary accumulation) and soft bounds producing smoother but smaller differentiation.</p>
+</section>
+<section id="inhibitor-field" class="level3" data-number="3.6.4">
+<h3 data-number="3.6.4" class="anchored" data-anchor-id="inhibitor-field"><span class="header-section-number">3.6.4</span> Inhibitor Field</h3>
+<p>Nodes emit an inhibitor signal proportional to their total outgoing weight mass. The inhibitor diffuses spatially and decays, providing long-range communication between assemblages.</p>
+<p><strong>Emission.</strong> At each step, each node adds to its local inhibitor concentration:</p>
+<p><span id="eq-inhibitor-emit"><span class="math display">\[
+I_i(t) \leftarrow I_i(t) + \rho \cdot m_i(t)
+\tag{3.17}\]</span></span></p>
+<p>where <span class="math inline">\(\rho = 0.01\)</span> is the emission rate and <span class="math inline">\(m_i(t) = \sum_{j: (i,j) \in \mathbf{W}} |w_{ij}|\)</span> is the node’s total outgoing weight mass.</p>
+<p><strong>Diffusion.</strong> The inhibitor spreads via a discrete Laplacian on the von Neumann neighbourhood:</p>
+<p><span id="eq-inhibitor-diffuse"><span class="math display">\[
+I_i(t+\tfrac{1}{2}) = I_i(t) + D \cdot \left(\sum_{j \in \mathcal{N}_1(i)} I_j(t) - |\mathcal{N}_1(i)| \cdot I_i(t)\right)
+\tag{3.18}\]</span></span></p>
+<p>where <span class="math inline">\(D\)</span> is the diffusion coefficient (default 0.05, capped at 0.20 for CFL stability). The inhibitor is clamped to non-negative values after diffusion.</p>
+<p><strong>Decay.</strong> The inhibitor decays exponentially:</p>
+<p><span id="eq-inhibitor-decay"><span class="math display">\[
+I_i(t+1) = (1 - \delta) \cdot I_i(t + \tfrac{1}{2})
+\tag{3.19}\]</span></span></p>
+<p>where <span class="math inline">\(\delta = 0.10\)</span> is the decay rate.</p>
+<p><strong>Inhibitor–Eta Coupling.</strong> When the coupling strength <span class="math inline">\(\kappa &gt; 0\)</span>, the inhibitor field suppresses learning rates. Two coupling modes are available:</p>
+<p><em>Absolute coupling</em> (<code>use_difference_coupling = False</code>):</p>
+<p><span id="eq-coupling-abs"><span class="math display">\[
+\eta_i \leftarrow \eta_i - \kappa \cdot I_i
+\tag{3.20}\]</span></span></p>
+<p><em>Difference-dependent coupling</em> (<code>use_difference_coupling = True</code>, default):</p>
+<p><span id="eq-coupling-diff"><span class="math display">\[
+\eta_i \leftarrow \eta_i - \kappa \cdot I_i \cdot \big(1 - (\eta_i - \bar{\eta}_i^{\text{local}})\big)
+\tag{3.21}\]</span></span></p>
+<p>where <span class="math inline">\(\bar{\eta}_i^{\text{local}} = \frac{1}{|\mathcal{N}_1(i)|} \sum_{j \in \mathcal{N}_1(i)} \eta_j\)</span> is the mean eta of grid neighbours. The difference-dependent mode amplifies pre-existing eta heterogeneity: nodes whose eta is already above their local mean experience less suppression (the <span class="math inline">\((1 - \Delta\eta)\)</span> factor is smaller when <span class="math inline">\(\Delta\eta\)</span> is large and positive), while nodes below their local mean are suppressed further. This creates a Turing-instability-like mechanism where Hebbian reinforcement acts as the short-range activator and inhibitor diffusion acts as the long-range inhibitor, with the variable that differentiates being the learning rule itself (<span class="math inline">\(\eta\)</span>), not the weights directly.</p>
+</section>
+<section id="step-ordering" class="level3" data-number="3.6.5">
+<h3 data-number="3.6.5" class="anchored" data-anchor-id="step-ordering"><span class="header-section-number">3.6.5</span> Step Ordering</h3>
+<p>Each metaplastic timestep executes the following operations in order:</p>
+<ol type="1">
+<li>Noise injection (<a href="#eq-noise-inject" class="quarto-xref">Equation&nbsp;<span>3.3</span></a>)</li>
+<li>Activation propagation (<a href="#eq-activation" class="quarto-xref">Equation&nbsp;<span>3.5</span></a>)</li>
+<li>Hebbian weight update with per-edge <span class="math inline">\(\eta_{ij}\)</span> (<a href="#eq-meta-hebbian" class="quarto-xref">Equation&nbsp;<span>3.9</span></a>)</li>
+<li>Local encounters (<a href="#sec-encounters" class="quarto-xref"><span>Section 3.3</span></a>)</li>
+<li>Edge pruning (<a href="#sec-pruning" class="quarto-xref"><span>Section 3.4</span></a>)</li>
+<li>Activity history update (<a href="#eq-ema" class="quarto-xref">Equation&nbsp;<span>3.11</span></a>)</li>
+<li>Metaplastic eta adjustment (<a href="#eq-meta-adjust" class="quarto-xref">Equation&nbsp;<span>3.13</span></a>)</li>
+<li>Inhibitor emission, diffusion, decay, and coupling (<a href="#eq-inhibitor-emit" class="quarto-xref">Equation&nbsp;<span>3.17</span></a> through <a href="#eq-coupling-diff" class="quarto-xref">Equation&nbsp;<span>3.21</span></a>)</li>
+</ol>
+<p>This ordering ensures that eta adjustments are based on the activity resulting from the current step’s dynamics, and that inhibitor coupling acts on the already-adjusted eta values.</p>
+</section>
+</section>
+<section id="sec-weight-bounds" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="sec-weight-bounds"><span class="header-section-number">3.7</span> Weight Bounding Strategies</h2>
+<p>Paper 4S introduced configurable weight bounding as a first-class experimental variable. Four strategies are implemented for the bounding operator <span class="math inline">\(\mathcal{B}[\cdot]\)</span> in <a href="#eq-hebbian" class="quarto-xref">Equation&nbsp;<span>3.7</span></a>:</p>
+<section id="hard-clip" class="level3" data-number="3.7.1">
+<h3 data-number="3.7.1" class="anchored" data-anchor-id="hard-clip"><span class="header-section-number">3.7.1</span> Hard Clip</h3>
+<p><span id="eq-bound-hard"><span class="math display">\[
+\mathcal{B}_{\text{hard}}[w] = \mathrm{clip}(w, -w_{\max}, w_{\max})
+\tag{3.22}\]</span></span></p>
+<p>This is the default used in Papers 1–4. Hard clipping creates absorbing states at <span class="math inline">\(\pm w_{\max}\)</span>: once a weight reaches the boundary, the Hebbian increment is discarded and only decay can pull the weight back. This produces bimodal weight distributions with peaks near <span class="math inline">\(\pm w_{\max}\)</span> in high-activity regions.</p>
+</section>
+<section id="tanh-saturation" class="level3" data-number="3.7.2">
+<h3 data-number="3.7.2" class="anchored" data-anchor-id="tanh-saturation"><span class="header-section-number">3.7.2</span> Tanh Saturation</h3>
+<p><span id="eq-bound-tanh"><span class="math display">\[
+\mathcal{B}_{\text{tanh}}[w] = w_{\max} \cdot \tanh\!\left(\frac{w}{w_{\max}}\right)
+\tag{3.23}\]</span></span></p>
+<p>Smooth saturation that is approximately linear for <span class="math inline">\(|w| \ll w_{\max}\)</span> and asymptotically approaches <span class="math inline">\(\pm w_{\max}\)</span>. The derivative <span class="math inline">\(\mathcal{B}'_{\text{tanh}}[w] = \mathrm{sech}^2(w/w_{\max})\)</span> is always positive, so no weight is fully absorbed—strong weights experience diminishing returns but never fully saturate.</p>
+</section>
+<section id="sigmoid-saturation" class="level3" data-number="3.7.3">
+<h3 data-number="3.7.3" class="anchored" data-anchor-id="sigmoid-saturation"><span class="header-section-number">3.7.3</span> Sigmoid Saturation</h3>
+<p><span id="eq-bound-sigmoid"><span class="math display">\[
+\mathcal{B}_{\text{sigmoid}}[w] = 2 w_{\max} \cdot \sigma\!\left(\frac{2w}{w_{\max}}\right) - w_{\max}
+\tag{3.24}\]</span></span></p>
+<p>where <span class="math inline">\(\sigma(x) = 1/(1 + e^{-x})\)</span>. This provides a sharper transition than <span class="math inline">\(\tanh\)</span> between the linear and saturating regimes. The function maps <span class="math inline">\(\mathbb{R} \to (-w_{\max}, w_{\max})\)</span> with an inflection point at <span class="math inline">\(w = 0\)</span>.</p>
+</section>
+<section id="oja-rule" class="level3" data-number="3.7.4">
+<h3 data-number="3.7.4" class="anchored" data-anchor-id="oja-rule"><span class="header-section-number">3.7.4</span> Oja Rule</h3>
+<p><span id="eq-oja"><span class="math display">\[
+\Delta w_{ij} = \eta \cdot \big(a_i \cdot a_j - a_j^2 \cdot w_{ij}\big)
+\tag{3.25}\]</span></span></p>
+<p>The Oja rule replaces the standard Hebbian update entirely rather than applying a post-hoc bound. The <span class="math inline">\(-a_j^2 w_{ij}\)</span> term provides self-normalisation: weights converge to the first principal component of the input covariance, with a natural scale determined by the input statistics rather than an externally imposed <span class="math inline">\(w_{\max}\)</span>. Multiplicative decay <span class="math inline">\((1 - \lambda)\)</span> is still applied after the Oja update. No explicit weight bounding is performed.</p>
+<p>In the <code>MetaplasticField</code>, all four strategies use the per-edge learning rate <span class="math inline">\(\eta_{ij}\)</span> (<a href="#eq-edge-eta" class="quarto-xref">Equation&nbsp;<span>3.8</span></a>) in place of the global <span class="math inline">\(\eta\)</span>.</p>
+</section>
+</section>
+<section id="sec-metrics" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="sec-metrics"><span class="header-section-number">3.8</span> Metrics</h2>
+<section id="sec-ccd" class="level3" data-number="3.8.1">
+<h3 data-number="3.8.1" class="anchored" data-anchor-id="sec-ccd"><span class="header-section-number">3.8.1</span> Centroid Cosine Distance (CCD)</h3>
+<p>CCD measures the structural differentiation between assemblages by comparing their outgoing weight profiles. For each assemblage <span class="math inline">\(\mathcal{A}_k\)</span>, a centroid weight vector <span class="math inline">\(\mathbf{c}_k \in \mathbb{R}^N\)</span> is computed as the mean of the outgoing weight vectors of its constituent nodes:</p>
+<p><span id="eq-centroid"><span class="math display">\[
+c_{k,j} = \frac{1}{|\mathcal{A}_k|} \sum_{i \in \mathcal{A}_k} w_{ij}
+\tag{3.26}\]</span></span></p>
+<p>CCD is then the mean pairwise cosine distance between centroids:</p>
+<p><span id="eq-ccd"><span class="math display">\[
+\text{CCD} = \frac{2}{K(K-1)} \sum_{k &lt; l} \left(1 - \frac{\mathbf{c}_k \cdot \mathbf{c}_l}{\|\mathbf{c}_k\| \|\mathbf{c}_l\|}\right)
+\tag{3.27}\]</span></span></p>
+<p>where <span class="math inline">\(K\)</span> is the number of assemblages. CCD ranges from 0 (all assemblages are identical clones) to 1 (all assemblages are pairwise orthogonal). If either centroid has zero norm, the distance is set to 1.0 (maximally different). CCD is undefined (returned as 0.0) for fewer than 2 assemblages.</p>
+<p><strong>Invalidity note.</strong> CCD was developed as a replacement for an earlier classifier-based differentiation metric that failed in the <span class="math inline">\(p \gg n\)</span> regime (weight vector dimensionality greatly exceeds assemblage size). While CCD is more robust, Paper 4S identified a partial confound: because CCD compares outgoing weight profiles and assemblages are spatially localised, some CCD variation across conditions may reflect differences in assemblage geometry (spatial spread, overlap with hotspots) rather than genuine functional differentiation. The participation ratio metric (<a href="#sec-participation-ratio" class="quarto-xref"><span>Section 3.8.3</span></a>) was developed as a deconfounded alternative.</p>
+</section>
+<section id="weight-modularity" class="level3" data-number="3.8.2">
+<h3 data-number="3.8.2" class="anchored" data-anchor-id="weight-modularity"><span class="header-section-number">3.8.2</span> Weight Modularity</h3>
+<p>Modularity measures the fraction of total weight mass that lies within assemblages rather than between them:</p>
+<p><span id="eq-modularity"><span class="math display">\[
+Q = \frac{\sum_{(i,j) \in \mathbf{W}} |w_{ij}| \cdot \mathbb{1}[\text{asm}(i) = \text{asm}(j) \geq 0]}{\sum_{(i,j) \in \mathbf{W}} |w_{ij}|}
+\tag{3.28}\]</span></span></p>
+<p>where <span class="math inline">\(\text{asm}(i)\)</span> returns the assemblage index of node <span class="math inline">\(i\)</span> (or <span class="math inline">\(-1\)</span> if unassigned). Modularity ranges from 0 (all weight between assemblages or on unassigned nodes) to 1 (all weight within assemblages). A random graph yields modularity approximately equal to the fraction of edges within assemblages by chance, which depends on assemblage sizes.</p>
+</section>
+<section id="sec-participation-ratio" class="level3" data-number="3.8.3">
+<h3 data-number="3.8.3" class="anchored" data-anchor-id="sec-participation-ratio"><span class="header-section-number">3.8.3</span> Response Rank (SVD) and Participation Ratio</h3>
+<p>Response rank quantifies the functional diversity of the system’s response to external stimuli. After running a simulation to steady state, the system is probed with <span class="math inline">\(P\)</span> stimulus patterns (default <span class="math inline">\(P = 10\)</span>). For each probe <span class="math inline">\(p\)</span>, the mean activation of each assemblage is recorded, yielding a response matrix <span class="math inline">\(\mathbf{R} \in \mathbb{R}^{K \times P}\)</span> (assemblages by probes).</p>
+<p>The mean-centred response matrix is decomposed via SVD:</p>
+<p><span id="eq-svd"><span class="math display">\[
+\mathbf{R} - \bar{\mathbf{R}} = \mathbf{U} \mathbf{\Sigma} \mathbf{V}^\top
+\tag{3.29}\]</span></span></p>
+<p>where <span class="math inline">\(\mathbf{\Sigma} = \mathrm{diag}(\sigma_1, \sigma_2, \ldots)\)</span> with <span class="math inline">\(\sigma_1 \geq \sigma_2 \geq \cdots \geq 0\)</span>.</p>
+<p><strong>Threshold-based rank.</strong> The number of singular values exceeding a fraction <span class="math inline">\(f\)</span> of the largest:</p>
+<p><span id="eq-rank"><span class="math display">\[
+\text{rank}_f = \left|\{k : \sigma_k &gt; f \cdot \sigma_1\}\right|
+\tag{3.30}\]</span></span></p>
+<p>This is computed at thresholds <span class="math inline">\(f \in \{0.001, 0.005, 0.01, 0.05, 0.10\}\)</span>, providing a multi-resolution view of the response spectrum.</p>
+<p><strong>Participation ratio.</strong> A threshold-free measure of effective dimensionality:</p>
+<p><span id="eq-pr"><span class="math display">\[
+\text{PR} = \frac{\left(\sum_k \sigma_k^2\right)^2}{\sum_k \sigma_k^4}
+\tag{3.31}\]</span></span></p>
+<p>PR equals 1 when a single singular value dominates (all assemblages respond identically up to scale) and equals <span class="math inline">\(K\)</span> when all singular values are equal (maximally diverse responses). PR is robust to the threshold parameter that complicates rank-based measures.</p>
+<p>Two types of stimuli are used: <strong>Gaussian probes</strong> (localised spatial bumps with random centres) and <strong>uniform probes</strong> (spatially unstructured random vectors drawn from <span class="math inline">\(\mathrm{Uniform}(-0.3, 0.3)^N\)</span>). The uniform probes serve as a spatial deconfound: if assemblage differentiation is purely geometric (reflecting spatial separation), then uniform probes will elicit similar responses from all assemblages, yielding <span class="math inline">\(\text{PR} \approx 1\)</span>. Genuine functional differentiation produces <span class="math inline">\(\text{PR} &gt; 1\)</span> under both stimulus types.</p>
+</section>
+<section id="response-diversity" class="level3" data-number="3.8.4">
+<h3 data-number="3.8.4" class="anchored" data-anchor-id="response-diversity"><span class="header-section-number">3.8.4</span> Response Diversity</h3>
+<p>Response diversity (used in Paper 3, Experiment 12) is a proxy measure of functional heterogeneity computed without explicit probing. For each assemblage, a gain score is computed as the product of mean per-node learning rate and mean internal weight magnitude:</p>
+<p><span id="eq-gain"><span class="math display">\[
+g_k = \bar{\eta}_k \cdot \overline{|w|}_k^{\text{internal}}
+\tag{3.32}\]</span></span></p>
+<p>Response diversity is the standard deviation of these gains across assemblages:</p>
+<p><span id="eq-response-div"><span class="math display">\[
+\text{RD} = \mathrm{sd}(g_1, g_2, \ldots, g_K)
+\tag{3.33}\]</span></span></p>
+<p>This metric is computationally cheaper than SVD-based measures but confounds structural and parametric differentiation.</p>
+</section>
+<section id="eta-divergence" class="level3" data-number="3.8.5">
+<h3 data-number="3.8.5" class="anchored" data-anchor-id="eta-divergence"><span class="header-section-number">3.8.5</span> Eta Divergence</h3>
+<p>Eta divergence measures the degree to which assemblages have differentiated their learning dynamics:</p>
+<p><span id="eq-eta-div"><span class="math display">\[
+D_\eta = \mathrm{Var}\!\left(\bar{\eta}_1, \bar{\eta}_2, \ldots, \bar{\eta}_K\right)
+\tag{3.34}\]</span></span></p>
+<p>where <span class="math inline">\(\bar{\eta}_k = \frac{1}{|\mathcal{A}_k|} \sum_{i \in \mathcal{A}_k} \eta_i\)</span> is the mean learning rate of assemblage <span class="math inline">\(k\)</span>. This is zero when all assemblages have the same mean eta (homogeneous learning rules) and positive when assemblages have differentiated into distinct learning regimes.</p>
+</section>
+<section id="capacity-diversity" class="level3" data-number="3.8.6">
+<h3 data-number="3.8.6" class="anchored" data-anchor-id="capacity-diversity"><span class="header-section-number">3.8.6</span> Capacity Diversity</h3>
+<p>Capacity diversity (Paper 3) uses PCA followed by <span class="math inline">\(k\)</span>-means clustering on assemblage centroid weight vectors to determine the optimal number of distinct functional profiles. Each assemblage’s centroid vector (<a href="#eq-centroid" class="quarto-xref">Equation&nbsp;<span>3.26</span></a>) is projected into a reduced-dimensional space via PCA (retaining up to 10 components), then clustered for <span class="math inline">\(k = 2, \ldots, K\)</span> with silhouette scoring to select the optimal <span class="math inline">\(k\)</span>. A result of <span class="math inline">\(k = 1\)</span> indicates all assemblages are functional clones; <span class="math inline">\(k &gt; 1\)</span> indicates genuine diversity.</p>
+</section>
+</section>
+<section id="sec-infrastructure" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="sec-infrastructure"><span class="header-section-number">3.9</span> Computational Infrastructure</h2>
+<section id="ray-cluster" class="level3" data-number="3.9.1">
+<h3 data-number="3.9.1" class="anchored" data-anchor-id="ray-cluster"><span class="header-section-number">3.9.1</span> Ray Cluster</h3>
+<p>All experiments are executed on a Ray cluster, with each simulation run dispatched as an independent <code>@ray.remote</code> task. This provides embarrassingly parallel scaling across available CPUs. The cluster job scripts (<code>cluster_job.py</code> and variants) implement:</p>
+<ul>
+<li><p><strong>Task-level parallelism.</strong> Each (condition, seed) pair is an independent Ray task. For a typical experiment sweep of 7 parameter values <span class="math inline">\(\times\)</span> 7 parameter values <span class="math inline">\(\times\)</span> 20 seeds <span class="math inline">\(= 980\)</span> jobs, all 980 tasks are submitted simultaneously and scheduled by Ray across available workers.</p></li>
+<li><p><strong>Progress tracking.</strong> Completion is monitored via <code>ray.wait()</code> with batched collection (50 tasks per batch, 60-second timeout), providing real-time progress reporting including estimated time remaining.</p></li>
+<li><p><strong>Resume capability.</strong> Each task checks for the existence of its output file before executing, allowing interrupted experiments to be resumed without re-running completed jobs.</p></li>
+</ul>
+</section>
+<section id="output-format" class="level3" data-number="3.9.2">
+<h3 data-number="3.9.2" class="anchored" data-anchor-id="output-format"><span class="header-section-number">3.9.2</span> Output Format</h3>
+<p>All experimental data is written as Apache Parquet files, one per (condition, seed) pair. After all tasks complete, per-job files are merged into a single <code>session_metrics.parquet</code> file per experiment using PyArrow’s <code>concat_tables</code>. This two-stage approach (per-job write, post-hoc merge) ensures fault tolerance: if a task fails, only that task’s data is lost.</p>
+<p>Each row in the merged output represents one census taken at the end of a session (a session consists of <span class="math inline">\(S\)</span> timesteps, default <span class="math inline">\(S = 300\)</span>). Columns include all metrics described in <a href="#sec-metrics" class="quarto-xref"><span>Section 3.8</span></a> along with the full parameter vector, enabling post-hoc filtering and grouping without separate metadata files.</p>
+</section>
+<section id="seed-management-and-reproducibility" class="level3" data-number="3.9.3">
+<h3 data-number="3.9.3" class="anchored" data-anchor-id="seed-management-and-reproducibility"><span class="header-section-number">3.9.3</span> Seed Management and Reproducibility</h3>
+<p>All random state is managed through NumPy’s <code>default_rng(seed)</code> generator. Each simulation receives an integer seed (typically 0–19 for 20-seed experiments), which deterministically controls:</p>
+<ul>
+<li>Hotspot placement (for <span class="math inline">\(K &gt; 4\)</span>)</li>
+<li>Initial connectivity and weight values</li>
+<li>Noise injection sequences</li>
+<li>Encounter pair sampling</li>
+<li>Perturbation events (using offset seeds, e.g., <code>seed + 99999</code>)</li>
+<li>Probe stimuli (using offset seeds, e.g., <code>seed + 777777</code>)</li>
+</ul>
+<p>The use of offset seeds for different random processes within the same simulation ensures that perturbation and probing randomness is independent of simulation randomness while remaining reproducible.</p>
+</section>
+</section>
+<section id="sec-params" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="sec-params"><span class="header-section-number">3.10</span> Standard Parameters</h2>
+<p><a href="#tbl-params" class="quarto-xref">Table&nbsp;<span>3.1</span></a> lists the default parameter values shared across all five papers. Paper-specific deviations are documented in the relevant chapters.</p>
+<div id="tbl-params" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3.1: Default parameter values for the simulation substrate.
+</figcaption>
+<div aria-describedby="tbl-params-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 27%">
+<col style="width: 27%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Parameter</th>
+<th style="text-align: center;">Symbol</th>
+<th style="text-align: center;">Default</th>
+<th style="text-align: left;">Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Grid size</td>
+<td style="text-align: center;"><span class="math inline">\(G\)</span></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;"><span class="math inline">\(N = 400\)</span> nodes; sufficient for 3 assemblages with spatial separation. Papers 4 and 4S also test <span class="math inline">\(G \in \{15, 25, 30\}\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Number of hotspots</td>
+<td style="text-align: center;"><span class="math inline">\(K\)</span></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;">Three energy sources provide a minimal multi-assemblage scenario with asymmetric placement.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Hotspot energy</td>
+<td style="text-align: center;"><span class="math inline">\(E_{\text{hot}}\)</span></td>
+<td style="text-align: center;">0.3</td>
+<td style="text-align: left;">Produces clear activity gradients without saturating activations.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Hotspot radius</td>
+<td style="text-align: center;"><span class="math inline">\(r_{\text{hot}}\)</span></td>
+<td style="text-align: center;">0.2</td>
+<td style="text-align: left;">Each hotspot covers approximately 12% of the field area (<span class="math inline">\(\pi r^2 \approx 0.126\)</span>); hotspots overlap minimally at the default separation.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Base noise</td>
+<td style="text-align: center;"><span class="math inline">\(\sigma_{\text{base}}\)</span></td>
+<td style="text-align: center;">0.02</td>
+<td style="text-align: left;">Background activity floor; an order of magnitude below hotspot energy.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Learning rate</td>
+<td style="text-align: center;"><span class="math inline">\(\eta\)</span></td>
+<td style="text-align: center;">0.05</td>
+<td style="text-align: left;">Balances learning speed against stability; higher values cause weight saturation, lower values produce insufficient differentiation within 200 sessions.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Weight decay</td>
+<td style="text-align: center;"><span class="math inline">\(\lambda\)</span></td>
+<td style="text-align: center;">0.002</td>
+<td style="text-align: left;">Prevents weight explosion while allowing strong connections to persist. At <span class="math inline">\(\lambda = 0.002\)</span>, a connection loses $$33% of its magnitude over 200 steps without reinforcement.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Weight maximum</td>
+<td style="text-align: center;"><span class="math inline">\(w_{\max}\)</span></td>
+<td style="text-align: center;">1.0</td>
+<td style="text-align: left;">Normalised scale; all bounding strategies map to <span class="math inline">\([-1, 1]\)</span>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Encounter rate</td>
+<td style="text-align: center;"><span class="math inline">\(R\)</span></td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">Per-step edge creation attempts. At 300 steps/session, this yields up to 6,000 encounter attempts per session.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Locality</td>
+<td style="text-align: center;"><span class="math inline">\(\ell\)</span></td>
+<td style="text-align: center;">0.10</td>
+<td style="text-align: left;">Spatial scale of encounters. At <span class="math inline">\(\ell = 0.10\)</span> on a unit square, the encounter kernel covers approximately 3% of the field area per standard deviation, favouring local interactions.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Prune threshold</td>
+<td style="text-align: center;"><span class="math inline">\(\theta_{\text{prune}}\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(10^{-4}\)</span></td>
+<td style="text-align: left;">Removes edges contributing negligibly to dynamics. See <a href="#sec-pruning" class="quarto-xref"><span>Section 3.4</span></a> for the confound this introduces.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Sessions</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">200</td>
+<td style="text-align: left;">Number of census intervals per run (300 steps each = 60,000 total steps). Paper 3, Experiment 6 uses 1,000 sessions.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Steps per session</td>
+<td style="text-align: center;"><span class="math inline">\(S\)</span></td>
+<td style="text-align: center;">300</td>
+<td style="text-align: left;">Sufficient for activity patterns to stabilise between censuses.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Seeds per condition</td>
+<td style="text-align: center;">—</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: left;">Provides adequate statistical power for between-condition comparisons with nonparametric tests.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Meta-strength</td>
+<td style="text-align: center;"><span class="math inline">\(\mu\)</span></td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: left;">Disabled by default; typical nonzero values are <span class="math inline">\(10^{-4}\)</span> to <span class="math inline">\(0.05\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Target activity</td>
+<td style="text-align: center;"><span class="math inline">\(a^*\)</span></td>
+<td style="text-align: center;">0.15</td>
+<td style="text-align: left;">Activity level that leaves <span class="math inline">\(\eta\)</span> unchanged under global target.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Eta bounds</td>
+<td style="text-align: center;"><span class="math inline">\([\eta_{\min}, \eta_{\max}]\)</span></td>
+<td style="text-align: center;"><span class="math inline">\([0.005, 0.20]\)</span></td>
+<td style="text-align: left;">A 40-fold range permits substantial differentiation. The minimum prevents complete learning shutdown; the maximum prevents instability.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inhibitor diffusion</td>
+<td style="text-align: center;"><span class="math inline">\(D\)</span></td>
+<td style="text-align: center;">0.05</td>
+<td style="text-align: left;">Moderate diffusion; capped at 0.20 for CFL stability of the discrete Laplacian.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inhibitor decay</td>
+<td style="text-align: center;"><span class="math inline">\(\delta\)</span></td>
+<td style="text-align: center;">0.10</td>
+<td style="text-align: left;">10% per step; inhibitor has an effective half-life of $$7 steps.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Inhibitor emission rate</td>
+<td style="text-align: center;"><span class="math inline">\(\rho\)</span></td>
+<td style="text-align: center;">0.01</td>
+<td style="text-align: left;">Low emission prevents runaway inhibitor accumulation.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Inhibitor coupling</td>
+<td style="text-align: center;"><span class="math inline">\(\kappa\)</span></td>
+<td style="text-align: center;">0.0</td>
+<td style="text-align: left;">Disabled by default; typical nonzero values are <span class="math inline">\(5 \times 10^{-4}\)</span> to <span class="math inline">\(0.05\)</span>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">EMA rate</td>
+<td style="text-align: center;"><span class="math inline">\(\alpha\)</span></td>
+<td style="text-align: center;">0.05</td>
+<td style="text-align: left;">Activity history smoothing; equivalent to a $$20-step memory window.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</figure>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../chapters/introduction.html" class="pagination-link" aria-label="Introduction">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introduction</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../chapters/paper1-summary.html" class="pagination-link" aria-label="Paper 1: Emergent Structure in Optimization-Free Hebbian Networks">
+        <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Paper 1: Emergent Structure in Optimization-Free Hebbian Networks</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

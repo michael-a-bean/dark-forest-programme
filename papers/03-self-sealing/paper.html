@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Michael Bean">
+
+<title>Coexistence Without Differentiation: The Self-Sealing Dynamics of Hebbian Individuation</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paper_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="paper_files/libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paper_files/libs/bootstrap/bootstrap-175f587307e0cd48ee646de96f0af297.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="quarto-light">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#background-hebbian-learning-and-the-pca-fixed-point" id="toc-background-hebbian-learning-and-the-pca-fixed-point" class="nav-link" data-scroll-target="#background-hebbian-learning-and-the-pca-fixed-point">Background: Hebbian Learning and the PCA Fixed Point</a></li>
+  <li><a href="#methods" id="toc-methods" class="nav-link" data-scroll-target="#methods">Methods</a>
+  <ul class="collapse">
+  <li><a href="#temporal-field-substrate" id="toc-temporal-field-substrate" class="nav-link" data-scroll-target="#temporal-field-substrate">Temporal Field Substrate</a></li>
+  <li><a href="#metrics" id="toc-metrics" class="nav-link" data-scroll-target="#metrics">Metrics</a></li>
+  <li><a href="#experimental-design" id="toc-experimental-design" class="nav-link" data-scroll-target="#experimental-design">Experimental Design</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a>
+  <ul class="collapse">
+  <li><a href="#cross-assemblage-edges-vanish-within-15-sessions" id="toc-cross-assemblage-edges-vanish-within-15-sessions" class="nav-link" data-scroll-target="#cross-assemblage-edges-vanish-within-15-sessions">Cross-Assemblage Edges Vanish Within 15 Sessions</a></li>
+  <li><a href="#the-coexistence-monopoly-gradient" id="toc-the-coexistence-monopoly-gradient" class="nav-link" data-scroll-target="#the-coexistence-monopoly-gradient">The Coexistence-Monopoly Gradient</a></li>
+  <li><a href="#edge-injection-absorption-rather-than-differentiation" id="toc-edge-injection-absorption-rather-than-differentiation" class="nav-link" data-scroll-target="#edge-injection-absorption-rather-than-differentiation">Edge Injection: Absorption Rather Than Differentiation</a></li>
+  <li><a href="#decay-sensitivity" id="toc-decay-sensitivity" class="nav-link" data-scroll-target="#decay-sensitivity">Decay Sensitivity</a></li>
+  </ul></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a>
+  <ul class="collapse">
+  <li><a href="#two-mechanisms-of-self-sealing" id="toc-two-mechanisms-of-self-sealing" class="nav-link" data-scroll-target="#two-mechanisms-of-self-sealing">Two Mechanisms of Self-Sealing</a></li>
+  <li><a href="#structural-incompatibility-of-coexistence-and-interaction" id="toc-structural-incompatibility-of-coexistence-and-interaction" class="nav-link" data-scroll-target="#structural-incompatibility-of-coexistence-and-interaction">Structural Incompatibility of Coexistence and Interaction</a></li>
+  <li><a href="#crystalline-individuation-and-bare-repetition" id="toc-crystalline-individuation-and-bare-repetition" class="nav-link" data-scroll-target="#crystalline-individuation-and-bare-repetition">Crystalline Individuation and Bare Repetition</a></li>
+  <li><a href="#what-would-break-the-self-seal" id="toc-what-would-break-the-self-seal" class="nav-link" data-scroll-target="#what-would-break-the-self-seal">What Would Break the Self-Seal</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Coexistence Without Differentiation: The Self-Sealing Dynamics of Hebbian Individuation</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Michael Bean </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>Papers 1 and 2 established that optimization-free Hebbian dynamics produce spatial individuation and coexistence through encounter locality, but assemblages remain qualitative clones — individuation without differenciation. We investigate whether temporal environmental variation, anti-Hebbian lateral inhibition, or artificially maintained cross-assemblage connectivity can produce functional differentiation. Cross-assemblage edges vanish within 15 sessions (median) across 840 simulations spanning 7 localities and 6 anti-Hebbian strengths (up to <span class="math inline">\(10\times\)</span> the Hebbian rate). When cross-assemblage edges are artificially maintained through continuous injection, two outcomes obtain: edges initialised at moderate-to-high weights are Hebbian-reinforced and absorbed into assemblages, producing monopoly; edges at near-threshold weights persist as cross-assemblage connections but produce no differentiation — anti-Hebbian decorrelation at these maintained connections <em>reduces</em> rather than increases assemblage divergence. Decay rate sensitivity analysis confirms that the coexistence regime occupies a narrow band (<span class="math inline">\(\lambda = 0.002\)</span>) between network death and monopoly. Across 1,400 simulations and 196,000 observations, no parameter combination produces differentiation. We identify this as a <em>self-sealing</em> property of Hebbian individuation operating through two distinct mechanisms: topological isolation (cross-assemblage edges decay) and functional absorption (maintained cross-assemblage edges are co-opted into assemblage structure). This constitutes an empirical decomposition of Deleuze’s distinction between individuation and differenciation: the Hebbian substrate achieves the former and is structurally incapable of the latter — not because assemblages cannot interact, but because interaction produces merger rather than difference.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Deleuze <span class="citation" data-cites="deleuze1994">(<a href="#ref-deleuze1994" role="doc-biblioref">1994</a>)</span> distinguished <em>individuation</em> — the emergence of discrete entities from a pre-individual field — from <em>differenciation</em> — the production of qualitative difference between those entities. Papers 1 and 2 in this series demonstrated that optimization-free Hebbian substrates achieve individuation readily: spatial encounter locality produces stable, modular assemblages around energy hotspots. But these assemblages are spatial clones, not qualitatively different entities. They occupy different regions of the grid but develop identical internal structure — what we will call <em>crystalline individuation</em>, following Simondon <span class="citation" data-cites="simondon1958">(<a href="#ref-simondon1958" role="doc-biblioref">1958</a>)</span>, who used crystallisation as the paradigm of physical individuation where the same mechanism resolves identically at every nucleation site. We invoke the crystal not as a model of the individuation <em>process</em> — our assemblages nucleate independently rather than propagating from a seed — but as a characterisation of the <em>result</em>: identical structure everywhere, with no residual metastability for further individuation.</p>
+<p>This matters for artificial life and the philosophy of emergent agency. If the substrate can only produce copies — individuation without differenciation — then it cannot generate the heterogeneous ecology that characterises biological systems. The question is whether supplementary mechanisms can break the symmetry that produces cloning, or whether the Hebbian substrate is structurally incapable of differenciation.</p>
+<p>We test three interventions, escalating in strength:</p>
+<ol type="1">
+<li><p><strong>Temporal environmental variation</strong> — hotspot configurations alternate on a fixed period, inspired by Kashtan and Alon’s <span class="citation" data-cites="kashtan2005">(<a href="#ref-kashtan2005" role="doc-biblioref">2005</a>)</span> modularity-under-variation prediction.</p></li>
+<li><p><strong>Anti-Hebbian lateral inhibition</strong> — cross-assemblage connections are weakened when endpoints co-activate <span class="citation" data-cites="foldiak1990">(<a href="#ref-foldiak1990" role="doc-biblioref">Földiák 1990</a>)</span>, at strengths up to <span class="math inline">\(10\times\)</span> the Hebbian learning rate.</p></li>
+<li><p><strong>Artificially maintained cross-assemblage edges</strong> — testing whether the obstacle is topological (edges don’t exist) or functional (edges exist but don’t produce differentiation).</p></li>
+</ol>
+<p>All three fail, but for different reasons. The substrate is <em>self-sealing</em> through two mechanisms: topological isolation (cross-assemblage edges decay to zero) and functional absorption (when edges are maintained, they are co-opted into assemblage structure, producing merger rather than differentiation). The finding is not merely that differentiation does not occur, but that the conditions required for it are structurally incompatible with Hebbian dynamics.</p>
+</section>
+<section id="background-hebbian-learning-and-the-pca-fixed-point" class="level2">
+<h2 class="anchored" data-anchor-id="background-hebbian-learning-and-the-pca-fixed-point">Background: Hebbian Learning and the PCA Fixed Point</h2>
+<p>Hebbian learning strengthens connections between co-active nodes: <span class="math inline">\(\Delta w_{ij} = \eta \cdot a_i \cdot a_j\)</span>. In the continuous case, this drives the weight vector toward the principal eigenvector of the input correlation matrix <span class="citation" data-cites="oja1982">(<a href="#ref-oja1982" role="doc-biblioref">Oja 1982</a>)</span>. When multiple assemblages receive qualitatively similar input — energy from hotspots, modulated by Gaussian noise — they converge to the same eigenvector. This is why assemblages are clones: the learning rule is symmetric with respect to assemblage identity.</p>
+<p>Anti-Hebbian learning <span class="citation" data-cites="foldiak1990">(<a href="#ref-foldiak1990" role="doc-biblioref">Földiák 1990</a>)</span> weakens connections between co-active nodes in different populations: <span class="math inline">\(\Delta w_{ij} = -\alpha \cdot a_i \cdot a_j\)</span> for cross-population edges. In biological neural circuits, this produces decorrelation and functional specialisation. But it requires persistent connections between populations to operate on — and, as we will show, it requires those connections to carry a particular kind of signal.</p>
+<p>The critical question is whether cross-assemblage connections can persist in a Hebbian substrate with weight decay (<span class="math inline">\(\lambda\)</span> per step), and if so, whether they can carry a decorrelation signal rather than being absorbed into the correlation structure of adjacent assemblages.</p>
+<p>In Deleuze’s <span class="citation" data-cites="deleuze1994">(<a href="#ref-deleuze1994" role="doc-biblioref">1994</a>)</span> terms, the question is whether the substrate supports two kinds of repetition. <em>Bare repetition</em> reproduces instances of an identical type — each assemblage is another token of the same structure. <em>Complex repetition</em> produces novelty through the internal difference of the repeating process itself. Our substrate, as we will show, is trapped in bare repetition: every assemblage converges to the same attractor, and every attempt to introduce difference is either ignored (topological isolation) or absorbed into sameness (functional absorption).</p>
+</section>
+<section id="methods" class="level2">
+<h2 class="anchored" data-anchor-id="methods">Methods</h2>
+<section id="temporal-field-substrate" class="level3">
+<h3 class="anchored" data-anchor-id="temporal-field-substrate">Temporal Field Substrate</h3>
+<p>We extend the MultiField substrate from Papers 1–2 with three mechanisms:</p>
+<ol type="1">
+<li><p><strong>Config switching</strong>: Two hotspot configurations alternate every <span class="math inline">\(T = 50\)</span> steps. Configuration A: <span class="math inline">\((0.2, 0.3)\)</span>, <span class="math inline">\((0.8, 0.3)\)</span>, <span class="math inline">\((0.5, 0.8)\)</span>; Configuration B: <span class="math inline">\((0.2, 0.3)\)</span>, <span class="math inline">\((0.3, 0.7)\)</span>, <span class="math inline">\((0.7, 0.7)\)</span>. One position is shared, two differ.</p></li>
+<li><p><strong>Anti-Hebbian decorrelation</strong>: Every 50 steps, assemblages are re-detected via connected components in the strong-edge subgraph. For cross-assemblage edges: <span class="math inline">\(\Delta w_{ij} = -\alpha \cdot a_i \cdot a_j\)</span>.</p></li>
+<li><p><strong>Edge injection with controlled initialisation</strong>: At each step, up to <span class="math inline">\(k\)</span> new edges are created between randomly selected nodes in different assemblages, initialised at weight <span class="math inline">\(w_0 \in \{10^{-4}, 0.1, 1.0\}\)</span>. This tests whether the obstacle to differentiation is the absence of cross-assemblage edges or their inability to carry a differentiation signal.</p></li>
+</ol>
+<p>All other dynamics are unchanged from Paper 2. Grid: <span class="math inline">\(20 \times 20\)</span> (400 nodes). Encounter locality <span class="math inline">\(\sigma = 0.10\)</span>. Weight decay <span class="math inline">\(\lambda = 0.002\)</span>/step. Pruning threshold <span class="math inline">\(10^{-4}\)</span>.</p>
+</section>
+<section id="metrics" class="level3">
+<h3 class="anchored" data-anchor-id="metrics">Metrics</h3>
+<p><strong>Cross-assemblage edge count</strong>: Edges connecting nodes in different assemblages. The primary diagnostic.</p>
+<p><strong>Weight modularity</strong> (<span class="math inline">\(M\)</span>): Within-assemblage weight mass divided by total weight mass.</p>
+<p><strong>Centroid cosine distance</strong>: Mean pairwise cosine distance between assemblage centroid weight vectors. 0 = clones, 1 = orthogonal. Replaces the classifier-based metric from preliminary analysis, which was ill-posed at the observed assemblage sizes (3–11 nodes in 400-dimensional weight space).</p>
+<p>Assemblage detection uses connected components in the strong-edge subgraph (edges above the 75th percentile of absolute weight). A sensitivity analysis across 50th, 75th, and 90th percentile thresholds (210 runs) produces identical assemblage counts (<span class="math inline">\(\pm 0.1\)</span>), confirming that the bimodal weight distribution (most edges near 0 or <span class="math inline">\(\pm w_{\max}\)</span>) makes detection robust to threshold choice.</p>
+</section>
+<section id="experimental-design" class="level3">
+<h3 class="anchored" data-anchor-id="experimental-design">Experimental Design</h3>
+<p><strong>Experiment 1</strong> (Locality <span class="math inline">\(\times\)</span> Anti-Hebbian): 7 localities <span class="math inline">\(\in \{0.08, \ldots, 0.20\}\)</span> <span class="math inline">\(\times\)</span> 6 anti-Hebbian strengths <span class="math inline">\(\in \{0, \ldots, 0.50\}\)</span> <span class="math inline">\(\times\)</span> 20 seeds = 840 simulations <span class="math inline">\(\times\)</span> 200 sessions. Maps the parameter space and establishes the self-sealing timeline.</p>
+<p><strong>Experiment 2</strong> (Edge Injection): 3 initialisation weights <span class="math inline">\(\in \{10^{-4}, 0.1, 1.0\}\)</span> <span class="math inline">\(\times\)</span> 2 injection rates <span class="math inline">\(\in \{0, 10\}\)</span>/step <span class="math inline">\(\times\)</span> 3 anti-Hebbian strengths <span class="math inline">\(\times\)</span> 20 seeds = 360 simulations <span class="math inline">\(\times\)</span> 50 sessions at <span class="math inline">\(\sigma = 0.10\)</span>. Tests whether maintained cross-assemblage connectivity enables differentiation.</p>
+<p><strong>Experiment 3</strong> (Decay Sensitivity): 5 decay rates <span class="math inline">\(\in \{0.0005, \ldots, 0.01\}\)</span> <span class="math inline">\(\times\)</span> 2 anti-Hebbian strengths <span class="math inline">\(\times\)</span> 20 seeds = 200 simulations <span class="math inline">\(\times\)</span> 50 sessions. Tests whether the self-sealing result is sensitive to the decay parameter.</p>
+<p>Total: 1,400 simulations producing 196,000 session-level observations, distributed across a 68-CPU Ray cluster.</p>
+</section>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<section id="cross-assemblage-edges-vanish-within-15-sessions" class="level3">
+<h3 class="anchored" data-anchor-id="cross-assemblage-edges-vanish-within-15-sessions">Cross-Assemblage Edges Vanish Within 15 Sessions</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"r1_locality_alpha"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>d1_traj <span class="ot">&lt;-</span> d1 <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(locality <span class="sc">==</span> <span class="fl">0.10</span>, anti_hebbian_strength <span class="sc">==</span> <span class="fl">0.0</span>, session <span class="sc">&lt;=</span> <span class="dv">30</span>) <span class="sc">|&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(session) <span class="sc">|&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_cross =</span> <span class="fu">mean</span>(cross_assemblage_edges),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_cross =</span> <span class="fu">sd</span>(cross_assemblage_edges) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d1_traj, <span class="fu">aes</span>(<span class="at">x =</span> session)) <span class="sc">+</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_cross <span class="sc">-</span> se_cross, <span class="at">ymax =</span> mean_cross <span class="sc">+</span> se_cross),</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>              <span class="at">fill =</span> pal[<span class="dv">2</span>], <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_cross), <span class="at">color =</span> pal[<span class="dv">2</span>], <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"grey50"</span>) <span class="sc">+</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Session"</span>, <span class="at">y =</span> <span class="st">"Cross-assemblage edges"</span>,</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Cross-assemblage connectivity collapses within 15 sessions"</span>,</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"σ = 0.10, α = 0, 20 seeds. Mean ± SE. Median seal at session 14."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/edge-trajectory-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cross-assemblage edges vanish within 15 sessions at σ=0.10. The median self-sealing completion session is 14 (range: 3–23).</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>At <span class="math inline">\(\sigma = 0.10\)</span> (the coexistence regime from Paper 2), cross-assemblage edges decline from 196 at session 1 to 15.8 at session 10 to near-zero by session 15. The median self-sealing completion session across all 840 Experiment 1 simulations is 14 (range: 3–23). At steady state, 1.1% of observations show transient non-zero cross-assemblage edges (max = 16), reflecting rare stochastic fluctuations rather than sustained connectivity.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>d1_late <span class="ot">&lt;-</span> d1 <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;</span> <span class="dv">150</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(locality, anti_hebbian_strength) <span class="sc">|&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_cross =</span> <span class="fu">mean</span>(cross_assemblage_edges), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d1_late, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(locality), <span class="at">y =</span> <span class="fu">factor</span>(anti_hebbian_strength),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">fill =</span> mean_cross)) <span class="sc">+</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">linewidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.1f"</span>, mean_cross)), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">"white"</span>, <span class="at">high =</span> pal[<span class="dv">2</span>], <span class="at">name =</span> <span class="st">"Cross-asm</span><span class="sc">\n</span><span class="st">edges"</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                      <span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Encounter locality (σ)"</span>, <span class="at">y =</span> <span class="st">"Anti-Hebbian strength (α)"</span>,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Near-zero cross-assemblage edges at all parameter combinations"</span>,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Sessions 150–200, 20 seeds per cell"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/cross-heatmap-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Mean cross-assemblage edges at steady state across locality × anti-Hebbian strength. Near-zero everywhere.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This pattern is universal across the parameter space. Anti-Hebbian decorrelation at strengths up to <span class="math inline">\(\alpha = 0.50\)</span> (<span class="math inline">\(10\times\)</span> the Hebbian learning rate) has no effect because cross-assemblage edges have already vanished.</p>
+<p>The mechanism is analytically predictable. An edge between nodes in different assemblages at locality <span class="math inline">\(\sigma = 0.10\)</span> receives expected Hebbian reinforcement <span class="math inline">\(\eta \cdot E[a_i \cdot a_j] \approx 0\)</span> (since activations are driven by uncorrelated local energy sources), while decay is deterministic at rate <span class="math inline">\(\lambda = 0.002\)</span>/step. The edge dies with probability approaching 1 within <span class="math inline">\(\sim\)</span><span class="math inline">\(\ln(w_0 / 10^{-4}) / \lambda \cdot 300\)</span> sessions.</p>
+</section>
+<section id="the-coexistence-monopoly-gradient" class="level3">
+<h3 class="anchored" data-anchor-id="the-coexistence-monopoly-gradient">The Coexistence-Monopoly Gradient</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>d1_coex <span class="ot">&lt;-</span> d1 <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;</span> <span class="dv">150</span>, anti_hebbian_strength <span class="sc">==</span> <span class="fl">0.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(locality) <span class="sc">|&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_n =</span> <span class="fu">mean</span>(n_assemblages), <span class="at">se_n =</span> <span class="fu">sd</span>(n_assemblages) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_larg =</span> <span class="fu">mean</span>(largest_assemblage), <span class="at">se_larg =</span> <span class="fu">sd</span>(largest_assemblage) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d1_coex, <span class="fu">aes</span>(<span class="at">x =</span> locality, <span class="at">y =</span> mean_n)) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_n <span class="sc">-</span> se_n, <span class="at">ymax =</span> mean_n <span class="sc">+</span> se_n), <span class="at">color =</span> pal[<span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> pal[<span class="dv">3</span>]) <span class="sc">+</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Locality (σ)"</span>, <span class="at">y =</span> <span class="st">"Assemblage count"</span>, <span class="at">title =</span> <span class="st">"Coexistence declines with locality"</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d1_coex, <span class="fu">aes</span>(<span class="at">x =</span> locality, <span class="at">y =</span> mean_larg)) <span class="sc">+</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_pointrange</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_larg <span class="sc">-</span> se_larg, <span class="at">ymax =</span> mean_larg <span class="sc">+</span> se_larg), <span class="at">color =</span> pal[<span class="dv">5</span>]) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> pal[<span class="dv">5</span>]) <span class="sc">+</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Locality (σ)"</span>, <span class="at">y =</span> <span class="st">"Largest assemblage"</span>, <span class="at">title =</span> <span class="st">"Monopoly increases with locality"</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>p1 <span class="sc">+</span> p2</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/coexistence-gradient-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Assemblage count and largest assemblage size across locality.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>Tight locality (<span class="math inline">\(\sigma \leq 0.10\)</span>): 5+ assemblages coexist, each containing 3–58 nodes. Broad locality (<span class="math inline">\(\sigma \geq 0.16\)</span>): 1–2 assemblages, trending toward monopoly.</p>
+</section>
+<section id="edge-injection-absorption-rather-than-differentiation" class="level3">
+<h3 class="anchored" data-anchor-id="edge-injection-absorption-rather-than-differentiation">Edge Injection: Absorption Rather Than Differentiation</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"r2b_lean"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>d2_late <span class="ot">&lt;-</span> d2 <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;</span> <span class="dv">40</span>, inject_cross_edges <span class="sc">==</span> <span class="dv">10</span>, anti_hebbian_strength <span class="sc">==</span> <span class="fl">0.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(inject_init_weight) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_cross =</span> <span class="fu">mean</span>(cross_assemblage_edges),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_cross =</span> <span class="fu">sd</span>(cross_assemblage_edges) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_nasm =</span> <span class="fu">mean</span>(n_assemblages),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_edges =</span> <span class="fu">mean</span>(n_edges),</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d2_late, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(inject_init_weight), <span class="at">y =</span> mean_cross)) <span class="sc">+</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> pal[<span class="dv">2</span>], <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_cross <span class="sc">-</span> se_cross, <span class="at">ymax =</span> mean_cross <span class="sc">+</span> se_cross), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Initialisation weight (w₀)"</span>, <span class="at">y =</span> <span class="st">"Cross-assemblage edges at steady state"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Only near-threshold edges survive as cross-assemblage connections"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"inject = 10/step, α = 0, sessions 40–50"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/injection-cross-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Cross-assemblage edges at steady state by initialisation weight. Only near-threshold initialisation (w₀ = 10⁻⁴) maintains cross-assemblage edges; higher weights cause absorption into assemblages.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The edge injection experiment reveals a critical asymmetry:</p>
+<ul>
+<li><strong><span class="math inline">\(w_0 = 10^{-4}\)</span></strong> (near pruning threshold): 17.3 cross-assemblage edges persist, with 1.4 assemblages. Edges are too weak to trigger Hebbian reinforcement, so they maintain their cross-assemblage identity.</li>
+<li><strong><span class="math inline">\(w_0 = 0.1\)</span></strong>: Zero cross-assemblage edges, 1.0 assemblages (monopoly). Moderate-weight edges are strong enough to propagate activity across assemblages, triggering Hebbian reinforcement that <em>absorbs</em> the edge into the receiving assemblage.</li>
+<li><strong><span class="math inline">\(w_0 = 1.0\)</span></strong>: Zero cross-assemblage edges, 1.0 assemblages (monopoly), 2,037 total edges. Full-strength edges immediately bridge assemblages, causing complete merger.</li>
+</ul>
+<p>This is the key finding: <strong>maintained cross-assemblage edges do not produce differentiation. They produce merger.</strong> The Hebbian substrate cannot sustain connections between assemblages that carry a differentiation signal — any connection strong enough to influence dynamics is strong enough to be absorbed.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>d2_ah <span class="ot">&lt;-</span> d2 <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;</span> <span class="dv">40</span>, inject_cross_edges <span class="sc">==</span> <span class="dv">10</span>, inject_init_weight <span class="sc">==</span> <span class="fl">0.0001</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anti_hebbian_strength) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_cdist =</span> <span class="fu">mean</span>(centroid_cosine_distance),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">se_cdist =</span> <span class="fu">sd</span>(centroid_cosine_distance) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>()),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_cross =</span> <span class="fu">mean</span>(cross_assemblage_edges),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(d2_ah, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(anti_hebbian_strength))) <span class="sc">+</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="fu">aes</span>(<span class="at">y =</span> mean_cdist), <span class="at">fill =</span> pal[<span class="dv">5</span>], <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin =</span> mean_cdist <span class="sc">-</span> se_cdist, <span class="at">ymax =</span> mean_cdist <span class="sc">+</span> se_cdist), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Anti-Hebbian strength (α)"</span>, <span class="at">y =</span> <span class="st">"Centroid cosine distance"</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Anti-Hebbian reduces differentiation, not increases it"</span>,</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"w₀ = 10⁻⁴, inject = 10/step. Higher α → more similar assemblages."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/injection-antihebb-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Anti-Hebbian effect on centroid distance with maintained cross-assemblage edges. Stronger anti-Hebbian <em>reduces</em> differentiation.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>When cross-assemblage edges are maintained at near-threshold weight (<span class="math inline">\(w_0 = 10^{-4}\)</span>), anti-Hebbian decorrelation <em>reduces</em> centroid cosine distance rather than increasing it: from 0.332 at <span class="math inline">\(\alpha = 0\)</span> to 0.211 at <span class="math inline">\(\alpha = 0.10\)</span> to 0.065 at <span class="math inline">\(\alpha = 0.50\)</span>. The anti-Hebbian force weakens the few surviving cross-assemblage edges further, reducing inter-assemblage communication and pushing assemblages toward identical isolation — the opposite of the intended effect.</p>
+</section>
+<section id="decay-sensitivity" class="level3">
+<h3 class="anchored" data-anchor-id="decay-sensitivity">Decay Sensitivity</h3>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>d4 <span class="ot">&lt;-</span> <span class="fu">read_experiment</span>(<span class="st">"r4_lean"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>d4_late <span class="ot">&lt;-</span> d4 <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(session <span class="sc">&gt;</span> <span class="dv">40</span>, anti_hebbian_strength <span class="sc">==</span> <span class="fl">0.0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(lam) <span class="sc">|&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_edges =</span> <span class="fu">mean</span>(n_edges), <span class="at">mean_nasm =</span> <span class="fu">mean</span>(n_assemblages),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_cross =</span> <span class="fu">mean</span>(cross_assemblage_edges), <span class="at">.groups =</span> <span class="st">"drop"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d4_late, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(lam), <span class="at">y =</span> mean_edges)) <span class="sc">+</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> pal[<span class="dv">3</span>], <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Decay rate (λ)"</span>, <span class="at">y =</span> <span class="st">"Total edges"</span>, <span class="at">title =</span> <span class="st">"Network survival vs decay"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(d4_late, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(lam), <span class="at">y =</span> mean_nasm)) <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> pal[<span class="dv">4</span>], <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Decay rate (λ)"</span>, <span class="at">y =</span> <span class="st">"Assemblage count"</span>, <span class="at">title =</span> <span class="st">"Coexistence vs decay"</span>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>p3 <span class="sc">+</span> p4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="paper_files/figure-html/decay-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Network survival across decay rates. The coexistence regime occupies a narrow band.</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>The coexistence regime is confined to a narrow decay band. At <span class="math inline">\(\lambda \leq 0.001\)</span>: networks survive with 1,400+ edges but only 1.1 assemblages (monopoly). At <span class="math inline">\(\lambda = 0.002\)</span>: 114 edges, 5.3 assemblages (coexistence). At <span class="math inline">\(\lambda \geq 0.005\)</span>: zero edges (network death). Cross-assemblage edges are near-zero at all decay rates. The coexistence regime occupies a single tested value (<span class="math inline">\(\lambda = 0.002\)</span>), suggesting this may represent a critical point rather than a broad topological invariant — the “diagram” of the growth-decay balance identified in Paper 1 operates over a narrower parameter range than previously appreciated.</p>
+</section>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+<section id="two-mechanisms-of-self-sealing" class="level3">
+<h3 class="anchored" data-anchor-id="two-mechanisms-of-self-sealing">Two Mechanisms of Self-Sealing</h3>
+<p>The self-sealing property operates through two distinct mechanisms, revealed by the edge injection experiment:</p>
+<p><strong>Topological isolation</strong> (Experiment 1): In the natural dynamics, cross-assemblage edges decay to zero within 15 sessions because nodes in spatially separated assemblages are not co-active. Expected Hebbian reinforcement is <span class="math inline">\(\eta \cdot E[a_i \cdot a_j] \approx 0\)</span> for cross-assemblage pairs, while decay is deterministic. This is analytically predictable from the learning rule and confirms what Oja <span class="citation" data-cites="oja1982">(<a href="#ref-oja1982" role="doc-biblioref">1982</a>)</span> established for the continuous case: Hebbian dynamics converge to the dominant eigenvector of the local correlation matrix.</p>
+<p><strong>Functional absorption</strong> (Experiment 2): When cross-assemblage edges are artificially maintained at moderate-to-high weights (<span class="math inline">\(w_0 \geq 0.1\)</span>), they do not produce differentiation. Instead, they propagate activity between assemblages, triggering Hebbian reinforcement that incorporates the cross-assemblage edge into the receiving assemblage’s correlation structure. The result is merger, not differentiation. Only edges maintained at near-threshold weights (<span class="math inline">\(w_0 = 10^{-4}\)</span>) preserve their cross-assemblage identity, but these are too weak to carry any differentiation signal — and anti-Hebbian decorrelation at these edges makes assemblages <em>more</em> similar, not less.</p>
+<p>This dual mechanism constitutes a self-sealing dilemma: edges strong enough to carry a signal are strong enough to be absorbed; edges weak enough to resist absorption are too weak to carry a signal. There is no intermediate regime.</p>
+</section>
+<section id="structural-incompatibility-of-coexistence-and-interaction" class="level3">
+<h3 class="anchored" data-anchor-id="structural-incompatibility-of-coexistence-and-interaction">Structural Incompatibility of Coexistence and Interaction</h3>
+<p>The results reveal a structural incompatibility in the Hebbian substrate. Three conditions are jointly required for differentiation: (1) multiple assemblages (coexistence), (2) cross-assemblage connectivity (interaction), and (3) connections that carry decorrelation rather than correlation signals. Our experiments show these cannot be simultaneously satisfied:</p>
+<ul>
+<li>Tight locality (<span class="math inline">\(\sigma \leq 0.10\)</span>) achieves condition 1 but not 2: assemblages coexist in topological isolation.</li>
+<li>Edge injection at high weight achieves condition 2 but destroys condition 1: connections produce merger, not coexistence.</li>
+<li>Edge injection at near-threshold weight achieves conditions 1 and 2 but not 3: connections persist but carry no decorrelation signal, and anti-Hebbian makes them weaker.</li>
+<li>Low decay (<span class="math inline">\(\lambda \leq 0.001\)</span>) achieves condition 2 but destroys condition 1: more edges survive, but assemblages merge into monopoly.</li>
+</ul>
+<p>This incompatibility is not parametric — it is structural. No combination of locality, anti-Hebbian strength, injection rate, injection weight, or decay rate within the tested ranges satisfies all three conditions.</p>
+</section>
+<section id="crystalline-individuation-and-bare-repetition" class="level3">
+<h3 class="anchored" data-anchor-id="crystalline-individuation-and-bare-repetition">Crystalline Individuation and Bare Repetition</h3>
+<p>Our substrate exhibits what Simondon <span class="citation" data-cites="simondon1958">(<a href="#ref-simondon1958" role="doc-biblioref">1958</a>)</span> called crystalline individuation: the metastable field resolves itself identically at every nucleation site through a single mechanism. Unlike biological individuation, which maintains internal metastability and resolves tensions differently in different regions, the Hebbian substrate exhausts its pre-individual potential during individuation, retaining none for transindividual relation. Assemblages cannot enter into relations with each other because the Hebbian mechanism that built them also sealed them.</p>
+<p>In Deleuze’s <span class="citation" data-cites="deleuze1994">(<a href="#ref-deleuze1994" role="doc-biblioref">1994</a>)</span> terms, the substrate is trapped in <em>bare repetition</em> — the repetition of the Same, where each assemblage is another token of an identical type. Bare repetition is governed by the logic of identity: co-activation statistics are identical across assemblages because the input structure (local energy from hotspots) is qualitatively identical, and the learning rule treats all co-activations identically. There is no internal mechanism to produce <em>complex repetition</em> — repetition that generates novelty through the internal difference of the process itself.</p>
+<p>The three-paper arc maps onto this distinction. Paper 1 established that the substrate traces its input (passive mirroring). Paper 2 showed that it individuates through bare repetition — producing identical assemblages at different spatial locations. Paper 3 reveals that bare repetition is the <em>only</em> mode available: the self-sealing property ensures that complex repetition — interaction between assemblages that could produce genuine difference — is structurally precluded. The system undergoes one symmetry-breaking event (from homogeneous field to assemblages) but lacks the capacity for a second bifurcation <span class="citation" data-cites="delanda2002">(<a href="#ref-delanda2002" role="doc-biblioref">DeLanda 2002</a>)</span>, because the first seals the conditions for further symmetry-breaking.</p>
+</section>
+<section id="what-would-break-the-self-seal" class="level3">
+<h3 class="anchored" data-anchor-id="what-would-break-the-self-seal">What Would Break the Self-Seal</h3>
+<p>The self-sealing property depends on two features of the substrate: (1) the homogeneity of the learning rule, and (2) the correlation structure of Hebbian reinforcement. Breaking either could enable differentiation:</p>
+<ul>
+<li><strong>Heterogeneous learning rules</strong>: Different plasticity rules at different locations would produce different convergence points — the Deleuzian requirement for multiple differential relations in the virtual <span class="citation" data-cites="deleuze1994">(<a href="#ref-deleuze1994" role="doc-biblioref">Deleuze 1994</a>)</span>.</li>
+<li><strong>BCM sliding threshold</strong> <span class="citation" data-cites="bienenstock1982">(<a href="#ref-bienenstock1982" role="doc-biblioref">Bienenstock, Cooper, and Munro 1982</a>)</span>: Activity-dependent thresholds could maintain cross-assemblage interaction by preventing high-activity assemblages from absorbing everything.</li>
+<li><strong>Homeostatic plasticity</strong> <span class="citation" data-cites="turrigiano2004">(<a href="#ref-turrigiano2004" role="doc-biblioref">Turrigiano and Nelson 2004</a>)</span>: Target activity levels would prevent the sparse network death at tight locality and the monopoly at broad locality.</li>
+<li><strong>Architectural heterogeneity</strong>: Pre-existing structural differences between locations would provide initial conditions that Hebbian learning could amplify rather than erase.</li>
+</ul>
+<p>Each corresponds to a mechanism present in biological neural circuits but absent from our minimal substrate. The self-sealing result identifies precisely what is missing: not a stronger decorrelation force, but a mechanism that maintains the structural conditions for interaction while preventing absorption.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>We tested three mechanisms for producing differentiation in optimization-free Hebbian substrates: temporal environmental variation, anti-Hebbian lateral inhibition, and artificially maintained cross-assemblage connectivity. None succeeded. The substrate self-seals through two mechanisms: topological isolation (cross-assemblage edges decay within 15 sessions) and functional absorption (maintained edges produce merger, not differentiation). These constitute a dilemma with no intermediate regime: edges strong enough to carry a signal are absorbed; edges weak enough to resist absorption carry no signal.</p>
+<p>This is an empirical decomposition of Deleuze’s distinction between individuation and differenciation. The Hebbian substrate achieves crystalline individuation — identical structure at every nucleation site, bare repetition of the Same — while being structurally incapable of complex repetition that produces difference. Breaking this self-seal requires not stronger parameters but different mechanisms: heterogeneous learning rules, homeostatic regulation, or architectural symmetry-breaking. This is the boundary of what correlation-based learning can achieve alone.</p>
+</section>
+<section id="references" class="level2 unnumbered">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-bienenstock1982" class="csl-entry" role="listitem">
+Bienenstock, Elie L., Leon N. Cooper, and Paul W. Munro. 1982. <span>“Theory for the Development of Neuron Selectivity: Orientation Specificity and Binocular Interaction in Visual Cortex.”</span> <em>Journal of Neuroscience</em> 2 (1): 32–48.
+</div>
+<div id="ref-delanda2002" class="csl-entry" role="listitem">
+DeLanda, Manuel. 2002. <em>Intensive Science and Virtual Philosophy</em>. London: Continuum.
+</div>
+<div id="ref-deleuze1994" class="csl-entry" role="listitem">
+Deleuze, Gilles. 1994. <em>Difference and Repetition</em>. New York: Columbia University Press.
+</div>
+<div id="ref-foldiak1990" class="csl-entry" role="listitem">
+Földiák, Peter. 1990. <span>“Forming Sparse Representations by Local Anti-<span>H</span>ebbian Learning.”</span> <em>Biological Cybernetics</em> 64 (2): 165–70.
+</div>
+<div id="ref-kashtan2005" class="csl-entry" role="listitem">
+Kashtan, Nadav, and Uri Alon. 2005. <span>“Spontaneous Evolution of Modularity and Network Motifs.”</span> <em>Proceedings of the National Academy of Sciences</em> 102 (39): 13773–78.
+</div>
+<div id="ref-oja1982" class="csl-entry" role="listitem">
+Oja, Erkki. 1982. <span>“Simplified Neuron Model as a Principal Component Analyzer.”</span> <em>Journal of Mathematical Biology</em> 15 (3): 267–73.
+</div>
+<div id="ref-simondon1958" class="csl-entry" role="listitem">
+Simondon, Gilbert. 1958. <em>L’individuation à La Lumière Des Notions de Forme Et d’information</em>. Paris: Presses Universitaires de France.
+</div>
+<div id="ref-turrigiano2004" class="csl-entry" role="listitem">
+Turrigiano, Gina G., and Sacha B. Nelson. 2004. <span>“Homeostatic Plasticity in the Developing Nervous System.”</span> <em>Nature Reviews Neuroscience</em> 5 (2): 97–107.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
