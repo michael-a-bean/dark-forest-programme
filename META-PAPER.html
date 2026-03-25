@@ -91,7 +91,7 @@ div.csl-indent {
   <li><a href="#sec-literature" id="toc-sec-literature" class="nav-link" data-scroll-target="#sec-literature"><span class="header-section-number">5</span> The Literature Review</a></li>
   <li><a href="#sec-audit" id="toc-sec-audit" class="nav-link" data-scroll-target="#sec-audit"><span class="header-section-number">6</span> The Academic Audit</a></li>
   <li><a href="#sec-defence" id="toc-sec-defence" class="nav-link" data-scroll-target="#sec-defence"><span class="header-section-number">7</span> The Mock Defence</a></li>
-  <li><a href="#sec-assessment" id="toc-sec-assessment" class="nav-link" data-scroll-target="#sec-assessment"><span class="header-section-number">8</span> What the System Did Well and Poorly</a>
+  <li><a href="#sec-assessment" id="toc-sec-assessment" class="nav-link" data-scroll-target="#sec-assessment"><span class="header-section-number">8</span> Capabilities and Limitations</a>
   <ul class="collapse">
   <li><a href="#strengths" id="toc-strengths" class="nav-link" data-scroll-target="#strengths"><span class="header-section-number">8.1</span> Strengths</a></li>
   <li><a href="#weaknesses" id="toc-weaknesses" class="nav-link" data-scroll-target="#weaknesses"><span class="header-section-number">8.2</span> Weaknesses</a></li>
@@ -146,7 +146,7 @@ div.csl-indent {
 <div>
   <div class="abstract">
     <div class="block-title">Abstract</div>
-    <p>This paper documents the research process behind a doctoral dissertation comprising five papers and one methodological supplement in computational artificial life, produced over twelve days using GEN, a personal AI assistant built on PAI (Personal AI Infrastructure) running on Claude Code with Claude Opus 4.6. The process involved autonomous experiment design and distributed cluster execution (approximately 15,000 simulation jobs producing 4.6 million session-level observations), simulated dissertation committee meetings with persistent AI personas, AI-conducted peer review, comprehensive parallel literature search across five API backends, a multi-phase academic integrity audit, and a mock doctoral defence with external examiners. We describe the technical architecture, the roles played by AI agents at each stage, failure modes encountered, and findings that converged with prior literature the system had not consulted. The case raises questions about the nature of discovery when the researcher, committee, reviewers, and auditors operate as AI systems under the direction of a single human principal.</p>
+    <p>This paper documents the research process behind a doctoral dissertation comprising five papers and one methodological supplement in computational artificial life, produced over twelve days using GEN, a personal AI assistant built on PAI (Personal AI Infrastructure) running on Claude Code with Claude Opus 4.6. The process involved autonomous experiment design and distributed cluster execution (approximately 15,000 simulation jobs producing 4.6 million session-level observations), simulated dissertation committee meetings with persistent AI personas, AI-conducted peer review, comprehensive parallel literature search across five API backends, a multi-phase academic integrity audit, and a mock doctoral defence with external examiners. We describe the technical architecture, the roles played by AI agents at each stage, failure modes encountered, and findings that converged with prior literature the system had not consulted. Every epistemic role except strategic direction was filled by AI systems — a configuration that complicates conventional notions of authorship and discovery.</p>
   </div>
 </div>
 
@@ -168,13 +168,13 @@ div.csl-indent {
 <p>Michael’s background informed the direction at every turn. His interest in Deleuze and Simondon shaped the philosophical framework. His frustration with metrics that measure the wrong thing led to the CCD invalidation and the adoption of response rank. His instinct that “the pruning shouldn’t matter” led to the experiment that showed it mattered enormously. The AI system executed and elaborated, but the questions — and the dissatisfaction with easy answers — came from the human.</p>
 <p>Twelve days later, the conversation had produced approximately 15,000 simulation jobs on a 20$$20-node substrate, 4.6 million session-level observations, five completed papers, a dissertation assembly, and a simulated defence. This document exists because the process itself turned out to be as interesting as the findings.</p>
 <p><strong>What this document is not.</strong> It is not a formal methods paper. It is not a proposal for how AI-assisted research should be conducted. It is a record of how one human and one AI system followed a question where it led, using the tools available, and what they found along the way — both about Hebbian self-organisation and about the process of AI-assisted inquiry.</p>
-<p><strong>What was real and what was simulated.</strong> The computational experiments executed on a physical Ray cluster and produced real data. The scientific findings are genuine results of those computations. The academic process surrounding them — committee meetings, peer review, editorial decisions, and the doctoral defence — was entirely simulated using AI agents within a single conversation session. No papers were submitted to any journal. No committee held institutional authority. No defence had academic standing. The simulated processes served as quality-control mechanisms and stress tests, not as claims of academic legitimacy.</p>
+<p><strong>What was real and what was simulated.</strong> The computational experiments executed on a physical Ray cluster and produced real data. The scientific findings are genuine results of those computations. The academic process surrounding them — committee meetings, peer review, editorial decisions, and the doctoral defence — was entirely simulated using AI agents across multiple conversation sessions, with continuity maintained by PAI’s persistent memory and work-tracking systems. No papers were submitted to any journal. No committee held institutional authority. No defence had academic standing. The simulated processes served as quality-control mechanisms and stress tests, not as claims of academic legitimacy.</p>
 </section>
 <section id="sec-stack" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> The Technical Stack</h1>
 <section id="gen-and-pai" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="gen-and-pai"><span class="header-section-number">2.1</span> GEN and PAI</h2>
-<p>GEN is the human principal’s personal AI assistant, built on the Personal AI Infrastructure (PAI) framework created by Daniel Miessler <span class="citation" data-cites="miessler2024pai">(<a href="#ref-miessler2024pai" role="doc-biblioref">Miessler, 2024</a>)</span>. PAI extends Claude Code <span class="citation" data-cites="anthropic2025claudecode">(<a href="#ref-anthropic2025claudecode" role="doc-biblioref">Anthropic, 2025</a>)</span> with capabilities that proved essential for sustained research:</p>
+<p>GEN is the human principal’s personal AI assistant, built on the Personal AI Infrastructure (PAI) framework created by Daniel Miessler <span class="citation" data-cites="miessler2024pai">(<a href="#ref-miessler2024pai" role="doc-biblioref">Miessler, 2024</a>)</span>. PAI extends Claude Code <span class="citation" data-cites="anthropic2025claudecode">(<a href="#ref-anthropic2025claudecode" role="doc-biblioref">Anthropic, 2025</a>)</span> with capabilities that used throughout the programme:</p>
 <p><strong>Agent orchestration.</strong> PAI enables spawning specialised sub-agents — Architect, Engineer, Explore, and multiple researcher types (Codex, Gemini, Grok, Perplexity, Claude) — for parallel task execution. Each agent operates with its own context but inherits the underlying model. This architecture enabled the parallel committee meetings, fourteen-agent literature reviews, and multi-phase audits documented below.</p>
 <p><strong>Persistent memory.</strong> A file-based memory system preserves project context, learning signals, and work items across conversation sessions. Two research documents that survived from the programme’s first day — “Capacities, Intent, and Affordances” (a synthesis of Gibson and DeLanda) and “Qualitative Differentiation from Homogeneous Substrates” (a reading of Deleuze’s <em>Difference and Repetition</em>) — demonstrate that philosophical research preceded and shaped the experimental design.</p>
 <p><strong>Skill routing.</strong> Modular capabilities invoked by slash commands provide structured workflows. The Research skill, for example, routes to appropriate agent configurations (quick, standard, extensive, or deep investigation) based on the scope of the query.</p>
@@ -211,7 +211,7 @@ div.csl-indent {
 <p>Each paper submission involved three AI reviewers with distinct expertise, an editorial decision, a response letter, and revision. The process produced genuine quality improvement.</p>
 <section id="issues-identified" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="issues-identified"><span class="header-section-number">4.1</span> Issues Identified</h2>
-<p>Reviewers identified legitimate problems:</p>
+<p>Review findings included:</p>
 <ul>
 <li>CCD invalidation was underspecified (Reviewer 1, Paper 4S)</li>
 <li>The edge cap mechanism potentially reintroduced the pruning confound (Reviewer 2, Paper 4S — described as “the most dangerous item”)</li>
@@ -221,7 +221,7 @@ div.csl-indent {
 </section>
 <section id="revision-experiments" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="revision-experiments"><span class="header-section-number">4.2</span> Revision Experiments</h2>
-<p>Addressing reviewer concerns required 900 additional simulation jobs and three new figures. This mirrors real peer review, where revision experiments often exceed the original submission in scope.</p>
+<p>Addressing reviewer concerns required 900 additional simulation jobs and three new figures.</p>
 </section>
 <section id="reviewer-errors" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="reviewer-errors"><span class="header-section-number">4.3</span> Reviewer Errors</h2>
@@ -274,7 +274,7 @@ Table&nbsp;1: Convergent findings and their prior art.
 </div>
 </figure>
 </div>
-<p>The committee reframed this convergence: independent derivation of established results from an unrelated starting point constitutes evidence that the underlying phenomena are real, not artifacts of any single methodology. The genuinely novel findings — the disordinal interaction, the non-monotonic steepness result, the critical threshold boundaries, and the grid-size scaling law — survived the prior art assessment.</p>
+<p>The committee reframed this convergence: independent derivation of established results from an unrelated starting point constitutes evidence that the underlying phenomena are real, not artifacts of any single methodology. Four results without prior art — the disordinal interaction, the non-monotonic steepness result, the critical threshold boundaries, and the grid-size scaling law — survived the prior art assessment.</p>
 </section>
 <section id="sec-audit" class="level1" data-number="6">
 <h1 data-number="6"><span class="header-section-number">6</span> The Academic Audit</h1>
@@ -297,7 +297,7 @@ Table&nbsp;1: Convergent findings and their prior art.
 <p>Verdict: pass with minor corrections.</p>
 </section>
 <section id="sec-assessment" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> What the System Did Well and Poorly</h1>
+<h1 data-number="8"><span class="header-section-number">8</span> Capabilities and Limitations</h1>
 <section id="strengths" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="strengths"><span class="header-section-number">8.1</span> Strengths</h2>
 <p>Parallel execution proved valuable: fourteen literature agents running simultaneously, cluster jobs executing overnight while writing proceeded, multiple committee members debating in a single invocation. Persistent context allowed committee positions to evolve across meetings. The system identified errors during directed investigations: the pruning confound through a human-requested experiment, the CCD invalidity through a human-requested permutation test, and the Shapiro-Wilk miscalculation through a human-requested audit.</p>
@@ -315,15 +315,15 @@ Table&nbsp;1: Convergent findings and their prior art.
 <h1 data-number="9"><span class="header-section-number">9</span> Implications</h1>
 <section id="for-research-practice" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="for-research-practice"><span class="header-section-number">9.1</span> For Research Practice</h2>
-<p>The committee disagreement format was the most productive architectural choice. Multiple AI personas with distinct intellectual commitments, debating a shared question, produced better outcomes than any individual agent. This suggests that AI-assisted research benefits more from structured <em>disagreement</em> than from optimised individual performance.</p>
+<p>The committee disagreement format was the most productive architectural choice. Multiple AI personas with distinct intellectual commitments, debating a shared question, produced better outcomes than any individual agent. This suggests that AI-assisted research benefits more from structured disagreement than from optimised individual performance.</p>
 </section>
 <section id="for-academic-integrity" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="for-academic-integrity"><span class="header-section-number">9.2</span> For Academic Integrity</h2>
-<p>This programme raises questions without settled answers. Who is the author when writing is AI-generated under human direction? How should simulated peer review be disclosed? When an AI system independently derives a result with prior art, is the appropriate response citation of the prior work, acknowledgment of independent derivation, or both? This document exists to make the process transparent so that others can evaluate it on its merits.</p>
+<p>The programme complicates authorship attribution. Under prevailing norms (ICMJE criteria, CRediT taxonomy), the human principal satisfies the criteria for corresponding authorship through conceptualisation and oversight. The AI system’s contributions — writing, analysis, review — fall outside current authorship frameworks. The simulated peer review presents a separate disclosure challenge: full review transcripts are included in the repository, but no consensus exists on how such processes should be reported in a submission context. The convergence with prior literature (approximately half of major findings) was genuine — the system had not consulted those sources — but whether this constitutes independent discovery or a failure of literature review depends on what standard one applies to an AI system.</p>
 </section>
 <section id="for-reproducibility" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="for-reproducibility"><span class="header-section-number">9.3</span> For Reproducibility</h2>
-<p>Every artifact in the accompanying repository — code, data, papers, committee transcripts, peer reviews, audit reports, and this document — is provided so that the process can be examined, critiqued, and, if desired, replicated.</p>
+<p>The accompanying repository contains all code, data, papers, and process transcripts.</p>
 </section>
 </section>
 <section id="references" class="level1 unnumbered" data-number="10">

@@ -19,10 +19,10 @@ abstract: |
   multi-phase academic integrity audit, and a mock doctoral defence with
   external examiners. We describe the technical architecture, the roles
   played by AI agents at each stage, failure modes encountered, and
-  findings that converged with prior literature the system had not consulted. The
-  case raises questions about the nature of discovery when the researcher,
-  committee, reviewers, and auditors operate as AI systems under the
-  direction of a single human principal.
+  findings that converged with prior literature the system had not
+  consulted. Every epistemic role except strategic direction was filled
+  by AI systems --- a configuration that complicates conventional notions
+  of authorship and discovery.
 keywords:
   - AI-assisted research
   - personal AI infrastructure
@@ -99,7 +99,7 @@ executed on a physical Ray cluster and produced real data. The scientific
 findings are genuine results of those computations. The academic process
 surrounding them --- committee meetings, peer review, editorial
 decisions, and the doctoral defence --- was entirely simulated using AI
-agents within a single conversation session. No papers were submitted to
+agents across multiple conversation sessions, with continuity maintained by PAI's persistent memory and work-tracking systems. No papers were submitted to
 any journal. No committee held institutional authority. No defence had
 academic standing. The simulated processes served as quality-control
 mechanisms and stress tests, not as claims of academic legitimacy.
@@ -111,7 +111,7 @@ mechanisms and stress tests, not as claims of academic legitimacy.
 GEN is the human principal's personal AI assistant, built on the Personal
 AI Infrastructure (PAI) framework created by Daniel Miessler
 [@miessler2024pai]. PAI extends Claude Code [@anthropic2025claudecode] with
-capabilities that proved essential for sustained research:
+capabilities that used throughout the programme:
 
 **Agent orchestration.** PAI enables spawning specialised sub-agents ---
 Architect, Engineer, Explore, and multiple researcher types (Codex, Gemini,
@@ -223,7 +223,7 @@ produced genuine quality improvement.
 
 ## Issues Identified
 
-Reviewers identified legitimate problems:
+Review findings included:
 
 - CCD invalidation was underspecified (Reviewer 1, Paper 4S)
 - The edge cap mechanism potentially reintroduced the pruning confound
@@ -236,8 +236,7 @@ Reviewers identified legitimate problems:
 ## Revision Experiments
 
 Addressing reviewer concerns required 900 additional simulation jobs and
-three new figures. This mirrors real peer review, where revision
-experiments often exceed the original submission in scope.
+three new figures.
 
 ## Reviewer Errors
 
@@ -267,7 +266,7 @@ substantial prior art.
 The committee reframed this convergence: independent derivation of
 established results from an unrelated starting point constitutes evidence
 that the underlying phenomena are real, not artifacts of any single
-methodology. The genuinely novel findings --- the disordinal interaction,
+methodology. Four results without prior art --- the disordinal interaction,
 the non-monotonic steepness result, the critical threshold boundaries,
 and the grid-size scaling law --- survived the prior art assessment.
 
@@ -308,7 +307,7 @@ philosophical vulnerability without fully resolving it.
 
 Verdict: pass with minor corrections.
 
-# What the System Did Well and Poorly {#sec-assessment}
+# Capabilities and Limitations {#sec-assessment}
 
 ## Strengths
 
@@ -347,23 +346,26 @@ The committee disagreement format was the most productive architectural
 choice. Multiple AI personas with distinct intellectual commitments,
 debating a shared question, produced better outcomes than any individual
 agent. This suggests that AI-assisted research benefits more from
-structured *disagreement* than from optimised individual performance.
+structured disagreement than from optimised individual performance.
 
 ## For Academic Integrity
 
-This programme raises questions without settled answers. Who is the author
-when writing is AI-generated under human direction? How should simulated
-peer review be disclosed? When an AI system independently derives a result
-with prior art, is the appropriate response citation of the prior work,
-acknowledgment of independent derivation, or both? This document exists
-to make the process transparent so that others can evaluate it on its
-merits.
+The programme complicates authorship attribution. Under prevailing norms
+(ICMJE criteria, CRediT taxonomy), the human principal satisfies the
+criteria for corresponding authorship through conceptualisation and
+oversight. The AI system's contributions --- writing, analysis, review ---
+fall outside current authorship frameworks. The simulated peer review
+presents a separate disclosure challenge: full review transcripts are
+included in the repository, but no consensus exists on how such processes
+should be reported in a submission context. The convergence with prior
+literature (approximately half of major findings) was genuine --- the
+system had not consulted those sources --- but whether this constitutes
+independent discovery or a failure of literature review depends on what
+standard one applies to an AI system.
 
 ## For Reproducibility
 
-Every artifact in the accompanying repository --- code, data, papers,
-committee transcripts, peer reviews, audit reports, and this document ---
-is provided so that the process can be examined, critiqued, and, if
-desired, replicated.
+The accompanying repository contains all code, data, papers, and process
+transcripts.
 
 # References

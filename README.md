@@ -10,7 +10,7 @@ Twelve days later (March 13-25, 2026), the conversation had accumulated into a f
 
 **What is real.** The code runs. The data is real. The experiments executed on a physical Ray cluster (68 CPUs, 3 nodes). The scientific findings are genuine computational results.
 
-**What is simulated.** The academic scaffolding — committee meetings, peer review, editorial decisions, the doctoral defence — was entirely simulated using AI agents within a single conversation. No papers were submitted to any journal. No committee was convened. No defence took place. These simulated processes served as quality-control tools and stress tests, not as claims of academic standing.
+**What is simulated.** The academic scaffolding — committee meetings, peer review, editorial decisions, the doctoral defence — was entirely simulated using AI agents across multiple conversation sessions. PAI's persistent memory preserved project context between sessions. No papers were submitted to any journal. No committee was convened. No defence took place. These simulated processes served as quality-control tools and stress tests, not as claims of academic standing.
 
 **What makes this repository unusual** is that it documents all of it — the real computation, the simulated process, and the human curiosity that drove both.
 
