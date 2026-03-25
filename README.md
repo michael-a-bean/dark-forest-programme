@@ -24,11 +24,11 @@ Five papers and one methodological supplement on Hebbian self-organisation:
 
 | Paper | Title | Key Finding |
 |---|---|---|
-| 1 | Emergent Structure in Optimization-Free Hebbian Networks | Spontaneous assemblage formation from noise |
-| 2 | Locality-Dependent Coexistence Mechanisms | Sharp phase transition between coexistence and monopoly |
-| 3 | Coexistence Without Differentiation: Self-Sealing | Every Hebbian intervention fails — the substrate seals |
-| 4 | Local Homeostasis Stabilises Differentiation | Per-node metaplasticity produces response rank 5.6 |
-| 4S | Pruning as Confound | Pruning reverses the ranking of approaches (disordinal interaction) |
+| [1](papers/01-emergent-structure/paper.qmd) | Emergent Structure in Optimization-Free Hebbian Networks | Spontaneous assemblage formation from noise |
+| [2](papers/02-coexistence/paper.qmd) | Locality-Dependent Coexistence Mechanisms | Sharp phase transition between coexistence and monopoly |
+| [3](papers/03-self-sealing/paper.qmd) | Coexistence Without Differentiation: Self-Sealing | Every Hebbian intervention fails — the substrate seals |
+| [4](papers/04-metaplasticity/paper.qmd) | Local Homeostasis Stabilises Differentiation | Per-node metaplasticity produces response rank 5.6 |
+| [4S](papers/04s-pruning-confound/paper.qmd) | Pruning as Confound | Pruning reverses the ranking of approaches (disordinal interaction) |
 
 The programme's central finding: **maintenance operations in self-organising systems interact with the phenomena they maintain, and this interaction can be disordinal.** Removing weak connections destroys exactly the exploratory structure that enables functional diversity — a principle validated across neural networks, metallurgy, ecology, markets, supply chains, and immune systems.
 
@@ -36,12 +36,12 @@ The programme's central finding: **maintenance operations in self-organising sys
 
 What makes this repository unusual:
 
-- **5 committee meetings** with three persistent AI personas (Vasquez/complex systems, Okafor/neuroscience, Dupont/philosophy) who maintained intellectual positions, disagreed productively, and changed their minds when persuaded
-- **5 rounds of peer review** with domain-expert AI reviewers who found genuine errors (CCD invalidity, Simondonian terminology, statistical methods) and prompted 900 additional simulation jobs
-- **14-agent parallel literature review** that discovered ~40-50% of findings had prior art — leading to an honest reckoning rather than a cover-up
-- **A comprehensive academic audit** (7 phases, ~75 tool invocations) that caught stale documents, a Shapiro-Wilk error, and a bib entry duplication
-- **A mock doctoral defence** with external examiners (Beer on autopoiesis, Hooker on pruning fairness) that identified the programme's deepest vulnerability
-- **~15,000 simulation jobs** producing approximately 4.6 million session-level observations across 28 experiments
+- **[5 committee meetings](process/committee-meetings/)** with three persistent AI personas (Vasquez/complex systems, Okafor/neuroscience, Dupont/philosophy) who maintained intellectual positions, disagreed productively, and changed their minds when persuaded
+- **[5 rounds of peer review](process/peer-review/)** with domain-expert AI reviewers who found genuine errors (CCD invalidity, Simondonian terminology, statistical methods) and prompted 900 additional simulation jobs
+- **[14-agent parallel literature review](dissertation/research-reports/)** that discovered ~40-50% of findings had prior art — leading to an [honest reckoning](dissertation/so-what-analysis.md) rather than a cover-up
+- **A [comprehensive academic audit](process/audit/academic-audit-report.md)** (7 phases, ~75 tool invocations) that caught stale documents, a Shapiro-Wilk error, and a bib entry duplication
+- **A mock doctoral defence** with external examiners (Beer on autopoiesis, Hooker on pruning fairness) that identified the programme's deepest vulnerability — [defence preparation notes](dissertation/defence-prep.md)
+- **~15,000 simulation jobs** producing approximately 4.6 million session-level observations across [28 experiments](src/experiments/)
 
 ### The Meta-Paper
 
@@ -107,13 +107,13 @@ META-PAPER.md              # The process documentation
 
 ## How to Read This
 
-**If you're interested in the science:** Start with `papers/04s-pruning-confound/paper.qmd` — the pruning confound paper is the most self-contained and has the broadest implications.
+**If you're interested in the science:** Start with [Paper 4S](papers/04s-pruning-confound/paper.qmd) — the pruning confound paper is the most self-contained and has the broadest implications. Then read [Paper 4](papers/04-metaplasticity/paper.qmd) for the metaplasticity mechanism.
 
-**If you're interested in the process:** Start with [`META-PAPER.md`](META-PAPER.md), then explore `process/committee-meetings/` and `process/peer-review/`.
+**If you're interested in the process:** Start with the [META-PAPER](META-PAPER.md), then explore [committee meetings](process/committee-meetings/) and [peer review](process/peer-review/).
 
-**If you're interested in what AI-assisted research looks like:** Read `dissertation/so-what-analysis.md` for the honest reckoning with prior art, then `process/audit/academic-audit-report.md` for the integrity check.
+**If you're interested in what AI-assisted research looks like:** Read the ["So What?" analysis](dissertation/so-what-analysis.md) for the honest reckoning with prior art, then the [academic audit report](process/audit/academic-audit-report.md) for the integrity check, then the [programme audit](process/audit/programme-audit.md) for the full cross-paper assessment.
 
-**If you want to run the code:** Start with `examples/quickstart.py` — a 40-line script that instantiates the substrate and runs it. The substrate code in `src/substrate/` is self-contained Python (numpy, scipy). The cluster job scripts in `src/experiments/` show the experimental designs. Data is in `data/` as Apache Parquet files readable by pandas, R arrow, or any Parquet reader. See `requirements.txt` for dependencies.
+**If you want to run the code:** Start with [`examples/quickstart.py`](examples/quickstart.py) — a 40-line script that instantiates the substrate and runs it. The substrate code in [`src/substrate/`](src/substrate/) is self-contained Python (numpy, scipy). The [cluster job scripts](src/experiments/) show the experimental designs. Data is in [`data/`](data/) as Apache Parquet files. See [`requirements.txt`](requirements.txt) for dependencies.
 
 **Note on data paths:** The `data/` directory contains key experimental datasets from Papers 4 and 4S. Papers 1-3 reference data from the original single-paper repositories not fully consolidated here. Paper 4S is the most self-contained entry point.
 
@@ -121,7 +121,7 @@ META-PAPER.md              # The process documentation
 
 ## The Honest Assessment
 
-The committee's verdict: **~40-50% of major findings converge with prior literature.** This is not hidden — it's documented in `dissertation/so-what-analysis.md` and addressed head-on in the dissertation introduction.
+The committee's verdict: **~40-50% of major findings converge with prior literature.** This is not hidden — it's documented in the ["So What?" analysis](dissertation/so-what-analysis.md) and addressed head-on in the [dissertation introduction](dissertation/chapters/introduction.qmd).
 
 What's genuinely novel:
 - The disordinal interaction (pruning reverses approach rankings) — no prior art
@@ -167,6 +167,12 @@ The most productive pattern was the **committee disagreement format**: multiple 
 
 ---
 
+## Future Work
+
+[Paper 5 proposal: "Does the Dark Forest Have Roads?"](proposals/paper5-topology.md) — testing whether the programme's findings hold on non-lattice topologies (small-world, scale-free, random geometric graphs). The strongest prediction: scale-free topology will suppress coexistence because hub nodes enforce the monopoly dynamic.
+
+---
+
 ## License
 
 Code: MIT License
@@ -181,7 +187,7 @@ If you use or reference this work:
 ```
 Bean, M. (2026). The Dark Forest Programme: A Complete AI-Assisted Research
 Programme in Computational Artificial Life. GitHub repository.
-https://github.com/michaelbean/dark-forest-programme
+https://github.com/michael-a-bean/dark-forest-programme
 ```
 
 ---
