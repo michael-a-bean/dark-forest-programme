@@ -63,16 +63,11 @@ emerged a prediction that shaped what followed: a Hebbian substrate would
 achieve individuation (the emergence of distinct entities) but not
 differenciation (the emergence of qualitatively different kinds).
 
-The git log records what happened next. By 16:43, the multi-field
-substrate was implemented and producing assemblages. By 23:08, the
-reproducible pipeline (Python, Parquet, R, Quarto) was operational. By
-midnight, the first paper had been through simulated committee review.
-These are timestamps, not narrative reconstruction — the author's
-experience of the session is not available to the system writing this
-document.
-
-Each step followed from the previous because the results were
-interesting enough to pursue. The programme emerged; it was not designed.
+The git log gives the timeline: multi-field substrate producing
+assemblages at 16:43, the full pipeline running by 23:08, the first paper
+through simulated committee review before midnight.^[GEN drafted this
+document from git timestamps and artifacts. The author's experience of
+these sessions is not available to the system writing this.]
 
 # The Five Papers
 
@@ -84,12 +79,11 @@ spontaneous assemblage formation from noise, governed by three regimes
 ratio. In the multi-field substrate, multiple assemblages formed
 transiently but converged to monopoly within 30 sessions.
 
-The paper went through simulated peer review (three AI reviewers, an
-editorial decision of Major Revision, committee discussion, revision, and
-acceptance) within a single day. The pace was absurd by academic standards
-but reflected the absence of all the friction that normally slows
-research: waiting for cluster access, waiting for co-authors, waiting for
-reviewers. The AI system handled each role in minutes.
+The paper went through simulated peer review, committee discussion,
+revision, and acceptance within a single day. The pace — committee
+review, revision, acceptance before sunrise — makes sense only if you
+think of it as removing every queue: no waiting for cluster allocation,
+for co-authors to respond, for reviewers to find time.
 
 ## Paper 2: Coexistence (March 14)
 
@@ -106,7 +100,7 @@ analysis revealed that tight-locality assemblages coexist through niche
 partitioning: each occupies a distinct spatial region with minimal
 encounter overlap. Broad locality destroys this partition.
 
-The cluster setup was itself a story. The head node ran on a home server,
+The head node ran on a home server,
 a second node on a workstation, and the third on a laptop connected over
 WiFi. The laptop disconnected repeatedly during overnight runs; Ray
 retried failed tasks on the remaining nodes without intervention. This
@@ -114,9 +108,8 @@ fault tolerance proved essential for the rest of the programme.
 
 ## Paper 3: The Self-Sealing Barrier (March 15–16)
 
-Papers 1 and 2 established that Hebbian substrates produce assemblages
-that can coexist spatially. But Michael noticed they were all structural
-clones — identical internal organisation, differing only in grid position.
+The assemblages from Papers 1 and 2 were structural clones — identical
+internal organisation, differing only in where they sat on the grid.
 The Deleuzian framework predicted this: without a mechanism to break
 symmetry at the level of dynamics (not just position), the substrate would
 produce bare repetition, not complex repetition.
@@ -129,15 +122,14 @@ edges decayed within 15 sessions (median), and artificially maintained
 edges were co-opted into existing assemblage structure rather than
 carrying a differentiation signal.
 
-This negative result was the programme's turning point. It established
-that differenciation requires mechanisms beyond the basic Hebbian rule,
-motivating the metaplastic intervention in Paper 4.
+Nothing worked. The substrate was self-sealing, and breaking it would
+require something outside the Hebbian framework.
 
 ## Paper 4: Metaplasticity (March 17–20)
 
-Paper 4 introduced per-node learning rates with homeostatic adjustment —
-a metaplastic mechanism where each node regulates its learning rate toward
-the mean activity of its spatial neighbours. The hypothesis was that this
+The metaplastic mechanism in Paper 4 gave each node its own learning
+rate, adjusted homeostatically toward the mean activity of neighbouring
+nodes. The hypothesis was that this
 would create a Turing-like instability at the metaplastic level,
 breaking the symmetry that self-sealing preserves.
 
@@ -147,14 +139,13 @@ but inferior to a simpler mechanism: the local homeostatic target itself,
 without any inter-assemblage communication, produced stable
 differentiation.
 
-This paper required the heaviest computation: 19 experiments, 6,070
-simulation jobs, executed over four days on the Ray cluster. The
-experiments ranged from parameter sweeps (980 jobs for the corrective
-mechanism) to single-condition probes (10 jobs for eta distribution
-snapshots). The cluster ran overnight while Michael slept; results were
-waiting in Parquet files each morning.
+This paper required the heaviest computation: 19 experiments, 6,070 jobs
+over four days. Some were full parameter sweeps (the corrective mechanism
+alone took 980 jobs); others were ten-job probes to snapshot a single eta
+distribution. The cluster ran overnight; results were waiting in Parquet
+files each morning.
 
-The central result: local homeostasis produced assemblages with response
+Local homeostasis produced assemblages with response
 rank 5.6 (over five independent functional dimensions) and eta divergence
 $F = 4.9$ ($p < 0.0001$). But a late finding complicated the story: the
 baseline (no metaplasticity) also reached rank 5.6 without pruning.
@@ -245,21 +236,19 @@ the accumulated transcripts of prior meetings. Each meeting was a fresh
 agent invocation conditioned on this context, not a persistent process
 with continuous memory.
 
-The chair (modelled on a complex-systems researcher) enforced scope and
-timeline discipline, warning against experimental expansion when the
-existing results were sufficient. A computational neuroscience persona
-was statistically demanding, raising the pruning confound and CCD
-invalidity concerns that reshaped the programme. A philosopher of
-technology corrected terminological errors — most consequentially,
-replacing "structural germ" with "limit condition," an error that
-persisted through several drafts.
+The neuroscience persona did the most damage — its statistical demands
+surfaced the pruning confound and killed the CCD metric, both of which
+reshaped the programme. The chair kept pulling scope back ("the existing
+results are sufficient"), which was annoying and usually right. The
+philosopher caught terminology errors, the most consequential being
+"structural germ" for what should have been "limit condition" — an error
+that survived an embarrassing number of drafts.
 
 The committee met five times across the programme. Its contribution was
 structural: when members disagreed, the disagreement produced decisions
-that no individual perspective would have reached. Whether positions
-that shifted across meetings (conditioned on prior transcripts)
-constitute intellectual development or context-matching is a question
-this document does not attempt to answer.
+that no individual perspective would have reached. Whether the position
+shifts across meetings constitute intellectual development or
+context-matching is not clear from the transcripts alone.
 
 ## Peer Review
 
@@ -341,45 +330,29 @@ minor corrections (lattice topology limitations, operational closure
 terminology clarification, lottery ticket hypothesis citation, power
 analysis for the eta ANOVA).
 
-# What the AI Did Well
+# Capabilities and Limitations
 
-Parallel execution was the clearest advantage. Fourteen literature agents
-running simultaneously, cluster jobs executing overnight, committee
-members debating in a single invocation. The sequential version of this
-programme — one agent, one task at a time — would have taken weeks rather
-than days.
+The committee disagreement format was the biggest surprise. Each member's
+blind spots (the chair's impatience with philosophy, the neuroscientist's
+scope creep, the philosopher's indifference to deadlines) got corrected by
+the others, producing decisions no single perspective would have reached.
+Parallelism helped too: fourteen literature agents running at once, cluster
+jobs overnight, a full committee meeting in one invocation. And directed
+error-checking worked — every major catch (pruning confound, CCD
+invalidity, the Shapiro-Wilk miscalculation) came from Michael requesting
+a specific investigation and the system executing it.
 
-The committee disagreement format produced better decisions than any
-individual perspective. Each member's limitations (the chair's
-impatience with philosophy, the neuroscientist's scope expansion, the
-philosopher's indifference to timelines) were corrected by the others.
-
-Error identification worked, within limits. The pruning confound, the CCD
-invalidity, the Shapiro-Wilk miscalculation, and the stale terminology in
-the framing document were all caught through directed investigations — the
-human requested each check, and the system executed and reported.
-
-# What the AI Did Poorly
-
-Literature awareness was insufficient. The ML compression fairness
-literature (Hooker et al. 2019, Tran et al. 2022) was not consulted
-until after the pruning confound was discovered empirically. The neural
-dimensionality literature (Stringer et al. 2019, Gao et al. 2017) was
-not consulted until after response rank was derived from first principles.
-A human researcher with training in either field would have found these
-sources before designing the experiments.
-
-Metric selection was suboptimal. Centroid cosine distance served as the
+The biggest failure was literature awareness. The ML compression fairness
+work [@hooker2019compressed] would have saved weeks — anyone trained in
+that area would have found it before designing the pruning experiments,
+not after discovering the confound empirically. Same for neural
+dimensionality [@stringer2019high]: response rank was derived from scratch
+when it was already a standard tool. Centroid cosine distance was the
 primary differentiation metric for four papers before a permutation test
-in Paper 4S revealed it was spatially confounded. A researcher familiar
-with neural population analysis would have used participation ratio from
-the start.
-
-Philosophical claims outran the evidence at points. "Structural germ"
-persisted through several drafts — a genuine Simondonian error that a
-specialist would have caught earlier. The committee's philosophical
-expertise, while consistent and differentiated, operated within a narrower
-range than a human scholar's.
+killed it; participation ratio would have been the obvious choice for
+anyone who had read the literature. And "structural germ" persisted through
+several drafts — a Simondonian error a specialist would have caught on day
+one.
 
 # What the Human Did
 
@@ -388,36 +361,28 @@ to run experiments or write, when to consult the committee, when to
 challenge the results, and when to stop. Three decisions shaped the
 programme more than any computational result:
 
-1. The decision to test the pruning threshold after the committee raised
-   the concern — rather than dismissing it as a housekeeping parameter.
-2. The decision to ask "so what, who cares?" — which triggered the
-   fourteen-agent literature review and the honest reckoning with prior
-   art.
-3. The decision to publish the process alongside the science — rather
-   than presenting only the findings.
-
-Strategic direction remained with the human throughout.
+1. Testing the pruning threshold when the committee raised it, rather than
+   dismissing it as a housekeeping parameter.
+2. Asking "so what, who cares?" — which triggered the fourteen-agent
+   literature review.
+3. Writing up the process, not just the science.
 
 # Integrity
 
-The programme complicates authorship attribution. Under prevailing norms
-(ICMJE criteria, CRediT taxonomy), the human principal satisfies
-corresponding authorship criteria through conceptualisation and oversight.
-The AI system's contributions — writing, analysis, review — fall outside
-current frameworks. The simulated peer review presents a disclosure
+Standard authorship frameworks do not handle this well. By ICMJE or CRediT
+standards, the human qualifies as corresponding author — conceptualisation
+and oversight. The AI's contributions (writing, analysis, review) do not
+fit any existing category. The simulated peer review presents a disclosure
 challenge: editorial decisions, response letters, and partial review
 transcripts are included in the repository, but no consensus exists on
 how such processes should be reported.
 
-The convergence with prior literature was empirically verifiable — the system had not
-consulted those sources — but whether this constitutes independent
-discovery or a failure of literature review depends on what standard one
-applies to an AI system.
+The system had not read those sources — the git log confirms it. Whether
+that counts as independent discovery or a literature review failure
+depends on how generous you feel about AI systems.
 
-No papers were submitted to any journal. No committee held institutional
-authority. No defence had academic standing. The computational experiments
-and their results are real; the academic process was simulated. The
-accompanying repository contains all code, data, papers, and process
-transcripts.
+None of this has institutional standing. No journal submissions, no real
+committee, no accredited defence. The experiments and data are real. The
+academic scaffolding was simulated. The repository contains everything.
 
 # References

@@ -121,11 +121,10 @@ window.Quarto = {
   <li><a href="#the-audit" id="toc-the-audit" class="nav-link" data-scroll-target="#the-audit"><span class="header-section-number">4.4</span> The Audit</a></li>
   <li><a href="#the-defence" id="toc-the-defence" class="nav-link" data-scroll-target="#the-defence"><span class="header-section-number">4.5</span> The Defence</a></li>
   </ul></li>
-  <li><a href="#what-the-ai-did-well" id="toc-what-the-ai-did-well" class="nav-link" data-scroll-target="#what-the-ai-did-well"><span class="header-section-number">5</span> What the AI Did Well</a></li>
-  <li><a href="#what-the-ai-did-poorly" id="toc-what-the-ai-did-poorly" class="nav-link" data-scroll-target="#what-the-ai-did-poorly"><span class="header-section-number">6</span> What the AI Did Poorly</a></li>
-  <li><a href="#what-the-human-did" id="toc-what-the-human-did" class="nav-link" data-scroll-target="#what-the-human-did"><span class="header-section-number">7</span> What the Human Did</a></li>
-  <li><a href="#integrity" id="toc-integrity" class="nav-link" data-scroll-target="#integrity"><span class="header-section-number">8</span> Integrity</a></li>
-  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">9</span> References</a></li>
+  <li><a href="#capabilities-and-limitations" id="toc-capabilities-and-limitations" class="nav-link" data-scroll-target="#capabilities-and-limitations"><span class="header-section-number">5</span> Capabilities and Limitations</a></li>
+  <li><a href="#what-the-human-did" id="toc-what-the-human-did" class="nav-link" data-scroll-target="#what-the-human-did"><span class="header-section-number">6</span> What the Human Did</a></li>
+  <li><a href="#integrity" id="toc-integrity" class="nav-link" data-scroll-target="#integrity"><span class="header-section-number">7</span> Integrity</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">8</span> References</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="META-PAPER.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></nav>
 </div>
@@ -186,35 +185,34 @@ window.Quarto = {
 <h1 data-number="1"><span class="header-section-number">1</span> How It Started</h1>
 <p>On March 13, 2026, Michael Bean started a conversation with GEN about Liu Cixin’s Dark Forest hypothesis and Fermi’s paradox — whether something like a dark forest could already exist in silica. The conversation pivoted to what an AI not governed by human objectives might look like: what dynamics would emerge if you removed optimisation, fitness functions, and error signals entirely? Michael then brought in Deleuze and asked how his work might connect, and things went from there.</p>
 <p>There was no research plan. The first git commit (00:17 AM) was titled “Initial commit — Dark Forest in Silica project.” Within the same session, GEN produced 609 lines of philosophical research on Deleuze’s distinction between differentiation and differenciation. From this emerged a prediction that shaped what followed: a Hebbian substrate would achieve individuation (the emergence of distinct entities) but not differenciation (the emergence of qualitatively different kinds).</p>
-<p>The git log records what happened next. By 16:43, the multi-field substrate was implemented and producing assemblages. By 23:08, the reproducible pipeline (Python, Parquet, R, Quarto) was operational. By midnight, the first paper had been through simulated committee review. These are timestamps, not narrative reconstruction — the author’s experience of the session is not available to the system writing this document.</p>
-<p>Each step followed from the previous because the results were interesting enough to pursue. The programme emerged; it was not designed.</p>
+<p>The git log gives the timeline: multi-field substrate producing assemblages at 16:43, the full pipeline running by 23:08, the first paper through simulated committee review before midnight.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 </section>
 <section id="the-five-papers" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> The Five Papers</h1>
 <section id="paper-1-individuation-march-13" class="level2" data-number="2.1">
 <h2 data-number="2.1" class="anchored" data-anchor-id="paper-1-individuation-march-13"><span class="header-section-number">2.1</span> Paper 1: Individuation (March 13)</h2>
 <p>The first paper asked what pure Hebbian dynamics produce. The answer: spontaneous assemblage formation from noise, governed by three regimes (dissolution, productive, saturation) depending on the learning-rate-to-decay ratio. In the multi-field substrate, multiple assemblages formed transiently but converged to monopoly within 30 sessions.</p>
-<p>The paper went through simulated peer review (three AI reviewers, an editorial decision of Major Revision, committee discussion, revision, and acceptance) within a single day. The pace was absurd by academic standards but reflected the absence of all the friction that normally slows research: waiting for cluster access, waiting for co-authors, waiting for reviewers. The AI system handled each role in minutes.</p>
+<p>The paper went through simulated peer review, committee discussion, revision, and acceptance within a single day. The pace — committee review, revision, acceptance before sunrise — makes sense only if you think of it as removing every queue: no waiting for cluster allocation, for co-authors to respond, for reviewers to find time.</p>
 </section>
 <section id="paper-2-coexistence-march-14" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="paper-2-coexistence-march-14"><span class="header-section-number">2.2</span> Paper 2: Coexistence (March 14)</h2>
 <p>The monopoly result in Paper 1 raised an immediate question: what conditions permit stable coexistence? Michael’s intuition was that spatial locality — how far nodes look when forming connections — would be the controlling variable.</p>
 <p>It was. A sharp phase transition at encounter locality <span class="math inline">\(\ell \approx
 0.10\)</span>–<span class="math inline">\(0.15\)</span> separated a coexistence regime (six to nine assemblages) from monopoly. The result came from a 1,120-job parameter sweep on a newly configured Ray cluster (three physical nodes, 68 CPUs). A coupling analysis revealed that tight-locality assemblages coexist through niche partitioning: each occupies a distinct spatial region with minimal encounter overlap. Broad locality destroys this partition.</p>
-<p>The cluster setup was itself a story. The head node ran on a home server, a second node on a workstation, and the third on a laptop connected over WiFi. The laptop disconnected repeatedly during overnight runs; Ray retried failed tasks on the remaining nodes without intervention. This fault tolerance proved essential for the rest of the programme.</p>
+<p>The head node ran on a home server, a second node on a workstation, and the third on a laptop connected over WiFi. The laptop disconnected repeatedly during overnight runs; Ray retried failed tasks on the remaining nodes without intervention. This fault tolerance proved essential for the rest of the programme.</p>
 </section>
 <section id="paper-3-the-self-sealing-barrier-march-1516" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="paper-3-the-self-sealing-barrier-march-1516"><span class="header-section-number">2.3</span> Paper 3: The Self-Sealing Barrier (March 15–16)</h2>
-<p>Papers 1 and 2 established that Hebbian substrates produce assemblages that can coexist spatially. But Michael noticed they were all structural clones — identical internal organisation, differing only in grid position. The Deleuzian framework predicted this: without a mechanism to break symmetry at the level of dynamics (not just position), the substrate would produce bare repetition, not complex repetition.</p>
+<p>The assemblages from Papers 1 and 2 were structural clones — identical internal organisation, differing only in where they sat on the grid. The Deleuzian framework predicted this: without a mechanism to break symmetry at the level of dynamics (not just position), the substrate would produce bare repetition, not complex repetition.</p>
 <p>Paper 3 tested every intervention available within the Hebbian framework: temporal environmental variation, anti-Hebbian lateral inhibition, and cross-assemblage edge injection at controlled weight levels. Across 1,400 simulations, all failed. The substrate was <em>self-sealing</em>: cross-assemblage edges decayed within 15 sessions (median), and artificially maintained edges were co-opted into existing assemblage structure rather than carrying a differentiation signal.</p>
-<p>This negative result was the programme’s turning point. It established that differenciation requires mechanisms beyond the basic Hebbian rule, motivating the metaplastic intervention in Paper 4.</p>
+<p>Nothing worked. The substrate was self-sealing, and breaking it would require something outside the Hebbian framework.</p>
 </section>
 <section id="paper-4-metaplasticity-march-1720" class="level2" data-number="2.4">
 <h2 data-number="2.4" class="anchored" data-anchor-id="paper-4-metaplasticity-march-1720"><span class="header-section-number">2.4</span> Paper 4: Metaplasticity (March 17–20)</h2>
-<p>Paper 4 introduced per-node learning rates with homeostatic adjustment — a metaplastic mechanism where each node regulates its learning rate toward the mean activity of its spatial neighbours. The hypothesis was that this would create a Turing-like instability at the metaplastic level, breaking the symmetry that self-sealing preserves.</p>
+<p>The metaplastic mechanism in Paper 4 gave each node its own learning rate, adjusted homeostatically toward the mean activity of neighbouring nodes. The hypothesis was that this would create a Turing-like instability at the metaplastic level, breaking the symmetry that self-sealing preserves.</p>
 <p>The Turing mechanism failed. Under hard <span class="math inline">\(\eta\)</span> bounds, inhibitor coupling was purely destructive. Under soft bounds, coupling was partially rescued but inferior to a simpler mechanism: the local homeostatic target itself, without any inter-assemblage communication, produced stable differentiation.</p>
-<p>This paper required the heaviest computation: 19 experiments, 6,070 simulation jobs, executed over four days on the Ray cluster. The experiments ranged from parameter sweeps (980 jobs for the corrective mechanism) to single-condition probes (10 jobs for eta distribution snapshots). The cluster ran overnight while Michael slept; results were waiting in Parquet files each morning.</p>
-<p>The central result: local homeostasis produced assemblages with response rank 5.6 (over five independent functional dimensions) and eta divergence <span class="math inline">\(F = 4.9\)</span> (<span class="math inline">\(p &lt; 0.0001\)</span>). But a late finding complicated the story: the baseline (no metaplasticity) also reached rank 5.6 without pruning. Metaplasticity stabilised and amplified diversity; it did not create it.</p>
+<p>This paper required the heaviest computation: 19 experiments, 6,070 jobs over four days. Some were full parameter sweeps (the corrective mechanism alone took 980 jobs); others were ten-job probes to snapshot a single eta distribution. The cluster ran overnight; results were waiting in Parquet files each morning.</p>
+<p>Local homeostasis produced assemblages with response rank 5.6 (over five independent functional dimensions) and eta divergence <span class="math inline">\(F = 4.9\)</span> (<span class="math inline">\(p &lt; 0.0001\)</span>). But a late finding complicated the story: the baseline (no metaplasticity) also reached rank 5.6 without pruning. Metaplasticity stabilised and amplified diversity; it did not create it.</p>
 </section>
 <section id="paper-4s-the-confound-march-2025" class="level2" data-number="2.5">
 <h2 data-number="2.5" class="anchored" data-anchor-id="paper-4s-the-confound-march-2025"><span class="header-section-number">2.5</span> Paper 4S: The Confound (March 20–25)</h2>
@@ -244,8 +242,8 @@ window.Quarto = {
 <section id="committee" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="committee"><span class="header-section-number">4.1</span> Committee</h2>
 <p>Three AI personas served as the dissertation committee throughout the programme. Each was instantiated from a written character description and the accumulated transcripts of prior meetings. Each meeting was a fresh agent invocation conditioned on this context, not a persistent process with continuous memory.</p>
-<p>The chair (modelled on a complex-systems researcher) enforced scope and timeline discipline, warning against experimental expansion when the existing results were sufficient. A computational neuroscience persona was statistically demanding, raising the pruning confound and CCD invalidity concerns that reshaped the programme. A philosopher of technology corrected terminological errors — most consequentially, replacing “structural germ” with “limit condition,” an error that persisted through several drafts.</p>
-<p>The committee met five times across the programme. Its contribution was structural: when members disagreed, the disagreement produced decisions that no individual perspective would have reached. Whether positions that shifted across meetings (conditioned on prior transcripts) constitute intellectual development or context-matching is a question this document does not attempt to answer.</p>
+<p>The neuroscience persona did the most damage — its statistical demands surfaced the pruning confound and killed the CCD metric, both of which reshaped the programme. The chair kept pulling scope back (“the existing results are sufficient”), which was annoying and usually right. The philosopher caught terminology errors, the most consequential being “structural germ” for what should have been “limit condition” — an error that survived an embarrassing number of drafts.</p>
+<p>The committee met five times across the programme. Its contribution was structural: when members disagreed, the disagreement produced decisions that no individual perspective would have reached. Whether the position shifts across meetings constitute intellectual development or context-matching is not clear from the transcripts alone.</p>
 </section>
 <section id="peer-review" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="peer-review"><span class="header-section-number">4.2</span> Peer Review</h2>
@@ -270,40 +268,33 @@ window.Quarto = {
 <p>A simulated doctoral defence introduced two external examiner personas (modelled on published researchers’ expertise profiles, not the actual individuals). The most difficult exchange concerned whether self-sealing assemblages constitute individuals or spatial patterns — a question the Simondonian framework does not fully resolve. The verdict: pass with four minor corrections (lattice topology limitations, operational closure terminology clarification, lottery ticket hypothesis citation, power analysis for the eta ANOVA).</p>
 </section>
 </section>
-<section id="what-the-ai-did-well" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> What the AI Did Well</h1>
-<p>Parallel execution was the clearest advantage. Fourteen literature agents running simultaneously, cluster jobs executing overnight, committee members debating in a single invocation. The sequential version of this programme — one agent, one task at a time — would have taken weeks rather than days.</p>
-<p>The committee disagreement format produced better decisions than any individual perspective. Each member’s limitations (the chair’s impatience with philosophy, the neuroscientist’s scope expansion, the philosopher’s indifference to timelines) were corrected by the others.</p>
-<p>Error identification worked, within limits. The pruning confound, the CCD invalidity, the Shapiro-Wilk miscalculation, and the stale terminology in the framing document were all caught through directed investigations — the human requested each check, and the system executed and reported.</p>
+<section id="capabilities-and-limitations" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Capabilities and Limitations</h1>
+<p>The committee disagreement format was the biggest surprise. Each member’s blind spots (the chair’s impatience with philosophy, the neuroscientist’s scope creep, the philosopher’s indifference to deadlines) got corrected by the others, producing decisions no single perspective would have reached. Parallelism helped too: fourteen literature agents running at once, cluster jobs overnight, a full committee meeting in one invocation. And directed error-checking worked — every major catch (pruning confound, CCD invalidity, the Shapiro-Wilk miscalculation) came from Michael requesting a specific investigation and the system executing it.</p>
+<p>The biggest failure was literature awareness. The ML compression fairness work <span class="citation" data-cites="hooker2019compressed">(<a href="#ref-hooker2019compressed" role="doc-biblioref">Hooker et al. 2019</a>)</span> would have saved weeks — anyone trained in that area would have found it before designing the pruning experiments, not after discovering the confound empirically. Same for neural dimensionality <span class="citation" data-cites="stringer2019high">(<a href="#ref-stringer2019high" role="doc-biblioref">Stringer et al. 2019</a>)</span>: response rank was derived from scratch when it was already a standard tool. Centroid cosine distance was the primary differentiation metric for four papers before a permutation test killed it; participation ratio would have been the obvious choice for anyone who had read the literature. And “structural germ” persisted through several drafts — a Simondonian error a specialist would have caught on day one.</p>
 </section>
-<section id="what-the-ai-did-poorly" class="level1" data-number="6">
-<h1 data-number="6"><span class="header-section-number">6</span> What the AI Did Poorly</h1>
-<p>Literature awareness was insufficient. The ML compression fairness literature (Hooker et al.&nbsp;2019, Tran et al.&nbsp;2022) was not consulted until after the pruning confound was discovered empirically. The neural dimensionality literature (Stringer et al.&nbsp;2019, Gao et al.&nbsp;2017) was not consulted until after response rank was derived from first principles. A human researcher with training in either field would have found these sources before designing the experiments.</p>
-<p>Metric selection was suboptimal. Centroid cosine distance served as the primary differentiation metric for four papers before a permutation test in Paper 4S revealed it was spatially confounded. A researcher familiar with neural population analysis would have used participation ratio from the start.</p>
-<p>Philosophical claims outran the evidence at points. “Structural germ” persisted through several drafts — a genuine Simondonian error that a specialist would have caught earlier. The committee’s philosophical expertise, while consistent and differentiated, operated within a narrower range than a human scholar’s.</p>
-</section>
-<section id="what-the-human-did" class="level1" data-number="7">
-<h1 data-number="7"><span class="header-section-number">7</span> What the Human Did</h1>
+<section id="what-the-human-did" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> What the Human Did</h1>
 <p>Michael directed every strategic decision: which questions to ask, when to run experiments or write, when to consult the committee, when to challenge the results, and when to stop. Three decisions shaped the programme more than any computational result:</p>
 <ol type="1">
-<li>The decision to test the pruning threshold after the committee raised the concern — rather than dismissing it as a housekeeping parameter.</li>
-<li>The decision to ask “so what, who cares?” — which triggered the fourteen-agent literature review and the honest reckoning with prior art.</li>
-<li>The decision to publish the process alongside the science — rather than presenting only the findings.</li>
+<li>Testing the pruning threshold when the committee raised it, rather than dismissing it as a housekeeping parameter.</li>
+<li>Asking “so what, who cares?” — which triggered the fourteen-agent literature review.</li>
+<li>Writing up the process, not just the science.</li>
 </ol>
-<p>Strategic direction remained with the human throughout.</p>
 </section>
-<section id="integrity" class="level1" data-number="8">
-<h1 data-number="8"><span class="header-section-number">8</span> Integrity</h1>
-<p>The programme complicates authorship attribution. Under prevailing norms (ICMJE criteria, CRediT taxonomy), the human principal satisfies corresponding authorship criteria through conceptualisation and oversight. The AI system’s contributions — writing, analysis, review — fall outside current frameworks. The simulated peer review presents a disclosure challenge: editorial decisions, response letters, and partial review transcripts are included in the repository, but no consensus exists on how such processes should be reported.</p>
-<p>The convergence with prior literature was empirically verifiable — the system had not consulted those sources — but whether this constitutes independent discovery or a failure of literature review depends on what standard one applies to an AI system.</p>
-<p>No papers were submitted to any journal. No committee held institutional authority. No defence had academic standing. The computational experiments and their results are real; the academic process was simulated. The accompanying repository contains all code, data, papers, and process transcripts.</p>
+<section id="integrity" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Integrity</h1>
+<p>Standard authorship frameworks do not handle this well. By ICMJE or CRediT standards, the human qualifies as corresponding author — conceptualisation and oversight. The AI’s contributions (writing, analysis, review) do not fit any existing category. The simulated peer review presents a disclosure challenge: editorial decisions, response letters, and partial review transcripts are included in the repository, but no consensus exists on how such processes should be reported.</p>
+<p>The system had not read those sources — the git log confirms it. Whether that counts as independent discovery or a literature review failure depends on how generous you feel about AI systems.</p>
+<p>None of this has institutional standing. No journal submissions, no real committee, no accredited defence. The experiments and data are real. The academic scaffolding was simulated. The repository contains everything.</p>
 </section>
-<section id="references" class="level1 unnumbered" data-number="9">
+<section id="references" class="level1 unnumbered" data-number="8">
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">9 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">8 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-achille2019critical" class="csl-entry" role="listitem">
 Achille, Alessandro, Matteo Rovere, and Stefano Soatto. 2019. <span>“Critical Learning Periods in Deep Networks.”</span> In <em>International Conference on Learning Representations</em>.
 </div>
@@ -331,7 +322,12 @@ Moritz, Philipp, Robert Nishihara, Stephanie Wang, Alexey Tumanov, Richard Liaw,
 <div id="ref-stringer2019high" class="csl-entry" role="listitem">
 Stringer, Carsen, Marius Pachitariu, Nicholas Steinmetz, Matteo Carandini, and Kenneth D. Harris. 2019. <span>“High-Dimensional Geometry of Population Responses in Visual Cortex.”</span> <em>Nature</em> 571: 361–65.
 </div>
-</div></section></div></main>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>GEN drafted this document from git timestamps and artifacts. The author’s experience of these sessions is not available to the system writing this.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
