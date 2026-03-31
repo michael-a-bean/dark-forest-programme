@@ -153,9 +153,10 @@ Metaplasticity stabilised and amplified diversity; it did not create it.
 
 ## Paper 4S: The Confound (March 20–25)
 
-Paper 4S began as a methodological check — a committee member's question
-about whether the programme's results depended on the hard weight clip.
-It became the programme's most consequential paper.
+Paper 4S began as a methodological check. Michael started investigating
+whether the choice of weight bounds influenced the results, then pushed
+further into weight clipping. It became the programme's most
+consequential paper.
 
 The answer was yes, but not in the way anyone expected. The weight clip
 mattered, but the pruning threshold mattered more. Removing the standard
