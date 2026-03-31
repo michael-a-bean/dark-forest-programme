@@ -4,17 +4,15 @@
 
 ## A Question That Grew Into a Programme
 
-This started as a conversation about Liu Cixin's Dark Forest hypothesis — whether something like a dark forest could already exist in silica. That led to a question about what an AI not governed by human objectives might look like, which led to Deleuze, which led to code. No research agenda, no proposal, no plan to write anything.
+This started as a conversation about Liu Cixin's Dark Forest hypothesis and whether something like it could already exist in silica. That turned into a question about Deleuze, then into code. There was no research agenda.
 
-The conversation led to code. The code produced results worth writing up. Writing raised questions that required more experiments. The experiments revealed a confound that changed everything. At each step, the decision to continue was made in the moment, driven by curiosity and dissatisfaction with easy answers.
-
-Twelve days later (March 13-25, 2026), the conversation had accumulated into a five-paper research programme with a dissertation, produced through collaboration between Michael Bean and **GEN** — a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6.
+The code produced results worth writing up. Writing raised questions that needed more experiments. One of those experiments found a confound that reframed everything before it. Twelve days later (March 13-25, 2026), there were five papers and a dissertation, produced through collaboration between Michael Bean and **GEN**, a personal AI assistant built on [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) running on [Claude Code](https://claude.ai/claude-code) with Claude Opus 4.6.
 
 **What is real.** The code runs. The data is real. The experiments executed on a physical Ray cluster (68 CPUs, 3 nodes).
 
-**What is simulated.** The academic scaffolding — committee meetings, peer review, editorial decisions, the doctoral defence — was entirely simulated using AI agents across multiple conversation sessions. PAI's persistent memory preserved project context between sessions. No papers were submitted to any journal. No committee was convened. No defence took place. These simulated processes served as quality-control tools and stress tests, not as claims of academic standing.
+**What is simulated.** Committee meetings, peer review, editorial decisions, and a doctoral defence were simulated using AI agents. No papers were submitted to any journal. No committee was convened. No defence took place.
 
-**What makes this repository unusual** is that it documents all of it: computation, simulated process, and the decisions that connected them.
+This repository documents both the computation and the simulated process around it.
 
 ---
 
