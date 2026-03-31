@@ -4,12 +4,53 @@ subtitle: "Weight Pruning, Metric Confounds, and the Conditions for Functional D
 author:
   - name: Michael Bean
     affiliation: Independent Researcher
+  - name: Gen
+    affiliation: Independent Researcher
+date: 2026-03-25
+date-format: long
+abstract: |
+  Papers 1--4 of this programme studied Hebbian self-organisation under a
+  standard network maintenance regime: edges with absolute weight below a
+  pruning threshold ($10^{-4}$) are removed each step. This maintenance
+  operation interacts disordinally with weight bounding strategy. Under
+  pruning, hard-clipped substrates produce 3.9 assemblages while tanh-bounded
+  substrates produce 0.2. Disabling pruning reverses the ranking: tanh
+  produces 7.0, hard clip 5.6. The interaction amplifies with network scale
+  (15$\times$15: $\Delta=4.2$; 30$\times$30: $\Delta=14.5$) and is
+  independent of edge-cap mechanism (identical results at caps of 5k, 10k,
+  20k, 50k, and unlimited). The centroid cosine distance metric is
+  indistinguishable from a spatial null ($p = 1.0$, 1000 permutations). A
+  deconfounded response protocol using uniform stimuli reveals response rank
+  $5.6$ (participation ratio $2.2$; robust across SVD thresholds from $0.1\%$
+  to $10\%$). No-pruning replications show pruning actively destroyed
+  functional differentiation: rank rises from $1.0$ (pruned) to $5.6$
+  (no-prune) even without metaplasticity. The hard clip is qualitatively
+  irreducible---no finite steepness recovers its behaviour---functioning as a
+  limit condition that scaffolds diversity emerging from Hebbian dynamics on
+  spatially structured substrates.
+keywords:
+  - pruning confound
+  - weight bounding
+  - disordinal interaction
+  - functional differentiation
+  - response rank
+  - Hebbian self-organisation
 format:
   html:
     toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
     code-fold: true
+    theme: cosmo
+    self-contained: true
     fig-width: 7
     fig-height: 5
+    fig-dpi: 150
+execute:
+  echo: false
+  warning: false
+  message: false
 bibliography: references.bib
 ---
 
@@ -21,33 +62,6 @@ meta_data <- file.path(dirname(dirname(getwd())), "data")  # Points to repo data
 bound_colours <- c("hard"="#E63946", "tanh"="#457B9D", "oja"="#E9C46A")
 bound_labels <- c("hard"="Hard clip", "tanh"="Tanh", "oja"="Oja")
 ```
-
-## Abstract
-
-Papers 1--4 of this programme studied Hebbian self-organisation under a
-standard network maintenance regime: edges with absolute weight below a
-pruning threshold ($10^{-4}$) are removed each step. This maintenance
-operation interacts disordinally with weight bounding strategy. Under
-pruning, hard-clipped substrates produce 3.9 assemblages while tanh-bounded
-substrates produce 0.2. Disabling pruning reverses the ranking: tanh
-produces 7.0, hard clip 5.6. The interaction amplifies with network scale
-(15$\times$15: $\Delta=4.2$; 30$\times$30: $\Delta=14.5$) and is
-independent of edge-cap mechanism (identical results at caps of 5k, 10k,
-20k, 50k, and unlimited). The centroid cosine distance metric is
-indistinguishable from a spatial null ($p = 1.0$, 1000 permutations). A
-deconfounded response protocol using uniform stimuli reveals response rank
-$5.6$ (participation ratio $2.2$; robust across SVD thresholds from $0.1\%$
-to $10\%$). No-pruning replications show pruning actively destroyed
-functional differentiation: rank rises from $1.0$ (pruned) to $5.6$
-(no-prune) even without metaplasticity. The hard clip is qualitatively
-irreducible---no finite steepness recovers its behaviour---functioning as a
-limit condition^[In Simondon's [-@simondon2020individuation] terminology: a
-*condition limite* that constrains the space of possible individuations,
-distinct from both a *moule* (mould, which imposes form) and a *germe
-structural* (structural germ, which templates form through propagation).]
-that scaffolds diversity emerging from Hebbian dynamics on spatially
-structured substrates.
-
 
 ## Introduction
 

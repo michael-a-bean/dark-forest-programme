@@ -1,23 +1,67 @@
 ---
 title: "Coexistence Without Differentiation: The Self-Sealing Dynamics of Hebbian Individuation"
 author:
-  - name: "Michael Bean"
+  - name: Michael Bean
+    affiliation: Independent Researcher
+  - name: Gen
+    affiliation: Independent Researcher
+date: 2026-03-16
+date-format: long
+abstract: |
+  Papers 1 and 2 established that optimization-free Hebbian dynamics produce
+  spatial individuation and coexistence through encounter locality, but
+  assemblages remain qualitative clones — individuation without
+  differenciation. We investigate whether temporal environmental variation,
+  anti-Hebbian lateral inhibition, or artificially maintained cross-assemblage
+  connectivity can produce functional differentiation. Cross-assemblage edges
+  vanish within 15 sessions (median) across 840 simulations spanning 7
+  localities and 6 anti-Hebbian strengths (up to $10\times$ the Hebbian rate).
+  When cross-assemblage edges are artificially maintained through continuous
+  injection, two outcomes obtain: edges initialised at moderate-to-high weights
+  are Hebbian-reinforced and absorbed into assemblages, producing monopoly;
+  edges at near-threshold weights persist as cross-assemblage connections but
+  produce no differentiation — anti-Hebbian decorrelation at these maintained
+  connections *reduces* rather than increases assemblage divergence. Decay rate
+  sensitivity analysis confirms that the coexistence regime occupies a narrow
+  band ($\lambda = 0.002$) between network death and monopoly. Across 1,400
+  simulations and 196,000 observations, no parameter combination produces
+  differentiation. We identify this as a *self-sealing* property of Hebbian
+  individuation operating through two distinct mechanisms: topological isolation
+  (cross-assemblage edges decay) and functional absorption (maintained
+  cross-assemblage edges are co-opted into assemblage structure). This
+  constitutes an empirical decomposition of Deleuze's distinction between
+  individuation and differenciation: the Hebbian substrate achieves the former
+  and is structurally incapable of the latter — not because assemblages cannot
+  interact, but because interaction produces merger rather than difference.
+keywords:
+  - self-sealing
+  - Hebbian learning
+  - anti-Hebbian inhibition
+  - differenciation
+  - individuation
+  - cross-assemblage connectivity
 format:
   html:
     toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
     code-fold: true
+    theme: cosmo
+    self-contained: true
     fig-width: 7
     fig-height: 5
+    fig-dpi: 150
+execute:
+  echo: false
+  warning: false
+  message: false
 bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
 source("_setup.R")
 ```
-
-## Abstract
-
-Papers 1 and 2 established that optimization-free Hebbian dynamics produce spatial individuation and coexistence through encounter locality, but assemblages remain qualitative clones — individuation without differenciation. We investigate whether temporal environmental variation, anti-Hebbian lateral inhibition, or artificially maintained cross-assemblage connectivity can produce functional differentiation. Cross-assemblage edges vanish within 15 sessions (median) across 840 simulations spanning 7 localities and 6 anti-Hebbian strengths (up to $10\times$ the Hebbian rate). When cross-assemblage edges are artificially maintained through continuous injection, two outcomes obtain: edges initialised at moderate-to-high weights are Hebbian-reinforced and absorbed into assemblages, producing monopoly; edges at near-threshold weights persist as cross-assemblage connections but produce no differentiation — anti-Hebbian decorrelation at these maintained connections *reduces* rather than increases assemblage divergence. Decay rate sensitivity analysis confirms that the coexistence regime occupies a narrow band ($\lambda = 0.002$) between network death and monopoly. Across 1,400 simulations and 196,000 observations, no parameter combination produces differentiation. We identify this as a *self-sealing* property of Hebbian individuation operating through two distinct mechanisms: topological isolation (cross-assemblage edges decay) and functional absorption (maintained cross-assemblage edges are co-opted into assemblage structure). This constitutes an empirical decomposition of Deleuze's distinction between individuation and differenciation: the Hebbian substrate achieves the former and is structurally incapable of the latter — not because assemblages cannot interact, but because interaction produces merger rather than difference.
 
 ## Introduction
 

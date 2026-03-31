@@ -4,58 +4,71 @@ subtitle: "Critical Periods, Attractor Resilience, and the Limits of Turing Morp
 author:
   - name: Michael Bean
     affiliation: Independent Researcher
+  - name: Gen
+    affiliation: Independent Researcher
+date: 2026-03-20
+date-format: long
+abstract: |
+  Papers 1--3 of this programme demonstrated that pure Hebbian substrates
+  produce individuation---assemblages emerge spontaneously from noise---but are
+  structurally incapable of differenciation: self-sealing eliminates the
+  prerequisites for lateral inhibition and inter-unit communication. Here we
+  test the theoretically motivated hypothesis that a Turing morphogenesis analog
+  (per-node metaplastic learning rate + diffusing inhibitor field) can break this
+  barrier. Under hard $\eta$ bounds, the Turing mechanism fails completely:
+  inhibitor coupling is purely destructive regardless of sign, strength, or
+  coupling topology. Under soft $\eta$ bounds, coupling is partially rescued but
+  remains inferior to a simpler mechanism. Replacing the global homeostatic
+  target with a *local* target---each node regulates toward its spatial
+  neighbors' mean activity---transforms the system without requiring any
+  inter-assemblage communication. Local homeostatic metaplasticity stabilises
+  and amplifies functional differentiation among initially identical
+  assemblages, sustained over 1000 sessions with no decay. A
+  perturbation-response matrix protocol reveals that assemblages develop
+  genuinely independent functional dimensions: response rank reaches $5.6$
+  (over five independent response modes) under hard bounds without pruning,
+  compared to $\approx 1.2$ under standard maintenance (Paper 4S). The metaplastic
+  mechanism adds learning-rate divergence between assemblages ($F = 4.9$,
+  $p < 0.0001$, $\eta^2_p = 0.83$), producing $10+$ assemblages with distinct
+  functional profiles. The system exhibits critical period dynamics:
+  inter-assemblage coupling introduced after differentiation preserves
+  diversity, while coupling from the start destroys it. We interpret these
+  findings through a triple philosophical framework: Simondon's transduction
+  explains the mechanism, Deleuze's ontology of problems explains why
+  differentiation occurs, and DeLanda's capacity criterion distinguishes
+  genuine functional differentiation from mere spatial separation. The work
+  identifies a productive fracture: the hard weight clip functions as a
+  limit condition in Simondon's sense---a qualitatively irreducible boundary
+  condition that creates the scaffold for metaplastic differentiation (Paper 4S).
+keywords:
+  - metaplasticity
+  - homeostasis
+  - Turing morphogenesis
+  - functional differentiation
+  - critical periods
+  - Hebbian learning
 format:
   html:
     toc: true
+    toc-depth: 3
+    toc-location: left
+    number-sections: true
     code-fold: true
+    theme: cosmo
+    self-contained: true
     fig-width: 7
     fig-height: 5
+    fig-dpi: 150
+execute:
+  echo: false
+  warning: false
+  message: false
 bibliography: references.bib
 ---
 
 ```{r setup, include=FALSE}
 source("_setup.R")
 ```
-
-## Abstract
-
-Papers 1--3 of this programme demonstrated that pure Hebbian substrates
-produce individuation---assemblages emerge spontaneously from noise---but are
-structurally incapable of differenciation^[We retain Deleuze's
-[-@deleuze1994difference] spelling *differenciation* to distinguish the
-ontological process (actualisation of virtual structure into distinct kinds)
-from standard "differentiation" (empirically measured divergence of
-properties). The substrate achieves the latter; whether it achieves the
-former is a central question of this paper.]: self-sealing eliminates the
-prerequisites for lateral inhibition and inter-unit communication. Here we
-test the theoretically motivated hypothesis that a Turing morphogenesis analog
-(per-node metaplastic learning rate + diffusing inhibitor field) can break this
-barrier. Under hard $\eta$ bounds, the Turing mechanism fails completely:
-inhibitor coupling is purely destructive regardless of sign, strength, or
-coupling topology. Under soft $\eta$ bounds, coupling is partially rescued but
-remains inferior to a simpler mechanism. Replacing the global homeostatic
-target with a *local* target---each node regulates toward its spatial
-neighbors' mean activity---transforms the system without requiring any
-inter-assemblage communication. Local homeostatic metaplasticity stabilises
-and amplifies functional differentiation among initially identical
-assemblages, sustained over 1000 sessions with no decay. A
-perturbation-response matrix protocol reveals that assemblages develop
-genuinely independent functional dimensions: response rank reaches $5.6$
-(over five independent response modes) under hard bounds without pruning,
-compared to $\approx 1.2$ under standard maintenance (Paper 4S). The metaplastic
-mechanism adds learning-rate divergence between assemblages ($F = 4.9$,
-$p < 0.0001$, $\eta^2_p = 0.83$), producing $10+$ assemblages with distinct
-functional profiles. The system exhibits critical period dynamics:
-inter-assemblage coupling introduced after differentiation preserves
-diversity, while coupling from the start destroys it. We interpret these
-findings through a triple philosophical framework: Simondon's transduction
-explains the mechanism, Deleuze's ontology of problems explains why
-differentiation occurs, and DeLanda's capacity criterion distinguishes
-genuine functional differentiation from mere spatial separation. The work
-identifies a productive fracture: the hard weight clip functions as a
-limit condition in Simondon's sense---a qualitatively irreducible boundary
-condition that creates the scaffold for metaplastic differentiation (Paper 4S).
-
 
 ## Introduction
 
