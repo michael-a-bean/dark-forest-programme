@@ -45,6 +45,8 @@ What makes this repository unusual:
 - **A mock doctoral defence** with external examiners (Beer on autopoiesis, Hooker on pruning fairness) that identified the programme's deepest vulnerability. [Defence preparation notes](dissertation/defence-prep.md)
 - **~15,000 simulation jobs** producing approximately 4.6 million session-level observations across [28 experiments](src/experiments/)
 
+**A note on completeness:** Documenting the process was a late decision — the science came first. Many committee consultations (journal submission readiness, how to weigh peer review concerns, scope decisions) were not saved. What's here was reconstructed from git history, PAI's persistent memory, and artifacts that survived in the working directory. Conversations that produced no artifacts left no trace.
+
 ### The Meta-Paper
 
 [`META-PAPER.md`](META-PAPER.md) documents the entire process: how the AI system was used, what it did well (parallel execution, self-correction, cross-domain synthesis), what it did poorly (literature awareness, philosophical overconfidence), and the integrity questions this raises.
